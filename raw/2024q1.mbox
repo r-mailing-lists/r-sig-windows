@@ -1,0 +1,3290 @@
+From tom@@@k@||ber@ @end|ng |rom gm@||@com  Wed Jan 31 11:19:10 2024
+From: tom@@@k@||ber@ @end|ng |rom gm@||@com (Tomas Kalibera)
+Date: Wed, 31 Jan 2024 11:19:10 +0100
+Subject: [R-SIG-Win] Rtools43 update
+Message-ID: <c2d55384-932d-4202-9a05-6419eb5c36cd@gmail.com>
+
+Dear R Windows developers,
+
+an update of Rtools43, the toolchain for R for Windows used by R-devel 
+and R 4.3, is available as revision 5948 from
+
+https://cran.r-project.org/bin/windows/Rtools/rtools43/rtools.html
+
+This update adds grpc, re2, abseil, c-ares. It includes a major update 
+of protobuf and ships with protoc. There are some improvements in 
+pkg-config wrappers.
+
+Some software using xml2 may have to be updated to the new API.
+
+Software linking protobuf and httpuv now has to link additional 
+dependencies.
+
+See https://cran.r-project.org/bin/windows/Rtools/rtools43/news.html for 
+more details.
+
+Best
+Tomas
+
+
+From tom@@@k@||ber@ @end|ng |rom gm@||@com  Thu Mar 14 09:45:04 2024
+From: tom@@@k@||ber@ @end|ng |rom gm@||@com (Tomas Kalibera)
+Date: Thu, 14 Mar 2024 09:45:04 +0100
+Subject: [R-SIG-Win] Rtools44
+Message-ID: <d192e3a0-4e91-4d84-b6a6-7e05584d9647@gmail.com>
+
+Dear R Windows developers,
+
+there is now a new toolchain for R for Windows, Rtools44. It is now used 
+by R-devel and is intended for R 4.4.0.
+
+Compared to Rtools43, it uses GCC 13 and updates other core components. 
+See https://cran.r-project.org/bin/windows/Rtools/rtools44/news.html for 
+a detailed list of changes.
+
+All users of R-devel who need to compile R packages with source code in 
+C, C++ or Fortran should install Rtools44. From the user perspective, 
+Rtools44 works the same way as Rtools43. See 
+https://cran.r-project.org/bin/windows/base/howto-R-devel.html for 
+instructions on how to build R-devel and packages for this version of R.
+
+It is recommended to re-install packages that need compilation to avoid 
+potential incompatibilities with code built using Rtools43.
+
+Rtools44 also includes an experimental version for 64-bit ARM machines, 
+using LLVM 17 (and clang, flang-new, lld, libc++) - the aarch64 version 
+of Rtools has its own installer and distribution tarballs.
+
+Best
+Tomas
+
+
+From @vr@h@m@@d|er @end|ng |rom gm@||@com  Sun Mar 17 17:53:57 2024
+From: @vr@h@m@@d|er @end|ng |rom gm@||@com (Avraham Adler)
+Date: Sun, 17 Mar 2024 12:53:57 -0400
+Subject: [R-SIG-Win] Rtools44
+In-Reply-To: <d192e3a0-4e91-4d84-b6a6-7e05584d9647@gmail.com>
+References: <d192e3a0-4e91-4d84-b6a6-7e05584d9647@gmail.com>
+Message-ID: <CAL6gwnKJWnDNDu+KNTC508gEeGjgquU-1380R0GELK-TaAuNDg@mail.gmail.com>
+
+Hello, Tomas.
+
+As always, thank you for your incessant hard work. I have compiled
+R-devel 86144 using Rtools44 and it completes normally. However, it
+fails very early in make check-devel. Specifically, I get the output
+below, and have received it more than once. Is this something to raise
+on R-devel or is it an Rtools44-specific issue?
+
+Thank you,
+
+Avi
+
+$ make check-devel
+Testing examples for package 'base'
+Testing examples for package 'tools'
+  comparing 'tools-Ex.Rout' to 'tools-Ex.Rout.save' ... NOTE
+  1046,1047d1045
+  < Warning in file(con, "r") :
+  <   file("") only supports open = "w+" and open = "w+b": using the former
+  1050,1051c1048,1049
+  <  $ file    : chr ""
+  <  $ title   : chr ""
+  ---
+  >  $ file    : chr "grid.Rnw"
+  >  $ title   : chr "Introduction to grid"
+Testing examples for package 'utils'
+Error: testing 'utils' failed
+Execution halted
+make[3]: *** [Makefile.win:29: test-Examples-Base] Error 1
+make[2]: *** [Makefile.common:208: test-Examples] Error 2
+make[1]: *** [Makefile.common:193: test-all-basics] Error 1
+make: *** [Makefile:333: check-devel] Error 2
+
+
+
+On Thu, Mar 14, 2024 at 4:45?AM Tomas Kalibera <tomas.kalibera at gmail.com> wrote:
+>
+> Dear R Windows developers,
+>
+> there is now a new toolchain for R for Windows, Rtools44. It is now used
+> by R-devel and is intended for R 4.4.0.
+>
+> Compared to Rtools43, it uses GCC 13 and updates other core components.
+> See https://cran.r-project.org/bin/windows/Rtools/rtools44/news.html for
+> a detailed list of changes.
+>
+> All users of R-devel who need to compile R packages with source code in
+> C, C++ or Fortran should install Rtools44. From the user perspective,
+> Rtools44 works the same way as Rtools43. See
+> https://cran.r-project.org/bin/windows/base/howto-R-devel.html for
+> instructions on how to build R-devel and packages for this version of R.
+>
+> It is recommended to re-install packages that need compilation to avoid
+> potential incompatibilities with code built using Rtools43.
+>
+> Rtools44 also includes an experimental version for 64-bit ARM machines,
+> using LLVM 17 (and clang, flang-new, lld, libc++) - the aarch64 version
+> of Rtools has its own installer and distribution tarballs.
+>
+> Best
+> Tomas
+>
+> _______________________________________________
+> R-SIG-windows mailing list
+> R-SIG-windows at r-project.org
+> https://stat.ethz.ch/mailman/listinfo/r-sig-windows
+
+
+From tom@@@k@||ber@ @end|ng |rom gm@||@com  Mon Mar 18 09:08:22 2024
+From: tom@@@k@||ber@ @end|ng |rom gm@||@com (Tomas Kalibera)
+Date: Mon, 18 Mar 2024 09:08:22 +0100
+Subject: [R-SIG-Win] Rtools44
+In-Reply-To: <CAL6gwnKJWnDNDu+KNTC508gEeGjgquU-1380R0GELK-TaAuNDg@mail.gmail.com>
+References: <d192e3a0-4e91-4d84-b6a6-7e05584d9647@gmail.com>
+ <CAL6gwnKJWnDNDu+KNTC508gEeGjgquU-1380R0GELK-TaAuNDg@mail.gmail.com>
+Message-ID: <79c027a1-64c4-46b2-a757-18aa0886b6f1@gmail.com>
+
+Hello Avi,
+
+On 3/17/24 17:53, Avraham Adler wrote:
+> Hello, Tomas.
+>
+> As always, thank you for your incessant hard work. I have compiled
+> R-devel 86144 using Rtools44 and it completes normally. However, it
+> fails very early in make check-devel. Specifically, I get the output
+> below, and have received it more than once. Is this something to raise
+> on R-devel or is it an Rtools44-specific issue?
+I can't tell from this output. Could you please try to get a more 
+specific error output?
+Could you please share your compiler options (e.g. MkRules.local) and 
+indeed if you made any modifications to the code?
+
+Also, as always, it is worth making sure that all code has been rebuilt 
+using the new Rtools - e.g. delete any old package library for R-devel 
+(4.4) you may have on your system.
+
+The testing done by myself and CRAN only covers the default compilation 
+options as specified in the make files.
+
+Best
+Tomas
+
+>
+> Thank you,
+>
+> Avi
+>
+> $ make check-devel
+> Testing examples for package 'base'
+> Testing examples for package 'tools'
+>    comparing 'tools-Ex.Rout' to 'tools-Ex.Rout.save' ... NOTE
+>    1046,1047d1045
+>    < Warning in file(con, "r") :
+>    <   file("") only supports open = "w+" and open = "w+b": using the former
+>    1050,1051c1048,1049
+>    <  $ file    : chr ""
+>    <  $ title   : chr ""
+>    ---
+>    >  $ file    : chr "grid.Rnw"
+>    >  $ title   : chr "Introduction to grid"
+> Testing examples for package 'utils'
+> Error: testing 'utils' failed
+> Execution halted
+> make[3]: *** [Makefile.win:29: test-Examples-Base] Error 1
+> make[2]: *** [Makefile.common:208: test-Examples] Error 2
+> make[1]: *** [Makefile.common:193: test-all-basics] Error 1
+> make: *** [Makefile:333: check-devel] Error 2
+>
+>
+>
+> On Thu, Mar 14, 2024 at 4:45?AM Tomas Kalibera <tomas.kalibera at gmail.com> wrote:
+>> Dear R Windows developers,
+>>
+>> there is now a new toolchain for R for Windows, Rtools44. It is now used
+>> by R-devel and is intended for R 4.4.0.
+>>
+>> Compared to Rtools43, it uses GCC 13 and updates other core components.
+>> See https://cran.r-project.org/bin/windows/Rtools/rtools44/news.html for
+>> a detailed list of changes.
+>>
+>> All users of R-devel who need to compile R packages with source code in
+>> C, C++ or Fortran should install Rtools44. From the user perspective,
+>> Rtools44 works the same way as Rtools43. See
+>> https://cran.r-project.org/bin/windows/base/howto-R-devel.html for
+>> instructions on how to build R-devel and packages for this version of R.
+>>
+>> It is recommended to re-install packages that need compilation to avoid
+>> potential incompatibilities with code built using Rtools43.
+>>
+>> Rtools44 also includes an experimental version for 64-bit ARM machines,
+>> using LLVM 17 (and clang, flang-new, lld, libc++) - the aarch64 version
+>> of Rtools has its own installer and distribution tarballs.
+>>
+>> Best
+>> Tomas
+>>
+>> _______________________________________________
+>> R-SIG-windows mailing list
+>> R-SIG-windows at r-project.org
+>> https://stat.ethz.ch/mailman/listinfo/r-sig-windows
+
+
+From @vr@h@m@@d|er @end|ng |rom gm@||@com  Tue Mar 19 04:49:05 2024
+From: @vr@h@m@@d|er @end|ng |rom gm@||@com (Avraham Adler)
+Date: Mon, 18 Mar 2024 23:49:05 -0400
+Subject: [R-SIG-Win] Rtools44
+In-Reply-To: <79c027a1-64c4-46b2-a757-18aa0886b6f1@gmail.com>
+References: <d192e3a0-4e91-4d84-b6a6-7e05584d9647@gmail.com>
+ <CAL6gwnKJWnDNDu+KNTC508gEeGjgquU-1380R0GELK-TaAuNDg@mail.gmail.com>
+ <79c027a1-64c4-46b2-a757-18aa0886b6f1@gmail.com>
+Message-ID: <CAL6gwnLFYbhp_qT_Pi8Hj1NhjH5u=JTcQq3z-2DhZnVBoBUE0g@mail.gmail.com>
+
+Hello, Tomas.
+
+I had hoped that my problem was that I was linking to OpenBLAS built
+under Rtools43, but sadly that is not the case, as I built OpenBLAS
+using Rtools44 and I still get the error in 'utils'. I do have
+Rtools43 installed on this machine, but I am doing eveything from the
+Rtools44 bash. My MkRules.local follows:
+
+USE_ATLAS = YES
+ATLAS_PATH = C:/R/OPB/OPB_03.26_1T_44
+EOPTS = -march=native -pipe -mno-rtm
+LTO = -flto=1 -fuse-linker-plugin
+LTO_OPT = -flto=1 -fuse-linker-plugin
+LTO_FC = -flto=1 -fuse-linker-plugin
+LTO_FC_OPT = -flto=1 -fuse-linker-plugin
+QPDF = C:/R/qpdf-11.9.0-msvc64
+OPENMP = -fopenmp
+
+I also make the following change to Makefile.win in /src/extra/blas as
+I have been doing for more than a decade:
+
+--- /c/r/trunk/src/extra/blas/Makefile.win    2024-01-24
+18:34:42.755255900 +0000
++++ /c/r/Makefile.win    2024-01-24 18:39:39.716458000 +0000
+@@ -12,7 +12,7 @@
+ ../../../$(BINDIR)/Rblas.dll: blas00.o ../../gnuwin32/dllversion.o
+     @$(ECHO) -------- Building $@ --------
+     $(DLL) -s -shared $(DLLFLAGS) -o $@ $^ Rblas.def \
+-       -L../../../$(IMPDIR) -lR  -L"$(ATLAS_PATH)" -lf77blas -latlas
++       -L../../../$(IMPDIR) -lR -L"$(ATLAS_PATH)" -fopenmp -lopenblas
+ else
+ ../../../$(BINDIR)/Rblas.dll: blas.o blas2.o cmplxblas.o cmplxblas2.o
+../../gnuwin32/dllversion.o
+     @$(ECHO) -------- Building $@ --------
+
+The utils-Ex.Rout.fail is 1188 lines long and I don't see any obvious
+point of failure. The last few lines are:
+> cleanEx()
+> nameEx("adist")
+> ### * adist
+>
+> flush(stderr()); flush(stdout())
+>
+> ### Name: adist
+> ### Title: Approximate String Distances
+> ### Aliases: adist
+> ### Keywords: character
+>
+> ### ** Examples
+>
+> ## Cf. https://en.wikipedia.org/wiki/Levenshtein_distance
+> adist("kitten", "sitting")
+     [,1]
+[1,]    3
+> ## To see the transformation counts for the Levenshtein distance:
+> drop(attr(adist("kitten", "sitting", counts = TRUE), "counts"))
+ins del sub
+  1   0   2
+> ## To see the transformation sequences:
+> attr(adist(c("kitten", "sitting"), counts = TRUE), "trafos")
+     [,1]      [,2]
+[1,] "MMMMMM"  "SMMMSMI"
+[2,] "SMMMSMD" "MMMMMMM"
+>
+> ## Cf. the examples for agrep:
+> adist("lasy", "1 lazy 2")
+     [,1]
+[1,]    5
+> ## For a "partial approximate match" (as used for agrep):
+> adist("lasy", "1 lazy 2", partial = TRUE)
+
+The build works under Rtools43. Should I uninstall both versions of
+Rtools, my current R installation, and its library and try again? I'm
+doubtful that will help as my "active" R installation is in a
+completely different directory, but I am willing to try. If there is
+any output or other tests I can do, please let me know. Or, if you
+think I should raise this on r-devel.
+
+Thank you,
+
+Avi
+
+On Mon, Mar 18, 2024 at 4:08?AM Tomas Kalibera <tomas.kalibera at gmail.com> wrote:
+>
+> Hello Avi,
+>
+> On 3/17/24 17:53, Avraham Adler wrote:
+> > Hello, Tomas.
+> >
+> > As always, thank you for your incessant hard work. I have compiled
+> > R-devel 86144 using Rtools44 and it completes normally. However, it
+> > fails very early in make check-devel. Specifically, I get the output
+> > below, and have received it more than once. Is this something to raise
+> > on R-devel or is it an Rtools44-specific issue?
+> I can't tell from this output. Could you please try to get a more
+> specific error output?
+> Could you please share your compiler options (e.g. MkRules.local) and
+> indeed if you made any modifications to the code?
+>
+> Also, as always, it is worth making sure that all code has been rebuilt
+> using the new Rtools - e.g. delete any old package library for R-devel
+> (4.4) you may have on your system.
+>
+> The testing done by myself and CRAN only covers the default compilation
+> options as specified in the make files.
+>
+> Best
+> Tomas
+>
+> >
+> > Thank you,
+> >
+> > Avi
+> >
+> > $ make check-devel
+> > Testing examples for package 'base'
+> > Testing examples for package 'tools'
+> >    comparing 'tools-Ex.Rout' to 'tools-Ex.Rout.save' ... NOTE
+> >    1046,1047d1045
+> >    < Warning in file(con, "r") :
+> >    <   file("") only supports open = "w+" and open = "w+b": using the former
+> >    1050,1051c1048,1049
+> >    <  $ file    : chr ""
+> >    <  $ title   : chr ""
+> >    ---
+> >    >  $ file    : chr "grid.Rnw"
+> >    >  $ title   : chr "Introduction to grid"
+> > Testing examples for package 'utils'
+> > Error: testing 'utils' failed
+> > Execution halted
+> > make[3]: *** [Makefile.win:29: test-Examples-Base] Error 1
+> > make[2]: *** [Makefile.common:208: test-Examples] Error 2
+> > make[1]: *** [Makefile.common:193: test-all-basics] Error 1
+> > make: *** [Makefile:333: check-devel] Error 2
+> >
+> >
+> >
+> > On Thu, Mar 14, 2024 at 4:45?AM Tomas Kalibera <tomas.kalibera at gmail.com> wrote:
+> >> Dear R Windows developers,
+> >>
+> >> there is now a new toolchain for R for Windows, Rtools44. It is now used
+> >> by R-devel and is intended for R 4.4.0.
+> >>
+> >> Compared to Rtools43, it uses GCC 13 and updates other core components.
+> >> See https://cran.r-project.org/bin/windows/Rtools/rtools44/news.html for
+> >> a detailed list of changes.
+> >>
+> >> All users of R-devel who need to compile R packages with source code in
+> >> C, C++ or Fortran should install Rtools44. From the user perspective,
+> >> Rtools44 works the same way as Rtools43. See
+> >> https://cran.r-project.org/bin/windows/base/howto-R-devel.html for
+> >> instructions on how to build R-devel and packages for this version of R.
+> >>
+> >> It is recommended to re-install packages that need compilation to avoid
+> >> potential incompatibilities with code built using Rtools43.
+> >>
+> >> Rtools44 also includes an experimental version for 64-bit ARM machines,
+> >> using LLVM 17 (and clang, flang-new, lld, libc++) - the aarch64 version
+> >> of Rtools has its own installer and distribution tarballs.
+> >>
+> >> Best
+> >> Tomas
+> >>
+> >> _______________________________________________
+> >> R-SIG-windows mailing list
+> >> R-SIG-windows at r-project.org
+> >> https://stat.ethz.ch/mailman/listinfo/r-sig-windows
+
+
+From @vr@h@m@@d|er @end|ng |rom gm@||@com  Tue Mar 19 04:52:21 2024
+From: @vr@h@m@@d|er @end|ng |rom gm@||@com (Avraham Adler)
+Date: Mon, 18 Mar 2024 23:52:21 -0400
+Subject: [R-SIG-Win] Rtools44
+In-Reply-To: <CAL6gwnLFYbhp_qT_Pi8Hj1NhjH5u=JTcQq3z-2DhZnVBoBUE0g@mail.gmail.com>
+References: <d192e3a0-4e91-4d84-b6a6-7e05584d9647@gmail.com>
+ <CAL6gwnKJWnDNDu+KNTC508gEeGjgquU-1380R0GELK-TaAuNDg@mail.gmail.com>
+ <79c027a1-64c4-46b2-a757-18aa0886b6f1@gmail.com>
+ <CAL6gwnLFYbhp_qT_Pi8Hj1NhjH5u=JTcQq3z-2DhZnVBoBUE0g@mail.gmail.com>
+Message-ID: <CAL6gwnJ0eLDtyOg8fgazGt9OZGhYquya7bGJ1=epE9HUvC+pWQ@mail.gmail.com>
+
+Hello, Tomas.
+
+I ran check again and this time it failed on base. Base failed at
+"agrep" and utils failed at "adist" if that triggers any ideas.
+
+Thank you,
+
+Avi
+
+On Mon, Mar 18, 2024 at 11:49?PM Avraham Adler <avraham.adler at gmail.com> wrote:
+>
+> Hello, Tomas.
+>
+> I had hoped that my problem was that I was linking to OpenBLAS built
+> under Rtools43, but sadly that is not the case, as I built OpenBLAS
+> using Rtools44 and I still get the error in 'utils'. I do have
+> Rtools43 installed on this machine, but I am doing eveything from the
+> Rtools44 bash. My MkRules.local follows:
+>
+> USE_ATLAS = YES
+> ATLAS_PATH = C:/R/OPB/OPB_03.26_1T_44
+> EOPTS = -march=native -pipe -mno-rtm
+> LTO = -flto=1 -fuse-linker-plugin
+> LTO_OPT = -flto=1 -fuse-linker-plugin
+> LTO_FC = -flto=1 -fuse-linker-plugin
+> LTO_FC_OPT = -flto=1 -fuse-linker-plugin
+> QPDF = C:/R/qpdf-11.9.0-msvc64
+> OPENMP = -fopenmp
+>
+> I also make the following change to Makefile.win in /src/extra/blas as
+> I have been doing for more than a decade:
+>
+> --- /c/r/trunk/src/extra/blas/Makefile.win    2024-01-24
+> 18:34:42.755255900 +0000
+> +++ /c/r/Makefile.win    2024-01-24 18:39:39.716458000 +0000
+> @@ -12,7 +12,7 @@
+>  ../../../$(BINDIR)/Rblas.dll: blas00.o ../../gnuwin32/dllversion.o
+>      @$(ECHO) -------- Building $@ --------
+>      $(DLL) -s -shared $(DLLFLAGS) -o $@ $^ Rblas.def \
+> -       -L../../../$(IMPDIR) -lR  -L"$(ATLAS_PATH)" -lf77blas -latlas
+> +       -L../../../$(IMPDIR) -lR -L"$(ATLAS_PATH)" -fopenmp -lopenblas
+>  else
+>  ../../../$(BINDIR)/Rblas.dll: blas.o blas2.o cmplxblas.o cmplxblas2.o
+> ../../gnuwin32/dllversion.o
+>      @$(ECHO) -------- Building $@ --------
+>
+> The utils-Ex.Rout.fail is 1188 lines long and I don't see any obvious
+> point of failure. The last few lines are:
+> > cleanEx()
+> > nameEx("adist")
+> > ### * adist
+> >
+> > flush(stderr()); flush(stdout())
+> >
+> > ### Name: adist
+> > ### Title: Approximate String Distances
+> > ### Aliases: adist
+> > ### Keywords: character
+> >
+> > ### ** Examples
+> >
+> > ## Cf. https://en.wikipedia.org/wiki/Levenshtein_distance
+> > adist("kitten", "sitting")
+>      [,1]
+> [1,]    3
+> > ## To see the transformation counts for the Levenshtein distance:
+> > drop(attr(adist("kitten", "sitting", counts = TRUE), "counts"))
+> ins del sub
+>   1   0   2
+> > ## To see the transformation sequences:
+> > attr(adist(c("kitten", "sitting"), counts = TRUE), "trafos")
+>      [,1]      [,2]
+> [1,] "MMMMMM"  "SMMMSMI"
+> [2,] "SMMMSMD" "MMMMMMM"
+> >
+> > ## Cf. the examples for agrep:
+> > adist("lasy", "1 lazy 2")
+>      [,1]
+> [1,]    5
+> > ## For a "partial approximate match" (as used for agrep):
+> > adist("lasy", "1 lazy 2", partial = TRUE)
+>
+> The build works under Rtools43. Should I uninstall both versions of
+> Rtools, my current R installation, and its library and try again? I'm
+> doubtful that will help as my "active" R installation is in a
+> completely different directory, but I am willing to try. If there is
+> any output or other tests I can do, please let me know. Or, if you
+> think I should raise this on r-devel.
+>
+> Thank you,
+>
+> Avi
+>
+> On Mon, Mar 18, 2024 at 4:08?AM Tomas Kalibera <tomas.kalibera at gmail.com> wrote:
+> >
+> > Hello Avi,
+> >
+> > On 3/17/24 17:53, Avraham Adler wrote:
+> > > Hello, Tomas.
+> > >
+> > > As always, thank you for your incessant hard work. I have compiled
+> > > R-devel 86144 using Rtools44 and it completes normally. However, it
+> > > fails very early in make check-devel. Specifically, I get the output
+> > > below, and have received it more than once. Is this something to raise
+> > > on R-devel or is it an Rtools44-specific issue?
+> > I can't tell from this output. Could you please try to get a more
+> > specific error output?
+> > Could you please share your compiler options (e.g. MkRules.local) and
+> > indeed if you made any modifications to the code?
+> >
+> > Also, as always, it is worth making sure that all code has been rebuilt
+> > using the new Rtools - e.g. delete any old package library for R-devel
+> > (4.4) you may have on your system.
+> >
+> > The testing done by myself and CRAN only covers the default compilation
+> > options as specified in the make files.
+> >
+> > Best
+> > Tomas
+> >
+> > >
+> > > Thank you,
+> > >
+> > > Avi
+> > >
+> > > $ make check-devel
+> > > Testing examples for package 'base'
+> > > Testing examples for package 'tools'
+> > >    comparing 'tools-Ex.Rout' to 'tools-Ex.Rout.save' ... NOTE
+> > >    1046,1047d1045
+> > >    < Warning in file(con, "r") :
+> > >    <   file("") only supports open = "w+" and open = "w+b": using the former
+> > >    1050,1051c1048,1049
+> > >    <  $ file    : chr ""
+> > >    <  $ title   : chr ""
+> > >    ---
+> > >    >  $ file    : chr "grid.Rnw"
+> > >    >  $ title   : chr "Introduction to grid"
+> > > Testing examples for package 'utils'
+> > > Error: testing 'utils' failed
+> > > Execution halted
+> > > make[3]: *** [Makefile.win:29: test-Examples-Base] Error 1
+> > > make[2]: *** [Makefile.common:208: test-Examples] Error 2
+> > > make[1]: *** [Makefile.common:193: test-all-basics] Error 1
+> > > make: *** [Makefile:333: check-devel] Error 2
+> > >
+> > >
+> > >
+> > > On Thu, Mar 14, 2024 at 4:45?AM Tomas Kalibera <tomas.kalibera at gmail.com> wrote:
+> > >> Dear R Windows developers,
+> > >>
+> > >> there is now a new toolchain for R for Windows, Rtools44. It is now used
+> > >> by R-devel and is intended for R 4.4.0.
+> > >>
+> > >> Compared to Rtools43, it uses GCC 13 and updates other core components.
+> > >> See https://cran.r-project.org/bin/windows/Rtools/rtools44/news.html for
+> > >> a detailed list of changes.
+> > >>
+> > >> All users of R-devel who need to compile R packages with source code in
+> > >> C, C++ or Fortran should install Rtools44. From the user perspective,
+> > >> Rtools44 works the same way as Rtools43. See
+> > >> https://cran.r-project.org/bin/windows/base/howto-R-devel.html for
+> > >> instructions on how to build R-devel and packages for this version of R.
+> > >>
+> > >> It is recommended to re-install packages that need compilation to avoid
+> > >> potential incompatibilities with code built using Rtools43.
+> > >>
+> > >> Rtools44 also includes an experimental version for 64-bit ARM machines,
+> > >> using LLVM 17 (and clang, flang-new, lld, libc++) - the aarch64 version
+> > >> of Rtools has its own installer and distribution tarballs.
+> > >>
+> > >> Best
+> > >> Tomas
+> > >>
+> > >> _______________________________________________
+> > >> R-SIG-windows mailing list
+> > >> R-SIG-windows at r-project.org
+> > >> https://stat.ethz.ch/mailman/listinfo/r-sig-windows
+
+
+From @vr@h@m@@d|er @end|ng |rom gm@||@com  Tue Mar 19 04:58:59 2024
+From: @vr@h@m@@d|er @end|ng |rom gm@||@com (Avraham Adler)
+Date: Mon, 18 Mar 2024 23:58:59 -0400
+Subject: [R-SIG-Win] Rtools44
+In-Reply-To: <CAL6gwnJ0eLDtyOg8fgazGt9OZGhYquya7bGJ1=epE9HUvC+pWQ@mail.gmail.com>
+References: <d192e3a0-4e91-4d84-b6a6-7e05584d9647@gmail.com>
+ <CAL6gwnKJWnDNDu+KNTC508gEeGjgquU-1380R0GELK-TaAuNDg@mail.gmail.com>
+ <79c027a1-64c4-46b2-a757-18aa0886b6f1@gmail.com>
+ <CAL6gwnLFYbhp_qT_Pi8Hj1NhjH5u=JTcQq3z-2DhZnVBoBUE0g@mail.gmail.com>
+ <CAL6gwnJ0eLDtyOg8fgazGt9OZGhYquya7bGJ1=epE9HUvC+pWQ@mail.gmail.com>
+Message-ID: <CAL6gwnJWoaXMQt1djLq5DdayxdTJ7xOk-Ts=DYw8XgSGiM72OA@mail.gmail.com>
+
+I ran "tools::testInstalledBasic("both")" from within Rterm, and it
+failed on reg-tests-1a, and doesn't that last call in the FAIL look
+familiar? Three times isn;t coincidence. What could be causing
+agrep/adist to fail?
+
+Avi
+
+> a <- c("NA", NA, "BANANA")
+> na <- NA_character_
+> a1 <- substr(a,1,1)
+> stopifnot(is.na(a1)==is.na(a))
+> a2 <- substring(a,1,1)
+> stopifnot(is.na(a2)==is.na(a))
+> a3 <- sub("NA","na",a)
+> stopifnot(is.na(a3)==is.na(a))
+> a3 <- gsub("NA","na",a)
+> stopifnot(is.na(a3)==is.na(a))
+> substr(a3, 1, 2) <- "na"
+> stopifnot(is.na(a3)==is.na(a))
+> substr(a3, 1, 2) <- na
+> stopifnot(all(is.na(a3)))
+> stopifnot(agrep("NA", a) == c(1, 3))
+
+On Mon, Mar 18, 2024 at 11:52?PM Avraham Adler <avraham.adler at gmail.com> wrote:
+>
+> Hello, Tomas.
+>
+> I ran check again and this time it failed on base. Base failed at
+> "agrep" and utils failed at "adist" if that triggers any ideas.
+>
+> Thank you,
+>
+> Avi
+>
+> On Mon, Mar 18, 2024 at 11:49?PM Avraham Adler <avraham.adler at gmail.com> wrote:
+> >
+> > Hello, Tomas.
+> >
+> > I had hoped that my problem was that I was linking to OpenBLAS built
+> > under Rtools43, but sadly that is not the case, as I built OpenBLAS
+> > using Rtools44 and I still get the error in 'utils'. I do have
+> > Rtools43 installed on this machine, but I am doing eveything from the
+> > Rtools44 bash. My MkRules.local follows:
+> >
+> > USE_ATLAS = YES
+> > ATLAS_PATH = C:/R/OPB/OPB_03.26_1T_44
+> > EOPTS = -march=native -pipe -mno-rtm
+> > LTO = -flto=1 -fuse-linker-plugin
+> > LTO_OPT = -flto=1 -fuse-linker-plugin
+> > LTO_FC = -flto=1 -fuse-linker-plugin
+> > LTO_FC_OPT = -flto=1 -fuse-linker-plugin
+> > QPDF = C:/R/qpdf-11.9.0-msvc64
+> > OPENMP = -fopenmp
+> >
+> > I also make the following change to Makefile.win in /src/extra/blas as
+> > I have been doing for more than a decade:
+> >
+> > --- /c/r/trunk/src/extra/blas/Makefile.win    2024-01-24
+> > 18:34:42.755255900 +0000
+> > +++ /c/r/Makefile.win    2024-01-24 18:39:39.716458000 +0000
+> > @@ -12,7 +12,7 @@
+> >  ../../../$(BINDIR)/Rblas.dll: blas00.o ../../gnuwin32/dllversion.o
+> >      @$(ECHO) -------- Building $@ --------
+> >      $(DLL) -s -shared $(DLLFLAGS) -o $@ $^ Rblas.def \
+> > -       -L../../../$(IMPDIR) -lR  -L"$(ATLAS_PATH)" -lf77blas -latlas
+> > +       -L../../../$(IMPDIR) -lR -L"$(ATLAS_PATH)" -fopenmp -lopenblas
+> >  else
+> >  ../../../$(BINDIR)/Rblas.dll: blas.o blas2.o cmplxblas.o cmplxblas2.o
+> > ../../gnuwin32/dllversion.o
+> >      @$(ECHO) -------- Building $@ --------
+> >
+> > The utils-Ex.Rout.fail is 1188 lines long and I don't see any obvious
+> > point of failure. The last few lines are:
+> > > cleanEx()
+> > > nameEx("adist")
+> > > ### * adist
+> > >
+> > > flush(stderr()); flush(stdout())
+> > >
+> > > ### Name: adist
+> > > ### Title: Approximate String Distances
+> > > ### Aliases: adist
+> > > ### Keywords: character
+> > >
+> > > ### ** Examples
+> > >
+> > > ## Cf. https://en.wikipedia.org/wiki/Levenshtein_distance
+> > > adist("kitten", "sitting")
+> >      [,1]
+> > [1,]    3
+> > > ## To see the transformation counts for the Levenshtein distance:
+> > > drop(attr(adist("kitten", "sitting", counts = TRUE), "counts"))
+> > ins del sub
+> >   1   0   2
+> > > ## To see the transformation sequences:
+> > > attr(adist(c("kitten", "sitting"), counts = TRUE), "trafos")
+> >      [,1]      [,2]
+> > [1,] "MMMMMM"  "SMMMSMI"
+> > [2,] "SMMMSMD" "MMMMMMM"
+> > >
+> > > ## Cf. the examples for agrep:
+> > > adist("lasy", "1 lazy 2")
+> >      [,1]
+> > [1,]    5
+> > > ## For a "partial approximate match" (as used for agrep):
+> > > adist("lasy", "1 lazy 2", partial = TRUE)
+> >
+> > The build works under Rtools43. Should I uninstall both versions of
+> > Rtools, my current R installation, and its library and try again? I'm
+> > doubtful that will help as my "active" R installation is in a
+> > completely different directory, but I am willing to try. If there is
+> > any output or other tests I can do, please let me know. Or, if you
+> > think I should raise this on r-devel.
+> >
+> > Thank you,
+> >
+> > Avi
+> >
+> > On Mon, Mar 18, 2024 at 4:08?AM Tomas Kalibera <tomas.kalibera at gmail.com> wrote:
+> > >
+> > > Hello Avi,
+> > >
+> > > On 3/17/24 17:53, Avraham Adler wrote:
+> > > > Hello, Tomas.
+> > > >
+> > > > As always, thank you for your incessant hard work. I have compiled
+> > > > R-devel 86144 using Rtools44 and it completes normally. However, it
+> > > > fails very early in make check-devel. Specifically, I get the output
+> > > > below, and have received it more than once. Is this something to raise
+> > > > on R-devel or is it an Rtools44-specific issue?
+> > > I can't tell from this output. Could you please try to get a more
+> > > specific error output?
+> > > Could you please share your compiler options (e.g. MkRules.local) and
+> > > indeed if you made any modifications to the code?
+> > >
+> > > Also, as always, it is worth making sure that all code has been rebuilt
+> > > using the new Rtools - e.g. delete any old package library for R-devel
+> > > (4.4) you may have on your system.
+> > >
+> > > The testing done by myself and CRAN only covers the default compilation
+> > > options as specified in the make files.
+> > >
+> > > Best
+> > > Tomas
+> > >
+> > > >
+> > > > Thank you,
+> > > >
+> > > > Avi
+> > > >
+> > > > $ make check-devel
+> > > > Testing examples for package 'base'
+> > > > Testing examples for package 'tools'
+> > > >    comparing 'tools-Ex.Rout' to 'tools-Ex.Rout.save' ... NOTE
+> > > >    1046,1047d1045
+> > > >    < Warning in file(con, "r") :
+> > > >    <   file("") only supports open = "w+" and open = "w+b": using the former
+> > > >    1050,1051c1048,1049
+> > > >    <  $ file    : chr ""
+> > > >    <  $ title   : chr ""
+> > > >    ---
+> > > >    >  $ file    : chr "grid.Rnw"
+> > > >    >  $ title   : chr "Introduction to grid"
+> > > > Testing examples for package 'utils'
+> > > > Error: testing 'utils' failed
+> > > > Execution halted
+> > > > make[3]: *** [Makefile.win:29: test-Examples-Base] Error 1
+> > > > make[2]: *** [Makefile.common:208: test-Examples] Error 2
+> > > > make[1]: *** [Makefile.common:193: test-all-basics] Error 1
+> > > > make: *** [Makefile:333: check-devel] Error 2
+> > > >
+> > > >
+> > > >
+> > > > On Thu, Mar 14, 2024 at 4:45?AM Tomas Kalibera <tomas.kalibera at gmail.com> wrote:
+> > > >> Dear R Windows developers,
+> > > >>
+> > > >> there is now a new toolchain for R for Windows, Rtools44. It is now used
+> > > >> by R-devel and is intended for R 4.4.0.
+> > > >>
+> > > >> Compared to Rtools43, it uses GCC 13 and updates other core components.
+> > > >> See https://cran.r-project.org/bin/windows/Rtools/rtools44/news.html for
+> > > >> a detailed list of changes.
+> > > >>
+> > > >> All users of R-devel who need to compile R packages with source code in
+> > > >> C, C++ or Fortran should install Rtools44. From the user perspective,
+> > > >> Rtools44 works the same way as Rtools43. See
+> > > >> https://cran.r-project.org/bin/windows/base/howto-R-devel.html for
+> > > >> instructions on how to build R-devel and packages for this version of R.
+> > > >>
+> > > >> It is recommended to re-install packages that need compilation to avoid
+> > > >> potential incompatibilities with code built using Rtools43.
+> > > >>
+> > > >> Rtools44 also includes an experimental version for 64-bit ARM machines,
+> > > >> using LLVM 17 (and clang, flang-new, lld, libc++) - the aarch64 version
+> > > >> of Rtools has its own installer and distribution tarballs.
+> > > >>
+> > > >> Best
+> > > >> Tomas
+> > > >>
+> > > >> _______________________________________________
+> > > >> R-SIG-windows mailing list
+> > > >> R-SIG-windows at r-project.org
+> > > >> https://stat.ethz.ch/mailman/listinfo/r-sig-windows
+
+
+From @vr@h@m@@d|er @end|ng |rom gm@||@com  Tue Mar 19 15:33:12 2024
+From: @vr@h@m@@d|er @end|ng |rom gm@||@com (Avraham Adler)
+Date: Tue, 19 Mar 2024 10:33:12 -0400
+Subject: [R-SIG-Win] Rtools44
+In-Reply-To: <CAL6gwnJWoaXMQt1djLq5DdayxdTJ7xOk-Ts=DYw8XgSGiM72OA@mail.gmail.com>
+References: <d192e3a0-4e91-4d84-b6a6-7e05584d9647@gmail.com>
+ <CAL6gwnKJWnDNDu+KNTC508gEeGjgquU-1380R0GELK-TaAuNDg@mail.gmail.com>
+ <79c027a1-64c4-46b2-a757-18aa0886b6f1@gmail.com>
+ <CAL6gwnLFYbhp_qT_Pi8Hj1NhjH5u=JTcQq3z-2DhZnVBoBUE0g@mail.gmail.com>
+ <CAL6gwnJ0eLDtyOg8fgazGt9OZGhYquya7bGJ1=epE9HUvC+pWQ@mail.gmail.com>
+ <CAL6gwnJWoaXMQt1djLq5DdayxdTJ7xOk-Ts=DYw8XgSGiM72OA@mail.gmail.com>
+Message-ID: <CAL6gwnJO2h1Ju+TTeWPhCPB25CGgCXeAPvGcwzv85bbR2ANsXQ@mail.gmail.com>
+
+For completeness, I compiled R from source using the native BLAS, and
+make check fails again, this time on "aregexec". Running "agrep" from
+within Rgui causes it to crash to desktop. Could it be something to do
+with this: https://github.com/wch/r-source/commit/ba486d898c2698c2afb678abdab807510327541e?
+But that didn't affect aregexc or adist? This is beyond my
+understanding, but I'm happy to do any tests you need to help identify
+what is going on.
+
+Thank you,
+
+Avi
+
+
+
+On Mon, Mar 18, 2024 at 11:58?PM Avraham Adler <avraham.adler at gmail.com> wrote:
+>
+> I ran "tools::testInstalledBasic("both")" from within Rterm, and it
+> failed on reg-tests-1a, and doesn't that last call in the FAIL look
+> familiar? Three times isn;t coincidence. What could be causing
+> agrep/adist to fail?
+>
+> Avi
+>
+> > a <- c("NA", NA, "BANANA")
+> > na <- NA_character_
+> > a1 <- substr(a,1,1)
+> > stopifnot(is.na(a1)==is.na(a))
+> > a2 <- substring(a,1,1)
+> > stopifnot(is.na(a2)==is.na(a))
+> > a3 <- sub("NA","na",a)
+> > stopifnot(is.na(a3)==is.na(a))
+> > a3 <- gsub("NA","na",a)
+> > stopifnot(is.na(a3)==is.na(a))
+> > substr(a3, 1, 2) <- "na"
+> > stopifnot(is.na(a3)==is.na(a))
+> > substr(a3, 1, 2) <- na
+> > stopifnot(all(is.na(a3)))
+> > stopifnot(agrep("NA", a) == c(1, 3))
+>
+> On Mon, Mar 18, 2024 at 11:52?PM Avraham Adler <avraham.adler at gmail.com> wrote:
+> >
+> > Hello, Tomas.
+> >
+> > I ran check again and this time it failed on base. Base failed at
+> > "agrep" and utils failed at "adist" if that triggers any ideas.
+> >
+> > Thank you,
+> >
+> > Avi
+> >
+> > On Mon, Mar 18, 2024 at 11:49?PM Avraham Adler <avraham.adler at gmail.com> wrote:
+> > >
+> > > Hello, Tomas.
+> > >
+> > > I had hoped that my problem was that I was linking to OpenBLAS built
+> > > under Rtools43, but sadly that is not the case, as I built OpenBLAS
+> > > using Rtools44 and I still get the error in 'utils'. I do have
+> > > Rtools43 installed on this machine, but I am doing eveything from the
+> > > Rtools44 bash. My MkRules.local follows:
+> > >
+> > > USE_ATLAS = YES
+> > > ATLAS_PATH = C:/R/OPB/OPB_03.26_1T_44
+> > > EOPTS = -march=native -pipe -mno-rtm
+> > > LTO = -flto=1 -fuse-linker-plugin
+> > > LTO_OPT = -flto=1 -fuse-linker-plugin
+> > > LTO_FC = -flto=1 -fuse-linker-plugin
+> > > LTO_FC_OPT = -flto=1 -fuse-linker-plugin
+> > > QPDF = C:/R/qpdf-11.9.0-msvc64
+> > > OPENMP = -fopenmp
+> > >
+> > > I also make the following change to Makefile.win in /src/extra/blas as
+> > > I have been doing for more than a decade:
+> > >
+> > > --- /c/r/trunk/src/extra/blas/Makefile.win    2024-01-24
+> > > 18:34:42.755255900 +0000
+> > > +++ /c/r/Makefile.win    2024-01-24 18:39:39.716458000 +0000
+> > > @@ -12,7 +12,7 @@
+> > >  ../../../$(BINDIR)/Rblas.dll: blas00.o ../../gnuwin32/dllversion.o
+> > >      @$(ECHO) -------- Building $@ --------
+> > >      $(DLL) -s -shared $(DLLFLAGS) -o $@ $^ Rblas.def \
+> > > -       -L../../../$(IMPDIR) -lR  -L"$(ATLAS_PATH)" -lf77blas -latlas
+> > > +       -L../../../$(IMPDIR) -lR -L"$(ATLAS_PATH)" -fopenmp -lopenblas
+> > >  else
+> > >  ../../../$(BINDIR)/Rblas.dll: blas.o blas2.o cmplxblas.o cmplxblas2.o
+> > > ../../gnuwin32/dllversion.o
+> > >      @$(ECHO) -------- Building $@ --------
+> > >
+> > > The utils-Ex.Rout.fail is 1188 lines long and I don't see any obvious
+> > > point of failure. The last few lines are:
+> > > > cleanEx()
+> > > > nameEx("adist")
+> > > > ### * adist
+> > > >
+> > > > flush(stderr()); flush(stdout())
+> > > >
+> > > > ### Name: adist
+> > > > ### Title: Approximate String Distances
+> > > > ### Aliases: adist
+> > > > ### Keywords: character
+> > > >
+> > > > ### ** Examples
+> > > >
+> > > > ## Cf. https://en.wikipedia.org/wiki/Levenshtein_distance
+> > > > adist("kitten", "sitting")
+> > >      [,1]
+> > > [1,]    3
+> > > > ## To see the transformation counts for the Levenshtein distance:
+> > > > drop(attr(adist("kitten", "sitting", counts = TRUE), "counts"))
+> > > ins del sub
+> > >   1   0   2
+> > > > ## To see the transformation sequences:
+> > > > attr(adist(c("kitten", "sitting"), counts = TRUE), "trafos")
+> > >      [,1]      [,2]
+> > > [1,] "MMMMMM"  "SMMMSMI"
+> > > [2,] "SMMMSMD" "MMMMMMM"
+> > > >
+> > > > ## Cf. the examples for agrep:
+> > > > adist("lasy", "1 lazy 2")
+> > >      [,1]
+> > > [1,]    5
+> > > > ## For a "partial approximate match" (as used for agrep):
+> > > > adist("lasy", "1 lazy 2", partial = TRUE)
+> > >
+> > > The build works under Rtools43. Should I uninstall both versions of
+> > > Rtools, my current R installation, and its library and try again? I'm
+> > > doubtful that will help as my "active" R installation is in a
+> > > completely different directory, but I am willing to try. If there is
+> > > any output or other tests I can do, please let me know. Or, if you
+> > > think I should raise this on r-devel.
+> > >
+> > > Thank you,
+> > >
+> > > Avi
+> > >
+> > > On Mon, Mar 18, 2024 at 4:08?AM Tomas Kalibera <tomas.kalibera at gmail.com> wrote:
+> > > >
+> > > > Hello Avi,
+> > > >
+> > > > On 3/17/24 17:53, Avraham Adler wrote:
+> > > > > Hello, Tomas.
+> > > > >
+> > > > > As always, thank you for your incessant hard work. I have compiled
+> > > > > R-devel 86144 using Rtools44 and it completes normally. However, it
+> > > > > fails very early in make check-devel. Specifically, I get the output
+> > > > > below, and have received it more than once. Is this something to raise
+> > > > > on R-devel or is it an Rtools44-specific issue?
+> > > > I can't tell from this output. Could you please try to get a more
+> > > > specific error output?
+> > > > Could you please share your compiler options (e.g. MkRules.local) and
+> > > > indeed if you made any modifications to the code?
+> > > >
+> > > > Also, as always, it is worth making sure that all code has been rebuilt
+> > > > using the new Rtools - e.g. delete any old package library for R-devel
+> > > > (4.4) you may have on your system.
+> > > >
+> > > > The testing done by myself and CRAN only covers the default compilation
+> > > > options as specified in the make files.
+> > > >
+> > > > Best
+> > > > Tomas
+> > > >
+> > > > >
+> > > > > Thank you,
+> > > > >
+> > > > > Avi
+> > > > >
+> > > > > $ make check-devel
+> > > > > Testing examples for package 'base'
+> > > > > Testing examples for package 'tools'
+> > > > >    comparing 'tools-Ex.Rout' to 'tools-Ex.Rout.save' ... NOTE
+> > > > >    1046,1047d1045
+> > > > >    < Warning in file(con, "r") :
+> > > > >    <   file("") only supports open = "w+" and open = "w+b": using the former
+> > > > >    1050,1051c1048,1049
+> > > > >    <  $ file    : chr ""
+> > > > >    <  $ title   : chr ""
+> > > > >    ---
+> > > > >    >  $ file    : chr "grid.Rnw"
+> > > > >    >  $ title   : chr "Introduction to grid"
+> > > > > Testing examples for package 'utils'
+> > > > > Error: testing 'utils' failed
+> > > > > Execution halted
+> > > > > make[3]: *** [Makefile.win:29: test-Examples-Base] Error 1
+> > > > > make[2]: *** [Makefile.common:208: test-Examples] Error 2
+> > > > > make[1]: *** [Makefile.common:193: test-all-basics] Error 1
+> > > > > make: *** [Makefile:333: check-devel] Error 2
+> > > > >
+> > > > >
+> > > > >
+> > > > > On Thu, Mar 14, 2024 at 4:45?AM Tomas Kalibera <tomas.kalibera at gmail.com> wrote:
+> > > > >> Dear R Windows developers,
+> > > > >>
+> > > > >> there is now a new toolchain for R for Windows, Rtools44. It is now used
+> > > > >> by R-devel and is intended for R 4.4.0.
+> > > > >>
+> > > > >> Compared to Rtools43, it uses GCC 13 and updates other core components.
+> > > > >> See https://cran.r-project.org/bin/windows/Rtools/rtools44/news.html for
+> > > > >> a detailed list of changes.
+> > > > >>
+> > > > >> All users of R-devel who need to compile R packages with source code in
+> > > > >> C, C++ or Fortran should install Rtools44. From the user perspective,
+> > > > >> Rtools44 works the same way as Rtools43. See
+> > > > >> https://cran.r-project.org/bin/windows/base/howto-R-devel.html for
+> > > > >> instructions on how to build R-devel and packages for this version of R.
+> > > > >>
+> > > > >> It is recommended to re-install packages that need compilation to avoid
+> > > > >> potential incompatibilities with code built using Rtools43.
+> > > > >>
+> > > > >> Rtools44 also includes an experimental version for 64-bit ARM machines,
+> > > > >> using LLVM 17 (and clang, flang-new, lld, libc++) - the aarch64 version
+> > > > >> of Rtools has its own installer and distribution tarballs.
+> > > > >>
+> > > > >> Best
+> > > > >> Tomas
+> > > > >>
+> > > > >> _______________________________________________
+> > > > >> R-SIG-windows mailing list
+> > > > >> R-SIG-windows at r-project.org
+> > > > >> https://stat.ethz.ch/mailman/listinfo/r-sig-windows
+
+
+From tom@@@k@||ber@ @end|ng |rom gm@||@com  Tue Mar 19 17:05:55 2024
+From: tom@@@k@||ber@ @end|ng |rom gm@||@com (Tomas Kalibera)
+Date: Tue, 19 Mar 2024 17:05:55 +0100
+Subject: [R-SIG-Win] Rtools44
+In-Reply-To: <CAL6gwnJO2h1Ju+TTeWPhCPB25CGgCXeAPvGcwzv85bbR2ANsXQ@mail.gmail.com>
+References: <d192e3a0-4e91-4d84-b6a6-7e05584d9647@gmail.com>
+ <CAL6gwnKJWnDNDu+KNTC508gEeGjgquU-1380R0GELK-TaAuNDg@mail.gmail.com>
+ <79c027a1-64c4-46b2-a757-18aa0886b6f1@gmail.com>
+ <CAL6gwnLFYbhp_qT_Pi8Hj1NhjH5u=JTcQq3z-2DhZnVBoBUE0g@mail.gmail.com>
+ <CAL6gwnJ0eLDtyOg8fgazGt9OZGhYquya7bGJ1=epE9HUvC+pWQ@mail.gmail.com>
+ <CAL6gwnJWoaXMQt1djLq5DdayxdTJ7xOk-Ts=DYw8XgSGiM72OA@mail.gmail.com>
+ <CAL6gwnJO2h1Ju+TTeWPhCPB25CGgCXeAPvGcwzv85bbR2ANsXQ@mail.gmail.com>
+Message-ID: <1cf6efdf-df64-483e-96c9-16461c23c099@gmail.com>
+
+On 3/19/24 15:33, Avraham Adler wrote:
+> For completeness, I compiled R from source using the native BLAS, and
+> make check fails again, this time on "aregexec". Running "agrep" from
+> within Rgui causes it to crash to desktop. Could it be something to do
+> with this: https://github.com/wch/r-source/commit/ba486d898c2698c2afb678abdab807510327541e?
+> But that didn't affect aregexc or adist? This is beyond my
+> understanding, but I'm happy to do any tests you need to help identify
+> what is going on.
+
+I can reproduce the problem (without LTO, without openblas), just by 
+"-O3 -march=native" and running
+
+agrep("lasy", "1 lazy 2")
+
+which crashes R.
+
+The crash happens in do_agrep from agrep.c, when calling tre_regaexec:
+
+ ??????? } else {
+ ??????????? const char *s = translateChar(STRING_ELT(vec, i));
+ ??????????? if(mbcslocale && !mbcsValid(s))
+ ??????????????? error(_("input string %lld is invalid in this locale"),
+ ????????????????????? (long long)i+1);
+ ??????????? rc = tre_regaexec(&reg, s, &match, params, 0);? // <=== 
+here (line 242)
+ ??????????? vmaxset(vmax);
+ ??????? }
+
+ ?? 0x00007fff79c642da <+1290>:? mov??? 0x50(%rsp),%rdx
+ ?? 0x00007fff79c642df <+1295>:? test?? %eax,%eax
+ ?? 0x00007fff79c642e1 <+1297>:? je???? 0x7fff79c6522a <do_agrep+5210>
+ ?? 0x00007fff79c642e7 <+1303>:? movl?? $0x0,0x20(%rsp)
+ ?? 0x00007fff79c642ef <+1311>:? mov??? 0x38(%rsp),%rcx
+ ?? 0x00007fff79c642f4 <+1316>:? mov??? %r15,%r8
+ ?? 0x00007fff79c642f7 <+1319>:? lea??? 0x80(%rsp),%r9
+ ?? 0x00007fff79c642ff <+1327>:? vmovdqu 0xb0(%rsp),%ymm4
+=> 0x00007fff79c64308 <+1336>:? vmovdqa %ymm4,0x80(%rsp)
+ ?? 0x00007fff79c64311 <+1345>:? vzeroupper
+ ?? 0x00007fff79c64314 <+1348>:? call?? 0x7fff79d183d0 <tre_regaexec>
+
+And it happens because of incorrect alignment in an AVX2 instruction. In 
+the above, vmovdqa is used as a second step of copying the regparams_t 
+structure to the stack (to be passed as 4th argument of tre_regaexec). 
+But GCC uses 0x80(%rsp) for that, which happens only to be 16-byte 
+aligned, but not 32-byte aligned. AVX2 requires this to be 32-byte 
+aligned in vmovdqa instruction, and hence the program segfaults.
+
+This is a long standing bug in GCC that has been reported long time ago: 
+https://gcc.gnu.org/bugzilla/show_bug.cgi?id=54412
+
+It must be a coincidence that you haven't run into this with GCC 12.3 
+and earlier (so earlier versions of Rtools for Windows).
+
+I think the simplest and most reliable work-around is to not use AVX2 
+with GCC on Windows.
+
+Best
+Tomas
+
+>
+> Thank you,
+>
+> Avi
+>
+>
+>
+> On Mon, Mar 18, 2024 at 11:58?PM Avraham Adler <avraham.adler at gmail.com> wrote:
+>> I ran "tools::testInstalledBasic("both")" from within Rterm, and it
+>> failed on reg-tests-1a, and doesn't that last call in the FAIL look
+>> familiar? Three times isn;t coincidence. What could be causing
+>> agrep/adist to fail?
+>>
+>> Avi
+>>
+>>> a <- c("NA", NA, "BANANA")
+>>> na <- NA_character_
+>>> a1 <- substr(a,1,1)
+>>> stopifnot(is.na(a1)==is.na(a))
+>>> a2 <- substring(a,1,1)
+>>> stopifnot(is.na(a2)==is.na(a))
+>>> a3 <- sub("NA","na",a)
+>>> stopifnot(is.na(a3)==is.na(a))
+>>> a3 <- gsub("NA","na",a)
+>>> stopifnot(is.na(a3)==is.na(a))
+>>> substr(a3, 1, 2) <- "na"
+>>> stopifnot(is.na(a3)==is.na(a))
+>>> substr(a3, 1, 2) <- na
+>>> stopifnot(all(is.na(a3)))
+>>> stopifnot(agrep("NA", a) == c(1, 3))
+>> On Mon, Mar 18, 2024 at 11:52?PM Avraham Adler <avraham.adler at gmail.com> wrote:
+>>> Hello, Tomas.
+>>>
+>>> I ran check again and this time it failed on base. Base failed at
+>>> "agrep" and utils failed at "adist" if that triggers any ideas.
+>>>
+>>> Thank you,
+>>>
+>>> Avi
+>>>
+>>> On Mon, Mar 18, 2024 at 11:49?PM Avraham Adler <avraham.adler at gmail.com> wrote:
+>>>> Hello, Tomas.
+>>>>
+>>>> I had hoped that my problem was that I was linking to OpenBLAS built
+>>>> under Rtools43, but sadly that is not the case, as I built OpenBLAS
+>>>> using Rtools44 and I still get the error in 'utils'. I do have
+>>>> Rtools43 installed on this machine, but I am doing eveything from the
+>>>> Rtools44 bash. My MkRules.local follows:
+>>>>
+>>>> USE_ATLAS = YES
+>>>> ATLAS_PATH = C:/R/OPB/OPB_03.26_1T_44
+>>>> EOPTS = -march=native -pipe -mno-rtm
+>>>> LTO = -flto=1 -fuse-linker-plugin
+>>>> LTO_OPT = -flto=1 -fuse-linker-plugin
+>>>> LTO_FC = -flto=1 -fuse-linker-plugin
+>>>> LTO_FC_OPT = -flto=1 -fuse-linker-plugin
+>>>> QPDF = C:/R/qpdf-11.9.0-msvc64
+>>>> OPENMP = -fopenmp
+>>>>
+>>>> I also make the following change to Makefile.win in /src/extra/blas as
+>>>> I have been doing for more than a decade:
+>>>>
+>>>> --- /c/r/trunk/src/extra/blas/Makefile.win    2024-01-24
+>>>> 18:34:42.755255900 +0000
+>>>> +++ /c/r/Makefile.win    2024-01-24 18:39:39.716458000 +0000
+>>>> @@ -12,7 +12,7 @@
+>>>>   ../../../$(BINDIR)/Rblas.dll: blas00.o ../../gnuwin32/dllversion.o
+>>>>       @$(ECHO) -------- Building $@ --------
+>>>>       $(DLL) -s -shared $(DLLFLAGS) -o $@ $^ Rblas.def \
+>>>> -       -L../../../$(IMPDIR) -lR  -L"$(ATLAS_PATH)" -lf77blas -latlas
+>>>> +       -L../../../$(IMPDIR) -lR -L"$(ATLAS_PATH)" -fopenmp -lopenblas
+>>>>   else
+>>>>   ../../../$(BINDIR)/Rblas.dll: blas.o blas2.o cmplxblas.o cmplxblas2.o
+>>>> ../../gnuwin32/dllversion.o
+>>>>       @$(ECHO) -------- Building $@ --------
+>>>>
+>>>> The utils-Ex.Rout.fail is 1188 lines long and I don't see any obvious
+>>>> point of failure. The last few lines are:
+>>>>> cleanEx()
+>>>>> nameEx("adist")
+>>>>> ### * adist
+>>>>>
+>>>>> flush(stderr()); flush(stdout())
+>>>>>
+>>>>> ### Name: adist
+>>>>> ### Title: Approximate String Distances
+>>>>> ### Aliases: adist
+>>>>> ### Keywords: character
+>>>>>
+>>>>> ### ** Examples
+>>>>>
+>>>>> ## Cf. https://en.wikipedia.org/wiki/Levenshtein_distance
+>>>>> adist("kitten", "sitting")
+>>>>       [,1]
+>>>> [1,]    3
+>>>>> ## To see the transformation counts for the Levenshtein distance:
+>>>>> drop(attr(adist("kitten", "sitting", counts = TRUE), "counts"))
+>>>> ins del sub
+>>>>    1   0   2
+>>>>> ## To see the transformation sequences:
+>>>>> attr(adist(c("kitten", "sitting"), counts = TRUE), "trafos")
+>>>>       [,1]      [,2]
+>>>> [1,] "MMMMMM"  "SMMMSMI"
+>>>> [2,] "SMMMSMD" "MMMMMMM"
+>>>>> ## Cf. the examples for agrep:
+>>>>> adist("lasy", "1 lazy 2")
+>>>>       [,1]
+>>>> [1,]    5
+>>>>> ## For a "partial approximate match" (as used for agrep):
+>>>>> adist("lasy", "1 lazy 2", partial = TRUE)
+>>>> The build works under Rtools43. Should I uninstall both versions of
+>>>> Rtools, my current R installation, and its library and try again? I'm
+>>>> doubtful that will help as my "active" R installation is in a
+>>>> completely different directory, but I am willing to try. If there is
+>>>> any output or other tests I can do, please let me know. Or, if you
+>>>> think I should raise this on r-devel.
+>>>>
+>>>> Thank you,
+>>>>
+>>>> Avi
+>>>>
+>>>> On Mon, Mar 18, 2024 at 4:08?AM Tomas Kalibera <tomas.kalibera at gmail.com> wrote:
+>>>>> Hello Avi,
+>>>>>
+>>>>> On 3/17/24 17:53, Avraham Adler wrote:
+>>>>>> Hello, Tomas.
+>>>>>>
+>>>>>> As always, thank you for your incessant hard work. I have compiled
+>>>>>> R-devel 86144 using Rtools44 and it completes normally. However, it
+>>>>>> fails very early in make check-devel. Specifically, I get the output
+>>>>>> below, and have received it more than once. Is this something to raise
+>>>>>> on R-devel or is it an Rtools44-specific issue?
+>>>>> I can't tell from this output. Could you please try to get a more
+>>>>> specific error output?
+>>>>> Could you please share your compiler options (e.g. MkRules.local) and
+>>>>> indeed if you made any modifications to the code?
+>>>>>
+>>>>> Also, as always, it is worth making sure that all code has been rebuilt
+>>>>> using the new Rtools - e.g. delete any old package library for R-devel
+>>>>> (4.4) you may have on your system.
+>>>>>
+>>>>> The testing done by myself and CRAN only covers the default compilation
+>>>>> options as specified in the make files.
+>>>>>
+>>>>> Best
+>>>>> Tomas
+>>>>>
+>>>>>> Thank you,
+>>>>>>
+>>>>>> Avi
+>>>>>>
+>>>>>> $ make check-devel
+>>>>>> Testing examples for package 'base'
+>>>>>> Testing examples for package 'tools'
+>>>>>>     comparing 'tools-Ex.Rout' to 'tools-Ex.Rout.save' ... NOTE
+>>>>>>     1046,1047d1045
+>>>>>>     < Warning in file(con, "r") :
+>>>>>>     <   file("") only supports open = "w+" and open = "w+b": using the former
+>>>>>>     1050,1051c1048,1049
+>>>>>>     <  $ file    : chr ""
+>>>>>>     <  $ title   : chr ""
+>>>>>>     ---
+>>>>>>     >  $ file    : chr "grid.Rnw"
+>>>>>>     >  $ title   : chr "Introduction to grid"
+>>>>>> Testing examples for package 'utils'
+>>>>>> Error: testing 'utils' failed
+>>>>>> Execution halted
+>>>>>> make[3]: *** [Makefile.win:29: test-Examples-Base] Error 1
+>>>>>> make[2]: *** [Makefile.common:208: test-Examples] Error 2
+>>>>>> make[1]: *** [Makefile.common:193: test-all-basics] Error 1
+>>>>>> make: *** [Makefile:333: check-devel] Error 2
+>>>>>>
+>>>>>>
+>>>>>>
+>>>>>> On Thu, Mar 14, 2024 at 4:45?AM Tomas Kalibera <tomas.kalibera at gmail.com> wrote:
+>>>>>>> Dear R Windows developers,
+>>>>>>>
+>>>>>>> there is now a new toolchain for R for Windows, Rtools44. It is now used
+>>>>>>> by R-devel and is intended for R 4.4.0.
+>>>>>>>
+>>>>>>> Compared to Rtools43, it uses GCC 13 and updates other core components.
+>>>>>>> See https://cran.r-project.org/bin/windows/Rtools/rtools44/news.html for
+>>>>>>> a detailed list of changes.
+>>>>>>>
+>>>>>>> All users of R-devel who need to compile R packages with source code in
+>>>>>>> C, C++ or Fortran should install Rtools44. From the user perspective,
+>>>>>>> Rtools44 works the same way as Rtools43. See
+>>>>>>> https://cran.r-project.org/bin/windows/base/howto-R-devel.html for
+>>>>>>> instructions on how to build R-devel and packages for this version of R.
+>>>>>>>
+>>>>>>> It is recommended to re-install packages that need compilation to avoid
+>>>>>>> potential incompatibilities with code built using Rtools43.
+>>>>>>>
+>>>>>>> Rtools44 also includes an experimental version for 64-bit ARM machines,
+>>>>>>> using LLVM 17 (and clang, flang-new, lld, libc++) - the aarch64 version
+>>>>>>> of Rtools has its own installer and distribution tarballs.
+>>>>>>>
+>>>>>>> Best
+>>>>>>> Tomas
+>>>>>>>
+>>>>>>> _______________________________________________
+>>>>>>> R-SIG-windows mailing list
+>>>>>>> R-SIG-windows at r-project.org
+>>>>>>> https://stat.ethz.ch/mailman/listinfo/r-sig-windows
+
+
+From tom@@@k@||ber@ @end|ng |rom gm@||@com  Tue Mar 19 17:15:17 2024
+From: tom@@@k@||ber@ @end|ng |rom gm@||@com (Tomas Kalibera)
+Date: Tue, 19 Mar 2024 17:15:17 +0100
+Subject: [R-SIG-Win] Rtools44
+In-Reply-To: <1cf6efdf-df64-483e-96c9-16461c23c099@gmail.com>
+References: <d192e3a0-4e91-4d84-b6a6-7e05584d9647@gmail.com>
+ <CAL6gwnKJWnDNDu+KNTC508gEeGjgquU-1380R0GELK-TaAuNDg@mail.gmail.com>
+ <79c027a1-64c4-46b2-a757-18aa0886b6f1@gmail.com>
+ <CAL6gwnLFYbhp_qT_Pi8Hj1NhjH5u=JTcQq3z-2DhZnVBoBUE0g@mail.gmail.com>
+ <CAL6gwnJ0eLDtyOg8fgazGt9OZGhYquya7bGJ1=epE9HUvC+pWQ@mail.gmail.com>
+ <CAL6gwnJWoaXMQt1djLq5DdayxdTJ7xOk-Ts=DYw8XgSGiM72OA@mail.gmail.com>
+ <CAL6gwnJO2h1Ju+TTeWPhCPB25CGgCXeAPvGcwzv85bbR2ANsXQ@mail.gmail.com>
+ <1cf6efdf-df64-483e-96c9-16461c23c099@gmail.com>
+Message-ID: <4f5073ec-926a-474e-9a11-666cf07e5a88@gmail.com>
+
+
+On 3/19/24 17:05, Tomas Kalibera wrote:
+> On 3/19/24 15:33, Avraham Adler wrote:
+>> For completeness, I compiled R from source using the native BLAS, and
+>> make check fails again, this time on "aregexec". Running "agrep" from
+>> within Rgui causes it to crash to desktop. Could it be something to do
+>> with this: 
+>> https://github.com/wch/r-source/commit/ba486d898c2698c2afb678abdab807510327541e?
+>> But that didn't affect aregexc or adist? This is beyond my
+>> understanding, but I'm happy to do any tests you need to help identify
+>> what is going on.
+>
+> I can reproduce the problem (without LTO, without openblas), just by 
+> "-O3 -march=native" and running
+>
+> agrep("lasy", "1 lazy 2")
+>
+> which crashes R.
+>
+> The crash happens in do_agrep from agrep.c, when calling tre_regaexec:
+>
+> ??????? } else {
+> ??????????? const char *s = translateChar(STRING_ELT(vec, i));
+> ??????????? if(mbcslocale && !mbcsValid(s))
+> ??????????????? error(_("input string %lld is invalid in this locale"),
+> ????????????????????? (long long)i+1);
+> ??????????? rc = tre_regaexec(&reg, s, &match, params, 0);? // <=== 
+> here (line 242)
+> ??????????? vmaxset(vmax);
+> ??????? }
+>
+> ?? 0x00007fff79c642da <+1290>:? mov??? 0x50(%rsp),%rdx
+> ?? 0x00007fff79c642df <+1295>:? test?? %eax,%eax
+> ?? 0x00007fff79c642e1 <+1297>:? je???? 0x7fff79c6522a <do_agrep+5210>
+> ?? 0x00007fff79c642e7 <+1303>:? movl?? $0x0,0x20(%rsp)
+> ?? 0x00007fff79c642ef <+1311>:? mov??? 0x38(%rsp),%rcx
+> ?? 0x00007fff79c642f4 <+1316>:? mov??? %r15,%r8
+> ?? 0x00007fff79c642f7 <+1319>:? lea??? 0x80(%rsp),%r9
+> ?? 0x00007fff79c642ff <+1327>:? vmovdqu 0xb0(%rsp),%ymm4
+> => 0x00007fff79c64308 <+1336>:? vmovdqa %ymm4,0x80(%rsp)
+> ?? 0x00007fff79c64311 <+1345>:? vzeroupper
+> ?? 0x00007fff79c64314 <+1348>:? call?? 0x7fff79d183d0 <tre_regaexec>
+>
+> And it happens because of incorrect alignment in an AVX2 instruction. 
+> In the above, vmovdqa is used as a second step of copying the 
+> regparams_t structure to the stack (to be passed as 4th argument of 
+> tre_regaexec). But GCC uses 0x80(%rsp) for that, which happens only to 
+> be 16-byte aligned, but not 32-byte aligned. AVX2 requires this to be 
+> 32-byte aligned in vmovdqa instruction, and hence the program segfaults.
+>
+> This is a long standing bug in GCC that has been reported long time 
+> ago: https://gcc.gnu.org/bugzilla/show_bug.cgi?id=54412
+>
+> It must be a coincidence that you haven't run into this with GCC 12.3 
+> and earlier (so earlier versions of Rtools for Windows).
+>
+> I think the simplest and most reliable work-around is to not use AVX2 
+> with GCC on Windows.
+
+You can also use "-Wa,-muse-unaligned-vector-move" option for the GNU 
+assembler (add to optimization options), which will make the assembler 
+use instructions that don't require memory to be aligned. Whether it 
+would still be beneficial for performance to use AVX2 in the end or not 
+probably depends on the code.
+
+Best
+Tomas
+
+>
+> Best
+> Tomas
+>
+>>
+>> Thank you,
+>>
+>> Avi
+>>
+>>
+>>
+>> On Mon, Mar 18, 2024 at 11:58?PM Avraham Adler 
+>> <avraham.adler at gmail.com> wrote:
+>>> I ran "tools::testInstalledBasic("both")" from within Rterm, and it
+>>> failed on reg-tests-1a, and doesn't that last call in the FAIL look
+>>> familiar? Three times isn;t coincidence. What could be causing
+>>> agrep/adist to fail?
+>>>
+>>> Avi
+>>>
+>>>> a <- c("NA", NA, "BANANA")
+>>>> na <- NA_character_
+>>>> a1 <- substr(a,1,1)
+>>>> stopifnot(is.na(a1)==is.na(a))
+>>>> a2 <- substring(a,1,1)
+>>>> stopifnot(is.na(a2)==is.na(a))
+>>>> a3 <- sub("NA","na",a)
+>>>> stopifnot(is.na(a3)==is.na(a))
+>>>> a3 <- gsub("NA","na",a)
+>>>> stopifnot(is.na(a3)==is.na(a))
+>>>> substr(a3, 1, 2) <- "na"
+>>>> stopifnot(is.na(a3)==is.na(a))
+>>>> substr(a3, 1, 2) <- na
+>>>> stopifnot(all(is.na(a3)))
+>>>> stopifnot(agrep("NA", a) == c(1, 3))
+>>> On Mon, Mar 18, 2024 at 11:52?PM Avraham Adler 
+>>> <avraham.adler at gmail.com> wrote:
+>>>> Hello, Tomas.
+>>>>
+>>>> I ran check again and this time it failed on base. Base failed at
+>>>> "agrep" and utils failed at "adist" if that triggers any ideas.
+>>>>
+>>>> Thank you,
+>>>>
+>>>> Avi
+>>>>
+>>>> On Mon, Mar 18, 2024 at 11:49?PM Avraham Adler 
+>>>> <avraham.adler at gmail.com> wrote:
+>>>>> Hello, Tomas.
+>>>>>
+>>>>> I had hoped that my problem was that I was linking to OpenBLAS built
+>>>>> under Rtools43, but sadly that is not the case, as I built OpenBLAS
+>>>>> using Rtools44 and I still get the error in 'utils'. I do have
+>>>>> Rtools43 installed on this machine, but I am doing eveything from the
+>>>>> Rtools44 bash. My MkRules.local follows:
+>>>>>
+>>>>> USE_ATLAS = YES
+>>>>> ATLAS_PATH = C:/R/OPB/OPB_03.26_1T_44
+>>>>> EOPTS = -march=native -pipe -mno-rtm
+>>>>> LTO = -flto=1 -fuse-linker-plugin
+>>>>> LTO_OPT = -flto=1 -fuse-linker-plugin
+>>>>> LTO_FC = -flto=1 -fuse-linker-plugin
+>>>>> LTO_FC_OPT = -flto=1 -fuse-linker-plugin
+>>>>> QPDF = C:/R/qpdf-11.9.0-msvc64
+>>>>> OPENMP = -fopenmp
+>>>>>
+>>>>> I also make the following change to Makefile.win in 
+>>>>> /src/extra/blas as
+>>>>> I have been doing for more than a decade:
+>>>>>
+>>>>> --- /c/r/trunk/src/extra/blas/Makefile.win??? 2024-01-24
+>>>>> 18:34:42.755255900 +0000
+>>>>> +++ /c/r/Makefile.win??? 2024-01-24 18:39:39.716458000 +0000
+>>>>> @@ -12,7 +12,7 @@
+>>>>> ? ../../../$(BINDIR)/Rblas.dll: blas00.o ../../gnuwin32/dllversion.o
+>>>>> ????? @$(ECHO) -------- Building $@ --------
+>>>>> ????? $(DLL) -s -shared $(DLLFLAGS) -o $@ $^ Rblas.def \
+>>>>> -?????? -L../../../$(IMPDIR) -lR? -L"$(ATLAS_PATH)" -lf77blas -latlas
+>>>>> +?????? -L../../../$(IMPDIR) -lR -L"$(ATLAS_PATH)" -fopenmp 
+>>>>> -lopenblas
+>>>>> ? else
+>>>>> ? ../../../$(BINDIR)/Rblas.dll: blas.o blas2.o cmplxblas.o 
+>>>>> cmplxblas2.o
+>>>>> ../../gnuwin32/dllversion.o
+>>>>> ????? @$(ECHO) -------- Building $@ --------
+>>>>>
+>>>>> The utils-Ex.Rout.fail is 1188 lines long and I don't see any obvious
+>>>>> point of failure. The last few lines are:
+>>>>>> cleanEx()
+>>>>>> nameEx("adist")
+>>>>>> ### * adist
+>>>>>>
+>>>>>> flush(stderr()); flush(stdout())
+>>>>>>
+>>>>>> ### Name: adist
+>>>>>> ### Title: Approximate String Distances
+>>>>>> ### Aliases: adist
+>>>>>> ### Keywords: character
+>>>>>>
+>>>>>> ### ** Examples
+>>>>>>
+>>>>>> ## Cf. https://en.wikipedia.org/wiki/Levenshtein_distance
+>>>>>> adist("kitten", "sitting")
+>>>>> ????? [,1]
+>>>>> [1,]??? 3
+>>>>>> ## To see the transformation counts for the Levenshtein distance:
+>>>>>> drop(attr(adist("kitten", "sitting", counts = TRUE), "counts"))
+>>>>> ins del sub
+>>>>> ?? 1?? 0?? 2
+>>>>>> ## To see the transformation sequences:
+>>>>>> attr(adist(c("kitten", "sitting"), counts = TRUE), "trafos")
+>>>>> ????? [,1]????? [,2]
+>>>>> [1,] "MMMMMM"? "SMMMSMI"
+>>>>> [2,] "SMMMSMD" "MMMMMMM"
+>>>>>> ## Cf. the examples for agrep:
+>>>>>> adist("lasy", "1 lazy 2")
+>>>>> ????? [,1]
+>>>>> [1,]??? 5
+>>>>>> ## For a "partial approximate match" (as used for agrep):
+>>>>>> adist("lasy", "1 lazy 2", partial = TRUE)
+>>>>> The build works under Rtools43. Should I uninstall both versions of
+>>>>> Rtools, my current R installation, and its library and try again? I'm
+>>>>> doubtful that will help as my "active" R installation is in a
+>>>>> completely different directory, but I am willing to try. If there is
+>>>>> any output or other tests I can do, please let me know. Or, if you
+>>>>> think I should raise this on r-devel.
+>>>>>
+>>>>> Thank you,
+>>>>>
+>>>>> Avi
+>>>>>
+>>>>> On Mon, Mar 18, 2024 at 4:08?AM Tomas Kalibera 
+>>>>> <tomas.kalibera at gmail.com> wrote:
+>>>>>> Hello Avi,
+>>>>>>
+>>>>>> On 3/17/24 17:53, Avraham Adler wrote:
+>>>>>>> Hello, Tomas.
+>>>>>>>
+>>>>>>> As always, thank you for your incessant hard work. I have compiled
+>>>>>>> R-devel 86144 using Rtools44 and it completes normally. However, it
+>>>>>>> fails very early in make check-devel. Specifically, I get the 
+>>>>>>> output
+>>>>>>> below, and have received it more than once. Is this something to 
+>>>>>>> raise
+>>>>>>> on R-devel or is it an Rtools44-specific issue?
+>>>>>> I can't tell from this output. Could you please try to get a more
+>>>>>> specific error output?
+>>>>>> Could you please share your compiler options (e.g. MkRules.local) 
+>>>>>> and
+>>>>>> indeed if you made any modifications to the code?
+>>>>>>
+>>>>>> Also, as always, it is worth making sure that all code has been 
+>>>>>> rebuilt
+>>>>>> using the new Rtools - e.g. delete any old package library for 
+>>>>>> R-devel
+>>>>>> (4.4) you may have on your system.
+>>>>>>
+>>>>>> The testing done by myself and CRAN only covers the default 
+>>>>>> compilation
+>>>>>> options as specified in the make files.
+>>>>>>
+>>>>>> Best
+>>>>>> Tomas
+>>>>>>
+>>>>>>> Thank you,
+>>>>>>>
+>>>>>>> Avi
+>>>>>>>
+>>>>>>> $ make check-devel
+>>>>>>> Testing examples for package 'base'
+>>>>>>> Testing examples for package 'tools'
+>>>>>>> ??? comparing 'tools-Ex.Rout' to 'tools-Ex.Rout.save' ... NOTE
+>>>>>>> ??? 1046,1047d1045
+>>>>>>> ??? < Warning in file(con, "r") :
+>>>>>>> ??? <?? file("") only supports open = "w+" and open = "w+b": 
+>>>>>>> using the former
+>>>>>>> ??? 1050,1051c1048,1049
+>>>>>>> ??? <? $ file??? : chr ""
+>>>>>>> ??? <? $ title?? : chr ""
+>>>>>>> ??? ---
+>>>>>>> ??? >? $ file??? : chr "grid.Rnw"
+>>>>>>> ??? >? $ title?? : chr "Introduction to grid"
+>>>>>>> Testing examples for package 'utils'
+>>>>>>> Error: testing 'utils' failed
+>>>>>>> Execution halted
+>>>>>>> make[3]: *** [Makefile.win:29: test-Examples-Base] Error 1
+>>>>>>> make[2]: *** [Makefile.common:208: test-Examples] Error 2
+>>>>>>> make[1]: *** [Makefile.common:193: test-all-basics] Error 1
+>>>>>>> make: *** [Makefile:333: check-devel] Error 2
+>>>>>>>
+>>>>>>>
+>>>>>>>
+>>>>>>> On Thu, Mar 14, 2024 at 4:45?AM Tomas Kalibera 
+>>>>>>> <tomas.kalibera at gmail.com> wrote:
+>>>>>>>> Dear R Windows developers,
+>>>>>>>>
+>>>>>>>> there is now a new toolchain for R for Windows, Rtools44. It is 
+>>>>>>>> now used
+>>>>>>>> by R-devel and is intended for R 4.4.0.
+>>>>>>>>
+>>>>>>>> Compared to Rtools43, it uses GCC 13 and updates other core 
+>>>>>>>> components.
+>>>>>>>> See 
+>>>>>>>> https://cran.r-project.org/bin/windows/Rtools/rtools44/news.html 
+>>>>>>>> for
+>>>>>>>> a detailed list of changes.
+>>>>>>>>
+>>>>>>>> All users of R-devel who need to compile R packages with source 
+>>>>>>>> code in
+>>>>>>>> C, C++ or Fortran should install Rtools44. From the user 
+>>>>>>>> perspective,
+>>>>>>>> Rtools44 works the same way as Rtools43. See
+>>>>>>>> https://cran.r-project.org/bin/windows/base/howto-R-devel.html for
+>>>>>>>> instructions on how to build R-devel and packages for this 
+>>>>>>>> version of R.
+>>>>>>>>
+>>>>>>>> It is recommended to re-install packages that need compilation 
+>>>>>>>> to avoid
+>>>>>>>> potential incompatibilities with code built using Rtools43.
+>>>>>>>>
+>>>>>>>> Rtools44 also includes an experimental version for 64-bit ARM 
+>>>>>>>> machines,
+>>>>>>>> using LLVM 17 (and clang, flang-new, lld, libc++) - the aarch64 
+>>>>>>>> version
+>>>>>>>> of Rtools has its own installer and distribution tarballs.
+>>>>>>>>
+>>>>>>>> Best
+>>>>>>>> Tomas
+>>>>>>>>
+>>>>>>>> _______________________________________________
+>>>>>>>> R-SIG-windows mailing list
+>>>>>>>> R-SIG-windows at r-project.org
+>>>>>>>> https://stat.ethz.ch/mailman/listinfo/r-sig-windows
+
+
+From @vr@h@m@@d|er @end|ng |rom gm@||@com  Tue Mar 19 18:32:57 2024
+From: @vr@h@m@@d|er @end|ng |rom gm@||@com (Avraham Adler)
+Date: Tue, 19 Mar 2024 13:32:57 -0400
+Subject: [R-SIG-Win] Rtools44
+In-Reply-To: <4f5073ec-926a-474e-9a11-666cf07e5a88@gmail.com>
+References: <d192e3a0-4e91-4d84-b6a6-7e05584d9647@gmail.com>
+ <CAL6gwnKJWnDNDu+KNTC508gEeGjgquU-1380R0GELK-TaAuNDg@mail.gmail.com>
+ <79c027a1-64c4-46b2-a757-18aa0886b6f1@gmail.com>
+ <CAL6gwnLFYbhp_qT_Pi8Hj1NhjH5u=JTcQq3z-2DhZnVBoBUE0g@mail.gmail.com>
+ <CAL6gwnJ0eLDtyOg8fgazGt9OZGhYquya7bGJ1=epE9HUvC+pWQ@mail.gmail.com>
+ <CAL6gwnJWoaXMQt1djLq5DdayxdTJ7xOk-Ts=DYw8XgSGiM72OA@mail.gmail.com>
+ <CAL6gwnJO2h1Ju+TTeWPhCPB25CGgCXeAPvGcwzv85bbR2ANsXQ@mail.gmail.com>
+ <1cf6efdf-df64-483e-96c9-16461c23c099@gmail.com>
+ <4f5073ec-926a-474e-9a11-666cf07e5a88@gmail.com>
+Message-ID: <CAL6gwnKfkNz9DPN6aSeq2A10T-ijVa7BUMTCR3ntmtK-+qNKyQ@mail.gmail.com>
+
+Thank you very much, Tomas.
+
+I guess when the variables were recast to long long, the compiler
+tried to use AVX2 commands. This is rather disappointing from GCC's
+end; there isn't much we in R can do. As this bug has been around for
+over a dozen years, and the last comment is two years ago, I do not
+have hope that anything will be fixed in my lifetime.
+
+Being restricted to Windows, are the only two options to disable all
+AVX2 or use "-Wa,-muse-unaligned-vector-move"? There is no alternative
+easy-to-drop-in toolchain to build R from source on Windows, is there?
+As someone who develops packages requiring source code but is
+restricted to Windows, I am loath to reduce the power of my code,
+unless I must. Any advice or suggestions you may have would be greatly
+appreciated.
+
+Thank you for figuring this out,
+
+Avi
+
+
+On Tue, Mar 19, 2024 at 12:15?PM Tomas Kalibera
+<tomas.kalibera at gmail.com> wrote:
+>
+>
+> On 3/19/24 17:05, Tomas Kalibera wrote:
+> > On 3/19/24 15:33, Avraham Adler wrote:
+> >> For completeness, I compiled R from source using the native BLAS, and
+> >> make check fails again, this time on "aregexec". Running "agrep" from
+> >> within Rgui causes it to crash to desktop. Could it be something to do
+> >> with this:
+> >> https://github.com/wch/r-source/commit/ba486d898c2698c2afb678abdab807510327541e?
+> >> But that didn't affect aregexc or adist? This is beyond my
+> >> understanding, but I'm happy to do any tests you need to help identify
+> >> what is going on.
+> >
+> > I can reproduce the problem (without LTO, without openblas), just by
+> > "-O3 -march=native" and running
+> >
+> > agrep("lasy", "1 lazy 2")
+> >
+> > which crashes R.
+> >
+> > The crash happens in do_agrep from agrep.c, when calling tre_regaexec:
+> >
+> >         } else {
+> >             const char *s = translateChar(STRING_ELT(vec, i));
+> >             if(mbcslocale && !mbcsValid(s))
+> >                 error(_("input string %lld is invalid in this locale"),
+> >                       (long long)i+1);
+> >             rc = tre_regaexec(&reg, s, &match, params, 0);  // <===
+> > here (line 242)
+> >             vmaxset(vmax);
+> >         }
+> >
+> >    0x00007fff79c642da <+1290>:  mov    0x50(%rsp),%rdx
+> >    0x00007fff79c642df <+1295>:  test   %eax,%eax
+> >    0x00007fff79c642e1 <+1297>:  je     0x7fff79c6522a <do_agrep+5210>
+> >    0x00007fff79c642e7 <+1303>:  movl   $0x0,0x20(%rsp)
+> >    0x00007fff79c642ef <+1311>:  mov    0x38(%rsp),%rcx
+> >    0x00007fff79c642f4 <+1316>:  mov    %r15,%r8
+> >    0x00007fff79c642f7 <+1319>:  lea    0x80(%rsp),%r9
+> >    0x00007fff79c642ff <+1327>:  vmovdqu 0xb0(%rsp),%ymm4
+> > => 0x00007fff79c64308 <+1336>:  vmovdqa %ymm4,0x80(%rsp)
+> >    0x00007fff79c64311 <+1345>:  vzeroupper
+> >    0x00007fff79c64314 <+1348>:  call   0x7fff79d183d0 <tre_regaexec>
+> >
+> > And it happens because of incorrect alignment in an AVX2 instruction.
+> > In the above, vmovdqa is used as a second step of copying the
+> > regparams_t structure to the stack (to be passed as 4th argument of
+> > tre_regaexec). But GCC uses 0x80(%rsp) for that, which happens only to
+> > be 16-byte aligned, but not 32-byte aligned. AVX2 requires this to be
+> > 32-byte aligned in vmovdqa instruction, and hence the program segfaults.
+> >
+> > This is a long standing bug in GCC that has been reported long time
+> > ago: https://gcc.gnu.org/bugzilla/show_bug.cgi?id=54412
+> >
+> > It must be a coincidence that you haven't run into this with GCC 12.3
+> > and earlier (so earlier versions of Rtools for Windows).
+> >
+> > I think the simplest and most reliable work-around is to not use AVX2
+> > with GCC on Windows.
+>
+> You can also use "-Wa,-muse-unaligned-vector-move" option for the GNU
+> assembler (add to optimization options), which will make the assembler
+> use instructions that don't require memory to be aligned. Whether it
+> would still be beneficial for performance to use AVX2 in the end or not
+> probably depends on the code.
+>
+> Best
+> Tomas
+>
+> >
+> > Best
+> > Tomas
+> >
+> >>
+> >> Thank you,
+> >>
+> >> Avi
+> >>
+> >>
+> >>
+> >> On Mon, Mar 18, 2024 at 11:58?PM Avraham Adler
+> >> <avraham.adler at gmail.com> wrote:
+> >>> I ran "tools::testInstalledBasic("both")" from within Rterm, and it
+> >>> failed on reg-tests-1a, and doesn't that last call in the FAIL look
+> >>> familiar? Three times isn;t coincidence. What could be causing
+> >>> agrep/adist to fail?
+> >>>
+> >>> Avi
+> >>>
+> >>>> a <- c("NA", NA, "BANANA")
+> >>>> na <- NA_character_
+> >>>> a1 <- substr(a,1,1)
+> >>>> stopifnot(is.na(a1)==is.na(a))
+> >>>> a2 <- substring(a,1,1)
+> >>>> stopifnot(is.na(a2)==is.na(a))
+> >>>> a3 <- sub("NA","na",a)
+> >>>> stopifnot(is.na(a3)==is.na(a))
+> >>>> a3 <- gsub("NA","na",a)
+> >>>> stopifnot(is.na(a3)==is.na(a))
+> >>>> substr(a3, 1, 2) <- "na"
+> >>>> stopifnot(is.na(a3)==is.na(a))
+> >>>> substr(a3, 1, 2) <- na
+> >>>> stopifnot(all(is.na(a3)))
+> >>>> stopifnot(agrep("NA", a) == c(1, 3))
+> >>> On Mon, Mar 18, 2024 at 11:52?PM Avraham Adler
+> >>> <avraham.adler at gmail.com> wrote:
+> >>>> Hello, Tomas.
+> >>>>
+> >>>> I ran check again and this time it failed on base. Base failed at
+> >>>> "agrep" and utils failed at "adist" if that triggers any ideas.
+> >>>>
+> >>>> Thank you,
+> >>>>
+> >>>> Avi
+> >>>>
+> >>>> On Mon, Mar 18, 2024 at 11:49?PM Avraham Adler
+> >>>> <avraham.adler at gmail.com> wrote:
+> >>>>> Hello, Tomas.
+> >>>>>
+> >>>>> I had hoped that my problem was that I was linking to OpenBLAS built
+> >>>>> under Rtools43, but sadly that is not the case, as I built OpenBLAS
+> >>>>> using Rtools44 and I still get the error in 'utils'. I do have
+> >>>>> Rtools43 installed on this machine, but I am doing eveything from the
+> >>>>> Rtools44 bash. My MkRules.local follows:
+> >>>>>
+> >>>>> USE_ATLAS = YES
+> >>>>> ATLAS_PATH = C:/R/OPB/OPB_03.26_1T_44
+> >>>>> EOPTS = -march=native -pipe -mno-rtm
+> >>>>> LTO = -flto=1 -fuse-linker-plugin
+> >>>>> LTO_OPT = -flto=1 -fuse-linker-plugin
+> >>>>> LTO_FC = -flto=1 -fuse-linker-plugin
+> >>>>> LTO_FC_OPT = -flto=1 -fuse-linker-plugin
+> >>>>> QPDF = C:/R/qpdf-11.9.0-msvc64
+> >>>>> OPENMP = -fopenmp
+> >>>>>
+> >>>>> I also make the following change to Makefile.win in
+> >>>>> /src/extra/blas as
+> >>>>> I have been doing for more than a decade:
+> >>>>>
+> >>>>> --- /c/r/trunk/src/extra/blas/Makefile.win    2024-01-24
+> >>>>> 18:34:42.755255900 +0000
+> >>>>> +++ /c/r/Makefile.win    2024-01-24 18:39:39.716458000 +0000
+> >>>>> @@ -12,7 +12,7 @@
+> >>>>>   ../../../$(BINDIR)/Rblas.dll: blas00.o ../../gnuwin32/dllversion.o
+> >>>>>       @$(ECHO) -------- Building $@ --------
+> >>>>>       $(DLL) -s -shared $(DLLFLAGS) -o $@ $^ Rblas.def \
+> >>>>> -       -L../../../$(IMPDIR) -lR  -L"$(ATLAS_PATH)" -lf77blas -latlas
+> >>>>> +       -L../../../$(IMPDIR) -lR -L"$(ATLAS_PATH)" -fopenmp
+> >>>>> -lopenblas
+> >>>>>   else
+> >>>>>   ../../../$(BINDIR)/Rblas.dll: blas.o blas2.o cmplxblas.o
+> >>>>> cmplxblas2.o
+> >>>>> ../../gnuwin32/dllversion.o
+> >>>>>       @$(ECHO) -------- Building $@ --------
+> >>>>>
+> >>>>> The utils-Ex.Rout.fail is 1188 lines long and I don't see any obvious
+> >>>>> point of failure. The last few lines are:
+> >>>>>> cleanEx()
+> >>>>>> nameEx("adist")
+> >>>>>> ### * adist
+> >>>>>>
+> >>>>>> flush(stderr()); flush(stdout())
+> >>>>>>
+> >>>>>> ### Name: adist
+> >>>>>> ### Title: Approximate String Distances
+> >>>>>> ### Aliases: adist
+> >>>>>> ### Keywords: character
+> >>>>>>
+> >>>>>> ### ** Examples
+> >>>>>>
+> >>>>>> ## Cf. https://en.wikipedia.org/wiki/Levenshtein_distance
+> >>>>>> adist("kitten", "sitting")
+> >>>>>       [,1]
+> >>>>> [1,]    3
+> >>>>>> ## To see the transformation counts for the Levenshtein distance:
+> >>>>>> drop(attr(adist("kitten", "sitting", counts = TRUE), "counts"))
+> >>>>> ins del sub
+> >>>>>    1   0   2
+> >>>>>> ## To see the transformation sequences:
+> >>>>>> attr(adist(c("kitten", "sitting"), counts = TRUE), "trafos")
+> >>>>>       [,1]      [,2]
+> >>>>> [1,] "MMMMMM"  "SMMMSMI"
+> >>>>> [2,] "SMMMSMD" "MMMMMMM"
+> >>>>>> ## Cf. the examples for agrep:
+> >>>>>> adist("lasy", "1 lazy 2")
+> >>>>>       [,1]
+> >>>>> [1,]    5
+> >>>>>> ## For a "partial approximate match" (as used for agrep):
+> >>>>>> adist("lasy", "1 lazy 2", partial = TRUE)
+> >>>>> The build works under Rtools43. Should I uninstall both versions of
+> >>>>> Rtools, my current R installation, and its library and try again? I'm
+> >>>>> doubtful that will help as my "active" R installation is in a
+> >>>>> completely different directory, but I am willing to try. If there is
+> >>>>> any output or other tests I can do, please let me know. Or, if you
+> >>>>> think I should raise this on r-devel.
+> >>>>>
+> >>>>> Thank you,
+> >>>>>
+> >>>>> Avi
+> >>>>>
+> >>>>> On Mon, Mar 18, 2024 at 4:08?AM Tomas Kalibera
+> >>>>> <tomas.kalibera at gmail.com> wrote:
+> >>>>>> Hello Avi,
+> >>>>>>
+> >>>>>> On 3/17/24 17:53, Avraham Adler wrote:
+> >>>>>>> Hello, Tomas.
+> >>>>>>>
+> >>>>>>> As always, thank you for your incessant hard work. I have compiled
+> >>>>>>> R-devel 86144 using Rtools44 and it completes normally. However, it
+> >>>>>>> fails very early in make check-devel. Specifically, I get the
+> >>>>>>> output
+> >>>>>>> below, and have received it more than once. Is this something to
+> >>>>>>> raise
+> >>>>>>> on R-devel or is it an Rtools44-specific issue?
+> >>>>>> I can't tell from this output. Could you please try to get a more
+> >>>>>> specific error output?
+> >>>>>> Could you please share your compiler options (e.g. MkRules.local)
+> >>>>>> and
+> >>>>>> indeed if you made any modifications to the code?
+> >>>>>>
+> >>>>>> Also, as always, it is worth making sure that all code has been
+> >>>>>> rebuilt
+> >>>>>> using the new Rtools - e.g. delete any old package library for
+> >>>>>> R-devel
+> >>>>>> (4.4) you may have on your system.
+> >>>>>>
+> >>>>>> The testing done by myself and CRAN only covers the default
+> >>>>>> compilation
+> >>>>>> options as specified in the make files.
+> >>>>>>
+> >>>>>> Best
+> >>>>>> Tomas
+> >>>>>>
+> >>>>>>> Thank you,
+> >>>>>>>
+> >>>>>>> Avi
+> >>>>>>>
+> >>>>>>> $ make check-devel
+> >>>>>>> Testing examples for package 'base'
+> >>>>>>> Testing examples for package 'tools'
+> >>>>>>>     comparing 'tools-Ex.Rout' to 'tools-Ex.Rout.save' ... NOTE
+> >>>>>>>     1046,1047d1045
+> >>>>>>>     < Warning in file(con, "r") :
+> >>>>>>>     <   file("") only supports open = "w+" and open = "w+b":
+> >>>>>>> using the former
+> >>>>>>>     1050,1051c1048,1049
+> >>>>>>>     <  $ file    : chr ""
+> >>>>>>>     <  $ title   : chr ""
+> >>>>>>>     ---
+> >>>>>>>     >  $ file    : chr "grid.Rnw"
+> >>>>>>>     >  $ title   : chr "Introduction to grid"
+> >>>>>>> Testing examples for package 'utils'
+> >>>>>>> Error: testing 'utils' failed
+> >>>>>>> Execution halted
+> >>>>>>> make[3]: *** [Makefile.win:29: test-Examples-Base] Error 1
+> >>>>>>> make[2]: *** [Makefile.common:208: test-Examples] Error 2
+> >>>>>>> make[1]: *** [Makefile.common:193: test-all-basics] Error 1
+> >>>>>>> make: *** [Makefile:333: check-devel] Error 2
+> >>>>>>>
+> >>>>>>>
+> >>>>>>>
+> >>>>>>> On Thu, Mar 14, 2024 at 4:45?AM Tomas Kalibera
+> >>>>>>> <tomas.kalibera at gmail.com> wrote:
+> >>>>>>>> Dear R Windows developers,
+> >>>>>>>>
+> >>>>>>>> there is now a new toolchain for R for Windows, Rtools44. It is
+> >>>>>>>> now used
+> >>>>>>>> by R-devel and is intended for R 4.4.0.
+> >>>>>>>>
+> >>>>>>>> Compared to Rtools43, it uses GCC 13 and updates other core
+> >>>>>>>> components.
+> >>>>>>>> See
+> >>>>>>>> https://cran.r-project.org/bin/windows/Rtools/rtools44/news.html
+> >>>>>>>> for
+> >>>>>>>> a detailed list of changes.
+> >>>>>>>>
+> >>>>>>>> All users of R-devel who need to compile R packages with source
+> >>>>>>>> code in
+> >>>>>>>> C, C++ or Fortran should install Rtools44. From the user
+> >>>>>>>> perspective,
+> >>>>>>>> Rtools44 works the same way as Rtools43. See
+> >>>>>>>> https://cran.r-project.org/bin/windows/base/howto-R-devel.html for
+> >>>>>>>> instructions on how to build R-devel and packages for this
+> >>>>>>>> version of R.
+> >>>>>>>>
+> >>>>>>>> It is recommended to re-install packages that need compilation
+> >>>>>>>> to avoid
+> >>>>>>>> potential incompatibilities with code built using Rtools43.
+> >>>>>>>>
+> >>>>>>>> Rtools44 also includes an experimental version for 64-bit ARM
+> >>>>>>>> machines,
+> >>>>>>>> using LLVM 17 (and clang, flang-new, lld, libc++) - the aarch64
+> >>>>>>>> version
+> >>>>>>>> of Rtools has its own installer and distribution tarballs.
+> >>>>>>>>
+> >>>>>>>> Best
+> >>>>>>>> Tomas
+> >>>>>>>>
+> >>>>>>>> _______________________________________________
+> >>>>>>>> R-SIG-windows mailing list
+> >>>>>>>> R-SIG-windows at r-project.org
+> >>>>>>>> https://stat.ethz.ch/mailman/listinfo/r-sig-windows
+
+
+From tom@@@k@||ber@ @end|ng |rom gm@||@com  Tue Mar 19 19:07:37 2024
+From: tom@@@k@||ber@ @end|ng |rom gm@||@com (Tomas Kalibera)
+Date: Tue, 19 Mar 2024 19:07:37 +0100
+Subject: [R-SIG-Win] Rtools44
+In-Reply-To: <CAL6gwnKfkNz9DPN6aSeq2A10T-ijVa7BUMTCR3ntmtK-+qNKyQ@mail.gmail.com>
+References: <d192e3a0-4e91-4d84-b6a6-7e05584d9647@gmail.com>
+ <CAL6gwnKJWnDNDu+KNTC508gEeGjgquU-1380R0GELK-TaAuNDg@mail.gmail.com>
+ <79c027a1-64c4-46b2-a757-18aa0886b6f1@gmail.com>
+ <CAL6gwnLFYbhp_qT_Pi8Hj1NhjH5u=JTcQq3z-2DhZnVBoBUE0g@mail.gmail.com>
+ <CAL6gwnJ0eLDtyOg8fgazGt9OZGhYquya7bGJ1=epE9HUvC+pWQ@mail.gmail.com>
+ <CAL6gwnJWoaXMQt1djLq5DdayxdTJ7xOk-Ts=DYw8XgSGiM72OA@mail.gmail.com>
+ <CAL6gwnJO2h1Ju+TTeWPhCPB25CGgCXeAPvGcwzv85bbR2ANsXQ@mail.gmail.com>
+ <1cf6efdf-df64-483e-96c9-16461c23c099@gmail.com>
+ <4f5073ec-926a-474e-9a11-666cf07e5a88@gmail.com>
+ <CAL6gwnKfkNz9DPN6aSeq2A10T-ijVa7BUMTCR3ntmtK-+qNKyQ@mail.gmail.com>
+Message-ID: <61b967d2-b55d-44a7-8bb2-5e70d03a3cac@gmail.com>
+
+On 3/19/24 18:32, Avraham Adler wrote:
+> Thank you very much, Tomas.
+>
+> I guess when the variables were recast to long long, the compiler
+> tried to use AVX2 commands.
+This is just an optimization for quick copying of a C structure on the 
+stack. This structure (regparams_t) has 8 ints, in this case.
+> This is rather disappointing from GCC's
+> end; there isn't much we in R can do. As this bug has been around for
+> over a dozen years, and the last comment is two years ago, I do not
+> have hope that anything will be fixed in my lifetime.
+>
+> Being restricted to Windows, are the only two options to disable all
+> AVX2 or use "-Wa,-muse-unaligned-vector-move"? There is no alternative
+> easy-to-drop-in toolchain to build R from source on Windows, is there?
+
+I would recommend you first check whether actually disabling AVX2 (or 
+using "-Wa,-muse-unaligned-vector-move" with AVX2) makes any difference 
+in performance for your use cases. Maybe not.
+
+There is no supported drop-in replacement toolchain that would work with 
+R and packages on x86_64. It is very likely that some LLVM-based 
+toolchain would work after a small amount of tweaks, as after all Rtools 
+with LLVM is being used on aarch64, so R has been and packages are being 
+fixed to work with it, but you would be on your own. And note that 
+flang-new is not yet stable, so you might still have to use gfortran.
+
+> As someone who develops packages requiring source code but is
+> restricted to Windows, I am loath to reduce the power of my code,
+> unless I must. Any advice or suggestions you may have would be greatly
+> appreciated.
+
+GCC is like other open-source software. Submitting a good, well-tested 
+patch, increases the chances things get fixed. Corporations that have 
+the money can also pay experts specializing in compiler implementation 
+to prepare such a patch.
+
+Tomas
+
+>
+> Thank you for figuring this out,
+>
+> Avi
+>
+>
+> On Tue, Mar 19, 2024 at 12:15?PM Tomas Kalibera
+> <tomas.kalibera at gmail.com> wrote:
+>>
+>> On 3/19/24 17:05, Tomas Kalibera wrote:
+>>> On 3/19/24 15:33, Avraham Adler wrote:
+>>>> For completeness, I compiled R from source using the native BLAS, and
+>>>> make check fails again, this time on "aregexec". Running "agrep" from
+>>>> within Rgui causes it to crash to desktop. Could it be something to do
+>>>> with this:
+>>>> https://github.com/wch/r-source/commit/ba486d898c2698c2afb678abdab807510327541e?
+>>>> But that didn't affect aregexc or adist? This is beyond my
+>>>> understanding, but I'm happy to do any tests you need to help identify
+>>>> what is going on.
+>>> I can reproduce the problem (without LTO, without openblas), just by
+>>> "-O3 -march=native" and running
+>>>
+>>> agrep("lasy", "1 lazy 2")
+>>>
+>>> which crashes R.
+>>>
+>>> The crash happens in do_agrep from agrep.c, when calling tre_regaexec:
+>>>
+>>>          } else {
+>>>              const char *s = translateChar(STRING_ELT(vec, i));
+>>>              if(mbcslocale && !mbcsValid(s))
+>>>                  error(_("input string %lld is invalid in this locale"),
+>>>                        (long long)i+1);
+>>>              rc = tre_regaexec(&reg, s, &match, params, 0);  // <===
+>>> here (line 242)
+>>>              vmaxset(vmax);
+>>>          }
+>>>
+>>>     0x00007fff79c642da <+1290>:  mov    0x50(%rsp),%rdx
+>>>     0x00007fff79c642df <+1295>:  test   %eax,%eax
+>>>     0x00007fff79c642e1 <+1297>:  je     0x7fff79c6522a <do_agrep+5210>
+>>>     0x00007fff79c642e7 <+1303>:  movl   $0x0,0x20(%rsp)
+>>>     0x00007fff79c642ef <+1311>:  mov    0x38(%rsp),%rcx
+>>>     0x00007fff79c642f4 <+1316>:  mov    %r15,%r8
+>>>     0x00007fff79c642f7 <+1319>:  lea    0x80(%rsp),%r9
+>>>     0x00007fff79c642ff <+1327>:  vmovdqu 0xb0(%rsp),%ymm4
+>>> => 0x00007fff79c64308 <+1336>:  vmovdqa %ymm4,0x80(%rsp)
+>>>     0x00007fff79c64311 <+1345>:  vzeroupper
+>>>     0x00007fff79c64314 <+1348>:  call   0x7fff79d183d0 <tre_regaexec>
+>>>
+>>> And it happens because of incorrect alignment in an AVX2 instruction.
+>>> In the above, vmovdqa is used as a second step of copying the
+>>> regparams_t structure to the stack (to be passed as 4th argument of
+>>> tre_regaexec). But GCC uses 0x80(%rsp) for that, which happens only to
+>>> be 16-byte aligned, but not 32-byte aligned. AVX2 requires this to be
+>>> 32-byte aligned in vmovdqa instruction, and hence the program segfaults.
+>>>
+>>> This is a long standing bug in GCC that has been reported long time
+>>> ago: https://gcc.gnu.org/bugzilla/show_bug.cgi?id=54412
+>>>
+>>> It must be a coincidence that you haven't run into this with GCC 12.3
+>>> and earlier (so earlier versions of Rtools for Windows).
+>>>
+>>> I think the simplest and most reliable work-around is to not use AVX2
+>>> with GCC on Windows.
+>> You can also use "-Wa,-muse-unaligned-vector-move" option for the GNU
+>> assembler (add to optimization options), which will make the assembler
+>> use instructions that don't require memory to be aligned. Whether it
+>> would still be beneficial for performance to use AVX2 in the end or not
+>> probably depends on the code.
+>>
+>> Best
+>> Tomas
+>>
+>>> Best
+>>> Tomas
+>>>
+>>>> Thank you,
+>>>>
+>>>> Avi
+>>>>
+>>>>
+>>>>
+>>>> On Mon, Mar 18, 2024 at 11:58?PM Avraham Adler
+>>>> <avraham.adler at gmail.com> wrote:
+>>>>> I ran "tools::testInstalledBasic("both")" from within Rterm, and it
+>>>>> failed on reg-tests-1a, and doesn't that last call in the FAIL look
+>>>>> familiar? Three times isn;t coincidence. What could be causing
+>>>>> agrep/adist to fail?
+>>>>>
+>>>>> Avi
+>>>>>
+>>>>>> a <- c("NA", NA, "BANANA")
+>>>>>> na <- NA_character_
+>>>>>> a1 <- substr(a,1,1)
+>>>>>> stopifnot(is.na(a1)==is.na(a))
+>>>>>> a2 <- substring(a,1,1)
+>>>>>> stopifnot(is.na(a2)==is.na(a))
+>>>>>> a3 <- sub("NA","na",a)
+>>>>>> stopifnot(is.na(a3)==is.na(a))
+>>>>>> a3 <- gsub("NA","na",a)
+>>>>>> stopifnot(is.na(a3)==is.na(a))
+>>>>>> substr(a3, 1, 2) <- "na"
+>>>>>> stopifnot(is.na(a3)==is.na(a))
+>>>>>> substr(a3, 1, 2) <- na
+>>>>>> stopifnot(all(is.na(a3)))
+>>>>>> stopifnot(agrep("NA", a) == c(1, 3))
+>>>>> On Mon, Mar 18, 2024 at 11:52?PM Avraham Adler
+>>>>> <avraham.adler at gmail.com> wrote:
+>>>>>> Hello, Tomas.
+>>>>>>
+>>>>>> I ran check again and this time it failed on base. Base failed at
+>>>>>> "agrep" and utils failed at "adist" if that triggers any ideas.
+>>>>>>
+>>>>>> Thank you,
+>>>>>>
+>>>>>> Avi
+>>>>>>
+>>>>>> On Mon, Mar 18, 2024 at 11:49?PM Avraham Adler
+>>>>>> <avraham.adler at gmail.com> wrote:
+>>>>>>> Hello, Tomas.
+>>>>>>>
+>>>>>>> I had hoped that my problem was that I was linking to OpenBLAS built
+>>>>>>> under Rtools43, but sadly that is not the case, as I built OpenBLAS
+>>>>>>> using Rtools44 and I still get the error in 'utils'. I do have
+>>>>>>> Rtools43 installed on this machine, but I am doing eveything from the
+>>>>>>> Rtools44 bash. My MkRules.local follows:
+>>>>>>>
+>>>>>>> USE_ATLAS = YES
+>>>>>>> ATLAS_PATH = C:/R/OPB/OPB_03.26_1T_44
+>>>>>>> EOPTS = -march=native -pipe -mno-rtm
+>>>>>>> LTO = -flto=1 -fuse-linker-plugin
+>>>>>>> LTO_OPT = -flto=1 -fuse-linker-plugin
+>>>>>>> LTO_FC = -flto=1 -fuse-linker-plugin
+>>>>>>> LTO_FC_OPT = -flto=1 -fuse-linker-plugin
+>>>>>>> QPDF = C:/R/qpdf-11.9.0-msvc64
+>>>>>>> OPENMP = -fopenmp
+>>>>>>>
+>>>>>>> I also make the following change to Makefile.win in
+>>>>>>> /src/extra/blas as
+>>>>>>> I have been doing for more than a decade:
+>>>>>>>
+>>>>>>> --- /c/r/trunk/src/extra/blas/Makefile.win    2024-01-24
+>>>>>>> 18:34:42.755255900 +0000
+>>>>>>> +++ /c/r/Makefile.win    2024-01-24 18:39:39.716458000 +0000
+>>>>>>> @@ -12,7 +12,7 @@
+>>>>>>>    ../../../$(BINDIR)/Rblas.dll: blas00.o ../../gnuwin32/dllversion.o
+>>>>>>>        @$(ECHO) -------- Building $@ --------
+>>>>>>>        $(DLL) -s -shared $(DLLFLAGS) -o $@ $^ Rblas.def \
+>>>>>>> -       -L../../../$(IMPDIR) -lR  -L"$(ATLAS_PATH)" -lf77blas -latlas
+>>>>>>> +       -L../../../$(IMPDIR) -lR -L"$(ATLAS_PATH)" -fopenmp
+>>>>>>> -lopenblas
+>>>>>>>    else
+>>>>>>>    ../../../$(BINDIR)/Rblas.dll: blas.o blas2.o cmplxblas.o
+>>>>>>> cmplxblas2.o
+>>>>>>> ../../gnuwin32/dllversion.o
+>>>>>>>        @$(ECHO) -------- Building $@ --------
+>>>>>>>
+>>>>>>> The utils-Ex.Rout.fail is 1188 lines long and I don't see any obvious
+>>>>>>> point of failure. The last few lines are:
+>>>>>>>> cleanEx()
+>>>>>>>> nameEx("adist")
+>>>>>>>> ### * adist
+>>>>>>>>
+>>>>>>>> flush(stderr()); flush(stdout())
+>>>>>>>>
+>>>>>>>> ### Name: adist
+>>>>>>>> ### Title: Approximate String Distances
+>>>>>>>> ### Aliases: adist
+>>>>>>>> ### Keywords: character
+>>>>>>>>
+>>>>>>>> ### ** Examples
+>>>>>>>>
+>>>>>>>> ## Cf. https://en.wikipedia.org/wiki/Levenshtein_distance
+>>>>>>>> adist("kitten", "sitting")
+>>>>>>>        [,1]
+>>>>>>> [1,]    3
+>>>>>>>> ## To see the transformation counts for the Levenshtein distance:
+>>>>>>>> drop(attr(adist("kitten", "sitting", counts = TRUE), "counts"))
+>>>>>>> ins del sub
+>>>>>>>     1   0   2
+>>>>>>>> ## To see the transformation sequences:
+>>>>>>>> attr(adist(c("kitten", "sitting"), counts = TRUE), "trafos")
+>>>>>>>        [,1]      [,2]
+>>>>>>> [1,] "MMMMMM"  "SMMMSMI"
+>>>>>>> [2,] "SMMMSMD" "MMMMMMM"
+>>>>>>>> ## Cf. the examples for agrep:
+>>>>>>>> adist("lasy", "1 lazy 2")
+>>>>>>>        [,1]
+>>>>>>> [1,]    5
+>>>>>>>> ## For a "partial approximate match" (as used for agrep):
+>>>>>>>> adist("lasy", "1 lazy 2", partial = TRUE)
+>>>>>>> The build works under Rtools43. Should I uninstall both versions of
+>>>>>>> Rtools, my current R installation, and its library and try again? I'm
+>>>>>>> doubtful that will help as my "active" R installation is in a
+>>>>>>> completely different directory, but I am willing to try. If there is
+>>>>>>> any output or other tests I can do, please let me know. Or, if you
+>>>>>>> think I should raise this on r-devel.
+>>>>>>>
+>>>>>>> Thank you,
+>>>>>>>
+>>>>>>> Avi
+>>>>>>>
+>>>>>>> On Mon, Mar 18, 2024 at 4:08?AM Tomas Kalibera
+>>>>>>> <tomas.kalibera at gmail.com> wrote:
+>>>>>>>> Hello Avi,
+>>>>>>>>
+>>>>>>>> On 3/17/24 17:53, Avraham Adler wrote:
+>>>>>>>>> Hello, Tomas.
+>>>>>>>>>
+>>>>>>>>> As always, thank you for your incessant hard work. I have compiled
+>>>>>>>>> R-devel 86144 using Rtools44 and it completes normally. However, it
+>>>>>>>>> fails very early in make check-devel. Specifically, I get the
+>>>>>>>>> output
+>>>>>>>>> below, and have received it more than once. Is this something to
+>>>>>>>>> raise
+>>>>>>>>> on R-devel or is it an Rtools44-specific issue?
+>>>>>>>> I can't tell from this output. Could you please try to get a more
+>>>>>>>> specific error output?
+>>>>>>>> Could you please share your compiler options (e.g. MkRules.local)
+>>>>>>>> and
+>>>>>>>> indeed if you made any modifications to the code?
+>>>>>>>>
+>>>>>>>> Also, as always, it is worth making sure that all code has been
+>>>>>>>> rebuilt
+>>>>>>>> using the new Rtools - e.g. delete any old package library for
+>>>>>>>> R-devel
+>>>>>>>> (4.4) you may have on your system.
+>>>>>>>>
+>>>>>>>> The testing done by myself and CRAN only covers the default
+>>>>>>>> compilation
+>>>>>>>> options as specified in the make files.
+>>>>>>>>
+>>>>>>>> Best
+>>>>>>>> Tomas
+>>>>>>>>
+>>>>>>>>> Thank you,
+>>>>>>>>>
+>>>>>>>>> Avi
+>>>>>>>>>
+>>>>>>>>> $ make check-devel
+>>>>>>>>> Testing examples for package 'base'
+>>>>>>>>> Testing examples for package 'tools'
+>>>>>>>>>      comparing 'tools-Ex.Rout' to 'tools-Ex.Rout.save' ... NOTE
+>>>>>>>>>      1046,1047d1045
+>>>>>>>>>      < Warning in file(con, "r") :
+>>>>>>>>>      <   file("") only supports open = "w+" and open = "w+b":
+>>>>>>>>> using the former
+>>>>>>>>>      1050,1051c1048,1049
+>>>>>>>>>      <  $ file    : chr ""
+>>>>>>>>>      <  $ title   : chr ""
+>>>>>>>>>      ---
+>>>>>>>>>      >  $ file    : chr "grid.Rnw"
+>>>>>>>>>      >  $ title   : chr "Introduction to grid"
+>>>>>>>>> Testing examples for package 'utils'
+>>>>>>>>> Error: testing 'utils' failed
+>>>>>>>>> Execution halted
+>>>>>>>>> make[3]: *** [Makefile.win:29: test-Examples-Base] Error 1
+>>>>>>>>> make[2]: *** [Makefile.common:208: test-Examples] Error 2
+>>>>>>>>> make[1]: *** [Makefile.common:193: test-all-basics] Error 1
+>>>>>>>>> make: *** [Makefile:333: check-devel] Error 2
+>>>>>>>>>
+>>>>>>>>>
+>>>>>>>>>
+>>>>>>>>> On Thu, Mar 14, 2024 at 4:45?AM Tomas Kalibera
+>>>>>>>>> <tomas.kalibera at gmail.com> wrote:
+>>>>>>>>>> Dear R Windows developers,
+>>>>>>>>>>
+>>>>>>>>>> there is now a new toolchain for R for Windows, Rtools44. It is
+>>>>>>>>>> now used
+>>>>>>>>>> by R-devel and is intended for R 4.4.0.
+>>>>>>>>>>
+>>>>>>>>>> Compared to Rtools43, it uses GCC 13 and updates other core
+>>>>>>>>>> components.
+>>>>>>>>>> See
+>>>>>>>>>> https://cran.r-project.org/bin/windows/Rtools/rtools44/news.html
+>>>>>>>>>> for
+>>>>>>>>>> a detailed list of changes.
+>>>>>>>>>>
+>>>>>>>>>> All users of R-devel who need to compile R packages with source
+>>>>>>>>>> code in
+>>>>>>>>>> C, C++ or Fortran should install Rtools44. From the user
+>>>>>>>>>> perspective,
+>>>>>>>>>> Rtools44 works the same way as Rtools43. See
+>>>>>>>>>> https://cran.r-project.org/bin/windows/base/howto-R-devel.html for
+>>>>>>>>>> instructions on how to build R-devel and packages for this
+>>>>>>>>>> version of R.
+>>>>>>>>>>
+>>>>>>>>>> It is recommended to re-install packages that need compilation
+>>>>>>>>>> to avoid
+>>>>>>>>>> potential incompatibilities with code built using Rtools43.
+>>>>>>>>>>
+>>>>>>>>>> Rtools44 also includes an experimental version for 64-bit ARM
+>>>>>>>>>> machines,
+>>>>>>>>>> using LLVM 17 (and clang, flang-new, lld, libc++) - the aarch64
+>>>>>>>>>> version
+>>>>>>>>>> of Rtools has its own installer and distribution tarballs.
+>>>>>>>>>>
+>>>>>>>>>> Best
+>>>>>>>>>> Tomas
+>>>>>>>>>>
+>>>>>>>>>> _______________________________________________
+>>>>>>>>>> R-SIG-windows mailing list
+>>>>>>>>>> R-SIG-windows at r-project.org
+>>>>>>>>>> https://stat.ethz.ch/mailman/listinfo/r-sig-windows
+
+
+From @vr@h@m@@d|er @end|ng |rom gm@||@com  Tue Mar 19 20:37:07 2024
+From: @vr@h@m@@d|er @end|ng |rom gm@||@com (Avraham Adler)
+Date: Tue, 19 Mar 2024 15:37:07 -0400
+Subject: [R-SIG-Win] Rtools44
+In-Reply-To: <61b967d2-b55d-44a7-8bb2-5e70d03a3cac@gmail.com>
+References: <d192e3a0-4e91-4d84-b6a6-7e05584d9647@gmail.com>
+ <CAL6gwnKJWnDNDu+KNTC508gEeGjgquU-1380R0GELK-TaAuNDg@mail.gmail.com>
+ <79c027a1-64c4-46b2-a757-18aa0886b6f1@gmail.com>
+ <CAL6gwnLFYbhp_qT_Pi8Hj1NhjH5u=JTcQq3z-2DhZnVBoBUE0g@mail.gmail.com>
+ <CAL6gwnJ0eLDtyOg8fgazGt9OZGhYquya7bGJ1=epE9HUvC+pWQ@mail.gmail.com>
+ <CAL6gwnJWoaXMQt1djLq5DdayxdTJ7xOk-Ts=DYw8XgSGiM72OA@mail.gmail.com>
+ <CAL6gwnJO2h1Ju+TTeWPhCPB25CGgCXeAPvGcwzv85bbR2ANsXQ@mail.gmail.com>
+ <1cf6efdf-df64-483e-96c9-16461c23c099@gmail.com>
+ <4f5073ec-926a-474e-9a11-666cf07e5a88@gmail.com>
+ <CAL6gwnKfkNz9DPN6aSeq2A10T-ijVa7BUMTCR3ntmtK-+qNKyQ@mail.gmail.com>
+ <61b967d2-b55d-44a7-8bb2-5e70d03a3cac@gmail.com>
+Message-ID: <CAL6gwnLtDJ8UmS0UOqDTY6p=atz4r+1+mjHwqVhfo49kEqYrfQ@mail.gmail.com>
+
+Thank you very much, Tomas, for your advice and your reminder about FLOSS.
+
+For completeness and closure, passing
+""-Wa,-muse-unaligned-vector-move" to EOPTS in Mkrules.local allows
+make check-devel to complete with no errors.
+
+If there is a fund being set up to entice someone to write a good
+patch, please let me know off-line; while I don't think my company
+would contribute, I would contribute personal funds.
+
+Thanks again,
+
+Avi
+
+On Tue, Mar 19, 2024 at 2:07?PM Tomas Kalibera <tomas.kalibera at gmail.com> wrote:
+>
+> On 3/19/24 18:32, Avraham Adler wrote:
+> > Thank you very much, Tomas.
+> >
+> > I guess when the variables were recast to long long, the compiler
+> > tried to use AVX2 commands.
+> This is just an optimization for quick copying of a C structure on the
+> stack. This structure (regparams_t) has 8 ints, in this case.
+> > This is rather disappointing from GCC's
+> > end; there isn't much we in R can do. As this bug has been around for
+> > over a dozen years, and the last comment is two years ago, I do not
+> > have hope that anything will be fixed in my lifetime.
+> >
+> > Being restricted to Windows, are the only two options to disable all
+> > AVX2 or use "-Wa,-muse-unaligned-vector-move"? There is no alternative
+> > easy-to-drop-in toolchain to build R from source on Windows, is there?
+>
+> I would recommend you first check whether actually disabling AVX2 (or
+> using "-Wa,-muse-unaligned-vector-move" with AVX2) makes any difference
+> in performance for your use cases. Maybe not.
+>
+> There is no supported drop-in replacement toolchain that would work with
+> R and packages on x86_64. It is very likely that some LLVM-based
+> toolchain would work after a small amount of tweaks, as after all Rtools
+> with LLVM is being used on aarch64, so R has been and packages are being
+> fixed to work with it, but you would be on your own. And note that
+> flang-new is not yet stable, so you might still have to use gfortran.
+>
+> > As someone who develops packages requiring source code but is
+> > restricted to Windows, I am loath to reduce the power of my code,
+> > unless I must. Any advice or suggestions you may have would be greatly
+> > appreciated.
+>
+> GCC is like other open-source software. Submitting a good, well-tested
+> patch, increases the chances things get fixed. Corporations that have
+> the money can also pay experts specializing in compiler implementation
+> to prepare such a patch.
+>
+> Tomas
+>
+> >
+> > Thank you for figuring this out,
+> >
+> > Avi
+> >
+> >
+> > On Tue, Mar 19, 2024 at 12:15?PM Tomas Kalibera
+> > <tomas.kalibera at gmail.com> wrote:
+> >>
+> >> On 3/19/24 17:05, Tomas Kalibera wrote:
+> >>> On 3/19/24 15:33, Avraham Adler wrote:
+> >>>> For completeness, I compiled R from source using the native BLAS, and
+> >>>> make check fails again, this time on "aregexec". Running "agrep" from
+> >>>> within Rgui causes it to crash to desktop. Could it be something to do
+> >>>> with this:
+> >>>> https://github.com/wch/r-source/commit/ba486d898c2698c2afb678abdab807510327541e?
+> >>>> But that didn't affect aregexc or adist? This is beyond my
+> >>>> understanding, but I'm happy to do any tests you need to help identify
+> >>>> what is going on.
+> >>> I can reproduce the problem (without LTO, without openblas), just by
+> >>> "-O3 -march=native" and running
+> >>>
+> >>> agrep("lasy", "1 lazy 2")
+> >>>
+> >>> which crashes R.
+> >>>
+> >>> The crash happens in do_agrep from agrep.c, when calling tre_regaexec:
+> >>>
+> >>>          } else {
+> >>>              const char *s = translateChar(STRING_ELT(vec, i));
+> >>>              if(mbcslocale && !mbcsValid(s))
+> >>>                  error(_("input string %lld is invalid in this locale"),
+> >>>                        (long long)i+1);
+> >>>              rc = tre_regaexec(&reg, s, &match, params, 0);  // <===
+> >>> here (line 242)
+> >>>              vmaxset(vmax);
+> >>>          }
+> >>>
+> >>>     0x00007fff79c642da <+1290>:  mov    0x50(%rsp),%rdx
+> >>>     0x00007fff79c642df <+1295>:  test   %eax,%eax
+> >>>     0x00007fff79c642e1 <+1297>:  je     0x7fff79c6522a <do_agrep+5210>
+> >>>     0x00007fff79c642e7 <+1303>:  movl   $0x0,0x20(%rsp)
+> >>>     0x00007fff79c642ef <+1311>:  mov    0x38(%rsp),%rcx
+> >>>     0x00007fff79c642f4 <+1316>:  mov    %r15,%r8
+> >>>     0x00007fff79c642f7 <+1319>:  lea    0x80(%rsp),%r9
+> >>>     0x00007fff79c642ff <+1327>:  vmovdqu 0xb0(%rsp),%ymm4
+> >>> => 0x00007fff79c64308 <+1336>:  vmovdqa %ymm4,0x80(%rsp)
+> >>>     0x00007fff79c64311 <+1345>:  vzeroupper
+> >>>     0x00007fff79c64314 <+1348>:  call   0x7fff79d183d0 <tre_regaexec>
+> >>>
+> >>> And it happens because of incorrect alignment in an AVX2 instruction.
+> >>> In the above, vmovdqa is used as a second step of copying the
+> >>> regparams_t structure to the stack (to be passed as 4th argument of
+> >>> tre_regaexec). But GCC uses 0x80(%rsp) for that, which happens only to
+> >>> be 16-byte aligned, but not 32-byte aligned. AVX2 requires this to be
+> >>> 32-byte aligned in vmovdqa instruction, and hence the program segfaults.
+> >>>
+> >>> This is a long standing bug in GCC that has been reported long time
+> >>> ago: https://gcc.gnu.org/bugzilla/show_bug.cgi?id=54412
+> >>>
+> >>> It must be a coincidence that you haven't run into this with GCC 12.3
+> >>> and earlier (so earlier versions of Rtools for Windows).
+> >>>
+> >>> I think the simplest and most reliable work-around is to not use AVX2
+> >>> with GCC on Windows.
+> >> You can also use "-Wa,-muse-unaligned-vector-move" option for the GNU
+> >> assembler (add to optimization options), which will make the assembler
+> >> use instructions that don't require memory to be aligned. Whether it
+> >> would still be beneficial for performance to use AVX2 in the end or not
+> >> probably depends on the code.
+> >>
+> >> Best
+> >> Tomas
+> >>
+> >>> Best
+> >>> Tomas
+> >>>
+> >>>> Thank you,
+> >>>>
+> >>>> Avi
+> >>>>
+> >>>>
+> >>>>
+> >>>> On Mon, Mar 18, 2024 at 11:58?PM Avraham Adler
+> >>>> <avraham.adler at gmail.com> wrote:
+> >>>>> I ran "tools::testInstalledBasic("both")" from within Rterm, and it
+> >>>>> failed on reg-tests-1a, and doesn't that last call in the FAIL look
+> >>>>> familiar? Three times isn;t coincidence. What could be causing
+> >>>>> agrep/adist to fail?
+> >>>>>
+> >>>>> Avi
+> >>>>>
+> >>>>>> a <- c("NA", NA, "BANANA")
+> >>>>>> na <- NA_character_
+> >>>>>> a1 <- substr(a,1,1)
+> >>>>>> stopifnot(is.na(a1)==is.na(a))
+> >>>>>> a2 <- substring(a,1,1)
+> >>>>>> stopifnot(is.na(a2)==is.na(a))
+> >>>>>> a3 <- sub("NA","na",a)
+> >>>>>> stopifnot(is.na(a3)==is.na(a))
+> >>>>>> a3 <- gsub("NA","na",a)
+> >>>>>> stopifnot(is.na(a3)==is.na(a))
+> >>>>>> substr(a3, 1, 2) <- "na"
+> >>>>>> stopifnot(is.na(a3)==is.na(a))
+> >>>>>> substr(a3, 1, 2) <- na
+> >>>>>> stopifnot(all(is.na(a3)))
+> >>>>>> stopifnot(agrep("NA", a) == c(1, 3))
+> >>>>> On Mon, Mar 18, 2024 at 11:52?PM Avraham Adler
+> >>>>> <avraham.adler at gmail.com> wrote:
+> >>>>>> Hello, Tomas.
+> >>>>>>
+> >>>>>> I ran check again and this time it failed on base. Base failed at
+> >>>>>> "agrep" and utils failed at "adist" if that triggers any ideas.
+> >>>>>>
+> >>>>>> Thank you,
+> >>>>>>
+> >>>>>> Avi
+> >>>>>>
+> >>>>>> On Mon, Mar 18, 2024 at 11:49?PM Avraham Adler
+> >>>>>> <avraham.adler at gmail.com> wrote:
+> >>>>>>> Hello, Tomas.
+> >>>>>>>
+> >>>>>>> I had hoped that my problem was that I was linking to OpenBLAS built
+> >>>>>>> under Rtools43, but sadly that is not the case, as I built OpenBLAS
+> >>>>>>> using Rtools44 and I still get the error in 'utils'. I do have
+> >>>>>>> Rtools43 installed on this machine, but I am doing eveything from the
+> >>>>>>> Rtools44 bash. My MkRules.local follows:
+> >>>>>>>
+> >>>>>>> USE_ATLAS = YES
+> >>>>>>> ATLAS_PATH = C:/R/OPB/OPB_03.26_1T_44
+> >>>>>>> EOPTS = -march=native -pipe -mno-rtm
+> >>>>>>> LTO = -flto=1 -fuse-linker-plugin
+> >>>>>>> LTO_OPT = -flto=1 -fuse-linker-plugin
+> >>>>>>> LTO_FC = -flto=1 -fuse-linker-plugin
+> >>>>>>> LTO_FC_OPT = -flto=1 -fuse-linker-plugin
+> >>>>>>> QPDF = C:/R/qpdf-11.9.0-msvc64
+> >>>>>>> OPENMP = -fopenmp
+> >>>>>>>
+> >>>>>>> I also make the following change to Makefile.win in
+> >>>>>>> /src/extra/blas as
+> >>>>>>> I have been doing for more than a decade:
+> >>>>>>>
+> >>>>>>> --- /c/r/trunk/src/extra/blas/Makefile.win    2024-01-24
+> >>>>>>> 18:34:42.755255900 +0000
+> >>>>>>> +++ /c/r/Makefile.win    2024-01-24 18:39:39.716458000 +0000
+> >>>>>>> @@ -12,7 +12,7 @@
+> >>>>>>>    ../../../$(BINDIR)/Rblas.dll: blas00.o ../../gnuwin32/dllversion.o
+> >>>>>>>        @$(ECHO) -------- Building $@ --------
+> >>>>>>>        $(DLL) -s -shared $(DLLFLAGS) -o $@ $^ Rblas.def \
+> >>>>>>> -       -L../../../$(IMPDIR) -lR  -L"$(ATLAS_PATH)" -lf77blas -latlas
+> >>>>>>> +       -L../../../$(IMPDIR) -lR -L"$(ATLAS_PATH)" -fopenmp
+> >>>>>>> -lopenblas
+> >>>>>>>    else
+> >>>>>>>    ../../../$(BINDIR)/Rblas.dll: blas.o blas2.o cmplxblas.o
+> >>>>>>> cmplxblas2.o
+> >>>>>>> ../../gnuwin32/dllversion.o
+> >>>>>>>        @$(ECHO) -------- Building $@ --------
+> >>>>>>>
+> >>>>>>> The utils-Ex.Rout.fail is 1188 lines long and I don't see any obvious
+> >>>>>>> point of failure. The last few lines are:
+> >>>>>>>> cleanEx()
+> >>>>>>>> nameEx("adist")
+> >>>>>>>> ### * adist
+> >>>>>>>>
+> >>>>>>>> flush(stderr()); flush(stdout())
+> >>>>>>>>
+> >>>>>>>> ### Name: adist
+> >>>>>>>> ### Title: Approximate String Distances
+> >>>>>>>> ### Aliases: adist
+> >>>>>>>> ### Keywords: character
+> >>>>>>>>
+> >>>>>>>> ### ** Examples
+> >>>>>>>>
+> >>>>>>>> ## Cf. https://en.wikipedia.org/wiki/Levenshtein_distance
+> >>>>>>>> adist("kitten", "sitting")
+> >>>>>>>        [,1]
+> >>>>>>> [1,]    3
+> >>>>>>>> ## To see the transformation counts for the Levenshtein distance:
+> >>>>>>>> drop(attr(adist("kitten", "sitting", counts = TRUE), "counts"))
+> >>>>>>> ins del sub
+> >>>>>>>     1   0   2
+> >>>>>>>> ## To see the transformation sequences:
+> >>>>>>>> attr(adist(c("kitten", "sitting"), counts = TRUE), "trafos")
+> >>>>>>>        [,1]      [,2]
+> >>>>>>> [1,] "MMMMMM"  "SMMMSMI"
+> >>>>>>> [2,] "SMMMSMD" "MMMMMMM"
+> >>>>>>>> ## Cf. the examples for agrep:
+> >>>>>>>> adist("lasy", "1 lazy 2")
+> >>>>>>>        [,1]
+> >>>>>>> [1,]    5
+> >>>>>>>> ## For a "partial approximate match" (as used for agrep):
+> >>>>>>>> adist("lasy", "1 lazy 2", partial = TRUE)
+> >>>>>>> The build works under Rtools43. Should I uninstall both versions of
+> >>>>>>> Rtools, my current R installation, and its library and try again? I'm
+> >>>>>>> doubtful that will help as my "active" R installation is in a
+> >>>>>>> completely different directory, but I am willing to try. If there is
+> >>>>>>> any output or other tests I can do, please let me know. Or, if you
+> >>>>>>> think I should raise this on r-devel.
+> >>>>>>>
+> >>>>>>> Thank you,
+> >>>>>>>
+> >>>>>>> Avi
+> >>>>>>>
+> >>>>>>> On Mon, Mar 18, 2024 at 4:08?AM Tomas Kalibera
+> >>>>>>> <tomas.kalibera at gmail.com> wrote:
+> >>>>>>>> Hello Avi,
+> >>>>>>>>
+> >>>>>>>> On 3/17/24 17:53, Avraham Adler wrote:
+> >>>>>>>>> Hello, Tomas.
+> >>>>>>>>>
+> >>>>>>>>> As always, thank you for your incessant hard work. I have compiled
+> >>>>>>>>> R-devel 86144 using Rtools44 and it completes normally. However, it
+> >>>>>>>>> fails very early in make check-devel. Specifically, I get the
+> >>>>>>>>> output
+> >>>>>>>>> below, and have received it more than once. Is this something to
+> >>>>>>>>> raise
+> >>>>>>>>> on R-devel or is it an Rtools44-specific issue?
+> >>>>>>>> I can't tell from this output. Could you please try to get a more
+> >>>>>>>> specific error output?
+> >>>>>>>> Could you please share your compiler options (e.g. MkRules.local)
+> >>>>>>>> and
+> >>>>>>>> indeed if you made any modifications to the code?
+> >>>>>>>>
+> >>>>>>>> Also, as always, it is worth making sure that all code has been
+> >>>>>>>> rebuilt
+> >>>>>>>> using the new Rtools - e.g. delete any old package library for
+> >>>>>>>> R-devel
+> >>>>>>>> (4.4) you may have on your system.
+> >>>>>>>>
+> >>>>>>>> The testing done by myself and CRAN only covers the default
+> >>>>>>>> compilation
+> >>>>>>>> options as specified in the make files.
+> >>>>>>>>
+> >>>>>>>> Best
+> >>>>>>>> Tomas
+> >>>>>>>>
+> >>>>>>>>> Thank you,
+> >>>>>>>>>
+> >>>>>>>>> Avi
+> >>>>>>>>>
+> >>>>>>>>> $ make check-devel
+> >>>>>>>>> Testing examples for package 'base'
+> >>>>>>>>> Testing examples for package 'tools'
+> >>>>>>>>>      comparing 'tools-Ex.Rout' to 'tools-Ex.Rout.save' ... NOTE
+> >>>>>>>>>      1046,1047d1045
+> >>>>>>>>>      < Warning in file(con, "r") :
+> >>>>>>>>>      <   file("") only supports open = "w+" and open = "w+b":
+> >>>>>>>>> using the former
+> >>>>>>>>>      1050,1051c1048,1049
+> >>>>>>>>>      <  $ file    : chr ""
+> >>>>>>>>>      <  $ title   : chr ""
+> >>>>>>>>>      ---
+> >>>>>>>>>      >  $ file    : chr "grid.Rnw"
+> >>>>>>>>>      >  $ title   : chr "Introduction to grid"
+> >>>>>>>>> Testing examples for package 'utils'
+> >>>>>>>>> Error: testing 'utils' failed
+> >>>>>>>>> Execution halted
+> >>>>>>>>> make[3]: *** [Makefile.win:29: test-Examples-Base] Error 1
+> >>>>>>>>> make[2]: *** [Makefile.common:208: test-Examples] Error 2
+> >>>>>>>>> make[1]: *** [Makefile.common:193: test-all-basics] Error 1
+> >>>>>>>>> make: *** [Makefile:333: check-devel] Error 2
+> >>>>>>>>>
+> >>>>>>>>>
+> >>>>>>>>>
+> >>>>>>>>> On Thu, Mar 14, 2024 at 4:45?AM Tomas Kalibera
+> >>>>>>>>> <tomas.kalibera at gmail.com> wrote:
+> >>>>>>>>>> Dear R Windows developers,
+> >>>>>>>>>>
+> >>>>>>>>>> there is now a new toolchain for R for Windows, Rtools44. It is
+> >>>>>>>>>> now used
+> >>>>>>>>>> by R-devel and is intended for R 4.4.0.
+> >>>>>>>>>>
+> >>>>>>>>>> Compared to Rtools43, it uses GCC 13 and updates other core
+> >>>>>>>>>> components.
+> >>>>>>>>>> See
+> >>>>>>>>>> https://cran.r-project.org/bin/windows/Rtools/rtools44/news.html
+> >>>>>>>>>> for
+> >>>>>>>>>> a detailed list of changes.
+> >>>>>>>>>>
+> >>>>>>>>>> All users of R-devel who need to compile R packages with source
+> >>>>>>>>>> code in
+> >>>>>>>>>> C, C++ or Fortran should install Rtools44. From the user
+> >>>>>>>>>> perspective,
+> >>>>>>>>>> Rtools44 works the same way as Rtools43. See
+> >>>>>>>>>> https://cran.r-project.org/bin/windows/base/howto-R-devel.html for
+> >>>>>>>>>> instructions on how to build R-devel and packages for this
+> >>>>>>>>>> version of R.
+> >>>>>>>>>>
+> >>>>>>>>>> It is recommended to re-install packages that need compilation
+> >>>>>>>>>> to avoid
+> >>>>>>>>>> potential incompatibilities with code built using Rtools43.
+> >>>>>>>>>>
+> >>>>>>>>>> Rtools44 also includes an experimental version for 64-bit ARM
+> >>>>>>>>>> machines,
+> >>>>>>>>>> using LLVM 17 (and clang, flang-new, lld, libc++) - the aarch64
+> >>>>>>>>>> version
+> >>>>>>>>>> of Rtools has its own installer and distribution tarballs.
+> >>>>>>>>>>
+> >>>>>>>>>> Best
+> >>>>>>>>>> Tomas
+> >>>>>>>>>>
+> >>>>>>>>>> _______________________________________________
+> >>>>>>>>>> R-SIG-windows mailing list
+> >>>>>>>>>> R-SIG-windows at r-project.org
+> >>>>>>>>>> https://stat.ethz.ch/mailman/listinfo/r-sig-windows
+
+
+From @vr@h@m@@d|er @end|ng |rom gm@||@com  Tue Mar 19 23:24:29 2024
+From: @vr@h@m@@d|er @end|ng |rom gm@||@com (Avraham Adler)
+Date: Tue, 19 Mar 2024 18:24:29 -0400
+Subject: [R-SIG-Win] Rtools44
+In-Reply-To: <CAL6gwnLtDJ8UmS0UOqDTY6p=atz4r+1+mjHwqVhfo49kEqYrfQ@mail.gmail.com>
+References: <d192e3a0-4e91-4d84-b6a6-7e05584d9647@gmail.com>
+ <CAL6gwnKJWnDNDu+KNTC508gEeGjgquU-1380R0GELK-TaAuNDg@mail.gmail.com>
+ <79c027a1-64c4-46b2-a757-18aa0886b6f1@gmail.com>
+ <CAL6gwnLFYbhp_qT_Pi8Hj1NhjH5u=JTcQq3z-2DhZnVBoBUE0g@mail.gmail.com>
+ <CAL6gwnJ0eLDtyOg8fgazGt9OZGhYquya7bGJ1=epE9HUvC+pWQ@mail.gmail.com>
+ <CAL6gwnJWoaXMQt1djLq5DdayxdTJ7xOk-Ts=DYw8XgSGiM72OA@mail.gmail.com>
+ <CAL6gwnJO2h1Ju+TTeWPhCPB25CGgCXeAPvGcwzv85bbR2ANsXQ@mail.gmail.com>
+ <1cf6efdf-df64-483e-96c9-16461c23c099@gmail.com>
+ <4f5073ec-926a-474e-9a11-666cf07e5a88@gmail.com>
+ <CAL6gwnKfkNz9DPN6aSeq2A10T-ijVa7BUMTCR3ntmtK-+qNKyQ@mail.gmail.com>
+ <61b967d2-b55d-44a7-8bb2-5e70d03a3cac@gmail.com>
+ <CAL6gwnLtDJ8UmS0UOqDTY6p=atz4r+1+mjHwqVhfo49kEqYrfQ@mail.gmail.com>
+Message-ID: <CAL6gwnLw_GkMa5JnPuh5A=+RZK+y-M-hubGt587s-KBgPKK0ow@mail.gmail.com>
+
+For the benefit of posterity, on the exact same machine, the new
+version which requires passing "-Wa,-muse-unaligned-vector-move" is
+between 5% and 20% slower on BLAS actions and over 30% slower on some
+non-BLAS actions. My testing suite can be found at
+<https://www.avrahamadler.com/r-tips/r-benchmark-code/>. Version 85824
+was built with Rtools43 and version 86152 was built with Rtools44.
+Both use OpenBLAS 0.326 - single threaded and both were compiled with
+march=native on a Sandy Bridge Intel 8600K overclocked to 5.0Ghz (4.9
+for AVX calls) and with 64GB RAM.
+
+Thanks,
+
+Avi
+
+Results for BLAS calls (values in milliseconds):
+
+                                   expr    ver    Min     LQ Median
+ UQ    Max   Mean    SD     CV
+                                 <fctr> <char>  <num>  <num>  <num>
+<num>  <num>  <num> <num>  <num>
+ 1: sort(c(as.vector(A), as.vector(B)))  85824  97.19 101.94 102.97
+108.06 170.48 111.10 20.91 0.1882
+ 2: sort(c(as.vector(A), as.vector(B)))  86152 110.26 112.24 114.10
+116.47 178.63 117.97 13.69 0.1161
+ 3:                              det(A)  85824  12.98  13.04  13.06
+13.11 276.79  24.02 52.68 2.1931
+ 4:                              det(A)  86152  13.67  13.83  14.92
+16.13  22.70  15.61  2.37 0.1517
+ 5:                             A %*% B  85824  30.55  30.60  30.64
+30.72  40.71  31.47  2.39 0.0761
+ 6:                             A %*% B  86152  31.18  31.62  31.89
+32.42  38.31  32.77  2.00 0.0611
+ 7:                          t(A) %*% B  85824  33.61  33.74  33.86
+37.91  40.03  35.27  2.24 0.0637
+ 8:                          t(A) %*% B  86152  34.23  35.28  36.69
+39.72  41.86  37.48  2.47 0.0659
+ 9:                     crossprod(A, B)  85824  30.84  30.88  30.99
+31.17  36.60  31.62  1.66 0.0526
+10:                     crossprod(A, B)  86152  31.79  32.17  32.97
+36.20  41.50  34.24  2.78 0.0813
+11:                            solve(A)  85824  51.25  51.65  53.04
+56.68  60.99  54.36  3.09 0.0568
+12:                            solve(A)  86152  52.81  53.68  56.83
+59.74 114.08  59.81 12.35 0.2064
+13:                      solve(A, t(B))  85824  53.59  53.78  54.99
+58.00 114.99  58.12 12.03 0.2069
+14:                      solve(A, t(B))  86152  54.54  55.84  58.52
+60.15  65.78  58.40  2.59 0.0444
+15:                            solve(B)  85824  53.87  54.47  54.98
+58.94  65.04  56.66  2.92 0.0516
+16:                            solve(B)  86152  55.94  57.65  61.26
+63.22  71.86  61.26  4.04 0.0660
+17:                             chol(A)  85824   8.50   8.54   8.56
+8.59  14.72   9.23  1.85 0.2008
+18:                             chol(A)  86152   8.61   8.95   9.11
+9.28  19.16   9.96  2.50 0.2513
+19:               chol(B, pivot = TRUE)  85824   1.58   1.60   1.62
+1.65   7.00   2.06  1.46 0.7067
+20:               chol(B, pivot = TRUE)  86152   1.85   2.01   2.09
+2.23  12.87   2.98  2.62 0.8777
+21:                qr(A, LAPACK = TRUE)  85824  60.90  61.80  63.03
+66.13  71.41  64.35  3.26 0.0506
+22:                qr(A, LAPACK = TRUE)  86152  68.11  69.69  71.89
+73.70  85.25  72.71  4.24 0.0583
+23:                              svd(A)  85824 284.32 290.18 292.75
+299.26 369.14 297.27 15.98 0.0538
+24:                              svd(A)  86152 313.55 319.00 325.84
+337.92 414.81 335.33 24.84 0.0741
+25:          eigen(A, symmetric = TRUE)  85824 128.31 129.22 132.29
+132.97 137.29 131.46  2.46 0.0187
+26:          eigen(A, symmetric = TRUE)  86152 133.27 135.41 136.64
+141.20 148.88 138.56  4.54 0.0328
+27:         eigen(A, symmetric = FALSE)  85824 435.68 441.50 444.46
+448.49 464.65 445.60  6.37 0.0143
+28:         eigen(A, symmetric = FALSE)  86152 465.50 467.59 471.43
+473.97 487.37 472.37  5.89 0.0125
+29:         eigen(B, symmetric = FALSE)  85824 536.32 543.78 546.62
+552.27 598.55 551.52 14.77 0.0268
+30:         eigen(B, symmetric = FALSE)  86152 567.55 577.89 589.19
+594.78 652.87 589.56 16.77 0.0285
+31:                               lu(A)  85824  14.12  14.16  14.18
+16.82  19.75  15.40  2.03 0.1316
+32:                               lu(A)  86152  14.94  15.15  15.23
+15.47  22.25  16.44  2.34 0.1426
+33:                              fft(A)  85824  54.94  56.26  57.24
+59.36  63.95  57.98  2.42 0.0418
+34:                              fft(A)  86152  63.99  64.91  65.77
+69.07  76.98  67.51  3.41 0.0506
+35:                       Hilbert(3000)  85824  97.19 155.77 159.96
+164.42 232.23 156.00 32.82 0.2104
+36:                       Hilbert(3000)  86152 112.06 174.10 179.16
+189.70 236.09 176.52 29.45 0.1668
+37:               toeplitz(A[1:500, 1])  85824   2.12   2.13   2.15
+2.22   9.27   2.45  1.42 0.5787
+38:               toeplitz(A[1:500, 1])  86152   1.98   2.23   2.29
+2.42  10.33   2.95  2.22 0.7527
+39:                         princomp(A)  85824 224.67 229.64 235.12
+242.65 304.54 247.40 27.13 0.1096
+40:                         princomp(A)  86152 238.38 247.86 254.47
+267.74 313.75 264.92 25.26 0.0953
+                                   expr    ver    Min     LQ Median
+ UQ    Max   Mean    SD     CV
+
+Results for non-BLAS calls are even more disparate, but on a much
+faster basis, with the new version remaining slower (values in
+milliseconds):
+
+                         expr    ver    Min     LQ Median     UQ   Max
+  Mean    SD    CV
+                       <fctr> <char>  <num>  <num>  <num>  <num> <num>
+ <num> <num> <num>
+ 1:                     A + 2  85824 1.1430 1.1930 1.2271 1.2879  75.6
+1.8059 2.437 1.349
+ 2:                     A + 2  86152 1.1804 1.5607 1.6543 1.7651  68.8
+2.3211 2.789 1.202
+ 3:                     A - 2  85824 1.1378 1.1922 1.2271 1.2948  74.7
+1.8244 2.472 1.355
+ 4:                     A - 2  86152 1.1847 1.6051 1.7160 1.8601  73.2
+2.4096 2.822 1.171
+ 5:                     A * 2  85824 1.1507 1.2209 1.2609 1.3392  77.2
+1.8724 2.678 1.430
+ 6:                     A * 2  86152 1.2155 1.5872 1.6936 1.8281  72.5
+2.3592 2.769 1.174
+ 7:                       A/2  85824 1.1625 1.2023 1.2254 1.2688  75.4
+1.7940 2.410 1.343
+ 8:                       A/2  86152 1.1857 1.5434 1.6366 1.7465  73.4
+2.2847 2.745 1.202
+ 9:                   A * 0.5  85824 1.1393 1.1788 1.1948 1.2362  90.7
+1.7604 2.507 1.424
+10:                   A * 0.5  86152 1.1686 1.5472 1.6392 1.7481  67.7
+2.2899 2.836 1.238
+11:                       A^2  85824 1.1420 1.1748 1.1929 1.2406  75.4
+1.7783 2.636 1.482
+12:                       A^2  86152 1.1689 1.5491 1.6420 1.7530  67.5
+2.2879 2.754 1.204
+13:          sqrt(A[1:10000])  85824 0.0445 0.0751 0.0767 0.0788  15.6
+0.0910 0.411 4.515
+14:          sqrt(A[1:10000])  86152 0.0455 0.0800 0.0817 0.0844  11.6
+0.0923 0.309 3.353
+15:           sin(A[1:10000])  85824 0.3136 0.3440 0.3453 0.3475  13.5
+0.3577 0.367 1.027
+16:           sin(A[1:10000])  86152 0.3220 0.3512 0.3536 0.3602  16.0
+0.3705 0.384 1.035
+17:                     A + B  85824 1.4062 1.4825 1.5112 1.5609  90.2
+2.1150 2.734 1.293
+18:                     A + B  86152 1.4191 1.8003 1.8957 2.0087  73.3
+2.5450 2.761 1.085
+19:                     A - B  85824 1.4081 1.4688 1.4991 1.5458  76.8
+2.0869 2.459 1.178
+20:                     A - B  86152 1.4487 1.8131 1.9098 2.0361  66.7
+2.5920 2.880 1.111
+21:                     A * B  85824 1.4474 1.5235 1.5942 1.7970  78.6
+2.2633 2.533 1.119
+22:                     A * B  86152 1.4473 1.8112 1.9118 2.0361  72.5
+2.5712 2.776 1.080
+23:                       A/B  85824 1.4406 1.5115 1.5517 1.6642  76.5
+2.1928 2.736 1.248
+24:                       A/B  86152 1.3210 1.7450 1.8508 1.9720  75.0
+2.5219 2.872 1.139
+25:  A[1:100000]%%B[1:100000]  85824 1.2169 1.8265 1.8620 1.8938  73.4
+1.9633 1.707 0.869
+26:  A[1:100000]%%B[1:100000]  86152 1.2498 1.9390 1.9765 2.0616  72.3
+2.1994 1.783 0.811
+27: A[1:100000]%/%B[1:100000]  85824 1.2491 1.2837 1.3023 1.8511  13.1
+1.5707 0.800 0.509
+28: A[1:100000]%/%B[1:100000]  86152 1.2473 1.2682 1.2934 1.4849  10.7
+1.5192 0.595 0.392
+                         expr    ver    Min     LQ Median     UQ   Max
+  Mean    SD    CV
+
+
+
+On Tue, Mar 19, 2024 at 3:37?PM Avraham Adler <avraham.adler at gmail.com> wrote:
+>
+> Thank you very much, Tomas, for your advice and your reminder about FLOSS.
+>
+> For completeness and closure, passing
+> ""-Wa,-muse-unaligned-vector-move" to EOPTS in Mkrules.local allows
+> make check-devel to complete with no errors.
+>
+> If there is a fund being set up to entice someone to write a good
+> patch, please let me know off-line; while I don't think my company
+> would contribute, I would contribute personal funds.
+>
+> Thanks again,
+>
+> Avi
+>
+> On Tue, Mar 19, 2024 at 2:07?PM Tomas Kalibera <tomas.kalibera at gmail.com> wrote:
+> >
+> > On 3/19/24 18:32, Avraham Adler wrote:
+> > > Thank you very much, Tomas.
+> > >
+> > > I guess when the variables were recast to long long, the compiler
+> > > tried to use AVX2 commands.
+> > This is just an optimization for quick copying of a C structure on the
+> > stack. This structure (regparams_t) has 8 ints, in this case.
+> > > This is rather disappointing from GCC's
+> > > end; there isn't much we in R can do. As this bug has been around for
+> > > over a dozen years, and the last comment is two years ago, I do not
+> > > have hope that anything will be fixed in my lifetime.
+> > >
+> > > Being restricted to Windows, are the only two options to disable all
+> > > AVX2 or use "-Wa,-muse-unaligned-vector-move"? There is no alternative
+> > > easy-to-drop-in toolchain to build R from source on Windows, is there?
+> >
+> > I would recommend you first check whether actually disabling AVX2 (or
+> > using "-Wa,-muse-unaligned-vector-move" with AVX2) makes any difference
+> > in performance for your use cases. Maybe not.
+> >
+> > There is no supported drop-in replacement toolchain that would work with
+> > R and packages on x86_64. It is very likely that some LLVM-based
+> > toolchain would work after a small amount of tweaks, as after all Rtools
+> > with LLVM is being used on aarch64, so R has been and packages are being
+> > fixed to work with it, but you would be on your own. And note that
+> > flang-new is not yet stable, so you might still have to use gfortran.
+> >
+> > > As someone who develops packages requiring source code but is
+> > > restricted to Windows, I am loath to reduce the power of my code,
+> > > unless I must. Any advice or suggestions you may have would be greatly
+> > > appreciated.
+> >
+> > GCC is like other open-source software. Submitting a good, well-tested
+> > patch, increases the chances things get fixed. Corporations that have
+> > the money can also pay experts specializing in compiler implementation
+> > to prepare such a patch.
+> >
+> > Tomas
+> >
+> > >
+> > > Thank you for figuring this out,
+> > >
+> > > Avi
+> > >
+> > >
+> > > On Tue, Mar 19, 2024 at 12:15?PM Tomas Kalibera
+> > > <tomas.kalibera at gmail.com> wrote:
+> > >>
+> > >> On 3/19/24 17:05, Tomas Kalibera wrote:
+> > >>> On 3/19/24 15:33, Avraham Adler wrote:
+> > >>>> For completeness, I compiled R from source using the native BLAS, and
+> > >>>> make check fails again, this time on "aregexec". Running "agrep" from
+> > >>>> within Rgui causes it to crash to desktop. Could it be something to do
+> > >>>> with this:
+> > >>>> https://github.com/wch/r-source/commit/ba486d898c2698c2afb678abdab807510327541e?
+> > >>>> But that didn't affect aregexc or adist? This is beyond my
+> > >>>> understanding, but I'm happy to do any tests you need to help identify
+> > >>>> what is going on.
+> > >>> I can reproduce the problem (without LTO, without openblas), just by
+> > >>> "-O3 -march=native" and running
+> > >>>
+> > >>> agrep("lasy", "1 lazy 2")
+> > >>>
+> > >>> which crashes R.
+> > >>>
+> > >>> The crash happens in do_agrep from agrep.c, when calling tre_regaexec:
+> > >>>
+> > >>>          } else {
+> > >>>              const char *s = translateChar(STRING_ELT(vec, i));
+> > >>>              if(mbcslocale && !mbcsValid(s))
+> > >>>                  error(_("input string %lld is invalid in this locale"),
+> > >>>                        (long long)i+1);
+> > >>>              rc = tre_regaexec(&reg, s, &match, params, 0);  // <===
+> > >>> here (line 242)
+> > >>>              vmaxset(vmax);
+> > >>>          }
+> > >>>
+> > >>>     0x00007fff79c642da <+1290>:  mov    0x50(%rsp),%rdx
+> > >>>     0x00007fff79c642df <+1295>:  test   %eax,%eax
+> > >>>     0x00007fff79c642e1 <+1297>:  je     0x7fff79c6522a <do_agrep+5210>
+> > >>>     0x00007fff79c642e7 <+1303>:  movl   $0x0,0x20(%rsp)
+> > >>>     0x00007fff79c642ef <+1311>:  mov    0x38(%rsp),%rcx
+> > >>>     0x00007fff79c642f4 <+1316>:  mov    %r15,%r8
+> > >>>     0x00007fff79c642f7 <+1319>:  lea    0x80(%rsp),%r9
+> > >>>     0x00007fff79c642ff <+1327>:  vmovdqu 0xb0(%rsp),%ymm4
+> > >>> => 0x00007fff79c64308 <+1336>:  vmovdqa %ymm4,0x80(%rsp)
+> > >>>     0x00007fff79c64311 <+1345>:  vzeroupper
+> > >>>     0x00007fff79c64314 <+1348>:  call   0x7fff79d183d0 <tre_regaexec>
+> > >>>
+> > >>> And it happens because of incorrect alignment in an AVX2 instruction.
+> > >>> In the above, vmovdqa is used as a second step of copying the
+> > >>> regparams_t structure to the stack (to be passed as 4th argument of
+> > >>> tre_regaexec). But GCC uses 0x80(%rsp) for that, which happens only to
+> > >>> be 16-byte aligned, but not 32-byte aligned. AVX2 requires this to be
+> > >>> 32-byte aligned in vmovdqa instruction, and hence the program segfaults.
+> > >>>
+> > >>> This is a long standing bug in GCC that has been reported long time
+> > >>> ago: https://gcc.gnu.org/bugzilla/show_bug.cgi?id=54412
+> > >>>
+> > >>> It must be a coincidence that you haven't run into this with GCC 12.3
+> > >>> and earlier (so earlier versions of Rtools for Windows).
+> > >>>
+> > >>> I think the simplest and most reliable work-around is to not use AVX2
+> > >>> with GCC on Windows.
+> > >> You can also use "-Wa,-muse-unaligned-vector-move" option for the GNU
+> > >> assembler (add to optimization options), which will make the assembler
+> > >> use instructions that don't require memory to be aligned. Whether it
+> > >> would still be beneficial for performance to use AVX2 in the end or not
+> > >> probably depends on the code.
+> > >>
+> > >> Best
+> > >> Tomas
+> > >>
+> > >>> Best
+> > >>> Tomas
+> > >>>
+> > >>>> Thank you,
+> > >>>>
+> > >>>> Avi
+> > >>>>
+> > >>>>
+> > >>>>
+> > >>>> On Mon, Mar 18, 2024 at 11:58?PM Avraham Adler
+> > >>>> <avraham.adler at gmail.com> wrote:
+> > >>>>> I ran "tools::testInstalledBasic("both")" from within Rterm, and it
+> > >>>>> failed on reg-tests-1a, and doesn't that last call in the FAIL look
+> > >>>>> familiar? Three times isn;t coincidence. What could be causing
+> > >>>>> agrep/adist to fail?
+> > >>>>>
+> > >>>>> Avi
+> > >>>>>
+> > >>>>>> a <- c("NA", NA, "BANANA")
+> > >>>>>> na <- NA_character_
+> > >>>>>> a1 <- substr(a,1,1)
+> > >>>>>> stopifnot(is.na(a1)==is.na(a))
+> > >>>>>> a2 <- substring(a,1,1)
+> > >>>>>> stopifnot(is.na(a2)==is.na(a))
+> > >>>>>> a3 <- sub("NA","na",a)
+> > >>>>>> stopifnot(is.na(a3)==is.na(a))
+> > >>>>>> a3 <- gsub("NA","na",a)
+> > >>>>>> stopifnot(is.na(a3)==is.na(a))
+> > >>>>>> substr(a3, 1, 2) <- "na"
+> > >>>>>> stopifnot(is.na(a3)==is.na(a))
+> > >>>>>> substr(a3, 1, 2) <- na
+> > >>>>>> stopifnot(all(is.na(a3)))
+> > >>>>>> stopifnot(agrep("NA", a) == c(1, 3))
+> > >>>>> On Mon, Mar 18, 2024 at 11:52?PM Avraham Adler
+> > >>>>> <avraham.adler at gmail.com> wrote:
+> > >>>>>> Hello, Tomas.
+> > >>>>>>
+> > >>>>>> I ran check again and this time it failed on base. Base failed at
+> > >>>>>> "agrep" and utils failed at "adist" if that triggers any ideas.
+> > >>>>>>
+> > >>>>>> Thank you,
+> > >>>>>>
+> > >>>>>> Avi
+> > >>>>>>
+> > >>>>>> On Mon, Mar 18, 2024 at 11:49?PM Avraham Adler
+> > >>>>>> <avraham.adler at gmail.com> wrote:
+> > >>>>>>> Hello, Tomas.
+> > >>>>>>>
+> > >>>>>>> I had hoped that my problem was that I was linking to OpenBLAS built
+> > >>>>>>> under Rtools43, but sadly that is not the case, as I built OpenBLAS
+> > >>>>>>> using Rtools44 and I still get the error in 'utils'. I do have
+> > >>>>>>> Rtools43 installed on this machine, but I am doing eveything from the
+> > >>>>>>> Rtools44 bash. My MkRules.local follows:
+> > >>>>>>>
+> > >>>>>>> USE_ATLAS = YES
+> > >>>>>>> ATLAS_PATH = C:/R/OPB/OPB_03.26_1T_44
+> > >>>>>>> EOPTS = -march=native -pipe -mno-rtm
+> > >>>>>>> LTO = -flto=1 -fuse-linker-plugin
+> > >>>>>>> LTO_OPT = -flto=1 -fuse-linker-plugin
+> > >>>>>>> LTO_FC = -flto=1 -fuse-linker-plugin
+> > >>>>>>> LTO_FC_OPT = -flto=1 -fuse-linker-plugin
+> > >>>>>>> QPDF = C:/R/qpdf-11.9.0-msvc64
+> > >>>>>>> OPENMP = -fopenmp
+> > >>>>>>>
+> > >>>>>>> I also make the following change to Makefile.win in
+> > >>>>>>> /src/extra/blas as
+> > >>>>>>> I have been doing for more than a decade:
+> > >>>>>>>
+> > >>>>>>> --- /c/r/trunk/src/extra/blas/Makefile.win    2024-01-24
+> > >>>>>>> 18:34:42.755255900 +0000
+> > >>>>>>> +++ /c/r/Makefile.win    2024-01-24 18:39:39.716458000 +0000
+> > >>>>>>> @@ -12,7 +12,7 @@
+> > >>>>>>>    ../../../$(BINDIR)/Rblas.dll: blas00.o ../../gnuwin32/dllversion.o
+> > >>>>>>>        @$(ECHO) -------- Building $@ --------
+> > >>>>>>>        $(DLL) -s -shared $(DLLFLAGS) -o $@ $^ Rblas.def \
+> > >>>>>>> -       -L../../../$(IMPDIR) -lR  -L"$(ATLAS_PATH)" -lf77blas -latlas
+> > >>>>>>> +       -L../../../$(IMPDIR) -lR -L"$(ATLAS_PATH)" -fopenmp
+> > >>>>>>> -lopenblas
+> > >>>>>>>    else
+> > >>>>>>>    ../../../$(BINDIR)/Rblas.dll: blas.o blas2.o cmplxblas.o
+> > >>>>>>> cmplxblas2.o
+> > >>>>>>> ../../gnuwin32/dllversion.o
+> > >>>>>>>        @$(ECHO) -------- Building $@ --------
+> > >>>>>>>
+> > >>>>>>> The utils-Ex.Rout.fail is 1188 lines long and I don't see any obvious
+> > >>>>>>> point of failure. The last few lines are:
+> > >>>>>>>> cleanEx()
+> > >>>>>>>> nameEx("adist")
+> > >>>>>>>> ### * adist
+> > >>>>>>>>
+> > >>>>>>>> flush(stderr()); flush(stdout())
+> > >>>>>>>>
+> > >>>>>>>> ### Name: adist
+> > >>>>>>>> ### Title: Approximate String Distances
+> > >>>>>>>> ### Aliases: adist
+> > >>>>>>>> ### Keywords: character
+> > >>>>>>>>
+> > >>>>>>>> ### ** Examples
+> > >>>>>>>>
+> > >>>>>>>> ## Cf. https://en.wikipedia.org/wiki/Levenshtein_distance
+> > >>>>>>>> adist("kitten", "sitting")
+> > >>>>>>>        [,1]
+> > >>>>>>> [1,]    3
+> > >>>>>>>> ## To see the transformation counts for the Levenshtein distance:
+> > >>>>>>>> drop(attr(adist("kitten", "sitting", counts = TRUE), "counts"))
+> > >>>>>>> ins del sub
+> > >>>>>>>     1   0   2
+> > >>>>>>>> ## To see the transformation sequences:
+> > >>>>>>>> attr(adist(c("kitten", "sitting"), counts = TRUE), "trafos")
+> > >>>>>>>        [,1]      [,2]
+> > >>>>>>> [1,] "MMMMMM"  "SMMMSMI"
+> > >>>>>>> [2,] "SMMMSMD" "MMMMMMM"
+> > >>>>>>>> ## Cf. the examples for agrep:
+> > >>>>>>>> adist("lasy", "1 lazy 2")
+> > >>>>>>>        [,1]
+> > >>>>>>> [1,]    5
+> > >>>>>>>> ## For a "partial approximate match" (as used for agrep):
+> > >>>>>>>> adist("lasy", "1 lazy 2", partial = TRUE)
+> > >>>>>>> The build works under Rtools43. Should I uninstall both versions of
+> > >>>>>>> Rtools, my current R installation, and its library and try again? I'm
+> > >>>>>>> doubtful that will help as my "active" R installation is in a
+> > >>>>>>> completely different directory, but I am willing to try. If there is
+> > >>>>>>> any output or other tests I can do, please let me know. Or, if you
+> > >>>>>>> think I should raise this on r-devel.
+> > >>>>>>>
+> > >>>>>>> Thank you,
+> > >>>>>>>
+> > >>>>>>> Avi
+> > >>>>>>>
+> > >>>>>>> On Mon, Mar 18, 2024 at 4:08?AM Tomas Kalibera
+> > >>>>>>> <tomas.kalibera at gmail.com> wrote:
+> > >>>>>>>> Hello Avi,
+> > >>>>>>>>
+> > >>>>>>>> On 3/17/24 17:53, Avraham Adler wrote:
+> > >>>>>>>>> Hello, Tomas.
+> > >>>>>>>>>
+> > >>>>>>>>> As always, thank you for your incessant hard work. I have compiled
+> > >>>>>>>>> R-devel 86144 using Rtools44 and it completes normally. However, it
+> > >>>>>>>>> fails very early in make check-devel. Specifically, I get the
+> > >>>>>>>>> output
+> > >>>>>>>>> below, and have received it more than once. Is this something to
+> > >>>>>>>>> raise
+> > >>>>>>>>> on R-devel or is it an Rtools44-specific issue?
+> > >>>>>>>> I can't tell from this output. Could you please try to get a more
+> > >>>>>>>> specific error output?
+> > >>>>>>>> Could you please share your compiler options (e.g. MkRules.local)
+> > >>>>>>>> and
+> > >>>>>>>> indeed if you made any modifications to the code?
+> > >>>>>>>>
+> > >>>>>>>> Also, as always, it is worth making sure that all code has been
+> > >>>>>>>> rebuilt
+> > >>>>>>>> using the new Rtools - e.g. delete any old package library for
+> > >>>>>>>> R-devel
+> > >>>>>>>> (4.4) you may have on your system.
+> > >>>>>>>>
+> > >>>>>>>> The testing done by myself and CRAN only covers the default
+> > >>>>>>>> compilation
+> > >>>>>>>> options as specified in the make files.
+> > >>>>>>>>
+> > >>>>>>>> Best
+> > >>>>>>>> Tomas
+> > >>>>>>>>
+> > >>>>>>>>> Thank you,
+> > >>>>>>>>>
+> > >>>>>>>>> Avi
+> > >>>>>>>>>
+> > >>>>>>>>> $ make check-devel
+> > >>>>>>>>> Testing examples for package 'base'
+> > >>>>>>>>> Testing examples for package 'tools'
+> > >>>>>>>>>      comparing 'tools-Ex.Rout' to 'tools-Ex.Rout.save' ... NOTE
+> > >>>>>>>>>      1046,1047d1045
+> > >>>>>>>>>      < Warning in file(con, "r") :
+> > >>>>>>>>>      <   file("") only supports open = "w+" and open = "w+b":
+> > >>>>>>>>> using the former
+> > >>>>>>>>>      1050,1051c1048,1049
+> > >>>>>>>>>      <  $ file    : chr ""
+> > >>>>>>>>>      <  $ title   : chr ""
+> > >>>>>>>>>      ---
+> > >>>>>>>>>      >  $ file    : chr "grid.Rnw"
+> > >>>>>>>>>      >  $ title   : chr "Introduction to grid"
+> > >>>>>>>>> Testing examples for package 'utils'
+> > >>>>>>>>> Error: testing 'utils' failed
+> > >>>>>>>>> Execution halted
+> > >>>>>>>>> make[3]: *** [Makefile.win:29: test-Examples-Base] Error 1
+> > >>>>>>>>> make[2]: *** [Makefile.common:208: test-Examples] Error 2
+> > >>>>>>>>> make[1]: *** [Makefile.common:193: test-all-basics] Error 1
+> > >>>>>>>>> make: *** [Makefile:333: check-devel] Error 2
+> > >>>>>>>>>
+> > >>>>>>>>>
+> > >>>>>>>>>
+> > >>>>>>>>> On Thu, Mar 14, 2024 at 4:45?AM Tomas Kalibera
+> > >>>>>>>>> <tomas.kalibera at gmail.com> wrote:
+> > >>>>>>>>>> Dear R Windows developers,
+> > >>>>>>>>>>
+> > >>>>>>>>>> there is now a new toolchain for R for Windows, Rtools44. It is
+> > >>>>>>>>>> now used
+> > >>>>>>>>>> by R-devel and is intended for R 4.4.0.
+> > >>>>>>>>>>
+> > >>>>>>>>>> Compared to Rtools43, it uses GCC 13 and updates other core
+> > >>>>>>>>>> components.
+> > >>>>>>>>>> See
+> > >>>>>>>>>> https://cran.r-project.org/bin/windows/Rtools/rtools44/news.html
+> > >>>>>>>>>> for
+> > >>>>>>>>>> a detailed list of changes.
+> > >>>>>>>>>>
+> > >>>>>>>>>> All users of R-devel who need to compile R packages with source
+> > >>>>>>>>>> code in
+> > >>>>>>>>>> C, C++ or Fortran should install Rtools44. From the user
+> > >>>>>>>>>> perspective,
+> > >>>>>>>>>> Rtools44 works the same way as Rtools43. See
+> > >>>>>>>>>> https://cran.r-project.org/bin/windows/base/howto-R-devel.html for
+> > >>>>>>>>>> instructions on how to build R-devel and packages for this
+> > >>>>>>>>>> version of R.
+> > >>>>>>>>>>
+> > >>>>>>>>>> It is recommended to re-install packages that need compilation
+> > >>>>>>>>>> to avoid
+> > >>>>>>>>>> potential incompatibilities with code built using Rtools43.
+> > >>>>>>>>>>
+> > >>>>>>>>>> Rtools44 also includes an experimental version for 64-bit ARM
+> > >>>>>>>>>> machines,
+> > >>>>>>>>>> using LLVM 17 (and clang, flang-new, lld, libc++) - the aarch64
+> > >>>>>>>>>> version
+> > >>>>>>>>>> of Rtools has its own installer and distribution tarballs.
+> > >>>>>>>>>>
+> > >>>>>>>>>> Best
+> > >>>>>>>>>> Tomas
+> > >>>>>>>>>>
+> > >>>>>>>>>> _______________________________________________
+> > >>>>>>>>>> R-SIG-windows mailing list
+> > >>>>>>>>>> R-SIG-windows at r-project.org
+> > >>>>>>>>>> https://stat.ethz.ch/mailman/listinfo/r-sig-windows
+
+

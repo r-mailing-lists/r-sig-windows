@@ -1,0 +1,36 @@
+{
+  "list": "r-sig-windows",
+  "description": "",
+  "month": "2020-03",
+  "messages": [
+    {
+      "id": "msg-9071c1030eba",
+      "message_id": "<CAJXgQP0Bc=71-Sf1J=mZTYSbweovQbZ8RJ+BML25Xi3Y2fJhBQ@mail.gmail.com>",
+      "from_name": "Kevin Ushey",
+      "from_email_hash": "c0bffc799bd95bf26caa6b1c9abdc3f8fdc556eac7399824869756688d2f0689",
+      "date": "2020-03-26T08:13:19-07:00",
+      "subject": "[R-SIG-Win] Rtools 4.0 for R 4.0.0?",
+      "subject_clean": "Rtools 4.0 for R 4.0.0?",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi,\n\nI'm curious to know: has a decision been made on whether R 4.0.0 will\nuse the new Rtools toolchain or not?\n\nThanks,\nKevin",
+      "body_snippet": "Hi,\n\nI'm curious to know: has a decision been made on whether R 4.0.0 will\nuse the new Rtools toolchain or not?\n\nThanks,\nKevin",
+      "thread_id": "thread-9071c1030eba",
+      "thread_depth": 0,
+      "month": "2020-03"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-9071c1030eba",
+      "subject": "Rtools 4.0 for R 4.0.0?",
+      "message_count": 1,
+      "participants": [
+        "Kevin Ushey"
+      ],
+      "started": "2020-03-26T08:13:19-07:00",
+      "last_reply": "2020-03-26T08:13:19-07:00",
+      "root_message_id": "msg-9071c1030eba"
+    }
+  ]
+}

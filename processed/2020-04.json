@@ -1,0 +1,36 @@
+{
+  "list": "r-sig-windows",
+  "description": "",
+  "month": "2020-04",
+  "messages": [
+    {
+      "id": "msg-0d59509c3b44",
+      "message_id": "<feb70c65-24a8-d403-ceb5-782da3ef1280-7470@googlemail.com>",
+      "from_name": "Constantin Ahlmann-Eltze",
+      "from_email_hash": "7a4a36b661de595f0ff16fb1dc9cc8dcb3e7b60575c8ae454acad885928418f0",
+      "date": "2020-04-08T12:01:29+02:00",
+      "subject": "[R-SIG-Win] Rtools and R 4.0.0?",
+      "subject_clean": "Rtools and R 4.0.0?",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi,\n\nI wanted to follow up on the email?below from Kevin about the prospect \nof Rtools 40 with the upcoming R 4.0.0 release?\n\nI currently have a package under review at BioConductor \n(https://github.com/Bioconductor/Contributions/issues/1465) which uses \nC++14 features. I was told that they would be ready to make the switch \nto Rtools 40, however are waiting for a decision from CRAN.\n\nBest Regards,\nConstantin Ahlmann-Eltze\n\nHello,\n\nHas a decision been made yet as to whether R 4.0.0 on Windows is going\nto be built using the new gcc8 toolchain (described at\nhttps://cran.r-project.org/bin/windows/testing/rtools40.html)?\n\n>/From the sidelines, I can see that the toolchain is being used to /build and test packages on CRAN; if there are any remaining issues\nthat I can help to try and run down (either in R or any CRAN packages)\nI'd be happy to try and help.\n\nFWIW, I'm excited at the prospect at seeing a new toolchain for\nWindows, since it would imply support for C++17 and so it would become\neasier for CRAN packages to depend on the newer C++ standard.\n\nThanks,\nKevin\n\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi,\n\nI wanted to follow up on the email?below from Kevin about the prospect \nof Rtools 40 with the upcoming R 4.0.0 release?\n\nI currently have a package under review at BioConductor \n(https://github.c",
+      "thread_id": "thread-0d59509c3b44",
+      "thread_depth": 0,
+      "month": "2020-04"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-0d59509c3b44",
+      "subject": "Rtools and R 4.0.0?",
+      "message_count": 1,
+      "participants": [
+        "Constantin Ahlmann-Eltze"
+      ],
+      "started": "2020-04-08T12:01:29+02:00",
+      "last_reply": "2020-04-08T12:01:29+02:00",
+      "root_message_id": "msg-0d59509c3b44"
+    }
+  ]
+}

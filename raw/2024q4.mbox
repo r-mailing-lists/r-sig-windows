@@ -1,0 +1,26 @@
+From tom@@@k@||ber@ @end|ng |rom gm@||@com  Wed Oct 30 10:36:03 2024
+From: tom@@@k@||ber@ @end|ng |rom gm@||@com (Tomas Kalibera)
+Date: Wed, 30 Oct 2024 10:36:03 +0100
+Subject: [R-SIG-Win] Rtools44 update
+Message-ID: <0e7ae230-1053-41ba-8749-edbd90f629fa@gmail.com>
+
+Dear R Windows developers,
+
+an update of Rtools44, the toolchain for R for Windows used by R-devel 
+and R 4.4, is available as revision 6335 from
+
+https://cran.r-project.org/bin/windows/Rtools/rtools44/rtools.html
+
+GCC is updated to 13.3.0 with several patches. HDF5 is now built with 
+Fortran support. A number of libraries have been updated to newer versions.
+
+See
+
+https://cran.r-project.org/bin/windows/Rtools/rtools44/news.html
+
+for more details.
+
+Best
+Tomas
+
+

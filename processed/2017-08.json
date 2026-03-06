@@ -1,0 +1,36 @@
+{
+  "list": "r-sig-windows",
+  "description": "",
+  "month": "2017-08",
+  "messages": [
+    {
+      "id": "msg-be9cb93bba64",
+      "message_id": "<CAL6gwn+x8KpuFFRxpzjRAuPUrZr96_=Jj0MtchbxiBFqKiS9rA@mail.gmail.com>",
+      "from_name": "Avraham Adler",
+      "from_email_hash": "af3a8abf7b61e7882d265f3ee607ab6f21a248be198b31d73d45602a933f5ba0",
+      "date": "2017-08-31T01:29:31-04:00",
+      "subject": "[R-SIG-Win] GCC 7.1.0 & Rtools",
+      "subject_clean": "GCC 7.1.0 & Rtools",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Feeling somewhat antsy, I followed Jeroen's instructions and used\nniXman's scripts [1] off of the master branch to build gcc 7.1.0 for\nx86_64, specifically \"x86_64-710-posix-seh-rt_v5-s\". It took a dozen\nor so hours, but the completed suite compiled \"make distribution\" on\nR-patched_2017-08-27 and passed check-devel. Of course, the external\nlibraries are still all built with 4.9.3, as is ICU, but I find this\npromising.\n\nJeroen, I think you mentioned having problems with runtime version 4?\nThis seems to have built runtime version 5, yet I didn't have any\nissues.\n\nSomething to keep in mind perhaps for the next iteration of Rtools.\n\nThanks,\n\nAvi\n\n[1] https://github.com/niXman/mingw-builds",
+      "body_snippet": "Feeling somewhat antsy, I followed Jeroen's instructions and used\nniXman's scripts [1] off of the master branch to build gcc 7.1.0 for\nx86_64, specifically \"x86_64-710-posix-seh-rt_v5-s\". It took a do",
+      "thread_id": "thread-be9cb93bba64",
+      "thread_depth": 0,
+      "month": "2017-08"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-be9cb93bba64",
+      "subject": "GCC 7.1.0 & Rtools",
+      "message_count": 1,
+      "participants": [
+        "Avraham Adler"
+      ],
+      "started": "2017-08-31T01:29:31-04:00",
+      "last_reply": "2017-08-31T01:29:31-04:00",
+      "root_message_id": "msg-be9cb93bba64"
+    }
+  ]
+}

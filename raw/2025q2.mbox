@@ -1,0 +1,26 @@
+From tom@@@k@||ber@ @end|ng |rom gm@||@com  Wed Jun 11 09:39:58 2025
+From: tom@@@k@||ber@ @end|ng |rom gm@||@com (Tomas Kalibera)
+Date: Wed, 11 Jun 2025 09:39:58 +0200
+Subject: [R-SIG-Win] Rtools45 update
+Message-ID: <8fe251b7-78d2-4fb0-a943-381ff7573f38@gmail.com>
+
+Dear R Windows developers,
+
+an update of Rtools45, the toolchain for R for Windows used by R-devel 
+and R 4.5, is available as revision 6608 from
+
+https://cran.r-project.org/bin/windows/Rtools/rtools45/rtools.html
+
+The update adds quantlib and upgrades a number of libraries to newer 
+versions.
+
+See
+
+https://cran.r-project.org/bin/windows/Rtools/rtools45/news.html
+
+for more details.
+
+Best
+Tomas
+
+

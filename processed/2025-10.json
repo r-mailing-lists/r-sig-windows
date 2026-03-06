@@ -1,0 +1,36 @@
+{
+  "list": "r-sig-windows",
+  "description": "",
+  "month": "2025-10",
+  "messages": [
+    {
+      "id": "msg-1e7996bd1b8c",
+      "message_id": "<40c9f740-2e72-4931-9c0d-6f5717091c27@gmail.com>",
+      "from_name": "Tomas Kalibera",
+      "from_email_hash": "7af110c9340339e5307bd348f1ec524e2fd1c8f104d583e9993022c5550711f4",
+      "date": "2025-10-29T15:06:56+01:00",
+      "subject": "[R-SIG-Win] Rtools45 update",
+      "subject_clean": "Rtools45 update",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear R Windows developers,\n\nan update of Rtools45, the toolchain for R for Windows used by R-devel \nand R 4.5, is available as revision 6691 from\n\nhttps://cran.r-project.org/bin/windows/Rtools/rtools45/rtools.html\n\nGCC is upgraded to 14.3?and a number of additional packages have been \nupgraded.? See\n\nhttps://cran.r-project.org/bin/windows/Rtools/rtools45/news.html\n\nfor more details.\n\nBest\nTomas",
+      "body_snippet": "Dear R Windows developers,\n\nan update of Rtools45, the toolchain for R for Windows used by R-devel \nand R 4.5, is available as revision 6691 from\n\nhttps://cran.r-project.org/bin/windows/Rtools/rtools4",
+      "thread_id": "thread-1e7996bd1b8c",
+      "thread_depth": 0,
+      "month": "2025-10"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-1e7996bd1b8c",
+      "subject": "Rtools45 update",
+      "message_count": 1,
+      "participants": [
+        "Tomas Kalibera"
+      ],
+      "started": "2025-10-29T15:06:56+01:00",
+      "last_reply": "2025-10-29T15:06:56+01:00",
+      "root_message_id": "msg-1e7996bd1b8c"
+    }
+  ]
+}

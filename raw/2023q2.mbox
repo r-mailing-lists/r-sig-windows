@@ -1,0 +1,874 @@
+From p@u|deep102 @end|ng |rom gm@||@com  Sat Apr 15 19:00:50 2023
+From: p@u|deep102 @end|ng |rom gm@||@com (Debartha Paul)
+Date: Sat, 15 Apr 2023 22:30:50 +0530
+Subject: [R-SIG-Win] pcre2.h not found error while building R in windows
+Message-ID: <CAK7Q9bcu4jjTnj0aTP87byRQfn0kkcN9JaS2WA=6kEs4PJtuFg@mail.gmail.com>
+
+Hi. I am Debartha Paul, a Master's student in Statistics at Presidency
+University, Kolkata, India. I was trying to build R from scratch using
+RTools as described in https://contributor.r-project.org/rdevguide/ and
+https://cran.r-project.org/bin/windows/base/howto-R-devel.html but when I
+run `make all recommended`, I get an error message as follows:
+```
+
+grep.c:75:10: fatal error: pcre2.h: No such file or directory
+   75 | # include<pcre2.h>
+      |          ^~~~~~~~~
+compilation terminated.
+make[4]: *** [../gnuwin32/MkRules:155: grep.o] Error 1
+make[3]: *** [Makefile:129: rlibs] Error 2
+make[2]: *** [Makefile:194: ../../bin/x64/R.dll] Error 2
+make[1]: *** [Makefile:114: rbuild] Error 2
+make: *** [Makefile:17: all] Error 2
+
+```
+I ran `pacman -Q` inside my `MSYS2 MSYS` bash but discovered that `pcre2`
+exists.
+However, upon running `pacman -Q` from RTools bash, I found that it is not
+being found, and only a subset of the original file list is available now. But
+the surprising fact (to me at least) is that when I open my RTools folder,
+where its installed, I did find the`pcre2` header file inside one of the
+folders named `x86_x64-w64-mingw32.static.posix`. More surprisingly, none
+of the header files, listed inside this folder, is being listed in `pacman
+-Q`  when I run it from inside `RTools` bash. I dived deeper and found that
+the folder that `pacman -Q` is returning from lies in `var`: another folder
+inside RTools, separate from `x86_x64-w64-mingw32.static.posix`.
+
+I brought this issue up in the recently concluded Office Hours of the
+R-Contributors Slack, but unfortunately, I couldn't get any satisfactory
+solution, nor a reason, on why this is happening.
+
+I tried `pacman -Sy pcre2` from RTools bash, and the result was that I can
+now see `pcre2` in the subset that I mentioned earlier, but still, the
+problem persists. Needless to say that I even updated both my MSYS bash
+packages and RTools bash packages using `pacman -Syuu` from both.
+
+Finally, I was using `rtools43-5493-5475.exe` and fearing that it might be
+the cause, I uninstalled and installed the latest
+version(`rtools43-5550-5548.exe`), but it didn't do anything to improve my
+output.
+
+At this point, I am confused as to why this is happening, and I would be
+glad if anyone guides me towards a solution to this problem. I am using a
+Windows 11 machine and would be happy to give further information if the
+need arises.
+
+With thanks and regards
+Debartha Paul
+Masters Student (1st Year)
+
+Department of Statistics
+Presidency University
+Kolkata
+
+	[[alternative HTML version deleted]]
+
+
+From tom@@@k@||ber@ @end|ng |rom gm@||@com  Mon Apr 17 09:51:52 2023
+From: tom@@@k@||ber@ @end|ng |rom gm@||@com (Tomas Kalibera)
+Date: Mon, 17 Apr 2023 09:51:52 +0200
+Subject: [R-SIG-Win] pcre2.h not found error while building R in windows
+In-Reply-To: <CAK7Q9bcu4jjTnj0aTP87byRQfn0kkcN9JaS2WA=6kEs4PJtuFg@mail.gmail.com>
+References: <CAK7Q9bcu4jjTnj0aTP87byRQfn0kkcN9JaS2WA=6kEs4PJtuFg@mail.gmail.com>
+Message-ID: <15986752-2c46-b8c0-5e17-6f28b27d70c7@gmail.com>
+
+
+On 4/15/23 19:00, Debartha Paul wrote:
+> Hi. I am Debartha Paul, a Master's student in Statistics at Presidency
+> University, Kolkata, India. I was trying to build R from scratch using
+> RTools as described in https://contributor.r-project.org/rdevguide/ and
+> https://cran.r-project.org/bin/windows/base/howto-R-devel.html but when I
+> run `make all recommended`, I get an error message as follows:
+> ```
+>
+> grep.c:75:10: fatal error: pcre2.h: No such file or directory
+>     75 | # include<pcre2.h>
+>        |          ^~~~~~~~~
+> compilation terminated.
+> make[4]: *** [../gnuwin32/MkRules:155: grep.o] Error 1
+> make[3]: *** [Makefile:129: rlibs] Error 2
+> make[2]: *** [Makefile:194: ../../bin/x64/R.dll] Error 2
+> make[1]: *** [Makefile:114: rbuild] Error 2
+> make: *** [Makefile:17: all] Error 2
+>
+> ```
+> I ran `pacman -Q` inside my `MSYS2 MSYS` bash but discovered that `pcre2`
+> exists.
+> However, upon running `pacman -Q` from RTools bash, I found that it is not
+> being found, and only a subset of the original file list is available now. But
+> the surprising fact (to me at least) is that when I open my RTools folder,
+> where its installed, I did find the`pcre2` header file inside one of the
+> folders named `x86_x64-w64-mingw32.static.posix`. More surprisingly, none
+> of the header files, listed inside this folder, is being listed in `pacman
+> -Q`  when I run it from inside `RTools` bash. I dived deeper and found that
+> the folder that `pacman -Q` is returning from lies in `var`: another folder
+> inside RTools, separate from `x86_x64-w64-mingw32.static.posix`.
+>
+> I brought this issue up in the recently concluded Office Hours of the
+> R-Contributors Slack, but unfortunately, I couldn't get any satisfactory
+> solution, nor a reason, on why this is happening.
+>
+> I tried `pacman -Sy pcre2` from RTools bash, and the result was that I can
+> now see `pcre2` in the subset that I mentioned earlier, but still, the
+> problem persists. Needless to say that I even updated both my MSYS bash
+> packages and RTools bash packages using `pacman -Syuu` from both.
+>
+> Finally, I was using `rtools43-5493-5475.exe` and fearing that it might be
+> the cause, I uninstalled and installed the latest
+> version(`rtools43-5550-5548.exe`), but it didn't do anything to improve my
+> output.
+>
+> At this point, I am confused as to why this is happening, and I would be
+> glad if anyone guides me towards a solution to this problem. I am using a
+> Windows 11 machine and would be happy to give further information if the
+> need arises.
+
+The official documentation for building R on Windows using Rtools can be 
+found from the Rtools download page 
+(https://cran.r-project.org/bin/windows/Rtools/) and is for a specific 
+version of R. I would recommend you read and follow that and in case of 
+any questions, you can ask on the R-package-devel mailing list (or this 
+one).
+
+If you are using R-devel, at the time of this writing, the Rtools 
+version to use is Rtools43, the download page is
+https://cran.r-project.org/bin/windows/Rtools/rtools43/rtools.html
+and the linked documentation page is
+https://cran.r-project.org/bin/windows/base/howto-R-devel.html
+(below referred to as howto document)
+
+If you are using R 4.2.x, you should use Rtools42 and the documentation 
+link is
+https://cran.r-project.org/bin/windows/base/howto-R-4.2.html
+
+ From your message I assume you are using R-devel. It is important to 
+use the right version of Rtools for the version of R and read the right 
+documentation, but the pcre2.h issue you are running into is probably 
+not specific to the version. Rtools43 consists of these parts:
+
+1. msys2
+2. toolchain+libraries built using MXE
+3. some extra tools
+
+You can use Msys2 package manager for (1) from the above, so only for 
+build tools. Normally you don't need to install any Msys2 packages to 
+build R packages or R itself, all necessary Msys2 packages are already 
+pre-installed. But you can use it to update the (1) part (see the howto 
+document). There may be pcre2 installed here, but it is _not_ the pcre2 
+library that might/could be used when build R and R packages. This is 
+only for tools such as "make" or "tar" which you run from the command 
+line. Even though Msys2 also offers some compiler toolchains and headers 
+and libraries, they are not static and they are not used with R and R 
+packages. I would recommend against installing any toolchain/libraries 
+for any of the Msys2 subsystems inside Rtools - it is too easy to 
+accidentally mix those with (2).
+
+(2) contains the compiler toolchain, headers and libraries and this is 
+what you can see under x86_x64-w64-mingw32.static.posix. So, you would 
+find pcre2.h there, as well as the library, and it will be found by the 
+compilers stored also there, if you follow the howto document. You can 
+find the header files simply using "find" etc, but not using pacman, 
+because pacman is part of (1).
+
+(3) you can ignore for this problem, but there are some tools outside 
+x86_x64-w64-mingw32.static.posix which are not from Msys2, documented 
+also in the howto document
+
+ From what you are writing, I am not sure why pcre2.h is not found. 
+Please make sure you have not installed any Msys2 compiler or libraries 
+inside Rtools43 - the right ones for R are already there (e.g., if you 
+installed gcc from Msys2 and ran that one, it would not find pcre2.h, 
+and you could easily check using "which gcc").
+
+Please follow the howto document exactly and if you run into the problem 
+again, please describe exactly the steps you have taken to install 
+Rtools43 and then inside Rtools43. Please make sure you have not set any 
+PATH or other important environment variables in Windows other than 
+described in the howto document (old settings could e.g. lead to running 
+the wrong compiler, which would not find the header file).
+
+Best
+Tomas
+
+>
+> With thanks and regards
+> Debartha Paul
+> Masters Student (1st Year)
+>
+> Department of Statistics
+> Presidency University
+> Kolkata
+>
+> 	[[alternative HTML version deleted]]
+>
+> _______________________________________________
+> R-SIG-windows mailing list
+> R-SIG-windows at r-project.org
+> https://stat.ethz.ch/mailman/listinfo/r-sig-windows
+
+
+From |redr|k@@koog @end|ng |rom gm@||@com  Tue Apr 18 14:16:58 2023
+From: |redr|k@@koog @end|ng |rom gm@||@com (Fredrik Skoog)
+Date: Tue, 18 Apr 2023 14:16:58 +0200
+Subject: [R-SIG-Win] R4.2.3 slower than R4.1.3 on Windows only
+Message-ID: <CAGO=1NuPKrPP8j=-zocTJ82Dm-JYKAkR1w6WW3EcsEAb20HaJQ@mail.gmail.com>
+
+Hi,
+
+If you run:
+
+library(microbenchmark)
+m <- matrix(rnorm(28000000), nrow=7000, byrow=TRUE)
+rownames(m) <- rownames(m, do.NULL = FALSE, prefix = "this is a row name")
+colnames(m) <- colnames(m, do.NULL = FALSE, prefix = "this is a column
+name")
+microbenchmark(df <- as.data.frame(m, keep.rownames=TRUE), times=10)
+
+The results shows worse performance in R4.2.3 (also bigger variations)
+compared to v4.1.3. Also v4.2.0 shows worse performance, so it looks like
+it's 4.2.0 and later that has this issue. On Linux it's all good, so it
+seems to be a Windows only issue.
+
+Version 4.2.3
+==============
+
+Run 1
+------
+Unit: seconds
+                                         expr      min       lq     mean
+ median       uq      max neval
+ df <- as.data.frame(m, keep.rownames = TRUE) 1.324839 2.411304 2.760553
+2.593452 3.290228 4.263175    10
+
+Run 2
+------
+Unit: milliseconds
+                                         expr      min     lq     mean
+ median       uq     max neval
+ dt <- as.data.frame(m, keep.rownames = TRUE) 967.5651 1054.8 1155.453
+1149.767 1194.742 1451.14    10
+
+
+Version 4.1.3
+===============
+
+Run 1:
+------
+
+Unit: milliseconds
+                                         expr      min       lq     mean
+ median       uq      max neval
+ df <- as.data.frame(m, keep.rownames = TRUE) 274.5478 298.2477 320.3988
+320.9164 342.8119 375.6841    10
+
+Run 2:
+-------
+Unit: milliseconds
+                                         expr      min       lq     mean
+ median       uq      max neval
+ df <- as.data.frame(m, keep.rownames = TRUE) 278.5369 310.0312 313.0745
+313.3275 320.0294 343.7539    10
+
+I have tried it on two different machines, with the same result.
+
+-----
+
+The above example is just trying to do something simple that exposes the
+issue, but as.data.table behaves similarly. Also it shows huge variations
+in time. We had a script that ran in 12 minutes in v3.6.3 and it took 18
+min with v4.2.3, with v4.1.3 it takes around 9 minutes.
+
+Has anyone else noticed this? I noticed in the release notes that Doug Leas
+malloc was replaced in v4.2.0 and that's a windows only change.
+
+Best regards,
+
+Fredrik
+
+	[[alternative HTML version deleted]]
+
+
+From tom@@@k@||ber@ @end|ng |rom gm@||@com  Wed May 17 16:07:11 2023
+From: tom@@@k@||ber@ @end|ng |rom gm@||@com (Tomas Kalibera)
+Date: Wed, 17 May 2023 16:07:11 +0200
+Subject: [R-SIG-Win] R4.2.3 slower than R4.1.3 on Windows only
+In-Reply-To: <CAGO=1NuPKrPP8j=-zocTJ82Dm-JYKAkR1w6WW3EcsEAb20HaJQ@mail.gmail.com>
+References: <CAGO=1NuPKrPP8j=-zocTJ82Dm-JYKAkR1w6WW3EcsEAb20HaJQ@mail.gmail.com>
+Message-ID: <0fceef8d-c436-cb9d-e083-3312eaa3efb0@gmail.com>
+
+
+On 4/18/23 14:16, Fredrik Skoog wrote:
+> Hi,
+>
+> If you run:
+>
+> library(microbenchmark)
+> m <- matrix(rnorm(28000000), nrow=7000, byrow=TRUE)
+> rownames(m) <- rownames(m, do.NULL = FALSE, prefix = "this is a row name")
+> colnames(m) <- colnames(m, do.NULL = FALSE, prefix = "this is a column
+> name")
+> microbenchmark(df <- as.data.frame(m, keep.rownames=TRUE), times=10)
+>
+> The results shows worse performance in R4.2.3 (also bigger variations)
+> compared to v4.1.3. Also v4.2.0 shows worse performance, so it looks like
+> it's 4.2.0 and later that has this issue. On Linux it's all good, so it
+> seems to be a Windows only issue.
+>
+> Version 4.2.3
+> ==============
+>
+> Run 1
+> ------
+> Unit: seconds
+>                                           expr      min       lq     mean
+>   median       uq      max neval
+>   df <- as.data.frame(m, keep.rownames = TRUE) 1.324839 2.411304 2.760553
+> 2.593452 3.290228 4.263175    10
+>
+> Run 2
+> ------
+> Unit: milliseconds
+>                                           expr      min     lq     mean
+>   median       uq     max neval
+>   dt <- as.data.frame(m, keep.rownames = TRUE) 967.5651 1054.8 1155.453
+> 1149.767 1194.742 1451.14    10
+>
+>
+> Version 4.1.3
+> ===============
+>
+> Run 1:
+> ------
+>
+> Unit: milliseconds
+>                                           expr      min       lq     mean
+>   median       uq      max neval
+>   df <- as.data.frame(m, keep.rownames = TRUE) 274.5478 298.2477 320.3988
+> 320.9164 342.8119 375.6841    10
+>
+> Run 2:
+> -------
+> Unit: milliseconds
+>                                           expr      min       lq     mean
+>   median       uq      max neval
+>   df <- as.data.frame(m, keep.rownames = TRUE) 278.5369 310.0312 313.0745
+> 313.3275 320.0294 343.7539    10
+>
+> I have tried it on two different machines, with the same result.
+>
+> -----
+>
+> The above example is just trying to do something simple that exposes the
+> issue, but as.data.table behaves similarly. Also it shows huge variations
+> in time. We had a script that ran in 12 minutes in v3.6.3 and it took 18
+> min with v4.2.3, with v4.1.3 it takes around 9 minutes.
+>
+> Has anyone else noticed this? I noticed in the release notes that Doug Leas
+> malloc was replaced in v4.2.0 and that's a windows only change.
+
+Thanks for the report. I confirm the slowdown with this example and I 
+confirm it is due to the change in memory allocator: I've switched my 
+working copy of R-devel back to the original version of dlmalloc, which 
+removed the slowdown.
+
+Windows 10 (build 19041 and later) allows to choose a more recent 
+SegmentHeap allocator instead of the default Low Fragmentation Heap 
+allocator. It gives almost the same performance with this example as the 
+original version of dlmalloc, without the maintenance overhead of using 
+a custom allocator, so this might be one possible solution.
+
+Best
+Tomas
+
+>
+> Best regards,
+>
+> Fredrik
+>
+> 	[[alternative HTML version deleted]]
+>
+> _______________________________________________
+> R-SIG-windows mailing list
+> R-SIG-windows at r-project.org
+> https://stat.ethz.ch/mailman/listinfo/r-sig-windows
+
+
+From tom@@@k@||ber@ @end|ng |rom gm@||@com  Mon May 22 17:29:17 2023
+From: tom@@@k@||ber@ @end|ng |rom gm@||@com (Tomas Kalibera)
+Date: Mon, 22 May 2023 17:29:17 +0200
+Subject: [R-SIG-Win] R4.2.3 slower than R4.1.3 on Windows only
+In-Reply-To: <0fceef8d-c436-cb9d-e083-3312eaa3efb0@gmail.com>
+References: <CAGO=1NuPKrPP8j=-zocTJ82Dm-JYKAkR1w6WW3EcsEAb20HaJQ@mail.gmail.com>
+ <0fceef8d-c436-cb9d-e083-3312eaa3efb0@gmail.com>
+Message-ID: <5f80fbf8-245d-b017-ef83-c5dcf423fb2e@gmail.com>
+
+
+On 5/17/23 16:07, Tomas Kalibera wrote:
+>
+> On 4/18/23 14:16, Fredrik Skoog wrote:
+>> Hi,
+>>
+>> If you run:
+>>
+>> library(microbenchmark)
+>> m <- matrix(rnorm(28000000), nrow=7000, byrow=TRUE)
+>> rownames(m) <- rownames(m, do.NULL = FALSE, prefix = "this is a row 
+>> name")
+>> colnames(m) <- colnames(m, do.NULL = FALSE, prefix = "this is a column
+>> name")
+>> microbenchmark(df <- as.data.frame(m, keep.rownames=TRUE), times=10)
+>>
+>> The results shows worse performance in R4.2.3 (also bigger variations)
+>> compared to v4.1.3. Also v4.2.0 shows worse performance, so it looks 
+>> like
+>> it's 4.2.0 and later that has this issue. On Linux it's all good, so it
+>> seems to be a Windows only issue.
+>>
+>> Version 4.2.3
+>> ==============
+>>
+>> Run 1
+>> ------
+>> Unit: seconds
+>> ????????????????????????????????????????? expr????? min lq???? mean
+>> ? median?????? uq????? max neval
+>> ? df <- as.data.frame(m, keep.rownames = TRUE) 1.324839 2.411304 
+>> 2.760553
+>> 2.593452 3.290228 4.263175??? 10
+>>
+>> Run 2
+>> ------
+>> Unit: milliseconds
+>> ????????????????????????????????????????? expr????? min lq???? mean
+>> ? median?????? uq???? max neval
+>> ? dt <- as.data.frame(m, keep.rownames = TRUE) 967.5651 1054.8 1155.453
+>> 1149.767 1194.742 1451.14??? 10
+>>
+>>
+>> Version 4.1.3
+>> ===============
+>>
+>> Run 1:
+>> ------
+>>
+>> Unit: milliseconds
+>> ????????????????????????????????????????? expr????? min lq???? mean
+>> ? median?????? uq????? max neval
+>> ? df <- as.data.frame(m, keep.rownames = TRUE) 274.5478 298.2477 
+>> 320.3988
+>> 320.9164 342.8119 375.6841??? 10
+>>
+>> Run 2:
+>> -------
+>> Unit: milliseconds
+>> ????????????????????????????????????????? expr????? min lq???? mean
+>> ? median?????? uq????? max neval
+>> ? df <- as.data.frame(m, keep.rownames = TRUE) 278.5369 310.0312 
+>> 313.0745
+>> 313.3275 320.0294 343.7539??? 10
+>>
+>> I have tried it on two different machines, with the same result.
+>>
+>> -----
+>>
+>> The above example is just trying to do something simple that exposes the
+>> issue, but as.data.table behaves similarly. Also it shows huge 
+>> variations
+>> in time. We had a script that ran in 12 minutes in v3.6.3 and it took 18
+>> min with v4.2.3, with v4.1.3 it takes around 9 minutes.
+>>
+>> Has anyone else noticed this? I noticed in the release notes that 
+>> Doug Leas
+>> malloc was replaced in v4.2.0 and that's a windows only change.
+>
+> Thanks for the report. I confirm the slowdown with this example and I 
+> confirm it is due to the change in memory allocator: I've switched my 
+> working copy of R-devel back to the original version of dlmalloc, 
+> which removed the slowdown.
+>
+> Windows 10 (build 19041 and later) allows to choose a more recent 
+> SegmentHeap allocator instead of the default Low Fragmentation Heap 
+> allocator. It gives almost the same performance with this example as 
+> the original version of dlmalloc, without the maintenance overhead of 
+> using a custom allocator, so this might be one possible solution.
+
+Hi Fredrik,
+
+we made R-devel use Segment Heap on recent Windows as an experiment. 
+Could you please check the performance implications on some real 
+application, on which you based the example micro-benchmark? Did it 
+improve performance for you?
+
+Indeed, if you have access to some other memory intensive real 
+applications with real data, it would be useful to check using that as 
+well.
+
+Microbenchmarks are tricky. While yours works much better with Segment 
+Heap, my colleague found another one which works much better with Low 
+Fragmentation Heap.
+
+Thanks
+Tomas
+
+>
+> Best
+> Tomas
+>
+>>
+>> Best regards,
+>>
+>> Fredrik
+>>
+>> ????[[alternative HTML version deleted]]
+>>
+>> _______________________________________________
+>> R-SIG-windows mailing list
+>> R-SIG-windows at r-project.org
+>> https://stat.ethz.ch/mailman/listinfo/r-sig-windows
+
+
+From |redr|k@@koog @end|ng |rom gm@||@com  Tue Jun  6 11:42:33 2023
+From: |redr|k@@koog @end|ng |rom gm@||@com (Fredrik Skoog)
+Date: Tue, 6 Jun 2023 11:42:33 +0200
+Subject: [R-SIG-Win] R4.2.3 slower than R4.1.3 on Windows only
+In-Reply-To: <5f80fbf8-245d-b017-ef83-c5dcf423fb2e@gmail.com>
+References: <CAGO=1NuPKrPP8j=-zocTJ82Dm-JYKAkR1w6WW3EcsEAb20HaJQ@mail.gmail.com>
+ <0fceef8d-c436-cb9d-e083-3312eaa3efb0@gmail.com>
+ <5f80fbf8-245d-b017-ef83-c5dcf423fb2e@gmail.com>
+Message-ID: <CAGO=1Nt3wyXLOyqfpwOamaJUMwSuoc2SX_7NiTmhO_oEm0EzdQ@mail.gmail.com>
+
+Hi,
+
+I tried a real world example (quant finance: reading up some data,
+transform/calc, write back to files), below is the runtime of the script
+run with some different versions:
+
+Latest R dev build: 15 minutes
+R 4.1.3: 10 minutes
+R 4.2.3: 23 minutes
+
+So the latest R dev build is a lot better than R4.2.3, but still slower
+than R 4.1.3
+
+Best regards,
+
+Fredrik
+
+
+
+
+Den m?n 22 maj 2023 kl 17:29 skrev Tomas Kalibera <tomas.kalibera at gmail.com
+>:
+
+>
+> On 5/17/23 16:07, Tomas Kalibera wrote:
+> >
+> > On 4/18/23 14:16, Fredrik Skoog wrote:
+> >> Hi,
+> >>
+> >> If you run:
+> >>
+> >> library(microbenchmark)
+> >> m <- matrix(rnorm(28000000), nrow=7000, byrow=TRUE)
+> >> rownames(m) <- rownames(m, do.NULL = FALSE, prefix = "this is a row
+> >> name")
+> >> colnames(m) <- colnames(m, do.NULL = FALSE, prefix = "this is a column
+> >> name")
+> >> microbenchmark(df <- as.data.frame(m, keep.rownames=TRUE), times=10)
+> >>
+> >> The results shows worse performance in R4.2.3 (also bigger variations)
+> >> compared to v4.1.3. Also v4.2.0 shows worse performance, so it looks
+> >> like
+> >> it's 4.2.0 and later that has this issue. On Linux it's all good, so it
+> >> seems to be a Windows only issue.
+> >>
+> >> Version 4.2.3
+> >> ==============
+> >>
+> >> Run 1
+> >> ------
+> >> Unit: seconds
+> >>                                           expr      min lq     mean
+> >>   median       uq      max neval
+> >>   df <- as.data.frame(m, keep.rownames = TRUE) 1.324839 2.411304
+> >> 2.760553
+> >> 2.593452 3.290228 4.263175    10
+> >>
+> >> Run 2
+> >> ------
+> >> Unit: milliseconds
+> >>                                           expr      min lq     mean
+> >>   median       uq     max neval
+> >>   dt <- as.data.frame(m, keep.rownames = TRUE) 967.5651 1054.8 1155.453
+> >> 1149.767 1194.742 1451.14    10
+> >>
+> >>
+> >> Version 4.1.3
+> >> ===============
+> >>
+> >> Run 1:
+> >> ------
+> >>
+> >> Unit: milliseconds
+> >>                                           expr      min lq     mean
+> >>   median       uq      max neval
+> >>   df <- as.data.frame(m, keep.rownames = TRUE) 274.5478 298.2477
+> >> 320.3988
+> >> 320.9164 342.8119 375.6841    10
+> >>
+> >> Run 2:
+> >> -------
+> >> Unit: milliseconds
+> >>                                           expr      min lq     mean
+> >>   median       uq      max neval
+> >>   df <- as.data.frame(m, keep.rownames = TRUE) 278.5369 310.0312
+> >> 313.0745
+> >> 313.3275 320.0294 343.7539    10
+> >>
+> >> I have tried it on two different machines, with the same result.
+> >>
+> >> -----
+> >>
+> >> The above example is just trying to do something simple that exposes the
+> >> issue, but as.data.table behaves similarly. Also it shows huge
+> >> variations
+> >> in time. We had a script that ran in 12 minutes in v3.6.3 and it took 18
+> >> min with v4.2.3, with v4.1.3 it takes around 9 minutes.
+> >>
+> >> Has anyone else noticed this? I noticed in the release notes that
+> >> Doug Leas
+> >> malloc was replaced in v4.2.0 and that's a windows only change.
+> >
+> > Thanks for the report. I confirm the slowdown with this example and I
+> > confirm it is due to the change in memory allocator: I've switched my
+> > working copy of R-devel back to the original version of dlmalloc,
+> > which removed the slowdown.
+> >
+> > Windows 10 (build 19041 and later) allows to choose a more recent
+> > SegmentHeap allocator instead of the default Low Fragmentation Heap
+> > allocator. It gives almost the same performance with this example as
+> > the original version of dlmalloc, without the maintenance overhead of
+> > using a custom allocator, so this might be one possible solution.
+>
+> Hi Fredrik,
+>
+> we made R-devel use Segment Heap on recent Windows as an experiment.
+> Could you please check the performance implications on some real
+> application, on which you based the example micro-benchmark? Did it
+> improve performance for you?
+>
+> Indeed, if you have access to some other memory intensive real
+> applications with real data, it would be useful to check using that as
+> well.
+>
+> Microbenchmarks are tricky. While yours works much better with Segment
+> Heap, my colleague found another one which works much better with Low
+> Fragmentation Heap.
+>
+> Thanks
+> Tomas
+>
+> >
+> > Best
+> > Tomas
+> >
+> >>
+> >> Best regards,
+> >>
+> >> Fredrik
+> >>
+> >>     [[alternative HTML version deleted]]
+> >>
+> >> _______________________________________________
+> >> R-SIG-windows mailing list
+> >> R-SIG-windows at r-project.org
+> >> https://stat.ethz.ch/mailman/listinfo/r-sig-windows
+>
+
+	[[alternative HTML version deleted]]
+
+
+From tom@@@k@||ber@ @end|ng |rom gm@||@com  Wed Jun  7 10:32:40 2023
+From: tom@@@k@||ber@ @end|ng |rom gm@||@com (Tomas Kalibera)
+Date: Wed, 7 Jun 2023 10:32:40 +0200
+Subject: [R-SIG-Win] R4.2.3 slower than R4.1.3 on Windows only
+In-Reply-To: <CAGO=1Nt3wyXLOyqfpwOamaJUMwSuoc2SX_7NiTmhO_oEm0EzdQ@mail.gmail.com>
+References: <CAGO=1NuPKrPP8j=-zocTJ82Dm-JYKAkR1w6WW3EcsEAb20HaJQ@mail.gmail.com>
+ <0fceef8d-c436-cb9d-e083-3312eaa3efb0@gmail.com>
+ <5f80fbf8-245d-b017-ef83-c5dcf423fb2e@gmail.com>
+ <CAGO=1Nt3wyXLOyqfpwOamaJUMwSuoc2SX_7NiTmhO_oEm0EzdQ@mail.gmail.com>
+Message-ID: <b318c2f3-0a2a-9f27-46ac-18b2946e9f09@gmail.com>
+
+
+On 6/6/23 11:42, Fredrik Skoog wrote:
+> Hi,
+>
+> I tried a real world example?(quant finance: reading up some data, 
+> transform/calc, write back to files), below is the runtime of the 
+> script run with some different versions:
+>
+> Latest R dev build: 15 minutes
+> R 4.1.3: 10 minutes
+> R 4.2.3: 23 minutes
+>
+> So the latest R dev build is a lot better than R4.2.3, but still 
+> slower than R 4.1.3
+
+Great, that's quite good news, thanks for running the experiments.
+
+Best,
+Tomas
+
+>
+> Best regards,
+>
+> Fredrik
+>
+>
+>
+>
+> Den m?n 22 maj 2023 kl 17:29 skrev Tomas Kalibera 
+> <tomas.kalibera at gmail.com>:
+>
+>
+>     On 5/17/23 16:07, Tomas Kalibera wrote:
+>     >
+>     > On 4/18/23 14:16, Fredrik Skoog wrote:
+>     >> Hi,
+>     >>
+>     >> If you run:
+>     >>
+>     >> library(microbenchmark)
+>     >> m <- matrix(rnorm(28000000), nrow=7000, byrow=TRUE)
+>     >> rownames(m) <- rownames(m, do.NULL = FALSE, prefix = "this is a
+>     row
+>     >> name")
+>     >> colnames(m) <- colnames(m, do.NULL = FALSE, prefix = "this is a
+>     column
+>     >> name")
+>     >> microbenchmark(df <- as.data.frame(m, keep.rownames=TRUE),
+>     times=10)
+>     >>
+>     >> The results shows worse performance in R4.2.3 (also bigger
+>     variations)
+>     >> compared to v4.1.3. Also v4.2.0 shows worse performance, so it
+>     looks
+>     >> like
+>     >> it's 4.2.0 and later that has this issue. On Linux it's all
+>     good, so it
+>     >> seems to be a Windows only issue.
+>     >>
+>     >> Version 4.2.3
+>     >> ==============
+>     >>
+>     >> Run 1
+>     >> ------
+>     >> Unit: seconds
+>     >> ????????????????????????????????????????? expr min lq???? mean
+>     >> ? median?????? uq????? max neval
+>     >> ? df <- as.data.frame(m, keep.rownames = TRUE) 1.324839 2.411304
+>     >> 2.760553
+>     >> 2.593452 3.290228 4.263175??? 10
+>     >>
+>     >> Run 2
+>     >> ------
+>     >> Unit: milliseconds
+>     >> ????????????????????????????????????????? expr min lq???? mean
+>     >> ? median?????? uq???? max neval
+>     >> ? dt <- as.data.frame(m, keep.rownames = TRUE) 967.5651 1054.8
+>     1155.453
+>     >> 1149.767 1194.742 1451.14??? 10
+>     >>
+>     >>
+>     >> Version 4.1.3
+>     >> ===============
+>     >>
+>     >> Run 1:
+>     >> ------
+>     >>
+>     >> Unit: milliseconds
+>     >> ????????????????????????????????????????? expr min lq???? mean
+>     >> ? median?????? uq????? max neval
+>     >> ? df <- as.data.frame(m, keep.rownames = TRUE) 274.5478 298.2477
+>     >> 320.3988
+>     >> 320.9164 342.8119 375.6841??? 10
+>     >>
+>     >> Run 2:
+>     >> -------
+>     >> Unit: milliseconds
+>     >> ????????????????????????????????????????? expr min lq???? mean
+>     >> ? median?????? uq????? max neval
+>     >> ? df <- as.data.frame(m, keep.rownames = TRUE) 278.5369 310.0312
+>     >> 313.0745
+>     >> 313.3275 320.0294 343.7539??? 10
+>     >>
+>     >> I have tried it on two different machines, with the same result.
+>     >>
+>     >> -----
+>     >>
+>     >> The above example is just trying to do something simple that
+>     exposes the
+>     >> issue, but as.data.table behaves similarly. Also it shows huge
+>     >> variations
+>     >> in time. We had a script that ran in 12 minutes in v3.6.3 and
+>     it took 18
+>     >> min with v4.2.3, with v4.1.3 it takes around 9 minutes.
+>     >>
+>     >> Has anyone else noticed this? I noticed in the release notes that
+>     >> Doug Leas
+>     >> malloc was replaced in v4.2.0 and that's a windows only change.
+>     >
+>     > Thanks for the report. I confirm the slowdown with this example
+>     and I
+>     > confirm it is due to the change in memory allocator: I've
+>     switched my
+>     > working copy of R-devel back to the original version of dlmalloc,
+>     > which removed the slowdown.
+>     >
+>     > Windows 10 (build 19041 and later) allows to choose a more recent
+>     > SegmentHeap allocator instead of the default Low Fragmentation Heap
+>     > allocator. It gives almost the same performance with this
+>     example as
+>     > the original version of dlmalloc, without the maintenance
+>     overhead of
+>     > using a custom allocator, so this might be one possible solution.
+>
+>     Hi Fredrik,
+>
+>     we made R-devel use Segment Heap on recent Windows as an experiment.
+>     Could you please check the performance implications on some real
+>     application, on which you based the example micro-benchmark? Did it
+>     improve performance for you?
+>
+>     Indeed, if you have access to some other memory intensive real
+>     applications with real data, it would be useful to check using
+>     that as
+>     well.
+>
+>     Microbenchmarks are tricky. While yours works much better with
+>     Segment
+>     Heap, my colleague found another one which works much better with Low
+>     Fragmentation Heap.
+>
+>     Thanks
+>     Tomas
+>
+>     >
+>     > Best
+>     > Tomas
+>     >
+>     >>
+>     >> Best regards,
+>     >>
+>     >> Fredrik
+>     >>
+>     >> ????[[alternative HTML version deleted]]
+>     >>
+>     >> _______________________________________________
+>     >> R-SIG-windows mailing list
+>     >> R-SIG-windows at r-project.org
+>     >> https://stat.ethz.ch/mailman/listinfo/r-sig-windows
+>
+	[[alternative HTML version deleted]]
+
+

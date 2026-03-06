@@ -1,0 +1,35 @@
+From tom@@@k@||ber@ @end|ng |rom gm@||@com  Mon Oct 23 11:36:17 2023
+From: tom@@@k@||ber@ @end|ng |rom gm@||@com (Tomas Kalibera)
+Date: Mon, 23 Oct 2023 11:36:17 +0200
+Subject: [R-SIG-Win] Rtools43 update
+Message-ID: <1e02ac01-2ef0-4465-a94b-c3a56b006d4e@gmail.com>
+
+Dear R Windows developers,
+
+an update of Rtools43, the toolchain for R for Windows used by R-devel 
+and R 4.3, is available as revision 5863 from
+
+https://cran.r-project.org/bin/windows/Rtools/rtools43/rtools.html
+
+R packages able to read files using libwebp should be rebuilt and 
+reinstalled due to a security vulnerability (CVE-2023-2863). This may be 
+also indirect through other packages or libraries.
+
+No changes in the list of libraries for linking are required.
+
+Pkg-config is now available for querying libraries for linking and 
+compilation flags. See 
+https://cran.r-project.org/bin/windows/base/howto-R-devel.html for more 
+details (setting this up with github actions requires some tweaks).
+
+The compilers and a number of libraries have been updated.
+
+There is an experimental build for aarch64 based on LLVM.
+
+See https://cran.r-project.org/bin/windows/Rtools/rtools43/news.html for 
+more details.
+
+Best
+Tomas
+
+

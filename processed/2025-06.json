@@ -1,0 +1,36 @@
+{
+  "list": "r-sig-windows",
+  "description": "",
+  "month": "2025-06",
+  "messages": [
+    {
+      "id": "msg-c755ad8ab57c",
+      "message_id": "<8fe251b7-78d2-4fb0-a943-381ff7573f38@gmail.com>",
+      "from_name": "Tomas Kalibera",
+      "from_email_hash": "7af110c9340339e5307bd348f1ec524e2fd1c8f104d583e9993022c5550711f4",
+      "date": "2025-06-11T09:39:58+02:00",
+      "subject": "[R-SIG-Win] Rtools45 update",
+      "subject_clean": "Rtools45 update",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear R Windows developers,\n\nan update of Rtools45, the toolchain for R for Windows used by R-devel \nand R 4.5, is available as revision 6608 from\n\nhttps://cran.r-project.org/bin/windows/Rtools/rtools45/rtools.html\n\nThe update adds quantlib and upgrades a number of libraries to newer \nversions.\n\nSee\n\nhttps://cran.r-project.org/bin/windows/Rtools/rtools45/news.html\n\nfor more details.\n\nBest\nTomas",
+      "body_snippet": "Dear R Windows developers,\n\nan update of Rtools45, the toolchain for R for Windows used by R-devel \nand R 4.5, is available as revision 6608 from\n\nhttps://cran.r-project.org/bin/windows/Rtools/rtools4",
+      "thread_id": "thread-c755ad8ab57c",
+      "thread_depth": 0,
+      "month": "2025-06"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-c755ad8ab57c",
+      "subject": "Rtools45 update",
+      "message_count": 1,
+      "participants": [
+        "Tomas Kalibera"
+      ],
+      "started": "2025-06-11T09:39:58+02:00",
+      "last_reply": "2025-06-11T09:39:58+02:00",
+      "root_message_id": "msg-c755ad8ab57c"
+    }
+  ]
+}

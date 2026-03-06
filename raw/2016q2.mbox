@@ -1,0 +1,146 @@
+From tkeitt at utexas.edu  Fri Apr 29 22:33:11 2016
+From: tkeitt at utexas.edu (Tim Keitt)
+Date: Fri, 29 Apr 2016 15:33:11 -0500
+Subject: [R-SIG-Win] Question about rtools provided shell
+Message-ID: <CANnL8grWnmPsG2kD55bvSAL7gZ_Zm+nTpwrub++oQoFbxWGDLg@mail.gmail.com>
+
+I am trying to be clever (whether that's a good idea is for another thread
+;) and write an R script that downloads and builds the postgres libpq
+library when its not installed. (The idea is to call this script during
+source package installation.)
+
+It works swimmingly on Linux as you would expect, but after a fresh windows
+install + R + Rtools, I get an error during the postgres configure step
+complaining about the shell not being posix. I _assume_ that I am calling
+the shell that comes with Rtools as it is at the front of the path variable.
+
+So my questions are: what shell comes with Rtools, can it be made to work
+with autoconf, and is it going to change anytime soon? It appears I might
+be able to automate installation of mingw but that would either replicate
+or possibly conflict with parts of Rtools.
+
+I'm not very familiar with windows generally, so perhaps I'm missing
+something obvious. Any pointers?
+
+THK
+
+http://www.keittlab.org/
+
+	[[alternative HTML version deleted]]
+
+
+From jeroenooms at gmail.com  Fri Apr 29 22:37:10 2016
+From: jeroenooms at gmail.com (Jeroen Ooms)
+Date: Fri, 29 Apr 2016 22:37:10 +0200
+Subject: [R-SIG-Win] Question about rtools provided shell
+In-Reply-To: <CANnL8grWnmPsG2kD55bvSAL7gZ_Zm+nTpwrub++oQoFbxWGDLg@mail.gmail.com>
+References: <CANnL8grWnmPsG2kD55bvSAL7gZ_Zm+nTpwrub++oQoFbxWGDLg@mail.gmail.com>
+Message-ID: <CABFfbXtz5n9-jzAw+jrgHeSXvf-twX5rTyuCe_D981UO0A1Kig@mail.gmail.com>
+
+On Fri, Apr 29, 2016 at 10:33 PM, Tim Keitt <tkeitt at utexas.edu> wrote:
+> I am trying to be clever (whether that's a good idea is for another thread
+> ;) and write an R script that downloads and builds the postgres libpq
+> library when its not installed. (The idea is to call this script during
+> source package installation.)
+
+We do exactly this in the RPostgres package:
+https://github.com/rstats-db/RPostgres . You want to check the
+src/Makevars.win file and tools/winlibs.R. Feel free to steal/copy
+whatever you need.
+
+
+From edd at debian.org  Sat Apr 30 00:55:43 2016
+From: edd at debian.org (Dirk Eddelbuettel)
+Date: Fri, 29 Apr 2016 17:55:43 -0500
+Subject: [R-SIG-Win] Question about rtools provided shell
+In-Reply-To: <CABFfbXtz5n9-jzAw+jrgHeSXvf-twX5rTyuCe_D981UO0A1Kig@mail.gmail.com>
+References: <CANnL8grWnmPsG2kD55bvSAL7gZ_Zm+nTpwrub++oQoFbxWGDLg@mail.gmail.com>
+	<CABFfbXtz5n9-jzAw+jrgHeSXvf-twX5rTyuCe_D981UO0A1Kig@mail.gmail.com>
+Message-ID: <22307.58991.433829.255495@max.nulle.part>
+
+
+On 29 April 2016 at 22:37, Jeroen Ooms wrote:
+| On Fri, Apr 29, 2016 at 10:33 PM, Tim Keitt <tkeitt at utexas.edu> wrote:
+| > I am trying to be clever (whether that's a good idea is for another thread
+| > ;) and write an R script that downloads and builds the postgres libpq
+| > library when its not installed. (The idea is to call this script during
+| > source package installation.)
+| 
+| We do exactly this in the RPostgres package:
+| https://github.com/rstats-db/RPostgres . You want to check the
+| src/Makevars.win file and tools/winlibs.R. Feel free to steal/copy
+| whatever you need.
+
+And RPostgreSQL builds it from embedded sources -- putting the download step
+in should not be hard.
+
+https://github.com/cran/RPostgreSQL/blob/master/src/Makevars.win
+
+Dirk
+
+-- 
+http://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org
+
+
+From tkeitt at utexas.edu  Sat Apr 30 02:08:28 2016
+From: tkeitt at utexas.edu (Tim Keitt)
+Date: Fri, 29 Apr 2016 19:08:28 -0500
+Subject: [R-SIG-Win] Question about rtools provided shell
+In-Reply-To: <CABFfbXtz5n9-jzAw+jrgHeSXvf-twX5rTyuCe_D981UO0A1Kig@mail.gmail.com>
+References: <CANnL8grWnmPsG2kD55bvSAL7gZ_Zm+nTpwrub++oQoFbxWGDLg@mail.gmail.com>
+	<CABFfbXtz5n9-jzAw+jrgHeSXvf-twX5rTyuCe_D981UO0A1Kig@mail.gmail.com>
+Message-ID: <CANnL8goS-eSBLyVtTaMwu21DrNGJafF1Xq-+MnFENX1FE5Yt=g@mail.gmail.com>
+
+http://www.keittlab.org/
+
+On Fri, Apr 29, 2016 at 3:37 PM, Jeroen Ooms <jeroenooms at gmail.com> wrote:
+
+> On Fri, Apr 29, 2016 at 10:33 PM, Tim Keitt <tkeitt at utexas.edu> wrote:
+> > I am trying to be clever (whether that's a good idea is for another
+> thread
+> > ;) and write an R script that downloads and builds the postgres libpq
+> > library when its not installed. (The idea is to call this script during
+> > source package installation.)
+>
+> We do exactly this in the RPostgres package:
+> https://github.com/rstats-db/RPostgres . You want to check the
+> src/Makevars.win file and tools/winlibs.R. Feel free to steal/copy
+> whatever you need.
+>
+
+Nice to discover the prebuilt windows libs on github. Did not know about
+that. I was pulling the full postgresql source and then building libpq in
+the tree.
+
+THK
+
+
+>
+> _______________________________________________
+> R-SIG-windows mailing list
+> R-SIG-windows at r-project.org
+> https://stat.ethz.ch/mailman/listinfo/r-sig-windows
+>
+
+	[[alternative HTML version deleted]]
+
+
+From jeroenooms at gmail.com  Sat Apr 30 12:34:08 2016
+From: jeroenooms at gmail.com (Jeroen Ooms)
+Date: Sat, 30 Apr 2016 12:34:08 +0200
+Subject: [R-SIG-Win] Question about rtools provided shell
+In-Reply-To: <CANnL8goS-eSBLyVtTaMwu21DrNGJafF1Xq-+MnFENX1FE5Yt=g@mail.gmail.com>
+References: <CANnL8grWnmPsG2kD55bvSAL7gZ_Zm+nTpwrub++oQoFbxWGDLg@mail.gmail.com>
+	<CABFfbXtz5n9-jzAw+jrgHeSXvf-twX5rTyuCe_D981UO0A1Kig@mail.gmail.com>
+	<CANnL8goS-eSBLyVtTaMwu21DrNGJafF1Xq-+MnFENX1FE5Yt=g@mail.gmail.com>
+Message-ID: <CABFfbXuPdr+yQ5BWGUOv3tzz+D4QR+WK=xz6z9CgzcHR8DaPeQ@mail.gmail.com>
+
+On Sat, Apr 30, 2016 at 2:08 AM, Tim Keitt <tkeitt at utexas.edu> wrote:
+> Nice to discover the prebuilt windows libs on github. Did not know about
+> that. I was pulling the full postgresql source and then building libpq in
+> the tree.
+
+I just added some new builds that also work with the new gcc 4.9.3
+toolchain: https://github.com/rwinlib/libpq/archive/v9.5.2.zip
+
+

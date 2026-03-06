@@ -1,0 +1,82 @@
+{
+  "list": "r-sig-windows",
+  "description": "",
+  "month": "2023-04",
+  "messages": [
+    {
+      "id": "msg-09d79ebd6f88",
+      "message_id": "<CAK7Q9bcu4jjTnj0aTP87byRQfn0kkcN9JaS2WA=6kEs4PJtuFg@mail.gmail.com>",
+      "from_name": "Debartha Paul",
+      "from_email_hash": "7d5c28e64346d0f280377ae3000a076390074e0384a3554b334308574e9210e9",
+      "date": "2023-04-15T22:30:50+05:30",
+      "subject": "[R-SIG-Win] pcre2.h not found error while building R in windows",
+      "subject_clean": "pcre2.h not found error while building R in windows",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi. I am Debartha Paul, a Master's student in Statistics at Presidency\nUniversity, Kolkata, India. I was trying to build R from scratch using\nRTools as described in https://contributor.r-project.org/rdevguide/ and\nhttps://cran.r-project.org/bin/windows/base/howto-R-devel.html but when I\nrun `make all recommended`, I get an error message as follows:\n```\n\ngrep.c:75:10: fatal error: pcre2.h: No such file or directory\n   75 | # include<pcre2.h>\n      |          ^~~~~~~~~\ncompilation terminated.\nmake[4]: *** [../gnuwin32/MkRules:155: grep.o] Error 1\nmake[3]: *** [Makefile:129: rlibs] Error 2\nmake[2]: *** [Makefile:194: ../../bin/x64/R.dll] Error 2\nmake[1]: *** [Makefile:114: rbuild] Error 2\nmake: *** [Makefile:17: all] Error 2\n\n```\nI ran `pacman -Q` inside my `MSYS2 MSYS` bash but discovered that `pcre2`\nexists.\nHowever, upon running `pacman -Q` from RTools bash, I found that it is not\nbeing found, and only a subset of the original file list is available now. But\nthe surprising fact (to me at least) is that when I open my RTools folder,\nwhere its installed, I did find the`pcre2` header file inside one of the\nfolders named `x86_x64-w64-mingw32.static.posix`. More surprisingly, none\nof the header files, listed inside this folder, is being listed in `pacman\n-Q`  when I run it from inside `RTools` bash. I dived deeper and found that\nthe folder that `pacman -Q` is returning from lies in `var`: another folder\ninside RTools, separate from `x86_x64-w64-mingw32.static.posix`.\n\nI brought this issue up in the recently concluded Office Hours of the\nR-Contributors Slack, but unfortunately, I couldn't get any satisfactory\nsolution, nor a reason, on why this is happening.\n\nI tried `pacman -Sy pcre2` from RTools bash, and the result was that I can\nnow see `pcre2` in the subset that I mentioned earlier, but still, the\nproblem persists. Needless to say that I even updated both my MSYS bash\npackages and RTools bash packages using `pacman -Syuu` from both.\n\nFinally, I was using `rtools43-5493-5475.exe` and fearing that it might be\nthe cause, I uninstalled and installed the latest\nversion(`rtools43-5550-5548.exe`), but it didn't do anything to improve my\noutput.\n\nAt this point, I am confused as to why this is happening, and I would be\nglad if anyone guides me towards a solution to this problem. I am using a\nWindows 11 machine and would be happy to give further information if the\nneed arises.\n\nWith thanks and regards\nDebartha Paul\nMasters Student (1st Year)\n\nDepartment of Statistics\nPresidency University\nKolkata\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi. I am Debartha Paul, a Master's student in Statistics at Presidency\nUniversity, Kolkata, India. I was trying to build R from scratch using\nRTools as described in https://contributor.r-project.org/r",
+      "thread_id": "thread-09d79ebd6f88",
+      "thread_depth": 0,
+      "month": "2023-04"
+    },
+    {
+      "id": "msg-be7ad040d191",
+      "message_id": "<15986752-2c46-b8c0-5e17-6f28b27d70c7@gmail.com>",
+      "from_name": "Tomas Kalibera",
+      "from_email_hash": "7af110c9340339e5307bd348f1ec524e2fd1c8f104d583e9993022c5550711f4",
+      "date": "2023-04-17T09:51:52+02:00",
+      "subject": "[R-SIG-Win] pcre2.h not found error while building R in windows",
+      "subject_clean": "pcre2.h not found error while building R in windows",
+      "in_reply_to": "<CAK7Q9bcu4jjTnj0aTP87byRQfn0kkcN9JaS2WA=6kEs4PJtuFg@mail.gmail.com>",
+      "references": [
+        "<CAK7Q9bcu4jjTnj0aTP87byRQfn0kkcN9JaS2WA=6kEs4PJtuFg@mail.gmail.com>"
+      ],
+      "body_plain": "On 4/15/23 19:00, Debartha Paul wrote:\n> Hi. I am Debartha Paul, a Master's student in Statistics at Presidency\n> University, Kolkata, India. I was trying to build R from scratch using\n> RTools as described in https://contributor.r-project.org/rdevguide/ and\n> https://cran.r-project.org/bin/windows/base/howto-R-devel.html but when I\n> run `make all recommended`, I get an error message as follows:\n> ```\n>\n> grep.c:75:10: fatal error: pcre2.h: No such file or directory\n>     75 | # include<pcre2.h>\n>        |          ^~~~~~~~~\n> compilation terminated.\n> make[4]: *** [../gnuwin32/MkRules:155: grep.o] Error 1\n> make[3]: *** [Makefile:129: rlibs] Error 2\n> make[2]: *** [Makefile:194: ../../bin/x64/R.dll] Error 2\n> make[1]: *** [Makefile:114: rbuild] Error 2\n> make: *** [Makefile:17: all] Error 2\n>\n> ```\n> I ran `pacman -Q` inside my `MSYS2 MSYS` bash but discovered that `pcre2`\n> exists.\n> However, upon running `pacman -Q` from RTools bash, I found that it is not\n> being found, and only a subset of the original file list is available now. But\n> the surprising fact (to me at least) is that when I open my RTools folder,\n> where its installed, I did find the`pcre2` header file inside one of the\n> folders named `x86_x64-w64-mingw32.static.posix`. More surprisingly, none\n> of the header files, listed inside this folder, is being listed in `pacman\n> -Q`  when I run it from inside `RTools` bash. I dived deeper and found that\n> the folder that `pacman -Q` is returning from lies in `var`: another folder\n> inside RTools, separate from `x86_x64-w64-mingw32.static.posix`.\n>\n> I brought this issue up in the recently concluded Office Hours of the\n> R-Contributors Slack, but unfortunately, I couldn't get any satisfactory\n> solution, nor a reason, on why this is happening.\n>\n> I tried `pacman -Sy pcre2` from RTools bash, and the result was that I can\n> now see `pcre2` in the subset that I mentioned earlier, but still, the\n> problem persists. Needless to say that I even updated both my MSYS bash\n> packages and RTools bash packages using `pacman -Syuu` from both.\n>\n> Finally, I was using `rtools43-5493-5475.exe` and fearing that it might be\n> the cause, I uninstalled and installed the latest\n> version(`rtools43-5550-5548.exe`), but it didn't do anything to improve my\n> output.\n>\n> At this point, I am confused as to why this is happening, and I would be\n> glad if anyone guides me towards a solution to this problem. I am using a\n> Windows 11 machine and would be happy to give further information if the\n> need arises.\n\nThe official documentation for building R on Windows using Rtools can be \nfound from the Rtools download page \n(https://cran.r-project.org/bin/windows/Rtools/) and is for a specific \nversion of R. I would recommend you read and follow that and in case of \nany questions, you can ask on the R-package-devel mailing list (or this \none).\n\nIf you are using R-devel, at the time of this writing, the Rtools \nversion to use is Rtools43, the download page is\nhttps://cran.r-project.org/bin/windows/Rtools/rtools43/rtools.html\nand the linked documentation page is\nhttps://cran.r-project.org/bin/windows/base/howto-R-devel.html\n(below referred to as howto document)\n\nIf you are using R 4.2.x, you should use Rtools42 and the documentation \nlink is\nhttps://cran.r-project.org/bin/windows/base/howto-R-4.2.html\n\n From your message I assume you are using R-devel. It is important to \nuse the right version of Rtools for the version of R and read the right \ndocumentation, but the pcre2.h issue you are running into is probably \nnot specific to the version. Rtools43 consists of these parts:\n\n1. msys2\n2. toolchain+libraries built using MXE\n3. some extra tools\n\nYou can use Msys2 package manager for (1) from the above, so only for \nbuild tools. Normally you don't need to install any Msys2 packages to \nbuild R packages or R itself, all necessary Msys2 packages are already \npre-installed. But you can use it to update the (1) part (see the howto \ndocument). There may be pcre2 installed here, but it is _not_ the pcre2 \nlibrary that might/could be used when build R and R packages. This is \nonly for tools such as \"make\" or \"tar\" which you run from the command \nline. Even though Msys2 also offers some compiler toolchains and headers \nand libraries, they are not static and they are not used with R and R \npackages. I would recommend against installing any toolchain/libraries \nfor any of the Msys2 subsystems inside Rtools - it is too easy to \naccidentally mix those with (2).\n\n(2) contains the compiler toolchain, headers and libraries and this is \nwhat you can see under x86_x64-w64-mingw32.static.posix. So, you would \nfind pcre2.h there, as well as the library, and it will be found by the \ncompilers stored also there, if you follow the howto document. You can \nfind the header files simply using \"find\" etc, but not using pacman, \nbecause pacman is part of (1).\n\n(3) you can ignore for this problem, but there are some tools outside \nx86_x64-w64-mingw32.static.posix which are not from Msys2, documented \nalso in the howto document\n\n From what you are writing, I am not sure why pcre2.h is not found. \nPlease make sure you have not installed any Msys2 compiler or libraries \ninside Rtools43 - the right ones for R are already there (e.g., if you \ninstalled gcc from Msys2 and ran that one, it would not find pcre2.h, \nand you could easily check using \"which gcc\").\n\nPlease follow the howto document exactly and if you run into the problem \nagain, please describe exactly the steps you have taken to install \nRtools43 and then inside Rtools43. Please make sure you have not set any \nPATH or other important environment variables in Windows other than \ndescribed in the howto document (old settings could e.g. lead to running \nthe wrong compiler, which would not find the header file).\n\nBest\nTomas\n\n>\n> With thanks and regards\n> Debartha Paul\n> Masters Student (1st Year)\n>\n> Department of Statistics\n> Presidency University\n> Kolkata\n>\n> \t[[alternative HTML version deleted]]\n>\n> _______________________________________________\n> R-SIG-windows mailing list\n> R-SIG-windows at r-project.org\n> https://stat.ethz.ch/mailman/listinfo/r-sig-windows",
+      "body_snippet": "On 4/15/23 19:00, Debartha Paul wrote:\n> Hi. I am Debartha Paul, a Master's student in Statistics at Presidency\n> University, Kolkata, India. I was trying to build R from scratch using\n> RTools as des",
+      "thread_id": "thread-09d79ebd6f88",
+      "thread_depth": 1,
+      "month": "2023-04"
+    },
+    {
+      "id": "msg-c6d707ed8a0a",
+      "message_id": "<CAGO=1NuPKrPP8j=-zocTJ82Dm-JYKAkR1w6WW3EcsEAb20HaJQ@mail.gmail.com>",
+      "from_name": "Fredrik Skoog",
+      "from_email_hash": "f6e4f2515ef78b0c73d582e90dc7a6130cd4ceb5bd365d3686af2f89317aa6ce",
+      "date": "2023-04-18T14:16:58+02:00",
+      "subject": "[R-SIG-Win] R4.2.3 slower than R4.1.3 on Windows only",
+      "subject_clean": "R4.2.3 slower than R4.1.3 on Windows only",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi,\n\nIf you run:\n\nlibrary(microbenchmark)\nm <- matrix(rnorm(28000000), nrow=7000, byrow=TRUE)\nrownames(m) <- rownames(m, do.NULL = FALSE, prefix = \"this is a row name\")\ncolnames(m) <- colnames(m, do.NULL = FALSE, prefix = \"this is a column\nname\")\nmicrobenchmark(df <- as.data.frame(m, keep.rownames=TRUE), times=10)\n\nThe results shows worse performance in R4.2.3 (also bigger variations)\ncompared to v4.1.3. Also v4.2.0 shows worse performance, so it looks like\nit's 4.2.0 and later that has this issue. On Linux it's all good, so it\nseems to be a Windows only issue.\n\nVersion 4.2.3\n==============\n\nRun 1\n------\nUnit: seconds\n                                         expr      min       lq     mean\n median       uq      max neval\n df <- as.data.frame(m, keep.rownames = TRUE) 1.324839 2.411304 2.760553\n2.593452 3.290228 4.263175    10\n\nRun 2\n------\nUnit: milliseconds\n                                         expr      min     lq     mean\n median       uq     max neval\n dt <- as.data.frame(m, keep.rownames = TRUE) 967.5651 1054.8 1155.453\n1149.767 1194.742 1451.14    10\n\n\nVersion 4.1.3\n===============\n\nRun 1:\n------\n\nUnit: milliseconds\n                                         expr      min       lq     mean\n median       uq      max neval\n df <- as.data.frame(m, keep.rownames = TRUE) 274.5478 298.2477 320.3988\n320.9164 342.8119 375.6841    10\n\nRun 2:\n-------\nUnit: milliseconds\n                                         expr      min       lq     mean\n median       uq      max neval\n df <- as.data.frame(m, keep.rownames = TRUE) 278.5369 310.0312 313.0745\n313.3275 320.0294 343.7539    10\n\nI have tried it on two different machines, with the same result.\n\n-----\n\nThe above example is just trying to do something simple that exposes the\nissue, but as.data.table behaves similarly. Also it shows huge variations\nin time. We had a script that ran in 12 minutes in v3.6.3 and it took 18\nmin with v4.2.3, with v4.1.3 it takes around 9 minutes.\n\nHas anyone else noticed this? I noticed in the release notes that Doug Leas\nmalloc was replaced in v4.2.0 and that's a windows only change.\n\nBest regards,\n\nFredrik\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hi,\n\nIf you run:\n\nlibrary(microbenchmark)\nm <- matrix(rnorm(28000000), nrow=7000, byrow=TRUE)\nrownames(m) <- rownames(m, do.NULL = FALSE, prefix = \"this is a row name\")\ncolnames(m) <- colnames(m, do.N",
+      "thread_id": "thread-c6d707ed8a0a",
+      "thread_depth": 0,
+      "month": "2023-04"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-09d79ebd6f88",
+      "subject": "pcre2.h not found error while building R in windows",
+      "message_count": 2,
+      "participants": [
+        "Debartha Paul",
+        "Tomas Kalibera"
+      ],
+      "started": "2023-04-15T22:30:50+05:30",
+      "last_reply": "2023-04-17T09:51:52+02:00",
+      "root_message_id": "msg-09d79ebd6f88"
+    },
+    {
+      "id": "thread-c6d707ed8a0a",
+      "subject": "R4.2.3 slower than R4.1.3 on Windows only",
+      "message_count": 1,
+      "participants": [
+        "Fredrik Skoog"
+      ],
+      "started": "2023-04-18T14:16:58+02:00",
+      "last_reply": "2023-04-18T14:16:58+02:00",
+      "root_message_id": "msg-c6d707ed8a0a"
+    }
+  ]
+}

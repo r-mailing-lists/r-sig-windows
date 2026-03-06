@@ -1,0 +1,63 @@
+{
+  "list": "r-sig-windows",
+  "description": "",
+  "month": "2025-02",
+  "messages": [
+    {
+      "id": "msg-094c09227bc9",
+      "message_id": "<7f7dceec-2e8b-4044-98b2-d70976344527@gmail.com>",
+      "from_name": "Tomas Kalibera",
+      "from_email_hash": "7af110c9340339e5307bd348f1ec524e2fd1c8f104d583e9993022c5550711f4",
+      "date": "2025-02-05T14:12:17+01:00",
+      "subject": "[R-SIG-Win] Rtools44 update",
+      "subject_clean": "Rtools44 update",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear R Windows developers,\n\nan update of Rtools44, the toolchain for R for Windows used by R-devel \nand R 4.4, is available as revision 6414 from\n\nhttps://cran.r-project.org/bin/windows/Rtools/rtools44/rtools.html\n\nA number of libraries have been updated to newer versions. Package flint \nhas been added. Ffmpeg build now supports libmp3lame.\n\nSee\n\nhttps://cran.r-project.org/bin/windows/Rtools/rtools44/news.html\n\nfor more details.\n\nBest\nTomas",
+      "body_snippet": "Dear R Windows developers,\n\nan update of Rtools44, the toolchain for R for Windows used by R-devel \nand R 4.4, is available as revision 6414 from\n\nhttps://cran.r-project.org/bin/windows/Rtools/rtools4",
+      "thread_id": "thread-094c09227bc9",
+      "thread_depth": 0,
+      "month": "2025-02"
+    },
+    {
+      "id": "msg-5b0397bad228",
+      "message_id": "<ad43df1b-7286-4d95-a25c-13ef0c943167@gmail.com>",
+      "from_name": "Tomas Kalibera",
+      "from_email_hash": "7af110c9340339e5307bd348f1ec524e2fd1c8f104d583e9993022c5550711f4",
+      "date": "2025-02-25T10:04:42+01:00",
+      "subject": "[R-SIG-Win] Rtools44 and Rtools43 update",
+      "subject_clean": "Rtools44 and Rtools43 update",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear R Windows developers,\n\nRtools44 and Rtools43 have been updated to fix a security vulnerability \nCVE-2025-1094 in PostgreSQL.\n\nSee the corresponding news files for more information:\n\nhttps://cran.r-project.org/bin/windows/Rtools/rtools43/rtools.html (5976)\nhttps://cran.r-project.org/bin/windows/Rtools/rtools44/rtools.html (6459)\n\nBest\nTomas",
+      "body_snippet": "Dear R Windows developers,\n\nRtools44 and Rtools43 have been updated to fix a security vulnerability \nCVE-2025-1094 in PostgreSQL.\n\nSee the corresponding news files for more information:\n\nhttps://cran.",
+      "thread_id": "thread-5b0397bad228",
+      "thread_depth": 0,
+      "month": "2025-02"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-094c09227bc9",
+      "subject": "Rtools44 update",
+      "message_count": 1,
+      "participants": [
+        "Tomas Kalibera"
+      ],
+      "started": "2025-02-05T14:12:17+01:00",
+      "last_reply": "2025-02-05T14:12:17+01:00",
+      "root_message_id": "msg-094c09227bc9"
+    },
+    {
+      "id": "thread-5b0397bad228",
+      "subject": "Rtools44 and Rtools43 update",
+      "message_count": 1,
+      "participants": [
+        "Tomas Kalibera"
+      ],
+      "started": "2025-02-25T10:04:42+01:00",
+      "last_reply": "2025-02-25T10:04:42+01:00",
+      "root_message_id": "msg-5b0397bad228"
+    }
+  ]
+}

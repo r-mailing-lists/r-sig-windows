@@ -1,0 +1,83 @@
+From tom@@@k@||ber@ @end|ng |rom gm@||@com  Wed Jan  4 13:24:36 2023
+From: tom@@@k@||ber@ @end|ng |rom gm@||@com (Tomas Kalibera)
+Date: Wed, 4 Jan 2023 13:24:36 +0100
+Subject: [R-SIG-Win] Rtools43
+Message-ID: <b3ca6a1d-780a-88f1-330f-b8b5b45427bc@gmail.com>
+
+Dear R Windows developers,
+
+there is now a new toolchain for R for Windows, Rtools43. It is now used 
+by R-devel and is intended, following likely at least one minor update, 
+for R 4.3.0.
+
+Compared to Rtools42, it uses GCC 12 and updates other core components. 
+See https://cran.r-project.org/bin/windows/Rtools/rtools43/news.html for 
+a detailed list of changes.
+
+All users of R-devel who need to compile R packages with source code in 
+C, C++ or Fortran should install Rtools43. From the user perspective, 
+Rtools43 works the same way as Rtools42. See 
+https://cran.r-project.org/bin/windows/base/howto-R-devel.html for 
+instructions on how to build R-devel and packages for this version of R.
+
+It is recommended to re-install packages that need compilation to avoid 
+potential incompatibilities with code built using Rtools42.
+
+Best
+Tomas
+
+
+From tom@@@k@||ber@ @end|ng |rom gm@||@com  Fri Jan 13 10:13:44 2023
+From: tom@@@k@||ber@ @end|ng |rom gm@||@com (Tomas Kalibera)
+Date: Fri, 13 Jan 2023 10:13:44 +0100
+Subject: [R-SIG-Win] Rtools43 (gdal update)
+Message-ID: <93f19116-ccf4-d615-0810-b7157126ff58@gmail.com>
+
+Dear R Windows developers,
+
+a minor update of Rtools43, the toolchain for R for Windows used by 
+R-devel, is now available as revision 5493 from
+
+https://cran.r-project.org/bin/windows/Rtools/rtools43/rtools.html
+
+The update is important for R-devel users who are building geospatial 
+packages from source, because it updates gdal from 3.6.0 to 3.6.2. 
+Version 3.6.0 of gdal has been officially retracted, it may cause data 
+corruption.
+
+See https://cran.r-project.org/bin/windows/Rtools/rtools43/news.html for 
+a detailed list of changes.
+
+Best
+Tomas
+
+
+From tom@@@k@||ber@ @end|ng |rom gm@||@com  Fri Mar 24 09:52:55 2023
+From: tom@@@k@||ber@ @end|ng |rom gm@||@com (Tomas Kalibera)
+Date: Fri, 24 Mar 2023 09:52:55 +0100
+Subject: [R-SIG-Win] Rtools43 update
+Message-ID: <469a1f05-2233-c125-cf31-a90b0d24254d@gmail.com>
+
+Dear R Windows developers,
+
+an update of Rtools43, the toolchain for R for Windows used by R-devel, 
+is now available as revision 5550 from
+
+https://cran.r-project.org/bin/windows/Rtools/rtools43/rtools.html
+
+In addition to updates to the included libraries, the installer now uses 
+a three-element version (4.3.5550) instead of previously used only two 
+elements (4.3). This makes it easier to see which version is installed 
+in "Add/Remove Programs" and it may also impact third party tools for 
+installing software on Windows.
+
+Updates of curl and webp require changes in the list of libraries for 
+linking.
+
+See https://cran.r-project.org/bin/windows/Rtools/rtools43/news.html for 
+more details.
+
+Best
+Tomas
+
+

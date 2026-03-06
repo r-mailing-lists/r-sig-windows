@@ -1,0 +1,132 @@
+{
+  "list": "r-sig-windows",
+  "description": "",
+  "month": "2016-10",
+  "messages": [
+    {
+      "id": "msg-837e1999eab0",
+      "message_id": "<CABtg=K=ZY=QfpLMgt9uwq4iFWbXgddBJTYfcV+wQPG70W3BCWg@mail.gmail.com>",
+      "from_name": "Gábor Csárdi",
+      "from_email_hash": "be1b1aa2bf940edb4d90301c038c97e98b84ed5c8724f0d46a3b2ee263683539",
+      "date": "2016-10-02T01:06:29+01:00",
+      "subject": "[R-SIG-Win] Install multiple versions of Rtools",
+      "subject_clean": "Install multiple versions of Rtools",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi All,\n\nI would like to have both rtools 3.3 and 3.4 on the same machine, one\nin c:\\rtools33, the other in c:\\rtools34.\n\nI managed to do it via modifying the RHOME/etc/ARCH/Makeconf files. Is\nthere a better way, by simply setting environment variables?\n\nThanks much!\nGabor",
+      "body_snippet": "Hi All,\n\nI would like to have both rtools 3.3 and 3.4 on the same machine, one\nin c:\\rtools33, the other in c:\\rtools34.\n\nI managed to do it via modifying the RHOME/etc/ARCH/Makeconf files. Is\nthere a",
+      "thread_id": "thread-837e1999eab0",
+      "thread_depth": 0,
+      "month": "2016-10"
+    },
+    {
+      "id": "msg-829bef51d684",
+      "message_id": "<67a12bb9-a51f-6196-efd0-802b90473c62@gmail.com>",
+      "from_name": "Duncan Murdoch",
+      "from_email_hash": "17e1fcd7901e6a11dc6bc3ede542d46252611499631dfb4199936939fda2e399",
+      "date": "2016-10-01T20:22:06-04:00",
+      "subject": "[R-SIG-Win] Install multiple versions of Rtools",
+      "subject_clean": "Install multiple versions of Rtools",
+      "in_reply_to": "<CABtg=K=ZY=QfpLMgt9uwq4iFWbXgddBJTYfcV+wQPG70W3BCWg@mail.gmail.com>",
+      "references": [
+        "<CABtg=K=ZY=QfpLMgt9uwq4iFWbXgddBJTYfcV+wQPG70W3BCWg@mail.gmail.com>"
+      ],
+      "body_plain": "On 01/10/2016 8:06 PM, G?bor Cs?rdi wrote:\n> Hi All,\n>\n> I would like to have both rtools 3.3 and 3.4 on the same machine, one\n> in c:\\rtools33, the other in c:\\rtools34.\n>\n> I managed to do it via modifying the RHOME/etc/ARCH/Makeconf files. Is\n> there a better way, by simply setting environment variables?\n>\n\nPresumably you could modify the PATH to switch between them.  I don't \nthink we put in anything more specific.\n\nDuncan Murdoch",
+      "body_snippet": "On 01/10/2016 8:06 PM, G?bor Cs?rdi wrote:\n> Hi All,\n>\n> I would like to have both rtools 3.3 and 3.4 on the same machine, one\n> in c:\\rtools33, the other in c:\\rtools34.\n>\n> I managed to do it via mo",
+      "thread_id": "thread-837e1999eab0",
+      "thread_depth": 1,
+      "month": "2016-10"
+    },
+    {
+      "id": "msg-8bc06d582354",
+      "message_id": "<CAKw=oCzmviyVjVyEu34NZZd4kPGDPR-Y0RqypGVbiGKuRVs9RQ@mail.gmail.com>",
+      "from_name": "JJ Allaire",
+      "from_email_hash": "a9c305e04711922728c52959da2daecf82e361748cb52e6ee571e18c898a3343",
+      "date": "2016-10-01T20:29:32-04:00",
+      "subject": "[R-SIG-Win] Install multiple versions of Rtools",
+      "subject_clean": "Install multiple versions of Rtools",
+      "in_reply_to": "<CABtg=K=ZY=QfpLMgt9uwq4iFWbXgddBJTYfcV+wQPG70W3BCWg@mail.gmail.com>",
+      "references": [
+        "<CABtg=K=ZY=QfpLMgt9uwq4iFWbXgddBJTYfcV+wQPG70W3BCWg@mail.gmail.com>"
+      ],
+      "body_plain": "You can do the following:\n\n1) Add the Rtools bin directory (e.g. C:\\Rtools33\\bin) to the PATH (so it\ncan find make, etc.)\n\n2) Define  BINPREF environment variables as seen here:\nhttps://github.com/RcppCore/Rcpp/blob/master/R/Attributes.R#L766-L767\n\nNote that creating a valid path to the root Rtools directory is a bit\nfinicky so we have this helper function:\nhttps://github.com/RcppCore/Rcpp/blob/master/R/Attributes.R#L780-L790.\nHere's a C++ version of the same function that we use in RStudio:\nhttps://github.com/rstudio/rstudio/blob/db703b6aff4f4136532e99bb1f2c081fe77f5601/src/cpp/core/r_util/RToolsInfo.cpp#L39-L46\n\n\n\n\nOn Sat, Oct 1, 2016 at 8:06 PM, G?bor Cs?rdi <csardi.gabor at gmail.com> wrote:\n\n> Hi All,\n>\n> I would like to have both rtools 3.3 and 3.4 on the same machine, one\n> in c:\\rtools33, the other in c:\\rtools34.\n>\n> I managed to do it via modifying the RHOME/etc/ARCH/Makeconf files. Is\n> there a better way, by simply setting environment variables?\n>\n> Thanks much!\n> Gabor\n>\n> _______________________________________________\n> R-SIG-windows mailing list\n> R-SIG-windows at r-project.org\n> https://stat.ethz.ch/mailman/listinfo/r-sig-windows\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "You can do the following:\n\n1) Add the Rtools bin directory (e.g. C:\\Rtools33\\bin) to the PATH (so it\ncan find make, etc.)\n\n2) Define  BINPREF environment variables as seen here:\nhttps://github.com/Rcp",
+      "thread_id": "thread-837e1999eab0",
+      "thread_depth": 1,
+      "month": "2016-10"
+    },
+    {
+      "id": "msg-33018f0cd5ba",
+      "message_id": "<CABtg=Kn8M6E79u1fEVjEFeLpTuy1aLrPfMz-oXWyjbUPpkFAyA@mail.gmail.com>",
+      "from_name": "Gábor Csárdi",
+      "from_email_hash": "be1b1aa2bf940edb4d90301c038c97e98b84ed5c8724f0d46a3b2ee263683539",
+      "date": "2016-10-02T07:06:56+01:00",
+      "subject": "[R-SIG-Win] Install multiple versions of Rtools",
+      "subject_clean": "Install multiple versions of Rtools",
+      "in_reply_to": "<CAKw=oCzmviyVjVyEu34NZZd4kPGDPR-Y0RqypGVbiGKuRVs9RQ@mail.gmail.com>",
+      "references": [
+        "<CABtg=K=ZY=QfpLMgt9uwq4iFWbXgddBJTYfcV+wQPG70W3BCWg@mail.gmail.com>",
+        "<CAKw=oCzmviyVjVyEu34NZZd4kPGDPR-Y0RqypGVbiGKuRVs9RQ@mail.gmail.com>"
+      ],
+      "body_plain": "THanks!\n\nIs it possible to make it work for both architectures? So that some R\nutils like `R CMD check` automatically find both, in the same run,\nlike on the CRAN windows machines? There is a BINPREF64 env var as\nwell, but seemingly that is not picked up, and BINPREF is used for\nboth 32bit and 64bit.\n\nI only way I could make it work was editing the Makeconf files, or at\nleast the one for 64bit, and set BINPREF there.\n\nGabor\n\n\n\nOn Sun, Oct 2, 2016 at 1:29 AM, JJ Allaire <jj.allaire at gmail.com> wrote:\n> You can do the following:\n>\n> 1) Add the Rtools bin directory (e.g. C:\\Rtools33\\bin) to the PATH (so it\n> can find make, etc.)\n>\n> 2) Define  BINPREF environment variables as seen here:\n> https://github.com/RcppCore/Rcpp/blob/master/R/Attributes.R#L766-L767\n>\n> Note that creating a valid path to the root Rtools directory is a bit\n> finicky so we have this helper function:\n> https://github.com/RcppCore/Rcpp/blob/master/R/Attributes.R#L780-L790.\n> Here's a C++ version of the same function that we use in RStudio:\n> https://github.com/rstudio/rstudio/blob/db703b6aff4f4136532e99bb1f2c081fe77f5601/src/cpp/core/r_util/RToolsInfo.cpp#L39-L46\n>\n>\n>\n>\n> On Sat, Oct 1, 2016 at 8:06 PM, G?bor Cs?rdi <csardi.gabor at gmail.com> wrote:\n>>\n>> Hi All,\n>>\n>> I would like to have both rtools 3.3 and 3.4 on the same machine, one\n>> in c:\\rtools33, the other in c:\\rtools34.\n>>\n>> I managed to do it via modifying the RHOME/etc/ARCH/Makeconf files. Is\n>> there a better way, by simply setting environment variables?\n>>\n>> Thanks much!\n>> Gabor\n>>\n>> _______________________________________________\n>> R-SIG-windows mailing list\n>> R-SIG-windows at r-project.org\n>> https://stat.ethz.ch/mailman/listinfo/r-sig-windows\n>\n>",
+      "body_snippet": "THanks!\n\nIs it possible to make it work for both architectures? So that some R\nutils like `R CMD check` automatically find both, in the same run,\nlike on the CRAN windows machines? There is a BINPREF6",
+      "thread_id": "thread-837e1999eab0",
+      "thread_depth": 2,
+      "month": "2016-10"
+    },
+    {
+      "id": "msg-cc1eeabe04ec",
+      "message_id": "<CAKw=oCzcPVnaTWbQ9=dd5h1E10w1BLYUwXywT6u1ViRFieLaQA@mail.gmail.com>",
+      "from_name": "JJ Allaire",
+      "from_email_hash": "a9c305e04711922728c52959da2daecf82e361748cb52e6ee571e18c898a3343",
+      "date": "2016-10-02T06:54:20-04:00",
+      "subject": "[R-SIG-Win] Install multiple versions of Rtools",
+      "subject_clean": "Install multiple versions of Rtools",
+      "in_reply_to": "<CAKw=oCzmviyVjVyEu34NZZd4kPGDPR-Y0RqypGVbiGKuRVs9RQ@mail.gmail.com>",
+      "references": [
+        "<CABtg=K=ZY=QfpLMgt9uwq4iFWbXgddBJTYfcV+wQPG70W3BCWg@mail.gmail.com>",
+        "<CAKw=oCzmviyVjVyEu34NZZd4kPGDPR-Y0RqypGVbiGKuRVs9RQ@mail.gmail.com>"
+      ],
+      "body_plain": "The $(WIN) within the BINPREF is automatically expanded to the correct\narchitecture. This is definitely possible as we have it working currently\nin Rcpp, devtools, and RStudio.\n\n\nOn Sat, Oct 1, 2016 at 8:29 PM, JJ Allaire <jj.allaire at gmail.com> wrote:\n\n> You can do the following:\n>\n> 1) Add the Rtools bin directory (e.g. C:\\Rtools33\\bin) to the PATH (so it\n> can find make, etc.)\n>\n> 2) Define  BINPREF environment variables as seen here: https://github.com/\n> RcppCore/Rcpp/blob/master/R/Attributes.R#L766-L767\n>\n> Note that creating a valid path to the root Rtools directory is a bit\n> finicky so we have this helper function: https://github.com/\n> RcppCore/Rcpp/blob/master/R/Attributes.R#L780-L790. Here's a C++ version\n> of the same function that we use in RStudio: https://github.com/\n> rstudio/rstudio/blob/db703b6aff4f4136532e99bb1f2c08\n> 1fe77f5601/src/cpp/core/r_util/RToolsInfo.cpp#L39-L46\n>\n>\n>\n>\n> On Sat, Oct 1, 2016 at 8:06 PM, G?bor Cs?rdi <csardi.gabor at gmail.com>\n> wrote:\n>\n>> Hi All,\n>>\n>> I would like to have both rtools 3.3 and 3.4 on the same machine, one\n>> in c:\\rtools33, the other in c:\\rtools34.\n>>\n>> I managed to do it via modifying the RHOME/etc/ARCH/Makeconf files. Is\n>> there a better way, by simply setting environment variables?\n>>\n>> Thanks much!\n>> Gabor\n>>\n>> _______________________________________________\n>> R-SIG-windows mailing list\n>> R-SIG-windows at r-project.org\n>> https://stat.ethz.ch/mailman/listinfo/r-sig-windows\n>>\n>\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "The $(WIN) within the BINPREF is automatically expanded to the correct\narchitecture. This is definitely possible as we have it working currently\nin Rcpp, devtools, and RStudio.\n\n\nOn Sat, Oct 1, 2016 a",
+      "thread_id": "thread-837e1999eab0",
+      "thread_depth": 2,
+      "month": "2016-10"
+    },
+    {
+      "id": "msg-0e06026be3fc",
+      "message_id": "<CABtg=KmAm3UdJwKeQVtno9wgV4_dhmWb8Gvi4qWGTstBrLqwsw@mail.gmail.com>",
+      "from_name": "Gábor Csárdi",
+      "from_email_hash": "be1b1aa2bf940edb4d90301c038c97e98b84ed5c8724f0d46a3b2ee263683539",
+      "date": "2016-10-02T12:19:25+01:00",
+      "subject": "[R-SIG-Win] Install multiple versions of Rtools",
+      "subject_clean": "Install multiple versions of Rtools",
+      "in_reply_to": "<CAKw=oCzcPVnaTWbQ9=dd5h1E10w1BLYUwXywT6u1ViRFieLaQA@mail.gmail.com>",
+      "references": [
+        "<CABtg=K=ZY=QfpLMgt9uwq4iFWbXgddBJTYfcV+wQPG70W3BCWg@mail.gmail.com>",
+        "<CAKw=oCzmviyVjVyEu34NZZd4kPGDPR-Y0RqypGVbiGKuRVs9RQ@mail.gmail.com>",
+        "<CAKw=oCzcPVnaTWbQ9=dd5h1E10w1BLYUwXywT6u1ViRFieLaQA@mail.gmail.com>"
+      ],
+      "body_plain": "Got it, thanks much! I missed the important detail that $win expands only\nlater. Perfect.\n\nGabor\n\nOn 2 Oct 2016 11:54 am, \"JJ Allaire\" <jj.allaire at gmail.com> wrote:\n\n> The $(WIN) within the BINPREF is automatically expanded to the correct\n> architecture. This is definitely possible as we have it working currently\n> in Rcpp, devtools, and RStudio.\n>\n>\n> On Sat, Oct 1, 2016 at 8:29 PM, JJ Allaire <jj.allaire at gmail.com> wrote:\n>\n>> You can do the following:\n>>\n>> 1) Add the Rtools bin directory (e.g. C:\\Rtools33\\bin) to the PATH (so it\n>> can find make, etc.)\n>>\n>> 2) Define  BINPREF environment variables as seen here:\n>> https://github.com/RcppCore/Rcpp/blob/master/R/Attributes.R#L766-L767\n>>\n>> Note that creating a valid path to the root Rtools directory is a bit\n>> finicky so we have this helper function: https://github.com/R\n>> cppCore/Rcpp/blob/master/R/Attributes.R#L780-L790. Here's a C++ version\n>> of the same function that we use in RStudio: https://github.com/rs\n>> tudio/rstudio/blob/db703b6aff4f4136532e99bb1f2c081fe77f5601/\n>> src/cpp/core/r_util/RToolsInfo.cpp#L39-L46\n>>\n>>\n>>\n>>\n>> On Sat, Oct 1, 2016 at 8:06 PM, G?bor Cs?rdi <csardi.gabor at gmail.com>\n>> wrote:\n>>\n>>> Hi All,\n>>>\n>>> I would like to have both rtools 3.3 and 3.4 on the same machine, one\n>>> in c:\\rtools33, the other in c:\\rtools34.\n>>>\n>>> I managed to do it via modifying the RHOME/etc/ARCH/Makeconf files. Is\n>>> there a better way, by simply setting environment variables?\n>>>\n>>> Thanks much!\n>>> Gabor\n>>>\n>>> _______________________________________________\n>>> R-SIG-windows mailing list\n>>> R-SIG-windows at r-project.org\n>>> https://stat.ethz.ch/mailman/listinfo/r-sig-windows\n>>>\n>>\n>>\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Got it, thanks much! I missed the important detail that $win expands only\nlater. Perfect.\n\nGabor\n\nOn 2 Oct 2016 11:54 am, \"JJ Allaire\" <jj.allaire at gmail.com> wrote:\n\n> The $(WIN) within the BINPREF",
+      "thread_id": "thread-837e1999eab0",
+      "thread_depth": 3,
+      "month": "2016-10"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-837e1999eab0",
+      "subject": "Install multiple versions of Rtools",
+      "message_count": 6,
+      "participants": [
+        "Duncan Murdoch",
+        "Gábor Csárdi",
+        "JJ Allaire"
+      ],
+      "started": "2016-10-02T01:06:29+01:00",
+      "last_reply": "2016-10-02T12:19:25+01:00",
+      "root_message_id": "msg-837e1999eab0"
+    }
+  ]
+}

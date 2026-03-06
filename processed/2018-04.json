@@ -1,0 +1,332 @@
+{
+  "list": "r-sig-windows",
+  "description": "",
+  "month": "2018-04",
+  "messages": [
+    {
+      "id": "msg-0353352762ab",
+      "message_id": "<CAL6gwnJeN78R4y8XD-aS6-Ss+yD2FKvsy4t0tMFroV7bAjmVTA@mail.gmail.com>",
+      "from_name": "Avraham Adler",
+      "from_email_hash": "af3a8abf7b61e7882d265f3ee607ab6f21a248be198b31d73d45602a933f5ba0",
+      "date": "2018-04-12T00:31:11-04:00",
+      "subject": "[R-SIG-Win] Rtools 3.5",
+      "subject_clean": "Rtools 3.5",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi, Jeroen.\n\nMaybe I wasn't paying attention, but is there anywhere which explains\nwhat was changed from Rtools 3.4 to 3.5?\n\nThanks,\n\nAvi",
+      "body_snippet": "Hi, Jeroen.\n\nMaybe I wasn't paying attention, but is there anywhere which explains\nwhat was changed from Rtools 3.4 to 3.5?\n\nThanks,\n\nAvi",
+      "thread_id": "thread-0353352762ab",
+      "thread_depth": 0,
+      "month": "2018-04"
+    },
+    {
+      "id": "msg-6231460ef411",
+      "message_id": "<CABFfbXu7uXFzEs8vRw4cjnkrU5y_jLg4yONXPrbaR+9UJN_0NA@mail.gmail.com>",
+      "from_name": "Jeroen Ooms",
+      "from_email_hash": "a265ef4bb03c14ee9d6f00489213486310c7d7bc8d3d2467e6937626fef998e1",
+      "date": "2018-04-12T09:50:39+02:00",
+      "subject": "[R-SIG-Win] Rtools 3.5",
+      "subject_clean": "Rtools 3.5",
+      "in_reply_to": "<CAL6gwnJeN78R4y8XD-aS6-Ss+yD2FKvsy4t0tMFroV7bAjmVTA@mail.gmail.com>",
+      "references": [
+        "<CAL6gwnJeN78R4y8XD-aS6-Ss+yD2FKvsy4t0tMFroV7bAjmVTA@mail.gmail.com>"
+      ],
+      "body_plain": "On Thu, Apr 12, 2018 at 6:31 AM, Avraham Adler <avraham.adler at gmail.com> wrote:\n>\n> Maybe I wasn't paying attention, but is there anywhere which explains\n> what was changed from Rtools 3.4 to 3.5?\n\nThe toolchain is unchanged, but I updated the build utilities (make,\nsh, tar, etc) and refactored the installer. The scripts are now\navailable at: https://github.com/rwinlib/rtools35\n\nFYI we are planning a big toolchain update based on gcc 8 for this summer.",
+      "body_snippet": "On Thu, Apr 12, 2018 at 6:31 AM, Avraham Adler <avraham.adler at gmail.com> wrote:\n>\n> Maybe I wasn't paying attention, but is there anywhere which explains\n> what was changed from Rtools 3.4 to 3.5?\n",
+      "thread_id": "thread-0353352762ab",
+      "thread_depth": 1,
+      "month": "2018-04"
+    },
+    {
+      "id": "msg-3ea68a587be4",
+      "message_id": "<CAL6gwn+CwQj0r2iXuZWL1iSfaiuY=4XFJQ8yvJ0ExH-KLhEB1g@mail.gmail.com>",
+      "from_name": "Avraham Adler",
+      "from_email_hash": "af3a8abf7b61e7882d265f3ee607ab6f21a248be198b31d73d45602a933f5ba0",
+      "date": "2018-04-13T17:45:25-04:00",
+      "subject": "[R-SIG-Win] Rtools 3.5",
+      "subject_clean": "Rtools 3.5",
+      "in_reply_to": "<CABFfbXu7uXFzEs8vRw4cjnkrU5y_jLg4yONXPrbaR+9UJN_0NA@mail.gmail.com>",
+      "references": [
+        "<CAL6gwnJeN78R4y8XD-aS6-Ss+yD2FKvsy4t0tMFroV7bAjmVTA@mail.gmail.com>",
+        "<CABFfbXu7uXFzEs8vRw4cjnkrU5y_jLg4yONXPrbaR+9UJN_0NA@mail.gmail.com>"
+      ],
+      "body_plain": "On Thu, Apr 12, 2018 at 3:50 AM, Jeroen Ooms <jeroenooms at gmail.com> wrote:\n[snip]\n> FYI we are planning a big toolchain update based on gcc 8 for this summer.\n\nThat is great news. Looking forward to helping out if I can!\n\nThanks,\n\nAvi",
+      "body_snippet": "On Thu, Apr 12, 2018 at 3:50 AM, Jeroen Ooms <jeroenooms at gmail.com> wrote:\n[snip]\n> FYI we are planning a big toolchain update based on gcc 8 for this summer.\n\nThat is great news. Looking forward t",
+      "thread_id": "thread-0353352762ab",
+      "thread_depth": 2,
+      "month": "2018-04"
+    },
+    {
+      "id": "msg-15c06e63c154",
+      "message_id": "<47a306bb-8856-390a-2c20-2793d259f5cc@statistik.tu-dortmund.de>",
+      "from_name": "Uwe Ligges",
+      "from_email_hash": "41041d76fae21a8bc18fe19d38def92b3b630abfb7abf4acf41a0734d8851d24",
+      "date": "2018-04-22T15:22:45+02:00",
+      "subject": "[R-SIG-Win] Rtools 3.5",
+      "subject_clean": "Rtools 3.5",
+      "in_reply_to": "<CABFfbXu7uXFzEs8vRw4cjnkrU5y_jLg4yONXPrbaR+9UJN_0NA@mail.gmail.com>",
+      "references": [
+        "<CAL6gwnJeN78R4y8XD-aS6-Ss+yD2FKvsy4t0tMFroV7bAjmVTA@mail.gmail.com>",
+        "<CABFfbXu7uXFzEs8vRw4cjnkrU5y_jLg4yONXPrbaR+9UJN_0NA@mail.gmail.com>"
+      ],
+      "body_plain": "Jeroen,\n\ncan we perhaps also have these scripts on CRAN, perhaps as a subdir of \nRtools?\n\nBest,\nUwe\n\n\n\nOn 12.04.2018 09:50, Jeroen Ooms wrote:\n> On Thu, Apr 12, 2018 at 6:31 AM, Avraham Adler <avraham.adler at gmail.com> wrote:\n>>\n>> Maybe I wasn't paying attention, but is there anywhere which explains\n>> what was changed from Rtools 3.4 to 3.5?\n> \n> The toolchain is unchanged, but I updated the build utilities (make,\n> sh, tar, etc) and refactored the installer. The scripts are now\n> available at: https://github.com/rwinlib/rtools35\n> \n> FYI we are planning a big toolchain update based on gcc 8 for this summer.\n> \n> _______________________________________________\n> R-SIG-windows mailing list\n> R-SIG-windows at r-project.org\n> https://stat.ethz.ch/mailman/listinfo/r-sig-windows\n>",
+      "body_snippet": "Jeroen,\n\ncan we perhaps also have these scripts on CRAN, perhaps as a subdir of \nRtools?\n\nBest,\nUwe\n\n\n\nOn 12.04.2018 09:50, Jeroen Ooms wrote:\n> On Thu, Apr 12, 2018 at 6:31 AM, Avraham Adler <avraham",
+      "thread_id": "thread-0353352762ab",
+      "thread_depth": 2,
+      "month": "2018-04"
+    },
+    {
+      "id": "msg-70ed5daf39b3",
+      "message_id": "<CABFfbXsosoSKEwUBEXq0kJ=b6Q8G2Jnu-b1uyBciE8oM=JWmKA@mail.gmail.com>",
+      "from_name": "Jeroen Ooms",
+      "from_email_hash": "a265ef4bb03c14ee9d6f00489213486310c7d7bc8d3d2467e6937626fef998e1",
+      "date": "2018-04-24T21:07:08+02:00",
+      "subject": "[R-SIG-Win] Rtools 3.5",
+      "subject_clean": "Rtools 3.5",
+      "in_reply_to": "<47a306bb-8856-390a-2c20-2793d259f5cc@statistik.tu-dortmund.de>",
+      "references": [
+        "<CAL6gwnJeN78R4y8XD-aS6-Ss+yD2FKvsy4t0tMFroV7bAjmVTA@mail.gmail.com>",
+        "<CABFfbXu7uXFzEs8vRw4cjnkrU5y_jLg4yONXPrbaR+9UJN_0NA@mail.gmail.com>",
+        "<47a306bb-8856-390a-2c20-2793d259f5cc@statistik.tu-dortmund.de>"
+      ],
+      "body_plain": "On Sun, Apr 22, 2018 at 3:22 PM, Uwe Ligges\n<ligges at statistik.tu-dortmund.de> wrote:\n> Jeroen,\n>\n> can we perhaps also have these scripts on CRAN, perhaps as a subdir of\n> Rtools?\n\nSure I will put a copy of the innosetup build script on CRAN. Both the\n3.4 version that I got from Duncan and the cleaned up version that I\nused for rtools 3.5.",
+      "body_snippet": "On Sun, Apr 22, 2018 at 3:22 PM, Uwe Ligges\n<ligges at statistik.tu-dortmund.de> wrote:\n> Jeroen,\n>\n> can we perhaps also have these scripts on CRAN, perhaps as a subdir of\n> Rtools?\n\nSure I will put ",
+      "thread_id": "thread-0353352762ab",
+      "thread_depth": 3,
+      "month": "2018-04"
+    },
+    {
+      "id": "msg-64b4e8af422d",
+      "message_id": "<CAL6gwnLqnCrhKZvYoe6=vXWjjU+Pc_Phg96RmDmaEdaatXnhpA@mail.gmail.com>",
+      "from_name": "Avraham Adler",
+      "from_email_hash": "af3a8abf7b61e7882d265f3ee607ab6f21a248be198b31d73d45602a933f5ba0",
+      "date": "2018-04-24T19:17:37Z",
+      "subject": "[R-SIG-Win] Rtools 3.5",
+      "subject_clean": "Rtools 3.5",
+      "in_reply_to": "<CABFfbXsosoSKEwUBEXq0kJ=b6Q8G2Jnu-b1uyBciE8oM=JWmKA@mail.gmail.com>",
+      "references": [
+        "<CAL6gwnJeN78R4y8XD-aS6-Ss+yD2FKvsy4t0tMFroV7bAjmVTA@mail.gmail.com>",
+        "<CABFfbXu7uXFzEs8vRw4cjnkrU5y_jLg4yONXPrbaR+9UJN_0NA@mail.gmail.com>",
+        "<47a306bb-8856-390a-2c20-2793d259f5cc@statistik.tu-dortmund.de>",
+        "<CABFfbXsosoSKEwUBEXq0kJ=b6Q8G2Jnu-b1uyBciE8oM=JWmKA@mail.gmail.com>"
+      ],
+      "body_plain": "Should we add qpdf too? They?re up to 8.0.2 now.\n\nAlso, for the record, I just installed 3.5 with new tool chain and OpenBLAS\n0.2.20 and it passes make check-devel :)\n\nThanks,\n\nAvi\n\nOn Tue, Apr 24, 2018 at 3:07 PM Jeroen Ooms <jeroenooms at gmail.com> wrote:\n\n> On Sun, Apr 22, 2018 at 3:22 PM, Uwe Ligges\n> <ligges at statistik.tu-dortmund.de> wrote:\n> > Jeroen,\n> >\n> > can we perhaps also have these scripts on CRAN, perhaps as a subdir of\n> > Rtools?\n>\n> Sure I will put a copy of the innosetup build script on CRAN. Both the\n> 3.4 version that I got from Duncan and the cleaned up version that I\n> used for rtools 3.5.\n>\n-- \nSent from Gmail Mobile\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Should we add qpdf too? They?re up to 8.0.2 now.\n\nAlso, for the record, I just installed 3.5 with new tool chain and OpenBLAS\n0.2.20 and it passes make check-devel :)\n\nThanks,\n\nAvi\n\nOn Tue, Apr 24, 20",
+      "thread_id": "thread-0353352762ab",
+      "thread_depth": 4,
+      "month": "2018-04"
+    },
+    {
+      "id": "msg-7c3f1f4253b6",
+      "message_id": "<CABFfbXuCuLqKb9oDWhdMdws-cYg7=3RONy4nJy=8UKE7W1ntng@mail.gmail.com>",
+      "from_name": "Jeroen Ooms",
+      "from_email_hash": "a265ef4bb03c14ee9d6f00489213486310c7d7bc8d3d2467e6937626fef998e1",
+      "date": "2018-04-24T21:20:06+02:00",
+      "subject": "[R-SIG-Win] Rtools 3.5",
+      "subject_clean": "Rtools 3.5",
+      "in_reply_to": "<CAL6gwnLqnCrhKZvYoe6=vXWjjU+Pc_Phg96RmDmaEdaatXnhpA@mail.gmail.com>",
+      "references": [
+        "<CAL6gwnJeN78R4y8XD-aS6-Ss+yD2FKvsy4t0tMFroV7bAjmVTA@mail.gmail.com>",
+        "<CABFfbXu7uXFzEs8vRw4cjnkrU5y_jLg4yONXPrbaR+9UJN_0NA@mail.gmail.com>",
+        "<47a306bb-8856-390a-2c20-2793d259f5cc@statistik.tu-dortmund.de>",
+        "<CABFfbXsosoSKEwUBEXq0kJ=b6Q8G2Jnu-b1uyBciE8oM=JWmKA@mail.gmail.com>",
+        "<CAL6gwnLqnCrhKZvYoe6=vXWjjU+Pc_Phg96RmDmaEdaatXnhpA@mail.gmail.com>"
+      ],
+      "body_plain": "On Tue, Apr 24, 2018 at 9:17 PM, Avraham Adler <avraham.adler at gmail.com> wrote:\n> Should we add qpdf too? They?re up to 8.0.2 now.\n\nYes I plan to add qpdf and aspell as optional pieces of rtools for\npackage authors. Just haven't gotten there yet.",
+      "body_snippet": "On Tue, Apr 24, 2018 at 9:17 PM, Avraham Adler <avraham.adler at gmail.com> wrote:\n> Should we add qpdf too? They?re up to 8.0.2 now.\n\nYes I plan to add qpdf and aspell as optional pieces of rtools fo",
+      "thread_id": "thread-0353352762ab",
+      "thread_depth": 5,
+      "month": "2018-04"
+    },
+    {
+      "id": "msg-6932d914409a",
+      "message_id": "<CABtg=KmjHYyJ+Uq49KEt4JCa9G+SY0Scq3v6FYTAU3oUWrYMCg@mail.gmail.com>",
+      "from_name": "Gábor Csárdi",
+      "from_email_hash": "be1b1aa2bf940edb4d90301c038c97e98b84ed5c8724f0d46a3b2ee263683539",
+      "date": "2018-04-24T21:01:56+01:00",
+      "subject": "[R-SIG-Win] Rtools 3.5",
+      "subject_clean": "Rtools 3.5",
+      "in_reply_to": "<CABFfbXuCuLqKb9oDWhdMdws-cYg7=3RONy4nJy=8UKE7W1ntng@mail.gmail.com>",
+      "references": [
+        "<CAL6gwnJeN78R4y8XD-aS6-Ss+yD2FKvsy4t0tMFroV7bAjmVTA@mail.gmail.com>",
+        "<CABFfbXu7uXFzEs8vRw4cjnkrU5y_jLg4yONXPrbaR+9UJN_0NA@mail.gmail.com>",
+        "<47a306bb-8856-390a-2c20-2793d259f5cc@statistik.tu-dortmund.de>",
+        "<CABFfbXsosoSKEwUBEXq0kJ=b6Q8G2Jnu-b1uyBciE8oM=JWmKA@mail.gmail.com>",
+        "<CAL6gwnLqnCrhKZvYoe6=vXWjjU+Pc_Phg96RmDmaEdaatXnhpA@mail.gmail.com>",
+        "<CABFfbXuCuLqKb9oDWhdMdws-cYg7=3RONy4nJy=8UKE7W1ntng@mail.gmail.com>"
+      ],
+      "body_plain": "Btw. if we are already talking about aspell, how about using hunspell instead?\nAFAIR (but FIXME) aspell for windows is long unmaintained.\n\nR supports hunspell as well, although as I remember, a slight change in needed\nin the check code, because that is hardwired to aspell.\n\nGabor\n\nOn Tue, Apr 24, 2018 at 8:20 PM, Jeroen Ooms <jeroenooms at gmail.com> wrote:\n> On Tue, Apr 24, 2018 at 9:17 PM, Avraham Adler <avraham.adler at gmail.com> wrote:\n>> Should we add qpdf too? They?re up to 8.0.2 now.\n>\n> Yes I plan to add qpdf and aspell as optional pieces of rtools for\n> package authors. Just haven't gotten there yet.\n>\n> _______________________________________________\n> R-SIG-windows mailing list\n> R-SIG-windows at r-project.org\n> https://stat.ethz.ch/mailman/listinfo/r-sig-windows",
+      "body_snippet": "Btw. if we are already talking about aspell, how about using hunspell instead?\nAFAIR (but FIXME) aspell for windows is long unmaintained.\n\nR supports hunspell as well, although as I remember, a slight",
+      "thread_id": "thread-0353352762ab",
+      "thread_depth": 6,
+      "month": "2018-04"
+    },
+    {
+      "id": "msg-ba441da61eff",
+      "message_id": "<78d62f84-3f9c-d66c-632f-a9df1b846f04@statistik.tu-dortmund.de>",
+      "from_name": "Uwe Ligges",
+      "from_email_hash": "41041d76fae21a8bc18fe19d38def92b3b630abfb7abf4acf41a0734d8851d24",
+      "date": "2018-04-24T22:53:03+02:00",
+      "subject": "[R-SIG-Win] Rtools 3.5",
+      "subject_clean": "Rtools 3.5",
+      "in_reply_to": "<CABFfbXsosoSKEwUBEXq0kJ=b6Q8G2Jnu-b1uyBciE8oM=JWmKA@mail.gmail.com>",
+      "references": [
+        "<CAL6gwnJeN78R4y8XD-aS6-Ss+yD2FKvsy4t0tMFroV7bAjmVTA@mail.gmail.com>",
+        "<CABFfbXu7uXFzEs8vRw4cjnkrU5y_jLg4yONXPrbaR+9UJN_0NA@mail.gmail.com>",
+        "<47a306bb-8856-390a-2c20-2793d259f5cc@statistik.tu-dortmund.de>",
+        "<CABFfbXsosoSKEwUBEXq0kJ=b6Q8G2Jnu-b1uyBciE8oM=JWmKA@mail.gmail.com>"
+      ],
+      "body_plain": "Excellent, thanks,\nUwe\n\n\nOn 24.04.2018 21:07, Jeroen Ooms wrote:\n> On Sun, Apr 22, 2018 at 3:22 PM, Uwe Ligges\n> <ligges at statistik.tu-dortmund.de> wrote:\n>> Jeroen,\n>>\n>> can we perhaps also have these scripts on CRAN, perhaps as a subdir of\n>> Rtools?\n> \n> Sure I will put a copy of the innosetup build script on CRAN. Both the\n> 3.4 version that I got from Duncan and the cleaned up version that I\n> used for rtools 3.5.\n>",
+      "body_snippet": "Excellent, thanks,\nUwe\n\n\nOn 24.04.2018 21:07, Jeroen Ooms wrote:\n> On Sun, Apr 22, 2018 at 3:22 PM, Uwe Ligges\n> <ligges at statistik.tu-dortmund.de> wrote:\n>> Jeroen,\n>>\n>> can we perhaps also have t",
+      "thread_id": "thread-0353352762ab",
+      "thread_depth": 4,
+      "month": "2018-04"
+    },
+    {
+      "id": "msg-defc81700009",
+      "message_id": "<CABFfbXuRVzCj=AS06rxt6JQ=Ogbdzv4zBMTxxbrKOCTD-bZ53A@mail.gmail.com>",
+      "from_name": "Jeroen Ooms",
+      "from_email_hash": "a265ef4bb03c14ee9d6f00489213486310c7d7bc8d3d2467e6937626fef998e1",
+      "date": "2018-04-24T22:53:36+02:00",
+      "subject": "[R-SIG-Win] Rtools 3.5",
+      "subject_clean": "Rtools 3.5",
+      "in_reply_to": "<CABtg=KmjHYyJ+Uq49KEt4JCa9G+SY0Scq3v6FYTAU3oUWrYMCg@mail.gmail.com>",
+      "references": [
+        "<CAL6gwnJeN78R4y8XD-aS6-Ss+yD2FKvsy4t0tMFroV7bAjmVTA@mail.gmail.com>",
+        "<CABFfbXu7uXFzEs8vRw4cjnkrU5y_jLg4yONXPrbaR+9UJN_0NA@mail.gmail.com>",
+        "<47a306bb-8856-390a-2c20-2793d259f5cc@statistik.tu-dortmund.de>",
+        "<CABFfbXsosoSKEwUBEXq0kJ=b6Q8G2Jnu-b1uyBciE8oM=JWmKA@mail.gmail.com>",
+        "<CAL6gwnLqnCrhKZvYoe6=vXWjjU+Pc_Phg96RmDmaEdaatXnhpA@mail.gmail.com>",
+        "<CABFfbXuCuLqKb9oDWhdMdws-cYg7=3RONy4nJy=8UKE7W1ntng@mail.gmail.com>",
+        "<CABtg=KmjHYyJ+Uq49KEt4JCa9G+SY0Scq3v6FYTAU3oUWrYMCg@mail.gmail.com>"
+      ],
+      "body_plain": "On Tue, Apr 24, 2018 at 10:01 PM, G?bor Cs?rdi <csardi.gabor at gmail.com> wrote:\n> Btw. if we are already talking about aspell, how about using hunspell instead?\n> AFAIR (but FIXME) aspell for windows is long unmaintained.\n\nWe use the standard aspell branch (0.60.7-rc1), not the special win32\nport (which seems dead). I built a standalone version earlier this\nyear: https://github.com/rwinlib/aspell\n\nThis is what CRAN currently runs, so I would like to give users the\nsame results.",
+      "body_snippet": "On Tue, Apr 24, 2018 at 10:01 PM, G?bor Cs?rdi <csardi.gabor at gmail.com> wrote:\n> Btw. if we are already talking about aspell, how about using hunspell instead?\n> AFAIR (but FIXME) aspell for window",
+      "thread_id": "thread-0353352762ab",
+      "thread_depth": 7,
+      "month": "2018-04"
+    },
+    {
+      "id": "msg-4b55b52609cb",
+      "message_id": "<CABtg=KmTXEhm1jsK4d3bW878Kz791OqNUmkxUjSoNPRum=x-XQ@mail.gmail.com>",
+      "from_name": "Gábor Csárdi",
+      "from_email_hash": "be1b1aa2bf940edb4d90301c038c97e98b84ed5c8724f0d46a3b2ee263683539",
+      "date": "2018-04-24T21:55:55+01:00",
+      "subject": "[R-SIG-Win] Rtools 3.5",
+      "subject_clean": "Rtools 3.5",
+      "in_reply_to": "<CABFfbXuRVzCj=AS06rxt6JQ=Ogbdzv4zBMTxxbrKOCTD-bZ53A@mail.gmail.com>",
+      "references": [
+        "<CAL6gwnJeN78R4y8XD-aS6-Ss+yD2FKvsy4t0tMFroV7bAjmVTA@mail.gmail.com>",
+        "<CABFfbXu7uXFzEs8vRw4cjnkrU5y_jLg4yONXPrbaR+9UJN_0NA@mail.gmail.com>",
+        "<47a306bb-8856-390a-2c20-2793d259f5cc@statistik.tu-dortmund.de>",
+        "<CABFfbXsosoSKEwUBEXq0kJ=b6Q8G2Jnu-b1uyBciE8oM=JWmKA@mail.gmail.com>",
+        "<CAL6gwnLqnCrhKZvYoe6=vXWjjU+Pc_Phg96RmDmaEdaatXnhpA@mail.gmail.com>",
+        "<CABFfbXuCuLqKb9oDWhdMdws-cYg7=3RONy4nJy=8UKE7W1ntng@mail.gmail.com>",
+        "<CABtg=KmjHYyJ+Uq49KEt4JCa9G+SY0Scq3v6FYTAU3oUWrYMCg@mail.gmail.com>",
+        "<CABFfbXuRVzCj=AS06rxt6JQ=Ogbdzv4zBMTxxbrKOCTD-bZ53A@mail.gmail.com>"
+      ],
+      "body_plain": "On Tue, Apr 24, 2018 at 9:53 PM, Jeroen Ooms <jeroenooms at gmail.com> wrote:\n> On Tue, Apr 24, 2018 at 10:01 PM, G?bor Cs?rdi <csardi.gabor at gmail.com> wrote:\n>> Btw. if we are already talking about aspell, how about using hunspell instead?\n>> AFAIR (but FIXME) aspell for windows is long unmaintained.\n>\n> We use the standard aspell branch (0.60.7-rc1), not the special win32\n> port (which seems dead). I built a standalone version earlier this\n> year: https://github.com/rwinlib/aspell\n>\n> This is what CRAN currently runs, so I would like to give users the\n> same results.\n\nOh, OK, somehow I thought CRAN was running some very old version. All\ngood  then. G",
+      "body_snippet": "On Tue, Apr 24, 2018 at 9:53 PM, Jeroen Ooms <jeroenooms at gmail.com> wrote:\n> On Tue, Apr 24, 2018 at 10:01 PM, G?bor Cs?rdi <csardi.gabor at gmail.com> wrote:\n>> Btw. if we are already talking abou",
+      "thread_id": "thread-0353352762ab",
+      "thread_depth": 8,
+      "month": "2018-04"
+    },
+    {
+      "id": "msg-defed872b4e3",
+      "message_id": "<CABFfbXvNgweAhmxd8EpVTAySV=9L1F1abBu6G1TY0avG7Fd3WQ@mail.gmail.com>",
+      "from_name": "Jeroen Ooms",
+      "from_email_hash": "a265ef4bb03c14ee9d6f00489213486310c7d7bc8d3d2467e6937626fef998e1",
+      "date": "2018-04-25T19:35:21+02:00",
+      "subject": "[R-SIG-Win] Rtools 3.5",
+      "subject_clean": "Rtools 3.5",
+      "in_reply_to": "<CABtg=KmTXEhm1jsK4d3bW878Kz791OqNUmkxUjSoNPRum=x-XQ@mail.gmail.com>",
+      "references": [
+        "<CAL6gwnJeN78R4y8XD-aS6-Ss+yD2FKvsy4t0tMFroV7bAjmVTA@mail.gmail.com>",
+        "<CABFfbXu7uXFzEs8vRw4cjnkrU5y_jLg4yONXPrbaR+9UJN_0NA@mail.gmail.com>",
+        "<47a306bb-8856-390a-2c20-2793d259f5cc@statistik.tu-dortmund.de>",
+        "<CABFfbXsosoSKEwUBEXq0kJ=b6Q8G2Jnu-b1uyBciE8oM=JWmKA@mail.gmail.com>",
+        "<CAL6gwnLqnCrhKZvYoe6=vXWjjU+Pc_Phg96RmDmaEdaatXnhpA@mail.gmail.com>",
+        "<CABFfbXuCuLqKb9oDWhdMdws-cYg7=3RONy4nJy=8UKE7W1ntng@mail.gmail.com>",
+        "<CABtg=KmjHYyJ+Uq49KEt4JCa9G+SY0Scq3v6FYTAU3oUWrYMCg@mail.gmail.com>",
+        "<CABFfbXuRVzCj=AS06rxt6JQ=Ogbdzv4zBMTxxbrKOCTD-bZ53A@mail.gmail.com>",
+        "<CABtg=KmTXEhm1jsK4d3bW878Kz791OqNUmkxUjSoNPRum=x-XQ@mail.gmail.com>"
+      ],
+      "body_plain": "Actually, how do I run CMD check with spell checking? I tried setting my\n.Renviron to:\n\n _R_CHECK_CRAN_INCOMING_USE_ASPELL_=1\n\nBut that doesn't seem to work. I also can't any information on\nhttps://cran.r-project.org/doc/manuals/r-release/R-ints.html\n\n\n\n\nOn Tue, Apr 24, 2018 at 10:55 PM, G?bor Cs?rdi <csardi.gabor at gmail.com>\nwrote:\n\n> On Tue, Apr 24, 2018 at 9:53 PM, Jeroen Ooms <jeroenooms at gmail.com> wrote:\n> > On Tue, Apr 24, 2018 at 10:01 PM, G?bor Cs?rdi <csardi.gabor at gmail.com>\n> wrote:\n> >> Btw. if we are already talking about aspell, how about using hunspell\n> instead?\n> >> AFAIR (but FIXME) aspell for windows is long unmaintained.\n> >\n> > We use the standard aspell branch (0.60.7-rc1), not the special win32\n> > port (which seems dead). I built a standalone version earlier this\n> > year: https://github.com/rwinlib/aspell\n> >\n> > This is what CRAN currently runs, so I would like to give users the\n> > same results.\n>\n> Oh, OK, somehow I thought CRAN was running some very old version. All\n> good  then. G\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Actually, how do I run CMD check with spell checking? I tried setting my\n.Renviron to:\n\n _R_CHECK_CRAN_INCOMING_USE_ASPELL_=1\n\nBut that doesn't seem to work. I also can't any information on\nhttps://cr",
+      "thread_id": "thread-0353352762ab",
+      "thread_depth": 9,
+      "month": "2018-04"
+    },
+    {
+      "id": "msg-bf032189dad7",
+      "message_id": "<CABtg=KkaiD8Z4Ogj7SFCUhaJZOcRPJhK8PcOA=v6eR5AP5=nAA@mail.gmail.com>",
+      "from_name": "Gábor Csárdi",
+      "from_email_hash": "be1b1aa2bf940edb4d90301c038c97e98b84ed5c8724f0d46a3b2ee263683539",
+      "date": "2018-04-25T18:53:36+01:00",
+      "subject": "[R-SIG-Win] Rtools 3.5",
+      "subject_clean": "Rtools 3.5",
+      "in_reply_to": "<CABFfbXvNgweAhmxd8EpVTAySV=9L1F1abBu6G1TY0avG7Fd3WQ@mail.gmail.com>",
+      "references": [
+        "<CAL6gwnJeN78R4y8XD-aS6-Ss+yD2FKvsy4t0tMFroV7bAjmVTA@mail.gmail.com>",
+        "<CABFfbXu7uXFzEs8vRw4cjnkrU5y_jLg4yONXPrbaR+9UJN_0NA@mail.gmail.com>",
+        "<47a306bb-8856-390a-2c20-2793d259f5cc@statistik.tu-dortmund.de>",
+        "<CABFfbXsosoSKEwUBEXq0kJ=b6Q8G2Jnu-b1uyBciE8oM=JWmKA@mail.gmail.com>",
+        "<CAL6gwnLqnCrhKZvYoe6=vXWjjU+Pc_Phg96RmDmaEdaatXnhpA@mail.gmail.com>",
+        "<CABFfbXuCuLqKb9oDWhdMdws-cYg7=3RONy4nJy=8UKE7W1ntng@mail.gmail.com>",
+        "<CABtg=KmjHYyJ+Uq49KEt4JCa9G+SY0Scq3v6FYTAU3oUWrYMCg@mail.gmail.com>",
+        "<CABFfbXuRVzCj=AS06rxt6JQ=Ogbdzv4zBMTxxbrKOCTD-bZ53A@mail.gmail.com>",
+        "<CABtg=KmTXEhm1jsK4d3bW878Kz791OqNUmkxUjSoNPRum=x-XQ@mail.gmail.com>",
+        "<CABFfbXvNgweAhmxd8EpVTAySV=9L1F1abBu6G1TY0avG7Fd3WQ@mail.gmail.com>"
+      ],
+      "body_plain": "I think  you need --as-cran as well. G.\n\nOn Wed, Apr 25, 2018 at 6:35 PM, Jeroen Ooms <jeroenooms at gmail.com> wrote:\n> Actually, how do I run CMD check with spell checking? I tried setting my\n> .Renviron to:\n>\n>  _R_CHECK_CRAN_INCOMING_USE_ASPELL_=1\n>\n> But that doesn't seem to work. I also can't any information on\n> https://cran.r-project.org/doc/manuals/r-release/R-ints.html\n>\n>\n>\n>\n> On Tue, Apr 24, 2018 at 10:55 PM, G?bor Cs?rdi <csardi.gabor at gmail.com>\n> wrote:\n>>\n>> On Tue, Apr 24, 2018 at 9:53 PM, Jeroen Ooms <jeroenooms at gmail.com> wrote:\n>> > On Tue, Apr 24, 2018 at 10:01 PM, G?bor Cs?rdi <csardi.gabor at gmail.com>\n>> > wrote:\n>> >> Btw. if we are already talking about aspell, how about using hunspell\n>> >> instead?\n>> >> AFAIR (but FIXME) aspell for windows is long unmaintained.\n>> >\n>> > We use the standard aspell branch (0.60.7-rc1), not the special win32\n>> > port (which seems dead). I built a standalone version earlier this\n>> > year: https://github.com/rwinlib/aspell\n>> >\n>> > This is what CRAN currently runs, so I would like to give users the\n>> > same results.\n>>\n>> Oh, OK, somehow I thought CRAN was running some very old version. All\n>> good  then. G\n>\n>",
+      "body_snippet": "I think  you need --as-cran as well. G.\n\nOn Wed, Apr 25, 2018 at 6:35 PM, Jeroen Ooms <jeroenooms at gmail.com> wrote:\n> Actually, how do I run CMD check with spell checking? I tried setting my\n> .Ren",
+      "thread_id": "thread-0353352762ab",
+      "thread_depth": 10,
+      "month": "2018-04"
+    },
+    {
+      "id": "msg-27dbebdf0427",
+      "message_id": "<f2da9be2-a218-9e9e-0c55-2d1049055f34@statistik.tu-dortmund.de>",
+      "from_name": "Uwe Ligges",
+      "from_email_hash": "41041d76fae21a8bc18fe19d38def92b3b630abfb7abf4acf41a0734d8851d24",
+      "date": "2018-04-25T20:01:17+02:00",
+      "subject": "[R-SIG-Win] Rtools 3.5",
+      "subject_clean": "Rtools 3.5",
+      "in_reply_to": "<CABtg=KkaiD8Z4Ogj7SFCUhaJZOcRPJhK8PcOA=v6eR5AP5=nAA@mail.gmail.com>",
+      "references": [
+        "<CAL6gwnJeN78R4y8XD-aS6-Ss+yD2FKvsy4t0tMFroV7bAjmVTA@mail.gmail.com>",
+        "<CABFfbXu7uXFzEs8vRw4cjnkrU5y_jLg4yONXPrbaR+9UJN_0NA@mail.gmail.com>",
+        "<47a306bb-8856-390a-2c20-2793d259f5cc@statistik.tu-dortmund.de>",
+        "<CABFfbXsosoSKEwUBEXq0kJ=b6Q8G2Jnu-b1uyBciE8oM=JWmKA@mail.gmail.com>",
+        "<CAL6gwnLqnCrhKZvYoe6=vXWjjU+Pc_Phg96RmDmaEdaatXnhpA@mail.gmail.com>",
+        "<CABFfbXuCuLqKb9oDWhdMdws-cYg7=3RONy4nJy=8UKE7W1ntng@mail.gmail.com>",
+        "<CABtg=KmjHYyJ+Uq49KEt4JCa9G+SY0Scq3v6FYTAU3oUWrYMCg@mail.gmail.com>",
+        "<CABFfbXuRVzCj=AS06rxt6JQ=Ogbdzv4zBMTxxbrKOCTD-bZ53A@mail.gmail.com>",
+        "<CABtg=KmTXEhm1jsK4d3bW878Kz791OqNUmkxUjSoNPRum=x-XQ@mail.gmail.com>",
+        "<CABFfbXvNgweAhmxd8EpVTAySV=9L1F1abBu6G1TY0avG7Fd3WQ@mail.gmail.com>",
+        "<CABtg=KkaiD8Z4Ogj7SFCUhaJZOcRPJhK8PcOA=v6eR5AP5=nAA@mail.gmail.com>"
+      ],
+      "body_plain": "On 25.04.2018 19:53, G?bor Cs?rdi wrote:\n> I think  you need --as-cran as well. G.\n\nI have\n\nset _R_CHECK_CRAN_INCOMING_=TRUE\nset _R_CHECK_CRAN_INCOMING_USE_ASPELL_=TRUE\n\n\n(and some more) butnot --as-cran which I never use myself as I have more \nenabled anyway.\n\nBest,\nUwe\n\n\n\n> On Wed, Apr 25, 2018 at 6:35 PM, Jeroen Ooms <jeroenooms at gmail.com> wrote:\n>> Actually, how do I run CMD check with spell checking? I tried setting my\n>> .Renviron to:\n>>\n>>   _R_CHECK_CRAN_INCOMING_USE_ASPELL_=1\n>>\n>> But that doesn't seem to work. I also can't any information on\n>> https://cran.r-project.org/doc/manuals/r-release/R-ints.html\n>>\n>>\n>>\n>>\n>> On Tue, Apr 24, 2018 at 10:55 PM, G?bor Cs?rdi <csardi.gabor at gmail.com>\n>> wrote:\n>>>\n>>> On Tue, Apr 24, 2018 at 9:53 PM, Jeroen Ooms <jeroenooms at gmail.com> wrote:\n>>>> On Tue, Apr 24, 2018 at 10:01 PM, G?bor Cs?rdi <csardi.gabor at gmail.com>\n>>>> wrote:\n>>>>> Btw. if we are already talking about aspell, how about using hunspell\n>>>>> instead?\n>>>>> AFAIR (but FIXME) aspell for windows is long unmaintained.\n>>>>\n>>>> We use the standard aspell branch (0.60.7-rc1), not the special win32\n>>>> port (which seems dead). I built a standalone version earlier this\n>>>> year: https://github.com/rwinlib/aspell\n>>>>\n>>>> This is what CRAN currently runs, so I would like to give users the\n>>>> same results.\n>>>\n>>> Oh, OK, somehow I thought CRAN was running some very old version. All\n>>> good  then. G\n>>\n>>\n> \n> _______________________________________________\n> R-SIG-windows mailing list\n> R-SIG-windows at r-project.org\n> https://stat.ethz.ch/mailman/listinfo/r-sig-windows\n>",
+      "body_snippet": "On 25.04.2018 19:53, G?bor Cs?rdi wrote:\n> I think  you need --as-cran as well. G.\n\nI have\n\nset _R_CHECK_CRAN_INCOMING_=TRUE\nset _R_CHECK_CRAN_INCOMING_USE_ASPELL_=TRUE\n\n\n(and some more) butnot --as-c",
+      "thread_id": "thread-0353352762ab",
+      "thread_depth": 11,
+      "month": "2018-04"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-0353352762ab",
+      "subject": "Rtools 3.5",
+      "message_count": 14,
+      "participants": [
+        "Avraham Adler",
+        "Gábor Csárdi",
+        "Jeroen Ooms",
+        "Uwe Ligges"
+      ],
+      "started": "2018-04-12T00:31:11-04:00",
+      "last_reply": "2018-04-25T20:01:17+02:00",
+      "root_message_id": "msg-0353352762ab"
+    }
+  ]
+}

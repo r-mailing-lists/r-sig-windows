@@ -1,0 +1,219 @@
+From @vr@h@m@@d|er @end|ng |rom gm@||@com  Thu Apr 14 05:08:22 2022
+From: @vr@h@m@@d|er @end|ng |rom gm@||@com (Avraham Adler)
+Date: Thu, 14 Apr 2022 03:08:22 +0000
+Subject: [R-SIG-Win] Changelog for Rtools42
+Message-ID: <CAL6gwnJMb1A_N74zhOkLD4U+=NcvG8tMhSd=p7KWhJGTK7Pt=g@mail.gmail.com>
+
+Hi, Tomas.
+
+Is there a changelog for Rtools42 anywhere; something that would
+explain the difference between 5111 and 5168, for example? Copying
+r-sig-windows for reference.
+
+Thank you,
+
+Avi
+
+
+From tom@@@k@||ber@ @end|ng |rom gm@||@com  Thu Apr 28 16:29:16 2022
+From: tom@@@k@||ber@ @end|ng |rom gm@||@com (Tomas Kalibera)
+Date: Thu, 28 Apr 2022 16:29:16 +0200
+Subject: [R-SIG-Win] Changelog for Rtools42
+In-Reply-To: <CAL6gwnJMb1A_N74zhOkLD4U+=NcvG8tMhSd=p7KWhJGTK7Pt=g@mail.gmail.com>
+References: <CAL6gwnJMb1A_N74zhOkLD4U+=NcvG8tMhSd=p7KWhJGTK7Pt=g@mail.gmail.com>
+Message-ID: <d00b0539-f885-befb-8161-5ea8c95d9601@gmail.com>
+
+On 4/14/22 05:08, Avraham Adler wrote:
+> Hi, Tomas.
+>
+> Is there a changelog for Rtools42 anywhere; something that would
+> explain the difference between 5111 and 5168, for example? Copying
+> r-sig-windows for reference.
+
+Hi Avi,
+
+for now one can only find out directly from the subversion, as shown 
+here. In short, there is no fundamental change affecting package authors.
+
+(1)
+
+svn diff -r 5111:5168 
+https://svn.r-project.org/R-dev-web/trunk/WindowsBuilds/winutf8/ucrt3/toolchain_libs
+
+gives you the diff for the toolchain and libraries.
+
+C++ library is built with more precise timers. This is not by default in 
+MXE, but I added that to match Msys2 and the previous behavior, on which 
+package benchr depends, so this fixed the package.
+
+Then, the distribution of the cross toolchain has been improved. There 
+are new sections in the documentation about using the cross-compilers 
+and setting up the build tree from the distributed files so that you 
+don't have to build Rtools from scratch. This is useful for people 
+wanting to contribute to Rtools (and hence MXE).
+
+(2)
+
+svn diff -r 5111:5168 
+https://svn.r-project.org/R-dev-web/trunk/WindowsBuilds/winutf8/ucrt3/rtools
+
+shows nothing, so no changes in rtools build scripts
+
+In addition, Rtools42 also have the Msys2 part, which is current when 
+Rtools is built. But I am not aware of a fundamental change that would 
+impact R package authors.
+
+Best
+Tomas
+
+
+
+
+>
+> Thank you,
+>
+> Avi
+
+
+From tom@@@k@||ber@ @end|ng |rom gm@||@com  Mon Jun 20 12:48:55 2022
+From: tom@@@k@||ber@ @end|ng |rom gm@||@com (Tomas Kalibera)
+Date: Mon, 20 Jun 2022 12:48:55 +0200
+Subject: [R-SIG-Win] Changelog for Rtools42
+In-Reply-To: <d00b0539-f885-befb-8161-5ea8c95d9601@gmail.com>
+References: <CAL6gwnJMb1A_N74zhOkLD4U+=NcvG8tMhSd=p7KWhJGTK7Pt=g@mail.gmail.com>
+ <d00b0539-f885-befb-8161-5ea8c95d9601@gmail.com>
+Message-ID: <2ccdbb28-5d1c-d3db-5bf7-870964ac11be@gmail.com>
+
+Hi Avi,
+
+there is now also a news file for Rtools42, at 
+https://cran.r-project.org/bin/windows/Rtools/rtools42/news.html
+
+As of the current release, 5253, there is also the list of installed MXE 
+packages in file named "installed.list" in the Rtools distribution.
+
+Best
+Tomas
+
+On 4/28/22 16:29, Tomas Kalibera wrote:
+> On 4/14/22 05:08, Avraham Adler wrote:
+>> Hi, Tomas.
+>>
+>> Is there a changelog for Rtools42 anywhere; something that would
+>> explain the difference between 5111 and 5168, for example? Copying
+>> r-sig-windows for reference.
+>
+> Hi Avi,
+>
+> for now one can only find out directly from the subversion, as shown 
+> here. In short, there is no fundamental change affecting package authors.
+>
+> (1)
+>
+> svn diff -r 5111:5168 
+> https://svn.r-project.org/R-dev-web/trunk/WindowsBuilds/winutf8/ucrt3/toolchain_libs
+>
+> gives you the diff for the toolchain and libraries.
+>
+> C++ library is built with more precise timers. This is not by default 
+> in MXE, but I added that to match Msys2 and the previous behavior, on 
+> which package benchr depends, so this fixed the package.
+>
+> Then, the distribution of the cross toolchain has been improved. There 
+> are new sections in the documentation about using the cross-compilers 
+> and setting up the build tree from the distributed files so that you 
+> don't have to build Rtools from scratch. This is useful for people 
+> wanting to contribute to Rtools (and hence MXE).
+>
+> (2)
+>
+> svn diff -r 5111:5168 
+> https://svn.r-project.org/R-dev-web/trunk/WindowsBuilds/winutf8/ucrt3/rtools
+>
+> shows nothing, so no changes in rtools build scripts
+>
+> In addition, Rtools42 also have the Msys2 part, which is current when 
+> Rtools is built. But I am not aware of a fundamental change that would 
+> impact R package authors.
+>
+> Best
+> Tomas
+>
+>
+>
+>
+>>
+>> Thank you,
+>>
+>> Avi
+>
+
+
+From @vr@h@m@@d|er @end|ng |rom gm@||@com  Mon Jun 20 13:32:51 2022
+From: @vr@h@m@@d|er @end|ng |rom gm@||@com (Avraham Adler)
+Date: Mon, 20 Jun 2022 14:32:51 +0300
+Subject: [R-SIG-Win] Changelog for Rtools42
+In-Reply-To: <2ccdbb28-5d1c-d3db-5bf7-870964ac11be@gmail.com>
+References: <2ccdbb28-5d1c-d3db-5bf7-870964ac11be@gmail.com>
+Message-ID: <CB8AB45C-FF6D-4407-8837-195998EBA90A@gmail.com>
+
+Thank you, Tomas, that is fantastic!
+
+Avi
+
+Sent from my iPhone
+
+> On Jun 20, 2022, at 1:48 PM, Tomas Kalibera <tomas.kalibera at gmail.com> wrote:
+> 
+> ?Hi Avi,
+> 
+> there is now also a news file for Rtools42, at https://cran.r-project.org/bin/windows/Rtools/rtools42/news.html
+> 
+> As of the current release, 5253, there is also the list of installed MXE packages in file named "installed.list" in the Rtools distribution.
+> 
+> Best
+> Tomas
+> 
+>> On 4/28/22 16:29, Tomas Kalibera wrote:
+>>> On 4/14/22 05:08, Avraham Adler wrote:
+>>> Hi, Tomas.
+>>> 
+>>> Is there a changelog for Rtools42 anywhere; something that would
+>>> explain the difference between 5111 and 5168, for example? Copying
+>>> r-sig-windows for reference.
+>> 
+>> Hi Avi,
+>> 
+>> for now one can only find out directly from the subversion, as shown here. In short, there is no fundamental change affecting package authors.
+>> 
+>> (1)
+>> 
+>> svn diff -r 5111:5168 https://svn.r-project.org/R-dev-web/trunk/WindowsBuilds/winutf8/ucrt3/toolchain_libs
+>> 
+>> gives you the diff for the toolchain and libraries.
+>> 
+>> C++ library is built with more precise timers. This is not by default in MXE, but I added that to match Msys2 and the previous behavior, on which package benchr depends, so this fixed the package.
+>> 
+>> Then, the distribution of the cross toolchain has been improved. There are new sections in the documentation about using the cross-compilers and setting up the build tree from the distributed files so that you don't have to build Rtools from scratch. This is useful for people wanting to contribute to Rtools (and hence MXE).
+>> 
+>> (2)
+>> 
+>> svn diff -r 5111:5168 https://svn.r-project.org/R-dev-web/trunk/WindowsBuilds/winutf8/ucrt3/rtools
+>> 
+>> shows nothing, so no changes in rtools build scripts
+>> 
+>> In addition, Rtools42 also have the Msys2 part, which is current when Rtools is built. But I am not aware of a fundamental change that would impact R package authors.
+>> 
+>> Best
+>> Tomas
+>> 
+>> 
+>> 
+>> 
+>>> 
+>>> Thank you,
+>>> 
+>>> Avi
+>> 
+
+

@@ -1,0 +1,36 @@
+{
+  "list": "r-sig-windows",
+  "description": "",
+  "month": "2026-01",
+  "messages": [
+    {
+      "id": "msg-222fd46e3109",
+      "message_id": "<CAL6gwnL5XCw5PY5DsuxwvKJLcwuYTm-jZ6OERHm7XTPgrfuWrA@mail.gmail.com>",
+      "from_name": "Avraham Adler",
+      "from_email_hash": "63266ae79d1743f1496b756da3e3df9582595f717d74d4d823b698d61ef74096",
+      "date": "2026-01-15T16:58:55-05:00",
+      "subject": "[R-SIG-Win] Funny compilation error for R-devel (89301+)",
+      "subject_clean": "Funny compilation error for R-devel (89301+)",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hello, Tomas.\n\nI thought I'd ask here before sending to the full R-devel. I am trying\nto build a very recent version of R (89301) on two platforms, both\nWIndows 11 using Rtools45. On my home desktop it compiles without an\nissue and passes make-check all.\n\nOn my work laptop, however, I get the error pasted below when it is\ntrying to build the manuals. I updated MikTex before running. I tried\nto trace line 127 in the Makefile, but I didn;t understand what that\nhad to do with anything, unless I was looking in the wrong place.\n\nAny thoughts?\n\nThank you,\n\nAvi\n\nERROR:\n\npdfTeX warning (dest): name{Rfn.base.Rdash.deprecated} has been referenced but\ndoes not exist, replaced by a fixed one\n\n\npdfTeX warning (dest): name{Rfn.base.Rdash.defunct} has been referenced but doe\ns not exist, replaced by a fixed one\n\n\npdfTeX warning (dest): name{Rfn.isRematched} has been referenced but does not e\nxist, replaced by a fixed one\n\n\npdfTeX warning (dest): name{Rfn.chron} has been referenced but does not exist,\nreplaced by a fixed one\n\n<C:\\Users\\AvrahamAdler\\AppData\\Local\\MiKTeX\\fonts/pk/ljfour/jknappen/ec/dpi600\n\\tctt1000.pk> <C:\\Users\\AvrahamAdler\\AppData\\Local\\MiKTeX\\fonts/pk/ljfour/jknap\npen/ec/dpi600\\tctt0900.pk><C:/Users/AvrahamAdler/AppData/Local/Programs/MiKTeX/\nfonts/type1/public/inconsolata/Inconsolata-zi4b.pfb><C:/Users/AvrahamAdler/AppD\nata/Local/Programs/MiKTeX/fonts/type1/public/inconsolata/Inconsolata-zi4r.pfb><\nC:/Users/AvrahamAdler/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts\n/cmextra/cmbsy7.pfb><C:/Users/AvrahamAdler/AppData/Local/Programs/MiKTeX/fonts/\ntype1/public/amsfonts/cm/cmbx10.pfb><C:/Users/AvrahamAdler/AppData/Local/Progra\nms/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/AvrahamAdler/AppD\nata/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/A\nvrahamAdler/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi5.\npfb><C:/Users/AvrahamAdler/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams\nfonts/cm/cmmi7.pfb><C:/Users/AvrahamAdler/AppData/Local/Programs/MiKTeX/fonts/t\nype1/public/amsfonts/cm/cmmib10.pfb><C:/Users/AvrahamAdler/AppData/Local/Progra\nms/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/AvrahamAdler/AppDa\nta/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Users/Avra\nhamAdler/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb>\n<C:/Users/AvrahamAdler/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfont\ns/cm/cmss8.pfb><C:/Users/AvrahamAdler/AppData/Local/Programs/MiKTeX/fonts/type1\n/public/amsfonts/cm/cmsy10.pfb><C:/Users/AvrahamAdler/AppData/Local/Programs/Mi\nKTeX/fonts/type1/public/amsfonts/cm/cmsy5.pfb><C:/Users/AvrahamAdler/AppData/Lo\ncal/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/AvrahamA\ndler/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C\n:/Users/AvrahamAdler/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/\nsymbols/msbm10.pfb><C:/Users/AvrahamAdler/AppData/Local/Programs/MiKTeX/fonts/t\nype1/urw/helvetic/uhvr8a.pfb><C:/Users/AvrahamAdler/AppData/Local/Programs/MiKT\neX/fonts/type1/urw/times/utmb8a.pfb><C:/Users/AvrahamAdler/AppData/Local/Progra\nms/MiKTeX/fonts/type1/urw/times/utmbi8a.pfb><C:/Users/AvrahamAdler/AppData/Loca\nl/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Users/AvrahamAdler/AppDa\nta/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Users/AvrahamAdle\nr/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>\nOutput written on fullrefman.pdf (3755 pages, 9825958 bytes).\n\nTranscript written on fullrefman.log.\n\nmake[1]: *** [Makefile.win:127: fullrefman.pdf] Error 1\n\nmake: *** [Makefile:339: manuals] Error 2",
+      "body_snippet": "Hello, Tomas.\n\nI thought I'd ask here before sending to the full R-devel. I am trying\nto build a very recent version of R (89301) on two platforms, both\nWIndows 11 using Rtools45. On my home desktop i",
+      "thread_id": "thread-222fd46e3109",
+      "thread_depth": 0,
+      "month": "2026-01"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-222fd46e3109",
+      "subject": "Funny compilation error for R-devel (89301+)",
+      "message_count": 1,
+      "participants": [
+        "Avraham Adler"
+      ],
+      "started": "2026-01-15T16:58:55-05:00",
+      "last_reply": "2026-01-15T16:58:55-05:00",
+      "root_message_id": "msg-222fd46e3109"
+    }
+  ]
+}

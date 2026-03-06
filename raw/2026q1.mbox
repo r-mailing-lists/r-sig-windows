@@ -1,0 +1,107 @@
+From @vr@h@m@@d|er @end|ng |rom gm@||@com  Thu Jan 15 22:58:55 2026
+From: @vr@h@m@@d|er @end|ng |rom gm@||@com (Avraham Adler)
+Date: Thu, 15 Jan 2026 16:58:55 -0500
+Subject: [R-SIG-Win] Funny compilation error for R-devel (89301+)
+Message-ID: <CAL6gwnL5XCw5PY5DsuxwvKJLcwuYTm-jZ6OERHm7XTPgrfuWrA@mail.gmail.com>
+
+Hello, Tomas.
+
+I thought I'd ask here before sending to the full R-devel. I am trying
+to build a very recent version of R (89301) on two platforms, both
+WIndows 11 using Rtools45. On my home desktop it compiles without an
+issue and passes make-check all.
+
+On my work laptop, however, I get the error pasted below when it is
+trying to build the manuals. I updated MikTex before running. I tried
+to trace line 127 in the Makefile, but I didn;t understand what that
+had to do with anything, unless I was looking in the wrong place.
+
+Any thoughts?
+
+Thank you,
+
+Avi
+
+ERROR:
+
+pdfTeX warning (dest): name{Rfn.base.Rdash.deprecated} has been referenced but
+does not exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{Rfn.base.Rdash.defunct} has been referenced but doe
+s not exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{Rfn.isRematched} has been referenced but does not e
+xist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{Rfn.chron} has been referenced but does not exist,
+replaced by a fixed one
+
+<C:\Users\AvrahamAdler\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600
+\tctt1000.pk> <C:\Users\AvrahamAdler\AppData\Local\MiKTeX\fonts/pk/ljfour/jknap
+pen/ec/dpi600\tctt0900.pk><C:/Users/AvrahamAdler/AppData/Local/Programs/MiKTeX/
+fonts/type1/public/inconsolata/Inconsolata-zi4b.pfb><C:/Users/AvrahamAdler/AppD
+ata/Local/Programs/MiKTeX/fonts/type1/public/inconsolata/Inconsolata-zi4r.pfb><
+C:/Users/AvrahamAdler/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts
+/cmextra/cmbsy7.pfb><C:/Users/AvrahamAdler/AppData/Local/Programs/MiKTeX/fonts/
+type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/AvrahamAdler/AppData/Local/Progra
+ms/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/AvrahamAdler/AppD
+ata/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/A
+vrahamAdler/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi5.
+pfb><C:/Users/AvrahamAdler/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
+fonts/cm/cmmi7.pfb><C:/Users/AvrahamAdler/AppData/Local/Programs/MiKTeX/fonts/t
+ype1/public/amsfonts/cm/cmmib10.pfb><C:/Users/AvrahamAdler/AppData/Local/Progra
+ms/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/AvrahamAdler/AppDa
+ta/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Users/Avra
+hamAdler/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb>
+<C:/Users/AvrahamAdler/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfont
+s/cm/cmss8.pfb><C:/Users/AvrahamAdler/AppData/Local/Programs/MiKTeX/fonts/type1
+/public/amsfonts/cm/cmsy10.pfb><C:/Users/AvrahamAdler/AppData/Local/Programs/Mi
+KTeX/fonts/type1/public/amsfonts/cm/cmsy5.pfb><C:/Users/AvrahamAdler/AppData/Lo
+cal/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/AvrahamA
+dler/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C
+:/Users/AvrahamAdler/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/
+symbols/msbm10.pfb><C:/Users/AvrahamAdler/AppData/Local/Programs/MiKTeX/fonts/t
+ype1/urw/helvetic/uhvr8a.pfb><C:/Users/AvrahamAdler/AppData/Local/Programs/MiKT
+eX/fonts/type1/urw/times/utmb8a.pfb><C:/Users/AvrahamAdler/AppData/Local/Progra
+ms/MiKTeX/fonts/type1/urw/times/utmbi8a.pfb><C:/Users/AvrahamAdler/AppData/Loca
+l/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Users/AvrahamAdler/AppDa
+ta/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Users/AvrahamAdle
+r/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
+Output written on fullrefman.pdf (3755 pages, 9825958 bytes).
+
+Transcript written on fullrefman.log.
+
+make[1]: *** [Makefile.win:127: fullrefman.pdf] Error 1
+
+make: *** [Makefile:339: manuals] Error 2
+
+
+From tom@@@k@||ber@ @end|ng |rom gm@||@com  Sat Feb  7 19:10:09 2026
+From: tom@@@k@||ber@ @end|ng |rom gm@||@com (Tomas Kalibera)
+Date: Sat, 7 Feb 2026 19:10:09 +0100
+Subject: [R-SIG-Win] Rtools45 update
+Message-ID: <beaf7a47-fad2-4280-b38e-effbdb08cee3@gmail.com>
+
+Dear R Windows developers,
+
+an update of Rtools45, the toolchain for R for Windows used by R-devel 
+and R 4.5, is available as revision 6768 from
+
+https://cran.r-project.org/bin/windows/Rtools/rtools45/rtools.html
+
+Package muparser has been added? and muparser support has been enabled 
+in gdal (thanks to Chris Toney).
+
+Some additional packages have been upgraded.? See
+
+https://cran.r-project.org/bin/windows/Rtools/rtools45/news.html
+
+for more details.
+
+Best
+Tomas
+
+

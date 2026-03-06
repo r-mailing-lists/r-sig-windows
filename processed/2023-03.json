@@ -1,0 +1,36 @@
+{
+  "list": "r-sig-windows",
+  "description": "",
+  "month": "2023-03",
+  "messages": [
+    {
+      "id": "msg-877cef68de94",
+      "message_id": "<469a1f05-2233-c125-cf31-a90b0d24254d@gmail.com>",
+      "from_name": "Tomas Kalibera",
+      "from_email_hash": "7af110c9340339e5307bd348f1ec524e2fd1c8f104d583e9993022c5550711f4",
+      "date": "2023-03-24T09:52:55+01:00",
+      "subject": "[R-SIG-Win] Rtools43 update",
+      "subject_clean": "Rtools43 update",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear R Windows developers,\n\nan update of Rtools43, the toolchain for R for Windows used by R-devel, \nis now available as revision 5550 from\n\nhttps://cran.r-project.org/bin/windows/Rtools/rtools43/rtools.html\n\nIn addition to updates to the included libraries, the installer now uses \na three-element version (4.3.5550) instead of previously used only two \nelements (4.3). This makes it easier to see which version is installed \nin \"Add/Remove Programs\" and it may also impact third party tools for \ninstalling software on Windows.\n\nUpdates of curl and webp require changes in the list of libraries for \nlinking.\n\nSee https://cran.r-project.org/bin/windows/Rtools/rtools43/news.html for \nmore details.\n\nBest\nTomas",
+      "body_snippet": "Dear R Windows developers,\n\nan update of Rtools43, the toolchain for R for Windows used by R-devel, \nis now available as revision 5550 from\n\nhttps://cran.r-project.org/bin/windows/Rtools/rtools43/rtoo",
+      "thread_id": "thread-877cef68de94",
+      "thread_depth": 0,
+      "month": "2023-03"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-877cef68de94",
+      "subject": "Rtools43 update",
+      "message_count": 1,
+      "participants": [
+        "Tomas Kalibera"
+      ],
+      "started": "2023-03-24T09:52:55+01:00",
+      "last_reply": "2023-03-24T09:52:55+01:00",
+      "root_message_id": "msg-877cef68de94"
+    }
+  ]
+}

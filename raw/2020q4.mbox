@@ -1,0 +1,176 @@
+From m@rce| @end|ng |rom coeurd@rt|ch@ut@ch  Tue Oct 27 08:15:03 2020
+From: m@rce| @end|ng |rom coeurd@rt|ch@ut@ch (Marcel Baumgartner)
+Date: Tue, 27 Oct 2020 08:15:03 +0100
+Subject: [R-SIG-Win] Call to R.exe in a Script fails since the upgrade from
+ R 3.6.1 to R 4.0.2
+Message-ID: <91FDD4F7-33CC-4F8C-ABFA-16510B00CBE4@coeurdartichaut.ch>
+
+Dear R Community,  
+
+I call R from within a software called ?IDEA? ([www.casewareanalytics.com <http://www.casewareanalytics.com/>](http://www.casewareanalytics.com <http://www.casewareanalytics.com/>)). This language uses its own scripting language, but it is very similar to Visual Basic. The basic call is as shown below:  
+
+
+R_Command is a string of the form (the Chr(34) creates a double quote):
+In my file ?script.R?, I then start everything by:
+This has worked perfectly up to R 3.6.1. But since I migrated to R 4.0.2, this command does not create the ?log.txt? anymore. The script runs, it finds the arguments in the file ?nga_config.R?, generates the output data, but then does not write the log.txt. However, when I run this R_command on the command line in Windows, all works fine: the log.txt is created. So the syntax is correct.
+In the R windows FAQ, i see this:  
+
+### 2.12 Can I use `R CMD BATCH`?  
+
+
+Yes: use `R CMD BATCH --help` or `?BATCH` for full details.  
+
+
+You can also set up a batch file using `Rterm.exe`. A sample batch file might contain (as one line)  
+
+
+
+I tried this, but I have the same issue: the output file ("log.txt") is not crated. Also, choosing R.exe and Rterm.exe has no impact.  
+
+Do you know whether something has changed in R 4.* that could cause this issue?  
+
+Thanks for your help. Happy to do a Skype/Teams/Zoom session anytime!  
+
+Best regards  
+
+Marcel Baumgartner  
+
+	[[alternative HTML version deleted]]
+
+
+From ||gge@ @end|ng |rom @t@t|@t|k@tu-dortmund@de  Tue Oct 27 08:46:16 2020
+From: ||gge@ @end|ng |rom @t@t|@t|k@tu-dortmund@de (Uwe Ligges)
+Date: Tue, 27 Oct 2020 08:46:16 +0100
+Subject: [R-SIG-Win] 
+ Call to R.exe in a Script fails since the upgrade from
+ R 3.6.1 to R 4.0.2
+In-Reply-To: <91FDD4F7-33CC-4F8C-ABFA-16510B00CBE4@coeurdartichaut.ch>
+References: <91FDD4F7-33CC-4F8C-ABFA-16510B00CBE4@coeurdartichaut.ch>
+Message-ID: <817d3b5b-cbae-1040-c0eb-4002bd624117@statistik.tu-dortmund.de>
+
+I think you have to show the code that is supposed to generate that 
+"log.txt".
+
+
+Best,
+Uwe Ligges
+
+On 27.10.2020 08:15, Marcel Baumgartner wrote:
+> Dear R Community,
+> 
+> I call R from within a software called ?IDEA? ([www.casewareanalytics.com <http://www.casewareanalytics.com/>](http://www.casewareanalytics.com <http://www.casewareanalytics.com/>)). This language uses its own scripting language, but it is very similar to Visual Basic. The basic call is as shown below:
+> 
+> 
+> R_Command is a string of the form (the Chr(34) creates a double quote):
+> In my file ?script.R?, I then start everything by:
+> This has worked perfectly up to R 3.6.1. But since I migrated to R 4.0.2, this command does not create the ?log.txt? anymore. The script runs, it finds the arguments in the file ?nga_config.R?, generates the output data, but then does not write the log.txt. However, when I run this R_command on the command line in Windows, all works fine: the log.txt is created. So the syntax is correct.
+> In the R windows FAQ, i see this:
+> 
+> ### 2.12 Can I use `R CMD BATCH`?
+> 
+> 
+> Yes: use `R CMD BATCH --help` or `?BATCH` for full details.
+> 
+> 
+> You can also set up a batch file using `Rterm.exe`. A sample batch file might contain (as one line)
+> 
+> 
+> 
+> I tried this, but I have the same issue: the output file ("log.txt") is not crated. Also, choosing R.exe and Rterm.exe has no impact.
+> 
+> Do you know whether something has changed in R 4.* that could cause this issue?
+> 
+> Thanks for your help. Happy to do a Skype/Teams/Zoom session anytime!
+> 
+> Best regards
+> 
+> Marcel Baumgartner
+> 
+> 	[[alternative HTML version deleted]]
+> 
+> _______________________________________________
+> R-SIG-windows mailing list
+> R-SIG-windows at r-project.org
+> https://stat.ethz.ch/mailman/listinfo/r-sig-windows
+>
+
+
+From m@rce| @end|ng |rom coeurd@rt|ch@ut@ch  Tue Oct 27 11:08:17 2020
+From: m@rce| @end|ng |rom coeurd@rt|ch@ut@ch (Marcel Baumgartner)
+Date: Tue, 27 Oct 2020 11:08:17 +0100
+Subject: [R-SIG-Win] 
+ Call to R.exe in a Script fails since the upgrade from
+ R 3.6.1 to R 4.0.2
+In-Reply-To: <817d3b5b-cbae-1040-c0eb-4002bd624117@statistik.tu-dortmund.de>
+References: <91FDD4F7-33CC-4F8C-ABFA-16510B00CBE4@coeurdartichaut.ch>
+ <817d3b5b-cbae-1040-c0eb-4002bd624117@statistik.tu-dortmund.de>
+Message-ID: <00E3408F-E8C1-4246-AB5E-1751AEDD3672@coeurdartichaut.ch>
+
+Dear Uwe and SIG Windows members,
+
+I realize that my message was missing the code elements. Apologies!
+
+I write again:
+
+I call R from within a software called ?IDEA? (www.casewareanalytics.com). This language uses its own scripting language, but it is very similar to Visual Basic. The basic call is as shown below:
+ 
+Function R_ExecuteScript() As Variant
+' Execute the R script and wait until it is finished.
+     Dim R_Command As String
+     Dim WshShell As Object
+     Set WshShell = CreateObject("Wscript.Shell")
+     R_Command = Chr(34) & R_Program & Chr(34) & " -f " & Chr(34) & R_Script & Chr(34) & " --args " & Chr(34) &     R_FormatPath(R_ProjectFolder & "\nga_config.r") & Chr(34) &"  1> " & Chr(34) & R_ProjectFolder & "\log.txt" & Chr(34) & " 2>&1 "
+     WshShell.run R_Command, 0, TRUE   
+     Set WshShell = Nothing
+End Function
+ 
+R_Command is a string of the form
+ 
+"C:\R\R-3.6.1\bin\x64\R.exe" -f "script.R" ?-args "args.R" 1> "log.txt" 2>&1
+ 
+In my file ?script.R?, I then start everything by:
+ 
+args <- commandArgs(TRUE)
+print(args)
+source(args[1])
+ 
+This has worked perfectly up to R 3.6.1. But since I migrated to R 4.0.2, this command does not create the ?log.txt? anymore. The script runs, it finds the arguments in the file ?nga_config.R?, generates the output data, but then does not write the log.txt.
+ 
+However, when I run this R_command on the command line in Windows, all works fine: the log.txt is created. So the syntax is correct.
+ 
+Do you whether something has changed in R 4.* that could cause this issue? Would you know somebody who can help me?
+
+Thanks for your insight!
+
+Marcel
+
+> Le 27 oct. 2020 ? 08:46, Uwe Ligges <ligges at statistik.tu-dortmund.de> a ?crit :
+> 
+> I think you have to show the code that is supposed to generate that "log.txt".
+> 
+> 
+> Best,
+> Uwe Ligges
+> 
+> On 27.10.2020 08:15, Marcel Baumgartner wrote:
+>> Dear R Community,
+>> I call R from within a software called ?IDEA? ([www.casewareanalytics.com <http://www.casewareanalytics.com/>](http://www.casewareanalytics.com <http://www.casewareanalytics.com/>)). This language uses its own scripting language, but it is very similar to Visual Basic. The basic call is as shown below:
+>> R_Command is a string of the form (the Chr(34) creates a double quote):
+>> In my file ?script.R?, I then start everything by:
+>> This has worked perfectly up to R 3.6.1. But since I migrated to R 4.0.2, this command does not create the ?log.txt? anymore. The script runs, it finds the arguments in the file ?nga_config.R?, generates the output data, but then does not write the log.txt. However, when I run this R_command on the command line in Windows, all works fine: the log.txt is created. So the syntax is correct.
+>> In the R windows FAQ, i see this:
+>> ### 2.12 Can I use `R CMD BATCH`?
+>> Yes: use `R CMD BATCH --help` or `?BATCH` for full details.
+>> You can also set up a batch file using `Rterm.exe`. A sample batch file might contain (as one line)
+>> I tried this, but I have the same issue: the output file ("log.txt") is not crated. Also, choosing R.exe and Rterm.exe has no impact.
+>> Do you know whether something has changed in R 4.* that could cause this issue?
+>> Thanks for your help. Happy to do a Skype/Teams/Zoom session anytime!
+>> Best regards
+>> Marcel Baumgartner
+>> 	[[alternative HTML version deleted]]
+>> _______________________________________________
+>> R-SIG-windows mailing list
+>> R-SIG-windows at r-project.org
+>> https://stat.ethz.ch/mailman/listinfo/r-sig-windows
+
+

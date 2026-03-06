@@ -1,0 +1,36 @@
+{
+  "list": "r-sig-windows",
+  "description": "",
+  "month": "2018-06",
+  "messages": [
+    {
+      "id": "msg-a589c98ac664",
+      "message_id": "<CAL6gwn+L+qaK=YBNYMYq84UkRJ6sO3d9X0H5P4-c+wz-NAM65g@mail.gmail.com>",
+      "from_name": "Avraham Adler",
+      "from_email_hash": "bc31d95136a42dda70906a1be7a3202337f5c9b8728bd4b530319c59fc1de16e",
+      "date": "2018-06-17T14:38:07-04:00",
+      "subject": "[R-SIG-Win] Rtools 3.6?",
+      "subject_clean": "Rtools 3.6?",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hi, Jeroen.\n\nYou mentioned that in the summer, there would be work on creating a\nnew version of Rtools based on gcc 8+. Any news? NixMans scripts seem\nto have stopped with GCC 7.2, although the MinGW64 project has 8.1 out\nalready.\n\nThanks,\n\nAvi",
+      "body_snippet": "Hi, Jeroen.\n\nYou mentioned that in the summer, there would be work on creating a\nnew version of Rtools based on gcc 8+. Any news? NixMans scripts seem\nto have stopped with GCC 7.2, although the MinGW6",
+      "thread_id": "thread-a589c98ac664",
+      "thread_depth": 0,
+      "month": "2018-06"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-a589c98ac664",
+      "subject": "Rtools 3.6?",
+      "message_count": 1,
+      "participants": [
+        "Avraham Adler"
+      ],
+      "started": "2018-06-17T14:38:07-04:00",
+      "last_reply": "2018-06-17T14:38:07-04:00",
+      "root_message_id": "msg-a589c98ac664"
+    }
+  ]
+}

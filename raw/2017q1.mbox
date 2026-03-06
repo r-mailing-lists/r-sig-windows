@@ -1,0 +1,259 @@
+From avraham.adler at gmail.com  Tue Jan 31 00:08:21 2017
+From: avraham.adler at gmail.com (Avraham Adler)
+Date: Mon, 30 Jan 2017 18:08:21 -0500
+Subject: [R-SIG-Win] Is an update of Rtools in the mid-to-distant future?
+Message-ID: <CAL6gwn+G0=Yn+QuzVqA7dA-p05VPeo=Qqd=a34ToMdbAm4-HHA@mail.gmail.com>
+
+Hello.
+
+Has there been any thought or consideration given to updating Rtools from
+4.9.3 to a 5.x or 6.x flavor, or was the push from 4.6 to 4.9.3 difficult
+enough that this should be tabled for a year or three? I know, I'm one to
+talk when Jeroen, Kevin, and Dr. Murdoch do all the work, but with GCC up
+to 6.3, there have been a lot of changes between 4.9.3 and 4.9.4 [1], 5.x
+[2] and 6.x [3].
+
+Thank you,
+
+Avi
+
+[1] <
+https://gcc.gnu.org/bugzilla/buglist.cgi?bug_status=RESOLVED&resolution=FIXED&target_milestone=4.9.4
+>
+
+[2] <https://gcc.gnu.org/gcc-5/changes.html>
+
+[3] <https://gcc.gnu.org/gcc-6/changes.html>
+
+	[[alternative HTML version deleted]]
+
+
+From jeroen.ooms at stat.ucla.edu  Tue Jan 31 00:22:14 2017
+From: jeroen.ooms at stat.ucla.edu (Jeroen Ooms)
+Date: Mon, 30 Jan 2017 15:22:14 -0800
+Subject: [R-SIG-Win] Is an update of Rtools in the mid-to-distant future?
+In-Reply-To: <CAL6gwn+G0=Yn+QuzVqA7dA-p05VPeo=Qqd=a34ToMdbAm4-HHA@mail.gmail.com>
+References: <CAL6gwn+G0=Yn+QuzVqA7dA-p05VPeo=Qqd=a34ToMdbAm4-HHA@mail.gmail.com>
+Message-ID: <CABFfbXvwkUWNO75Z6fTG9a7DC76KB+u2_gcG3h0iPptB9ara=A@mail.gmail.com>
+
+On Mon, Jan 30, 2017 at 3:08 PM, Avraham Adler <avraham.adler at gmail.com> wrote:
+
+> Has there been any thought or consideration given to updating Rtools from
+> 4.9.3 to a 5.x or 6.x flavor, or was the push from 4.6 to 4.9.3 difficult
+> enough that this should be tabled for a year or three?
+
+Definitely no upgrade planned for R 3.4, and I expect it won't get
+upgraded until it is really needed again.
+
+The 4.9.3 upgrade was motivated by C++11 support, which was largely
+missing in 4.6.3 and becoming mainstream. I don't think there are any
+new features in 5.x or 6.x at this point that are critical enough to
+outweigh the disruption.
+
+That said, any future upgrades should be much easier than the last one
+because we switched to a pretty standard gcc/mingw configuration. In
+fact you can easily configure R to use a more recent compiler (e.g.
+from msys2), which would allow you to use new compiler features
+locally.
+
+
+From avraham.adler at gmail.com  Wed Feb  1 05:31:08 2017
+From: avraham.adler at gmail.com (Avraham Adler)
+Date: Tue, 31 Jan 2017 23:31:08 -0500
+Subject: [R-SIG-Win] Default mtune for R windows
+Message-ID: <CAL6gwn+vDE4Fb43hECq9YbEGBrMDJ3rQS_8XE8wpFc8fhB2+3w@mail.gmail.com>
+
+I put in a bug request for this over a year ago and it went nowhere.
+Nobody is using a core2 on Windows anymore. GCC itself has been
+suggesting for a very long time to use '-mtune=generic'. Their
+language on 4.9.3. is:
+
+?generic? Produce code optimized for the most common IA32/AMD64/EM64T
+processors. If youknow the CPU on which your code will run, then you
+should use the corresponding -mtune or -march option instead of
+-mtune=generic. But, if you do not know exactly what CPU users of your
+application will have, then you should use this option.
+
+As new processors are deployed in the marketplace, the behavior of
+this option will change. Therefore, if you upgrade to a newer version
+of GCC, code generation controlled by this option will change to
+reflect the processors that are most common at the time that version
+of GCC is released.
+
+
+How difficult is it to change that line in Mkrules.dist/Mkrules.rules?
+
+Avi
+
+
+From jeroen.ooms at stat.ucla.edu  Wed Feb  1 07:08:19 2017
+From: jeroen.ooms at stat.ucla.edu (Jeroen Ooms)
+Date: Tue, 31 Jan 2017 22:08:19 -0800
+Subject: [R-SIG-Win] Default mtune for R windows
+In-Reply-To: <CAL6gwn+vDE4Fb43hECq9YbEGBrMDJ3rQS_8XE8wpFc8fhB2+3w@mail.gmail.com>
+References: <CAL6gwn+vDE4Fb43hECq9YbEGBrMDJ3rQS_8XE8wpFc8fhB2+3w@mail.gmail.com>
+Message-ID: <CABFfbXuB-Ui28o6xHqa4U00NrBsna=QBQWZrBChzJ0OzOR-mOA@mail.gmail.com>
+
+On Tue, Jan 31, 2017 at 8:31 PM, Avraham Adler <avraham.adler at gmail.com> wrote:
+> I put in a bug request for this over a year ago and it went nowhere.
+
+Where did you post this exactly? If we open a topic with a working
+patch on bugs.r-project.org and reference the canonical gcc source
+that you are citing below, perhaps it will get merged.
+
+
+From avraham.adler at gmail.com  Wed Feb  1 08:32:15 2017
+From: avraham.adler at gmail.com (Avraham Adler)
+Date: Wed, 1 Feb 2017 02:32:15 -0500
+Subject: [R-SIG-Win] Default mtune for R windows
+In-Reply-To: <CABFfbXuB-Ui28o6xHqa4U00NrBsna=QBQWZrBChzJ0OzOR-mOA@mail.gmail.com>
+References: <CAL6gwn+vDE4Fb43hECq9YbEGBrMDJ3rQS_8XE8wpFc8fhB2+3w@mail.gmail.com>
+	<CABFfbXuB-Ui28o6xHqa4U00NrBsna=QBQWZrBChzJ0OzOR-mOA@mail.gmail.com>
+Message-ID: <CAL6gwnJG_yEXf6HK+_rbgWSf1QD=iz28dt4oHiRuHVkRymwg8w@mail.gmail.com>
+
+https://bugs.r-project.org/bugzilla/show_bug.cgi?id=16536
+
+I closed it after it was open over a year.
+
+Avi
+
+On Wed, Feb 1, 2017 at 1:08 AM, Jeroen Ooms <jeroen.ooms at stat.ucla.edu>
+wrote:
+
+> On Tue, Jan 31, 2017 at 8:31 PM, Avraham Adler <avraham.adler at gmail.com>
+> wrote:
+> > I put in a bug request for this over a year ago and it went nowhere.
+>
+> Where did you post this exactly? If we open a topic with a working
+> patch on bugs.r-project.org and reference the canonical gcc source
+> that you are citing below, perhaps it will get merged.
+>
+
+	[[alternative HTML version deleted]]
+
+
+From ligges at statistik.tu-dortmund.de  Wed Feb  1 16:49:24 2017
+From: ligges at statistik.tu-dortmund.de (Uwe Ligges)
+Date: Wed, 1 Feb 2017 16:49:24 +0100
+Subject: [R-SIG-Win] Default mtune for R windows
+In-Reply-To: <CAL6gwn+vDE4Fb43hECq9YbEGBrMDJ3rQS_8XE8wpFc8fhB2+3w@mail.gmail.com>
+References: <CAL6gwn+vDE4Fb43hECq9YbEGBrMDJ3rQS_8XE8wpFc8fhB2+3w@mail.gmail.com>
+Message-ID: <eb24e9e2-a300-6b94-7093-eb9f0ce5aa63@statistik.tu-dortmund.de>
+
+
+
+On 01.02.2017 05:31, Avraham Adler wrote:
+> I put in a bug request for this over a year ago and it went nowhere.
+> Nobody is using a core2 on Windows anymore. GCC itself has been
+> suggesting for a very long time to use '-mtune=generic'. Their
+> language on 4.9.3. is:
+>
+> ?generic? Produce code optimized for the most common IA32/AMD64/EM64T
+> processors. If youknow the CPU on which your code will run, then you
+> should use the corresponding -mtune or -march option instead of
+> -mtune=generic. But, if you do not know exactly what CPU users of your
+> application will have, then you should use this option.
+>
+> As new processors are deployed in the marketplace, the behavior of
+> this option will change. Therefore, if you upgrade to a newer version
+> of GCC, code generation controlled by this option will change to
+> reflect the processors that are most common at the time that version
+> of GCC is released.
+>
+>
+> How difficult is it to change that line in Mkrules.dist/Mkrules.rules?
+
+That is not the problem.
+
+For the last transition, a lot of testing, adatptions to R, and a lot of 
+third party software had to be rebuild.
+Thanks to Jeroen Ooms, Duncan Murdoch, Jim Hester and several others it 
+was possible to get most of that done within half a year or so. Even if 
+the next transition works more smoothly and faster, it is still a 
+considerable amount of work to get the 10000 CRAN and also several 
+thousand BioC packages to a state they work with a current compiler 
+collection on Windows and (if necessary) rebuild third party tools.
+
+Best,
+Uwe Ligges
+
+
+
+
+>
+> Avi
+>
+> _______________________________________________
+> R-SIG-windows mailing list
+> R-SIG-windows at r-project.org
+> https://stat.ethz.ch/mailman/listinfo/r-sig-windows
+>
+
+
+From ligges at statistik.tu-dortmund.de  Wed Feb  1 16:55:53 2017
+From: ligges at statistik.tu-dortmund.de (Uwe Ligges)
+Date: Wed, 1 Feb 2017 16:55:53 +0100
+Subject: [R-SIG-Win] Default mtune for R windows
+In-Reply-To: <CAL6gwnJG_yEXf6HK+_rbgWSf1QD=iz28dt4oHiRuHVkRymwg8w@mail.gmail.com>
+References: <CAL6gwn+vDE4Fb43hECq9YbEGBrMDJ3rQS_8XE8wpFc8fhB2+3w@mail.gmail.com>
+	<CABFfbXuB-Ui28o6xHqa4U00NrBsna=QBQWZrBChzJ0OzOR-mOA@mail.gmail.com>
+	<CAL6gwnJG_yEXf6HK+_rbgWSf1QD=iz28dt4oHiRuHVkRymwg8w@mail.gmail.com>
+Message-ID: <11ca3f00-1b57-6cf6-0427-8a21322b5e18@statistik.tu-dortmund.de>
+
+
+
+On 01.02.2017 08:32, Avraham Adler wrote:
+> https://bugs.r-project.org/bugzilla/show_bug.cgi?id=16536
+>
+> I closed it after it was open over a year.
+
+I just see this,
+
+I can try to make a CRAN run with that option enabled and see how much 
+dropout we will find.
+In the past, going to different opimization levels was never as easy as 
+expected.
+
+In the above mention feature request, you cite that in 'GCC 4.9, this 
+option has been "retuned for better support of Intel core and AMD 
+Bulldozer architectures. Performance of AMD K7, K8, Intel Pentium-M, and 
+Pentium4 based CPUs is no longer considered important for generic." [3].'
+
+Which is interesting, as we still have lots of AMD K8 machines running 
+at our department. If the generated code still works with a minor 
+penalty on those machines, we may consider it, but let me trigger a test 
+run in the next one or two weeks.
+
+Best,
+Uwe Ligges
+
+
+
+
+
+
+
+>
+> Avi
+>
+> On Wed, Feb 1, 2017 at 1:08 AM, Jeroen Ooms <jeroen.ooms at stat.ucla.edu>
+> wrote:
+>
+>> On Tue, Jan 31, 2017 at 8:31 PM, Avraham Adler <avraham.adler at gmail.com>
+>> wrote:
+>>> I put in a bug request for this over a year ago and it went nowhere.
+>>
+>> Where did you post this exactly? If we open a topic with a working
+>> patch on bugs.r-project.org and reference the canonical gcc source
+>> that you are citing below, perhaps it will get merged.
+>>
+>
+> 	[[alternative HTML version deleted]]
+>
+> _______________________________________________
+> R-SIG-windows mailing list
+> R-SIG-windows at r-project.org
+> https://stat.ethz.ch/mailman/listinfo/r-sig-windows
+>
+
+

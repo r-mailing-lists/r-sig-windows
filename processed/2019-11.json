@@ -1,0 +1,55 @@
+{
+  "list": "r-sig-windows",
+  "description": "",
+  "month": "2019-11",
+  "messages": [
+    {
+      "id": "msg-5b8b70b86319",
+      "message_id": "<CAL6gwnKznQ9WRPm2cw8X4Qa=gUxhBhKn9YmqAGAGHOid3Hg-1Q@mail.gmail.com>",
+      "from_name": "Avraham Adler",
+      "from_email_hash": "63266ae79d1743f1496b756da3e3df9582595f717d74d4d823b698d61ef74096",
+      "date": "2019-11-19T22:54:10-05:00",
+      "subject": "[R-SIG-Win] Rtools 4.0",
+      "subject_clean": "Rtools 4.0",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hello, Jereon.\n\nI am very happy and grateful for the work you have done, unsupported, in\nmodernizing the Windows toolchain. What concerns me, though, is that there\nseems to be a major overhaul to the build process. For most purposes it is\nmuch neater and easier. Unfortunately, it seems to do so at the expense of\ncustomization. You are preparing the first major change to the windows\nbuild in over a decade, if not longer, and it breaks a number of existing\nprocesses.\n\nFor example with the Mkrules.local options, all PATHS can be set prior to\nbuild. I see the option to change Innosetup with ISDIR, but where is the\nQPDF option? Also, you are testing for \" test -f \"C:/Program Files\n(x86)/Inno Setup 6/ISCC.exe\" in PKGBUILD\n<https://github.com/r-windows/r-testing/blob/master/PKGBUILD>, not ISDIR,\n\nMore importantly, at least to me, is that since at least 2013, I've been\nbuilding Rblas against OpenBLAS. That requires changing ATLAS PATH in\nMkrules.dist and Makevars.win in R_HOME/src/extra/blas. I see no way to do\nthat in the current system.\n\nLastly, and this may be less important, to use LTO, at least under the\ncurrent system (which i do NOT advise, I spent months trying to get it to\nwork and the best I could do was build base+recommended) other files need\nto be changed to ensure that the properly prefizxed AR, NM, and RANLIB are\nused, that the proper flags are passed to both compiler and linker, and\nthat allow multiple definitions is set. I wouldn't have the foggiest idea\nwhere to begin with your setup, because you aren't working from a static\npackage of R-XXX but seem to download it on the fly every time.\n\nMaybe I don't understand enough of what you did, and I'm just not seeing\nit. I'd be thrilled, if you could point out where I've been blind or where\nI've overlooked these abilities.However, if there is going to be a major,\nbreaking, overhaul of the build, it would really help those of us who work\nand develop in Windows to be able to continue with the customizations we've\nbuilt (and which we have, in our own small ways, supported the wider R\ncommunity).\n\nThank you very much,\n\nAvi\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hello, Jereon.\n\nI am very happy and grateful for the work you have done, unsupported, in\nmodernizing the Windows toolchain. What concerns me, though, is that there\nseems to be a major overhaul to the ",
+      "thread_id": "thread-5b8b70b86319",
+      "thread_depth": 0,
+      "month": "2019-11"
+    },
+    {
+      "id": "msg-19521834f73b",
+      "message_id": "<CABFfbXvVSi4Ha0-ujv_76r7eYTESBsF2OF1Vyk=YUbkx1XjPFw@mail.gmail.com>",
+      "from_name": "Jeroen Ooms",
+      "from_email_hash": "6d6b57f7dfdacdb11068763c49af518a12f1ee23bc379f749098f057c1d6df69",
+      "date": "2019-11-20T12:35:30+01:00",
+      "subject": "[R-SIG-Win] Rtools 4.0",
+      "subject_clean": "Rtools 4.0",
+      "in_reply_to": "<CAL6gwnKznQ9WRPm2cw8X4Qa=gUxhBhKn9YmqAGAGHOid3Hg-1Q@mail.gmail.com>",
+      "references": [
+        "<CAL6gwnKznQ9WRPm2cw8X4Qa=gUxhBhKn9YmqAGAGHOid3Hg-1Q@mail.gmail.com>"
+      ],
+      "body_plain": "I think you are misunderstanding the difference between R and Rtools.\nRtools is merely a bundle with gcc and some extra utilities.\nEverything else is managed by R-core in the R svn. An update Rtools\ndoesn't change how you can build R.\n\nThe main thing that changes in rtools40 is that the version of GCC has\nbumped to 8. Also there is now a package manager included with\nrtools40, that you could use (but don't have to) to install additional\nlibraries. The latter is optional, your current scripts and libs will\nkeep working as well. None of the things you describe below have\nchanged.\n\nI am indeed refactoring some of the scripts that I use myself to build\nthe daily R installers, but those are not relevant to you. Your\ncurrent build scripts will keep working, the only thing you should\nhave to change to build with rtools40 is update the path to gcc in\nyour script.\n\nI don't understand everything you are trying to do, but I'll test\nmyself if I can build R with external openblas. For discussions about\nadding (optional) support for LTO flags, you need to talk to R-core.\n\n\n\n\n\nOn Wed, Nov 20, 2019 at 4:54 AM Avraham Adler <avraham.adler at gmail.com> wrote:\n>\n> Hello, Jereon.\n>\n> I am very happy and grateful for the work you have done, unsupported, in modernizing the Windows toolchain. What concerns me, though, is that there seems to be a major overhaul to the build process. For most purposes it is much neater and easier. Unfortunately, it seems to do so at the expense of customization. You are preparing the first major change to the windows build in over a decade, if not longer, and it breaks a number of existing processes.\n>\n> For example with the Mkrules.local options, all PATHS can be set prior to build. I see the option to change Innosetup with ISDIR, but where is the QPDF option? Also, you are testing for \" test -f \"C:/Program Files (x86)/Inno Setup 6/ISCC.exe\" in PKGBUILD, not ISDIR,\n>\n> More importantly, at least to me, is that since at least 2013, I've been building Rblas against OpenBLAS. That requires changing ATLAS PATH in Mkrules.dist and Makevars.win in R_HOME/src/extra/blas. I see no way to do that in the current system.\n>\n> Lastly, and this may be less important, to use LTO, at least under the current system (which i do NOT advise, I spent months trying to get it to work and the best I could do was build base+recommended) other files need to be changed to ensure that the properly prefizxed AR, NM, and RANLIB are used, that the proper flags are passed to both compiler and linker, and that allow multiple definitions is set. I wouldn't have the foggiest idea where to begin with your setup, because you aren't working from a static package of R-XXX but seem to download it on the fly every time.\n>\n> Maybe I don't understand enough of what you did, and I'm just not seeing it. I'd be thrilled, if you could point out where I've been blind or where I've overlooked these abilities.However, if there is going to be a major, breaking, overhaul of the build, it would really help those of us who work and develop in Windows to be able to continue with the customizations we've built (and which we have, in our own small ways, supported the wider R community).\n>\n> Thank you very much,\n>\n> Avi\n>\n>",
+      "body_snippet": "I think you are misunderstanding the difference between R and Rtools.\nRtools is merely a bundle with gcc and some extra utilities.\nEverything else is managed by R-core in the R svn. An update Rtools\nd",
+      "thread_id": "thread-5b8b70b86319",
+      "thread_depth": 1,
+      "month": "2019-11"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-5b8b70b86319",
+      "subject": "Rtools 4.0",
+      "message_count": 2,
+      "participants": [
+        "Avraham Adler",
+        "Jeroen Ooms"
+      ],
+      "started": "2019-11-19T22:54:10-05:00",
+      "last_reply": "2019-11-20T12:35:30+01:00",
+      "root_message_id": "msg-5b8b70b86319"
+    }
+  ]
+}

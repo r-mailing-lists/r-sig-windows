@@ -1,0 +1,89 @@
+{
+  "list": "r-sig-windows",
+  "description": "",
+  "month": "2017-02",
+  "messages": [
+    {
+      "id": "msg-d2157d3ff779",
+      "message_id": "<CAL6gwnJG_yEXf6HK+_rbgWSf1QD=iz28dt4oHiRuHVkRymwg8w@mail.gmail.com>",
+      "from_name": "Avraham Adler",
+      "from_email_hash": "af3a8abf7b61e7882d265f3ee607ab6f21a248be198b31d73d45602a933f5ba0",
+      "date": "2017-02-01T02:32:15-05:00",
+      "subject": "[R-SIG-Win] Default mtune for R windows",
+      "subject_clean": "Default mtune for R windows",
+      "in_reply_to": "<CABFfbXuB-Ui28o6xHqa4U00NrBsna=QBQWZrBChzJ0OzOR-mOA@mail.gmail.com>",
+      "references": [
+        "<CAL6gwn+vDE4Fb43hECq9YbEGBrMDJ3rQS_8XE8wpFc8fhB2+3w@mail.gmail.com>",
+        "<CABFfbXuB-Ui28o6xHqa4U00NrBsna=QBQWZrBChzJ0OzOR-mOA@mail.gmail.com>"
+      ],
+      "body_plain": "https://bugs.r-project.org/bugzilla/show_bug.cgi?id=16536\n\nI closed it after it was open over a year.\n\nAvi\n\nOn Wed, Feb 1, 2017 at 1:08 AM, Jeroen Ooms <jeroen.ooms at stat.ucla.edu>\nwrote:\n\n> On Tue, Jan 31, 2017 at 8:31 PM, Avraham Adler <avraham.adler at gmail.com>\n> wrote:\n> > I put in a bug request for this over a year ago and it went nowhere.\n>\n> Where did you post this exactly? If we open a topic with a working\n> patch on bugs.r-project.org and reference the canonical gcc source\n> that you are citing below, perhaps it will get merged.\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "https://bugs.r-project.org/bugzilla/show_bug.cgi?id=16536\n\nI closed it after it was open over a year.\n\nAvi\n\nOn Wed, Feb 1, 2017 at 1:08 AM, Jeroen Ooms <jeroen.ooms at stat.ucla.edu>\nwrote:\n\n> On Tue,",
+      "thread_id": "thread-d2157d3ff779",
+      "thread_depth": 0,
+      "month": "2017-02"
+    },
+    {
+      "id": "msg-67d62103c216",
+      "message_id": "<eb24e9e2-a300-6b94-7093-eb9f0ce5aa63@statistik.tu-dortmund.de>",
+      "from_name": "Uwe Ligges",
+      "from_email_hash": "41041d76fae21a8bc18fe19d38def92b3b630abfb7abf4acf41a0734d8851d24",
+      "date": "2017-02-01T16:49:24+01:00",
+      "subject": "[R-SIG-Win] Default mtune for R windows",
+      "subject_clean": "Default mtune for R windows",
+      "in_reply_to": "<CAL6gwn+vDE4Fb43hECq9YbEGBrMDJ3rQS_8XE8wpFc8fhB2+3w@mail.gmail.com>",
+      "references": [
+        "<CAL6gwn+vDE4Fb43hECq9YbEGBrMDJ3rQS_8XE8wpFc8fhB2+3w@mail.gmail.com>"
+      ],
+      "body_plain": "On 01.02.2017 05:31, Avraham Adler wrote:\n> I put in a bug request for this over a year ago and it went nowhere.\n> Nobody is using a core2 on Windows anymore. GCC itself has been\n> suggesting for a very long time to use '-mtune=generic'. Their\n> language on 4.9.3. is:\n>\n> ?generic? Produce code optimized for the most common IA32/AMD64/EM64T\n> processors. If youknow the CPU on which your code will run, then you\n> should use the corresponding -mtune or -march option instead of\n> -mtune=generic. But, if you do not know exactly what CPU users of your\n> application will have, then you should use this option.\n>\n> As new processors are deployed in the marketplace, the behavior of\n> this option will change. Therefore, if you upgrade to a newer version\n> of GCC, code generation controlled by this option will change to\n> reflect the processors that are most common at the time that version\n> of GCC is released.\n>\n>\n> How difficult is it to change that line in Mkrules.dist/Mkrules.rules?\n\nThat is not the problem.\n\nFor the last transition, a lot of testing, adatptions to R, and a lot of \nthird party software had to be rebuild.\nThanks to Jeroen Ooms, Duncan Murdoch, Jim Hester and several others it \nwas possible to get most of that done within half a year or so. Even if \nthe next transition works more smoothly and faster, it is still a \nconsiderable amount of work to get the 10000 CRAN and also several \nthousand BioC packages to a state they work with a current compiler \ncollection on Windows and (if necessary) rebuild third party tools.\n\nBest,\nUwe Ligges\n\n\n\n\n>\n> Avi\n>\n> _______________________________________________\n> R-SIG-windows mailing list\n> R-SIG-windows at r-project.org\n> https://stat.ethz.ch/mailman/listinfo/r-sig-windows\n>",
+      "body_snippet": "On 01.02.2017 05:31, Avraham Adler wrote:\n> I put in a bug request for this over a year ago and it went nowhere.\n> Nobody is using a core2 on Windows anymore. GCC itself has been\n> suggesting for a ve",
+      "thread_id": "thread-67d62103c216",
+      "thread_depth": 0,
+      "month": "2017-02"
+    },
+    {
+      "id": "msg-68a691f039dc",
+      "message_id": "<11ca3f00-1b57-6cf6-0427-8a21322b5e18@statistik.tu-dortmund.de>",
+      "from_name": "Uwe Ligges",
+      "from_email_hash": "41041d76fae21a8bc18fe19d38def92b3b630abfb7abf4acf41a0734d8851d24",
+      "date": "2017-02-01T16:55:53+01:00",
+      "subject": "[R-SIG-Win] Default mtune for R windows",
+      "subject_clean": "Default mtune for R windows",
+      "in_reply_to": "<CAL6gwnJG_yEXf6HK+_rbgWSf1QD=iz28dt4oHiRuHVkRymwg8w@mail.gmail.com>",
+      "references": [
+        "<CAL6gwn+vDE4Fb43hECq9YbEGBrMDJ3rQS_8XE8wpFc8fhB2+3w@mail.gmail.com>",
+        "<CABFfbXuB-Ui28o6xHqa4U00NrBsna=QBQWZrBChzJ0OzOR-mOA@mail.gmail.com>",
+        "<CAL6gwnJG_yEXf6HK+_rbgWSf1QD=iz28dt4oHiRuHVkRymwg8w@mail.gmail.com>"
+      ],
+      "body_plain": "On 01.02.2017 08:32, Avraham Adler wrote:\n> https://bugs.r-project.org/bugzilla/show_bug.cgi?id=16536\n>\n> I closed it after it was open over a year.\n\nI just see this,\n\nI can try to make a CRAN run with that option enabled and see how much \ndropout we will find.\nIn the past, going to different opimization levels was never as easy as \nexpected.\n\nIn the above mention feature request, you cite that in 'GCC 4.9, this \noption has been \"retuned for better support of Intel core and AMD \nBulldozer architectures. Performance of AMD K7, K8, Intel Pentium-M, and \nPentium4 based CPUs is no longer considered important for generic.\" [3].'\n\nWhich is interesting, as we still have lots of AMD K8 machines running \nat our department. If the generated code still works with a minor \npenalty on those machines, we may consider it, but let me trigger a test \nrun in the next one or two weeks.\n\nBest,\nUwe Ligges\n\n\n\n\n\n\n\n>\n> Avi\n>\n> On Wed, Feb 1, 2017 at 1:08 AM, Jeroen Ooms <jeroen.ooms at stat.ucla.edu>\n> wrote:\n>\n>> On Tue, Jan 31, 2017 at 8:31 PM, Avraham Adler <avraham.adler at gmail.com>\n>> wrote:\n>>> I put in a bug request for this over a year ago and it went nowhere.\n>>\n>> Where did you post this exactly? If we open a topic with a working\n>> patch on bugs.r-project.org and reference the canonical gcc source\n>> that you are citing below, perhaps it will get merged.\n>>\n>\n> \t[[alternative HTML version deleted]]\n>\n> _______________________________________________\n> R-SIG-windows mailing list\n> R-SIG-windows at r-project.org\n> https://stat.ethz.ch/mailman/listinfo/r-sig-windows\n>",
+      "body_snippet": "On 01.02.2017 08:32, Avraham Adler wrote:\n> https://bugs.r-project.org/bugzilla/show_bug.cgi?id=16536\n>\n> I closed it after it was open over a year.\n\nI just see this,\n\nI can try to make a CRAN run wit",
+      "thread_id": "thread-d2157d3ff779",
+      "thread_depth": 1,
+      "month": "2017-02"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-d2157d3ff779",
+      "subject": "Default mtune for R windows",
+      "message_count": 2,
+      "participants": [
+        "Avraham Adler",
+        "Uwe Ligges"
+      ],
+      "started": "2017-02-01T02:32:15-05:00",
+      "last_reply": "2017-02-01T16:55:53+01:00",
+      "root_message_id": "msg-d2157d3ff779"
+    },
+    {
+      "id": "thread-67d62103c216",
+      "subject": "Default mtune for R windows",
+      "message_count": 1,
+      "participants": [
+        "Uwe Ligges"
+      ],
+      "started": "2017-02-01T16:49:24+01:00",
+      "last_reply": "2017-02-01T16:49:24+01:00",
+      "root_message_id": "msg-67d62103c216"
+    }
+  ]
+}

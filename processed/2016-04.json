@@ -1,0 +1,114 @@
+{
+  "list": "r-sig-windows",
+  "description": "",
+  "month": "2016-04",
+  "messages": [
+    {
+      "id": "msg-733b7dc0f6d6",
+      "message_id": "<CANnL8grWnmPsG2kD55bvSAL7gZ_Zm+nTpwrub++oQoFbxWGDLg@mail.gmail.com>",
+      "from_name": "Tim Keitt",
+      "from_email_hash": "d1fbfc1cb7ef35401094f34c8b86be970c51c67d04033c5e7eff9b5bfec47e48",
+      "date": "2016-04-29T15:33:11-05:00",
+      "subject": "[R-SIG-Win] Question about rtools provided shell",
+      "subject_clean": "Question about rtools provided shell",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I am trying to be clever (whether that's a good idea is for another thread\n;) and write an R script that downloads and builds the postgres libpq\nlibrary when its not installed. (The idea is to call this script during\nsource package installation.)\n\nIt works swimmingly on Linux as you would expect, but after a fresh windows\ninstall + R + Rtools, I get an error during the postgres configure step\ncomplaining about the shell not being posix. I _assume_ that I am calling\nthe shell that comes with Rtools as it is at the front of the path variable.\n\nSo my questions are: what shell comes with Rtools, can it be made to work\nwith autoconf, and is it going to change anytime soon? It appears I might\nbe able to automate installation of mingw but that would either replicate\nor possibly conflict with parts of Rtools.\n\nI'm not very familiar with windows generally, so perhaps I'm missing\nsomething obvious. Any pointers?\n\nTHK\n\nhttp://www.keittlab.org/\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "I am trying to be clever (whether that's a good idea is for another thread\n;) and write an R script that downloads and builds the postgres libpq\nlibrary when its not installed. (The idea is to call th",
+      "thread_id": "thread-733b7dc0f6d6",
+      "thread_depth": 0,
+      "month": "2016-04"
+    },
+    {
+      "id": "msg-333a0dd920ab",
+      "message_id": "<CABFfbXtz5n9-jzAw+jrgHeSXvf-twX5rTyuCe_D981UO0A1Kig@mail.gmail.com>",
+      "from_name": "Jeroen Ooms",
+      "from_email_hash": "a265ef4bb03c14ee9d6f00489213486310c7d7bc8d3d2467e6937626fef998e1",
+      "date": "2016-04-29T22:37:10+02:00",
+      "subject": "[R-SIG-Win] Question about rtools provided shell",
+      "subject_clean": "Question about rtools provided shell",
+      "in_reply_to": "<CANnL8grWnmPsG2kD55bvSAL7gZ_Zm+nTpwrub++oQoFbxWGDLg@mail.gmail.com>",
+      "references": [
+        "<CANnL8grWnmPsG2kD55bvSAL7gZ_Zm+nTpwrub++oQoFbxWGDLg@mail.gmail.com>"
+      ],
+      "body_plain": "On Fri, Apr 29, 2016 at 10:33 PM, Tim Keitt <tkeitt at utexas.edu> wrote:\n> I am trying to be clever (whether that's a good idea is for another thread\n> ;) and write an R script that downloads and builds the postgres libpq\n> library when its not installed. (The idea is to call this script during\n> source package installation.)\n\nWe do exactly this in the RPostgres package:\nhttps://github.com/rstats-db/RPostgres . You want to check the\nsrc/Makevars.win file and tools/winlibs.R. Feel free to steal/copy\nwhatever you need.",
+      "body_snippet": "On Fri, Apr 29, 2016 at 10:33 PM, Tim Keitt <tkeitt at utexas.edu> wrote:\n> I am trying to be clever (whether that's a good idea is for another thread\n> ;) and write an R script that downloads and bui",
+      "thread_id": "thread-733b7dc0f6d6",
+      "thread_depth": 1,
+      "month": "2016-04"
+    },
+    {
+      "id": "msg-9d1892758ffb",
+      "message_id": "<22307.58991.433829.255495@max.nulle.part>",
+      "from_name": "Dirk Eddelbuettel",
+      "from_email_hash": "447d8de83a7b9c5d61116890bacb6dc0c76aee31b3011a41fb7d3c62dac9042f",
+      "date": "2016-04-29T17:55:43-05:00",
+      "subject": "[R-SIG-Win] Question about rtools provided shell",
+      "subject_clean": "Question about rtools provided shell",
+      "in_reply_to": "<CABFfbXtz5n9-jzAw+jrgHeSXvf-twX5rTyuCe_D981UO0A1Kig@mail.gmail.com>",
+      "references": [
+        "<CANnL8grWnmPsG2kD55bvSAL7gZ_Zm+nTpwrub++oQoFbxWGDLg@mail.gmail.com>",
+        "<CABFfbXtz5n9-jzAw+jrgHeSXvf-twX5rTyuCe_D981UO0A1Kig@mail.gmail.com>"
+      ],
+      "body_plain": "On 29 April 2016 at 22:37, Jeroen Ooms wrote:\n| On Fri, Apr 29, 2016 at 10:33 PM, Tim Keitt <tkeitt at utexas.edu> wrote:\n| > I am trying to be clever (whether that's a good idea is for another thread\n| > ;) and write an R script that downloads and builds the postgres libpq\n| > library when its not installed. (The idea is to call this script during\n| > source package installation.)\n| \n| We do exactly this in the RPostgres package:\n| https://github.com/rstats-db/RPostgres . You want to check the\n| src/Makevars.win file and tools/winlibs.R. Feel free to steal/copy\n| whatever you need.\n\nAnd RPostgreSQL builds it from embedded sources -- putting the download step\nin should not be hard.\n\nhttps://github.com/cran/RPostgreSQL/blob/master/src/Makevars.win\n\nDirk\n\n-- \nhttp://dirk.eddelbuettel.com | @eddelbuettel | edd at debian.org",
+      "body_snippet": "On 29 April 2016 at 22:37, Jeroen Ooms wrote:\n| On Fri, Apr 29, 2016 at 10:33 PM, Tim Keitt <tkeitt at utexas.edu> wrote:\n| > I am trying to be clever (whether that's a good idea is for another thread",
+      "thread_id": "thread-733b7dc0f6d6",
+      "thread_depth": 2,
+      "month": "2016-04"
+    },
+    {
+      "id": "msg-ba41f6f2b712",
+      "message_id": "<CANnL8goS-eSBLyVtTaMwu21DrNGJafF1Xq-+MnFENX1FE5Yt=g@mail.gmail.com>",
+      "from_name": "Tim Keitt",
+      "from_email_hash": "d1fbfc1cb7ef35401094f34c8b86be970c51c67d04033c5e7eff9b5bfec47e48",
+      "date": "2016-04-29T19:08:28-05:00",
+      "subject": "[R-SIG-Win] Question about rtools provided shell",
+      "subject_clean": "Question about rtools provided shell",
+      "in_reply_to": "<CABFfbXtz5n9-jzAw+jrgHeSXvf-twX5rTyuCe_D981UO0A1Kig@mail.gmail.com>",
+      "references": [
+        "<CANnL8grWnmPsG2kD55bvSAL7gZ_Zm+nTpwrub++oQoFbxWGDLg@mail.gmail.com>",
+        "<CABFfbXtz5n9-jzAw+jrgHeSXvf-twX5rTyuCe_D981UO0A1Kig@mail.gmail.com>"
+      ],
+      "body_plain": "http://www.keittlab.org/\n\nOn Fri, Apr 29, 2016 at 3:37 PM, Jeroen Ooms <jeroenooms at gmail.com> wrote:\n\n> On Fri, Apr 29, 2016 at 10:33 PM, Tim Keitt <tkeitt at utexas.edu> wrote:\n> > I am trying to be clever (whether that's a good idea is for another\n> thread\n> > ;) and write an R script that downloads and builds the postgres libpq\n> > library when its not installed. (The idea is to call this script during\n> > source package installation.)\n>\n> We do exactly this in the RPostgres package:\n> https://github.com/rstats-db/RPostgres . You want to check the\n> src/Makevars.win file and tools/winlibs.R. Feel free to steal/copy\n> whatever you need.\n>\n\nNice to discover the prebuilt windows libs on github. Did not know about\nthat. I was pulling the full postgresql source and then building libpq in\nthe tree.\n\nTHK\n\n\n>\n> _______________________________________________\n> R-SIG-windows mailing list\n> R-SIG-windows at r-project.org\n> https://stat.ethz.ch/mailman/listinfo/r-sig-windows\n>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "http://www.keittlab.org/\n\nOn Fri, Apr 29, 2016 at 3:37 PM, Jeroen Ooms <jeroenooms at gmail.com> wrote:\n\n> On Fri, Apr 29, 2016 at 10:33 PM, Tim Keitt <tkeitt at utexas.edu> wrote:\n> > I am trying to ",
+      "thread_id": "thread-733b7dc0f6d6",
+      "thread_depth": 2,
+      "month": "2016-04"
+    },
+    {
+      "id": "msg-08397525c68d",
+      "message_id": "<CABFfbXuPdr+yQ5BWGUOv3tzz+D4QR+WK=xz6z9CgzcHR8DaPeQ@mail.gmail.com>",
+      "from_name": "Jeroen Ooms",
+      "from_email_hash": "a265ef4bb03c14ee9d6f00489213486310c7d7bc8d3d2467e6937626fef998e1",
+      "date": "2016-04-30T12:34:08+02:00",
+      "subject": "[R-SIG-Win] Question about rtools provided shell",
+      "subject_clean": "Question about rtools provided shell",
+      "in_reply_to": "<CANnL8goS-eSBLyVtTaMwu21DrNGJafF1Xq-+MnFENX1FE5Yt=g@mail.gmail.com>",
+      "references": [
+        "<CANnL8grWnmPsG2kD55bvSAL7gZ_Zm+nTpwrub++oQoFbxWGDLg@mail.gmail.com>",
+        "<CABFfbXtz5n9-jzAw+jrgHeSXvf-twX5rTyuCe_D981UO0A1Kig@mail.gmail.com>",
+        "<CANnL8goS-eSBLyVtTaMwu21DrNGJafF1Xq-+MnFENX1FE5Yt=g@mail.gmail.com>"
+      ],
+      "body_plain": "On Sat, Apr 30, 2016 at 2:08 AM, Tim Keitt <tkeitt at utexas.edu> wrote:\n> Nice to discover the prebuilt windows libs on github. Did not know about\n> that. I was pulling the full postgresql source and then building libpq in\n> the tree.\n\nI just added some new builds that also work with the new gcc 4.9.3\ntoolchain: https://github.com/rwinlib/libpq/archive/v9.5.2.zip",
+      "body_snippet": "On Sat, Apr 30, 2016 at 2:08 AM, Tim Keitt <tkeitt at utexas.edu> wrote:\n> Nice to discover the prebuilt windows libs on github. Did not know about\n> that. I was pulling the full postgresql source and",
+      "thread_id": "thread-733b7dc0f6d6",
+      "thread_depth": 3,
+      "month": "2016-04"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-733b7dc0f6d6",
+      "subject": "Question about rtools provided shell",
+      "message_count": 5,
+      "participants": [
+        "Dirk Eddelbuettel",
+        "Jeroen Ooms",
+        "Tim Keitt"
+      ],
+      "started": "2016-04-29T15:33:11-05:00",
+      "last_reply": "2016-04-30T12:34:08+02:00",
+      "root_message_id": "msg-733b7dc0f6d6"
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+From @rtjom31415 @end|ng |rom goog|em@||@com  Wed Apr  8 12:01:29 2020
+From: @rtjom31415 @end|ng |rom goog|em@||@com (Constantin Ahlmann-Eltze)
+Date: Wed, 8 Apr 2020 12:01:29 +0200
+Subject: [R-SIG-Win] Rtools and R 4.0.0?
+Message-ID: <feb70c65-24a8-d403-ceb5-782da3ef1280-7470@googlemail.com>
+
+Hi,
+
+I wanted to follow up on the email?below from Kevin about the prospect 
+of Rtools 40 with the upcoming R 4.0.0 release?
+
+I currently have a package under review at BioConductor 
+(https://github.com/Bioconductor/Contributions/issues/1465) which uses 
+C++14 features. I was told that they would be ready to make the switch 
+to Rtools 40, however are waiting for a decision from CRAN.
+
+Best Regards,
+Constantin Ahlmann-Eltze
+
+Hello,
+
+Has a decision been made yet as to whether R 4.0.0 on Windows is going
+to be built using the new gcc8 toolchain (described at
+https://cran.r-project.org/bin/windows/testing/rtools40.html)?
+
+>/From the sidelines, I can see that the toolchain is being used to /build and test packages on CRAN; if there are any remaining issues
+that I can help to try and run down (either in R or any CRAN packages)
+I'd be happy to try and help.
+
+FWIW, I'm excited at the prospect at seeing a new toolchain for
+Windows, since it would imply support for C++17 and so it would become
+easier for CRAN packages to depend on the newer C++ standard.
+
+Thanks,
+Kevin
+
+
+	[[alternative HTML version deleted]]
+
+

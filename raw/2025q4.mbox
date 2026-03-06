@@ -1,0 +1,24 @@
+From tom@@@k@||ber@ @end|ng |rom gm@||@com  Wed Oct 29 15:06:56 2025
+From: tom@@@k@||ber@ @end|ng |rom gm@||@com (Tomas Kalibera)
+Date: Wed, 29 Oct 2025 15:06:56 +0100
+Subject: [R-SIG-Win] Rtools45 update
+Message-ID: <40c9f740-2e72-4931-9c0d-6f5717091c27@gmail.com>
+
+Dear R Windows developers,
+
+an update of Rtools45, the toolchain for R for Windows used by R-devel 
+and R 4.5, is available as revision 6691 from
+
+https://cran.r-project.org/bin/windows/Rtools/rtools45/rtools.html
+
+GCC is upgraded to 14.3?and a number of additional packages have been 
+upgraded.? See
+
+https://cran.r-project.org/bin/windows/Rtools/rtools45/news.html
+
+for more details.
+
+Best
+Tomas
+
+

@@ -1,0 +1,3273 @@
+From jeroen.ooms at stat.ucla.edu  Fri Aug 28 23:52:36 2015
+From: jeroen.ooms at stat.ucla.edu (Jeroen Ooms)
+Date: Fri, 28 Aug 2015 23:52:36 +0200
+Subject: [R-SIG-Win] mingw-w64 toolchain status update
+Message-ID: <CABFfbXsJKcry=s=fbU_H7MxQnZocxF+-TH2n6DpfX4npBQV4ew@mail.gmail.com>
+
+Welcome to the new r-sig-windows mailing list! The initial purpose is
+to announce updates of the mingw-w64 tool chain (aka Rtools) and
+discuss problems related to building R and R packages on windows. Feel
+free to invite other people that might be interested in these
+developments.
+
+## Building mingw-w64
+
+Several people have been working on and off on this over the past
+year. Below a summary of the current status to best of my knowledge.
+Please correct me where I am wrong.
+
+There are various collections of build-scripts available that produce
+a mingw-w64 tool-chain. Some cross compile from Linux, others are
+compile natively on Windows. In my experience, best results have been
+achieved using the "mingw-builds" [1] scripts, which build from the
+msys2 environment on windows. The "mingw-builds" scripts are pretty
+complete and well maintained. The mingw-w64 project itself uses these
+same scripts for publishing builds on their sourceforge website [2].
+
+Because we strive for maximum compatibility and minimal disruption, we
+target the same settings as the current rtools:
+
+ - i686 host (win32)
+ - sjlj exceptions
+ - win32 threads (not posix)
+ - static gcc (i.e. no separate libstdc++-6.dll and libgcc_s_sjlj-1.dll files)
+ - mingw-w64 runtime v3 (needed for c++11, current rtools has v2)
+
+When using sjlj exceptions, the mingw-builds defaults to a multilib
+toolchain. This means that the same compiler can target both win32 and
+win64 (using the -m32 and -m64 C flags). The current rtools uses a
+multilib tool chain as well, so R already passes the correct flags to
+the compiler, which makes the migration a little easier.
+
+I used the following command in msys2 to produce a gcc-4.9.2 build:
+
+  ./build --mode=gcc-4.9.2 --rt-version=v3 --arch=i686
+--exceptions=sjlj --static-gcc --threads=win32
+--enable-languages=c,c++,fortran
+
+Building took about 3 hours. A zip file with the binaries is available
+here [3]. The zip file is pretty large because the scripts also build
+a lot of extra utilities that we probably don't need in the final
+rtools distribution.
+
+## Numeric precision bug
+
+One outstanding bug [4] in the mingw-w64 runtime can cause tiny
+numeric differences on 64bit windows. KK has found a simple workaround
+is to change R_pow (in src/main/arithmetic.c) to use powl() instead of
+pow().
+
+  sed -i "s/pow(x, y)/powl(x, y)/g" %R_HOME%/src/main/arithmetic.c
+
+I have confirmed that with this fix, R passes make check on win64.
+Hopefully base R can adopt this fix so that we don't need special
+patching for windows.
+
+## Rf_error problem
+
+The mingw-w64 runtime version 3.3.0 had a bug [5] for sjlj exceptions
+that caused Rf_error() to crash. This problem has since then been
+fixed both the v3 and v4 versions of mingw-w64. Because the
+"mingw-builds" scripts always uses the latest v3.x version of
+mingw-w64, we do not need special patching anymore.
+
+In case we want to build a tool chain using the v3.3.0 version of the
+mingw runtime, KK has extracted the required patch:
+http://pastebin.com/k4dLndkw.
+
+## Crashing V8
+
+There was a problem with the V8 package which would crash with the new
+tool chain. It looks like this was related to some ABI change in the
+mingw-w64 runtime. Rebuilding the libv8 library for i386 has solved
+the problem.
+
+## Static Libraries
+
+I was able to build R-devel with the new tool chain using the same
+static libraries as for R 3.2.2 (libicu, libcairo, libcurl, Tcl, and
+the "extsoft" stuff in local320.zip, see [6]). However perhaps it
+couldn't hurt to rebuild some of these with more recent versions.
+
+## To do
+
+There is still a lot of work to do. We need to do more more testing of
+R itself, in particular GUI features that are not covered by make
+check. Kevin already found a problem with tab completion in RGui that
+we need to investigate.
+
+Then we need to test if all CRAN packages work with the new tool
+chain. In particular packages that link to external C/C++ libraries,
+or those that use exotic c++ features might require attention.
+
+I will try to provide builds of the windows installer via [3] until
+the new tool chain is ready for CRAN. This installer contains both x32
+and x64 builds of R-devel, as well as a copy of the new tool chain
+itself.
+
+Thanks everyone for you help and patience!
+
+
+[1] https://github.com/niXman/mingw-builds/tree/develop
+[2] http://sourceforge.net/projects/mingw-w64/files/Toolchains%20targetting%20Win32/Personal%20Builds/mingw-builds/
+[3] http://www.stat.ucla.edu/~jeroen/mingw-w64/
+[4] http://sourceforge.net/p/mingw-w64/bugs/466/
+[5] http://sourceforge.net/p/mingw-w64/bugs/465/
+[6] http://www.stats.ox.ac.uk/pub/Rtools
+
+
+From qkou at umail.iu.edu  Sat Aug 29 20:27:00 2015
+From: qkou at umail.iu.edu (Qiang Kou)
+Date: Sat, 29 Aug 2015 14:27:00 -0400
+Subject: [R-SIG-Win] mingw-w64 toolchain status update
+In-Reply-To: <CABFfbXsJKcry=s=fbU_H7MxQnZocxF+-TH2n6DpfX4npBQV4ew@mail.gmail.com>
+References: <CABFfbXsJKcry=s=fbU_H7MxQnZocxF+-TH2n6DpfX4npBQV4ew@mail.gmail.com>
+Message-ID: <CAJ_LAMDfVwTw1dYV0wGs+bgzd=26hzCs+cpkAWaK=tZWcNDDFA@mail.gmail.com>
+
+More update from my side:
+
+(1) MinGW-w64:
+
+I think we should take "mingw-builds", although it uses a different way to
+build GCC.
+
+The Rtools with GCC 4.6.3 used the cross-compiling method: it builds a
+cross-compiler and then generates the Windows binaries. But I can't get
+multilib support by using this method.
+
+So "mingw-builds" seems a better solution, since it has multilib support.
+
+(2) numerical precision
+
+For reference, the bug is from
+https://github.com/wch/r-source/blob/trunk/src/main/arithmetic.c#L217
+
+Best wishes,
+
+KK
+
+On Fri, Aug 28, 2015 at 5:52 PM, Jeroen Ooms <jeroen.ooms at stat.ucla.edu>
+wrote:
+
+> Welcome to the new r-sig-windows mailing list! The initial purpose is
+> to announce updates of the mingw-w64 tool chain (aka Rtools) and
+> discuss problems related to building R and R packages on windows. Feel
+> free to invite other people that might be interested in these
+> developments.
+>
+> ## Building mingw-w64
+>
+> Several people have been working on and off on this over the past
+> year. Below a summary of the current status to best of my knowledge.
+> Please correct me where I am wrong.
+>
+> There are various collections of build-scripts available that produce
+> a mingw-w64 tool-chain. Some cross compile from Linux, others are
+> compile natively on Windows. In my experience, best results have been
+> achieved using the "mingw-builds" [1] scripts, which build from the
+> msys2 environment on windows. The "mingw-builds" scripts are pretty
+> complete and well maintained. The mingw-w64 project itself uses these
+> same scripts for publishing builds on their sourceforge website [2].
+>
+> Because we strive for maximum compatibility and minimal disruption, we
+> target the same settings as the current rtools:
+>
+>  - i686 host (win32)
+>  - sjlj exceptions
+>  - win32 threads (not posix)
+>  - static gcc (i.e. no separate libstdc++-6.dll and libgcc_s_sjlj-1.dll
+> files)
+>  - mingw-w64 runtime v3 (needed for c++11, current rtools has v2)
+>
+> When using sjlj exceptions, the mingw-builds defaults to a multilib
+> toolchain. This means that the same compiler can target both win32 and
+> win64 (using the -m32 and -m64 C flags). The current rtools uses a
+> multilib tool chain as well, so R already passes the correct flags to
+> the compiler, which makes the migration a little easier.
+>
+> I used the following command in msys2 to produce a gcc-4.9.2 build:
+>
+>   ./build --mode=gcc-4.9.2 --rt-version=v3 --arch=i686
+> --exceptions=sjlj --static-gcc --threads=win32
+> --enable-languages=c,c++,fortran
+>
+> Building took about 3 hours. A zip file with the binaries is available
+> here [3]. The zip file is pretty large because the scripts also build
+> a lot of extra utilities that we probably don't need in the final
+> rtools distribution.
+>
+> ## Numeric precision bug
+>
+> One outstanding bug [4] in the mingw-w64 runtime can cause tiny
+> numeric differences on 64bit windows. KK has found a simple workaround
+> is to change R_pow (in src/main/arithmetic.c) to use powl() instead of
+> pow().
+>
+>   sed -i "s/pow(x, y)/powl(x, y)/g" %R_HOME%/src/main/arithmetic.c
+>
+> I have confirmed that with this fix, R passes make check on win64.
+> Hopefully base R can adopt this fix so that we don't need special
+> patching for windows.
+>
+> ## Rf_error problem
+>
+> The mingw-w64 runtime version 3.3.0 had a bug [5] for sjlj exceptions
+> that caused Rf_error() to crash. This problem has since then been
+> fixed both the v3 and v4 versions of mingw-w64. Because the
+> "mingw-builds" scripts always uses the latest v3.x version of
+> mingw-w64, we do not need special patching anymore.
+>
+> In case we want to build a tool chain using the v3.3.0 version of the
+> mingw runtime, KK has extracted the required patch:
+> http://pastebin.com/k4dLndkw.
+>
+> ## Crashing V8
+>
+> There was a problem with the V8 package which would crash with the new
+> tool chain. It looks like this was related to some ABI change in the
+> mingw-w64 runtime. Rebuilding the libv8 library for i386 has solved
+> the problem.
+>
+> ## Static Libraries
+>
+> I was able to build R-devel with the new tool chain using the same
+> static libraries as for R 3.2.2 (libicu, libcairo, libcurl, Tcl, and
+> the "extsoft" stuff in local320.zip, see [6]). However perhaps it
+> couldn't hurt to rebuild some of these with more recent versions.
+>
+> ## To do
+>
+> There is still a lot of work to do. We need to do more more testing of
+> R itself, in particular GUI features that are not covered by make
+> check. Kevin already found a problem with tab completion in RGui that
+> we need to investigate.
+>
+> Then we need to test if all CRAN packages work with the new tool
+> chain. In particular packages that link to external C/C++ libraries,
+> or those that use exotic c++ features might require attention.
+>
+> I will try to provide builds of the windows installer via [3] until
+> the new tool chain is ready for CRAN. This installer contains both x32
+> and x64 builds of R-devel, as well as a copy of the new tool chain
+> itself.
+>
+> Thanks everyone for you help and patience!
+>
+>
+> [1] https://github.com/niXman/mingw-builds/tree/develop
+> [2]
+> http://sourceforge.net/projects/mingw-w64/files/Toolchains%20targetting%20Win32/Personal%20Builds/mingw-builds/
+> [3] http://www.stat.ucla.edu/~jeroen/mingw-w64/
+> [4] http://sourceforge.net/p/mingw-w64/bugs/466/
+> [5] http://sourceforge.net/p/mingw-w64/bugs/465/
+> [6] http://www.stats.ox.ac.uk/pub/Rtools
+>
+> _______________________________________________
+> R-SIG-windows mailing list
+> R-SIG-windows at r-project.org
+> https://stat.ethz.ch/mailman/listinfo/r-sig-windows
+>
+
+
+
+-- 
+Qiang Kou
+qkou at umail.iu.edu
+School of Informatics and Computing, Indiana University
+
+	[[alternative HTML version deleted]]
+
+
+From jeroenooms at gmail.com  Mon Aug 31 15:14:28 2015
+From: jeroenooms at gmail.com (Jeroen Ooms)
+Date: Mon, 31 Aug 2015 15:14:28 +0200
+Subject: [R-SIG-Win] An update on the windows toolchain developments
+Message-ID: <CABFfbXsifUjqovxHqXg0PbBP4D_38NZZx=Xv0YkY9MuUnPRJdQ@mail.gmail.com>
+
+A new version of the toolchain based on gcc 4.9.3 and corresponding
+build of R-devel are available from [1]. See the readme.txt [2] for
+details. The installer should work out of the box and make it easy for
+Windows users to compile and test R packages with the new toolchain.
+
+The bad news: unfortunately it appears that the sjlj problem on win64
+(triggered by Rf_error) is still not completely solved in the latest
+mingw-w64. Therefore I restored -fno-asynchronous-unwind-tables in
+CXXFLAGS in the latest build of R. This workaround allows us to move
+forward while we investigate this problem.
+
+Even with -fno-asynchronous-unwind-tables there are still two Rcpp
+unit tests that crash on win64: test.Module.member and
+test.Module.property. These tests segfault when an exception is raised
+within a module. The problem still exists in the latest Rcpp version
+from Github. It is unclear if this is related to the sjlj bug above,
+or a separate problem in Rcpp / R-devel. The issue can be worked
+around by changing Rcpp's Makevars.win to:
+
+   PKG_CXXFLAGS=-mno-sse
+
+With this fix, Rcpp is able to execute all unit tests on both win32
+and win64. All tests pass, except for an issue with dates (also only
+on win64) that is reported at [3].
+
+[1] http://www.stat.ucla.edu/~jeroen/mingw-w64/
+[2] http://www.stat.ucla.edu/~jeroen/mingw-w64/readme.txt
+[3] https://github.com/RcppCore/Rcpp/issues/359
+
+
+From avraham.adler at gmail.com  Mon Aug 31 15:22:33 2015
+From: avraham.adler at gmail.com (Avraham Adler)
+Date: Mon, 31 Aug 2015 09:22:33 -0400
+Subject: [R-SIG-Win] An update on the windows toolchain developments
+In-Reply-To: <CABFfbXsifUjqovxHqXg0PbBP4D_38NZZx=Xv0YkY9MuUnPRJdQ@mail.gmail.com>
+References: <CABFfbXsifUjqovxHqXg0PbBP4D_38NZZx=Xv0YkY9MuUnPRJdQ@mail.gmail.com>
+Message-ID: <CAL6gwnJS0PwdvjEg+P3sNCpOhjuV3p6gDotaJYs5g_m9VHaawg@mail.gmail.com>
+
+Hello, Jeroen.
+
+Regarding the Rf_error, does the issue still exist in v4 of GCC 4.9.2
+and is a regression in 4.9.3, or has it never been solved in 4.9.2
+either?
+
+Regarding the Rcpp error, wouldn't throwing no-sse also prevents the
+use of almost all vecotrizations (sse2-4.1 and avx/avx2), slowing
+results down noticeably?
+
+
+Avi
+
+On Mon, Aug 31, 2015 at 9:14 AM, Jeroen Ooms <jeroenooms at gmail.com> wrote:
+> A new version of the toolchain based on gcc 4.9.3 and corresponding
+> build of R-devel are available from [1]. See the readme.txt [2] for
+> details. The installer should work out of the box and make it easy for
+> Windows users to compile and test R packages with the new toolchain.
+>
+> The bad news: unfortunately it appears that the sjlj problem on win64
+> (triggered by Rf_error) is still not completely solved in the latest
+> mingw-w64. Therefore I restored -fno-asynchronous-unwind-tables in
+> CXXFLAGS in the latest build of R. This workaround allows us to move
+> forward while we investigate this problem.
+>
+> Even with -fno-asynchronous-unwind-tables there are still two Rcpp
+> unit tests that crash on win64: test.Module.member and
+> test.Module.property. These tests segfault when an exception is raised
+> within a module. The problem still exists in the latest Rcpp version
+> from Github. It is unclear if this is related to the sjlj bug above,
+> or a separate problem in Rcpp / R-devel. The issue can be worked
+> around by changing Rcpp's Makevars.win to:
+>
+>    PKG_CXXFLAGS=-mno-sse
+>
+> With this fix, Rcpp is able to execute all unit tests on both win32
+> and win64. All tests pass, except for an issue with dates (also only
+> on win64) that is reported at [3].
+>
+> [1] http://www.stat.ucla.edu/~jeroen/mingw-w64/
+> [2] http://www.stat.ucla.edu/~jeroen/mingw-w64/readme.txt
+> [3] https://github.com/RcppCore/Rcpp/issues/359
+>
+> _______________________________________________
+> R-SIG-windows mailing list
+> R-SIG-windows at r-project.org
+> https://stat.ethz.ch/mailman/listinfo/r-sig-windows
+
+
+From avraham.adler at gmail.com  Mon Aug 31 15:48:51 2015
+From: avraham.adler at gmail.com (Avraham Adler)
+Date: Mon, 31 Aug 2015 09:48:51 -0400
+Subject: [R-SIG-Win] An update on the windows toolchain developments
+In-Reply-To: <CAL6gwnJS0PwdvjEg+P3sNCpOhjuV3p6gDotaJYs5g_m9VHaawg@mail.gmail.com>
+References: <CABFfbXsifUjqovxHqXg0PbBP4D_38NZZx=Xv0YkY9MuUnPRJdQ@mail.gmail.com>
+	<CAL6gwnJS0PwdvjEg+P3sNCpOhjuV3p6gDotaJYs5g_m9VHaawg@mail.gmail.com>
+Message-ID: <CAL6gwnLOPBT3N7kBWc_ZoDSCCPYhdZ0hYybq5n0jS1Hrw2fTJg@mail.gmail.com>
+
+On Mon, Aug 31, 2015 at 9:22 AM, Avraham Adler <avraham.adler at gmail.com> wrote:
+> Hello, Jeroen.
+>
+> Regarding the Rf_error, does the issue still exist in v4 of GCC 4.9.2
+> and is a regression in 4.9.3, or has it never been solved in 4.9.2
+> either?
+>
+> Regarding the Rcpp error, wouldn't throwing no-sse also prevents the
+> use of almost all vecotrizations (sse2-4.1 and avx/avx2), slowing
+> results down noticeably?
+>
+>
+> Avi
+>
+> On Mon, Aug 31, 2015 at 9:14 AM, Jeroen Ooms <jeroenooms at gmail.com> wrote:
+>> A new version of the toolchain based on gcc 4.9.3 and corresponding
+>> build of R-devel are available from [1]. See the readme.txt [2] for
+>> details. The installer should work out of the box and make it easy for
+>> Windows users to compile and test R packages with the new toolchain.
+>>
+>> The bad news: unfortunately it appears that the sjlj problem on win64
+>> (triggered by Rf_error) is still not completely solved in the latest
+>> mingw-w64. Therefore I restored -fno-asynchronous-unwind-tables in
+>> CXXFLAGS in the latest build of R. This workaround allows us to move
+>> forward while we investigate this problem.
+>>
+>> Even with -fno-asynchronous-unwind-tables there are still two Rcpp
+>> unit tests that crash on win64: test.Module.member and
+>> test.Module.property. These tests segfault when an exception is raised
+>> within a module. The problem still exists in the latest Rcpp version
+>> from Github. It is unclear if this is related to the sjlj bug above,
+>> or a separate problem in Rcpp / R-devel. The issue can be worked
+>> around by changing Rcpp's Makevars.win to:
+>>
+>>    PKG_CXXFLAGS=-mno-sse
+>>
+>> With this fix, Rcpp is able to execute all unit tests on both win32
+>> and win64. All tests pass, except for an issue with dates (also only
+>> on win64) that is reported at [3].
+>>
+>> [1] http://www.stat.ucla.edu/~jeroen/mingw-w64/
+>> [2] http://www.stat.ucla.edu/~jeroen/mingw-w64/readme.txt
+>> [3] https://github.com/RcppCore/Rcpp/issues/359
+>>
+>> _______________________________________________
+>> R-SIG-windows mailing list
+>> R-SIG-windows at r-project.org
+>> https://stat.ethz.ch/mailman/listinfo/r-sig-windows
+
+
+Is this error [1] dependent on using RToolsTest (for which I get
+package ?RToolTest? is not available (for R version 3.2.2 Patched) )?
+
+In my test compilation of R and Rcpp using the 4.9.2 toolchain, given:
+
+#include <Rcpp.h>
+using namespace Rcpp;
+
+// [[Rcpp::export]]
+SEXP ctor_mdy() {
+  Date dt = Date(12,31,2005);
+  return wrap(dt);
+}
+
+// [[Rcpp::export]]
+SEXP ctor_ymd() {
+  Date dt = Date(2005,12,31);
+  return wrap(dt);
+}
+
+I get
+
+> ctor_mdy()
+[1] "2005-12-31"
+> ctor_ymd()
+[1] "2005-12-31"
+
+If it matters, EOPTS in MkRules.local were -march=ivybridge
+-mtune=ivybridge --param l1-cache-line-size=64 --param
+l1-cache-size=32 --param l2-cache-size=256 -pipe
+
+.R/Makevars CXXFLAGS= -std=gnu++11 -O2 -march=ivybridge
+-mtune=ivybridge --param l1-cache-line-size=64 --param
+l1-cache-size=32 --param l2-cache-size=256 -pipe
+
+
+Thank you,
+
+Avi
+
+
+[1] https://github.com/RcppCore/Rcpp/issues/359
+
+
+From jeroenooms at gmail.com  Mon Aug 31 16:03:08 2015
+From: jeroenooms at gmail.com (Jeroen Ooms)
+Date: Mon, 31 Aug 2015 16:03:08 +0200
+Subject: [R-SIG-Win] An update on the windows toolchain developments
+In-Reply-To: <CAL6gwnLOPBT3N7kBWc_ZoDSCCPYhdZ0hYybq5n0jS1Hrw2fTJg@mail.gmail.com>
+References: <CABFfbXsifUjqovxHqXg0PbBP4D_38NZZx=Xv0YkY9MuUnPRJdQ@mail.gmail.com>
+	<CAL6gwnJS0PwdvjEg+P3sNCpOhjuV3p6gDotaJYs5g_m9VHaawg@mail.gmail.com>
+	<CAL6gwnLOPBT3N7kBWc_ZoDSCCPYhdZ0hYybq5n0jS1Hrw2fTJg@mail.gmail.com>
+Message-ID: <CABFfbXv+pRJ7Cgba0uY8nsK8CKDPikLq+9wHJDik1maspR7E9Q@mail.gmail.com>
+
+On Mon, Aug 31, 2015 at 3:22 PM, Avraham Adler <avraham.adler at gmail.com> wrote:
+> Regarding the Rf_error, does the issue still exist in v4 of GCC 4.9.2
+> and is a regression in 4.9.3, or has it never been solved in 4.9.2
+> either?
+
+It is an issue in the mingw runtime, it appears in either version of gcc.
+
+> Regarding the Rcpp error, wouldn't throwing no-sse also prevents the
+> use of almost all vecotrizations (sse2-4.1 and avx/avx2), slowing
+> results down noticeably?
+
+I don't know. Hopefully it is just a temporary workaround that we can
+remove once we figure out why the Rcpp module exception is crashing.
+
+> Is this error [1] dependent on using RToolsTest (for which I get
+> package ?RToolTest? is not available (for R version 3.2.2 Patched) )?
+
+RToolTest is a package we use to collect a bunch of tests for the tool
+chain. Did you test with win64 The bug does not appear on win32.
+Please further discuss this within the github issue.
+
+
+From avraham.adler at gmail.com  Mon Aug 31 21:22:38 2015
+From: avraham.adler at gmail.com (Avraham Adler)
+Date: Mon, 31 Aug 2015 15:22:38 -0400
+Subject: [R-SIG-Win] An update on the windows toolchain developments
+In-Reply-To: <CABFfbXsifUjqovxHqXg0PbBP4D_38NZZx=Xv0YkY9MuUnPRJdQ@mail.gmail.com>
+References: <CABFfbXsifUjqovxHqXg0PbBP4D_38NZZx=Xv0YkY9MuUnPRJdQ@mail.gmail.com>
+Message-ID: <CAL6gwn+dKXQ9eQVDqOqK2QWcqFVNk=jLa96vRgR1CyY7bt8_bQ@mail.gmail.com>
+
+Hi, Jeroen. Per <https://github.com/jeroenooms/Rbuild/issues/1>, I
+think there may be an issue with the 4.9.3 toolchain. I have no idea
+if it is in the build, or inherent in 4.9.3, though.
+
+Avi
+
+On Mon, Aug 31, 2015 at 9:14 AM, Jeroen Ooms <jeroenooms at gmail.com> wrote:
+> A new version of the toolchain based on gcc 4.9.3 and corresponding
+> build of R-devel are available from [1]. See the readme.txt [2] for
+> details. The installer should work out of the box and make it easy for
+> Windows users to compile and test R packages with the new toolchain.
+>
+> The bad news: unfortunately it appears that the sjlj problem on win64
+> (triggered by Rf_error) is still not completely solved in the latest
+> mingw-w64. Therefore I restored -fno-asynchronous-unwind-tables in
+> CXXFLAGS in the latest build of R. This workaround allows us to move
+> forward while we investigate this problem.
+>
+> Even with -fno-asynchronous-unwind-tables there are still two Rcpp
+> unit tests that crash on win64: test.Module.member and
+> test.Module.property. These tests segfault when an exception is raised
+> within a module. The problem still exists in the latest Rcpp version
+> from Github. It is unclear if this is related to the sjlj bug above,
+> or a separate problem in Rcpp / R-devel. The issue can be worked
+> around by changing Rcpp's Makevars.win to:
+>
+>    PKG_CXXFLAGS=-mno-sse
+>
+> With this fix, Rcpp is able to execute all unit tests on both win32
+> and win64. All tests pass, except for an issue with dates (also only
+> on win64) that is reported at [3].
+>
+> [1] http://www.stat.ucla.edu/~jeroen/mingw-w64/
+> [2] http://www.stat.ucla.edu/~jeroen/mingw-w64/readme.txt
+> [3] https://github.com/RcppCore/Rcpp/issues/359
+>
+> _______________________________________________
+> R-SIG-windows mailing list
+> R-SIG-windows at r-project.org
+> https://stat.ethz.ch/mailman/listinfo/r-sig-windows
+
+
+From avraham.adler at gmail.com  Tue Sep  8 18:56:14 2015
+From: avraham.adler at gmail.com (Avraham Adler)
+Date: Tue, 8 Sep 2015 12:56:14 -0400
+Subject: [R-SIG-Win] Some suggested changes to Windows makefiles with
+ respect to experimental toolchain
+Message-ID: <CAL6gwnJQfVU-5BWGioEEFaijGL39=nLuMOhRz7NKJAv7QNJPog@mail.gmail.com>
+
+Hello.
+
+As the new toolchain is going to require some changes to some of the
+makefiles for Windows (such as the NM_FILTER already in place, I would
+like to make some suggestions for review.
+
+A: Link-time Optimization
+I have successfully compiled R (Windows7 64bit) using link-time
+optimization, but it required some monkeying around with various
+files. Specifically:
+
+1) src/gnuwin32/Mkrules.local: (no change needed)
+    needs '-flto -ffat-lto-objects' passed in EOPTS
+
+2) src/gnuwin32/Mkrules: (changes needed to lines 243, 262, and 263)
+    AR, NM, and RANLIB all need to add 'gcc-' as a prefix to the
+actual calls. For example: AR=$(BINPREF)gcc-ar
+
+3) src/gnuwin32/Makefile: (changes needed to line 65)
+    DLLFLAGS needs to allow multiple definitions (for the tools
+package) so the else branch needs to be changed to 'DLLFLAGS =
+-Wl,--allow-multiple-definition -s'
+
+4) src/gnuwin32/fixed/etc/Makeconf (changes needed to lines 14, 15,
+40, 64, and 132)
+    DLLFLAGS and LINKFLAGS need '-Wl,--allow-multiple-definition'
+added (lines 14 & 15)
+    AR, NM, and RANLIB need the 'gcc-' prefix (lines 40, 64, and 132)
+
+Would it be possible and make sense to expose the variables AR, NM,
+RANLIB, DLLFLAGS, and LINKFLAGS in Mkrules.local to allow for LTO?
+
+B: External BLAS
+I have been compiling R (Windows7 64bit) linking to an external
+OpenBLAS for years now. The method requires changing
+src/gnuwin32/Mkrules.local to 'USE_ATLAS = YES' and setting the proper
+ATLAS_PATH (lines 30 & 31). Then changing src/extra/blas/Makefile.win
+line 15 to point to the proper file. Specifically, from
+'-L../../../$(IMPDIR) -lR  -L"$(ATLAS_PATH)" -lf77blas -latlas' to '
+-L../../../$(IMPDIR) -lR  -L"$(ATLAS_PATH)" -lopenblas' or the
+equivalent. Could the name of the BLAS library itself be made a
+variable for Mkrules.local? Perhaps something like 'USE_EXTBLAS',
+'EXTBLAS_PATH', and 'EXTBLASLIBS' could be used in Mkrules.local, with
+EXTBLASLIBS even defaulting to '-lf77blas -latlas'. Then
+src/extra/blas/Makefile.win line 15 could look something like
+'-L../../../$(IMPDIR) -lR  -L"$(ATLAS_PATH)" $(EXTBLASLIBS)'? I admit
+I have not tested this configuration yet, though.
+
+C: Toolchain definitions
+If the toolchain developed by Jeroen will be be the eventual Rtools,
+as it is a multilib, src/gnuwin32/Mkrules.local lines 52?59 will
+probably require a rewrite, if they are necessary at all.
+
+Thank you,
+
+Avi
+
+
+From murdoch.duncan at gmail.com  Tue Sep  8 20:00:50 2015
+From: murdoch.duncan at gmail.com (Duncan Murdoch)
+Date: Tue, 8 Sep 2015 14:00:50 -0400
+Subject: [R-SIG-Win] Some suggested changes to Windows makefiles with
+ respect to experimental toolchain
+In-Reply-To: <CAL6gwnJQfVU-5BWGioEEFaijGL39=nLuMOhRz7NKJAv7QNJPog@mail.gmail.com>
+References: <CAL6gwnJQfVU-5BWGioEEFaijGL39=nLuMOhRz7NKJAv7QNJPog@mail.gmail.com>
+Message-ID: <55EF2252.9070902@gmail.com>
+
+On 08/09/2015 12:56 PM, Avraham Adler wrote:
+> Hello.
+> 
+> As the new toolchain is going to require some changes to some of the
+> makefiles for Windows (such as the NM_FILTER already in place, I would
+> like to make some suggestions for review.
+> 
+> A: Link-time Optimization
+> I have successfully compiled R (Windows7 64bit) using link-time
+> optimization, but it required some monkeying around with various
+> files. Specifically:
+> 
+> 1) src/gnuwin32/Mkrules.local: (no change needed)
+>     needs '-flto -ffat-lto-objects' passed in EOPTS
+> 
+> 2) src/gnuwin32/Mkrules: (changes needed to lines 243, 262, and 263)
+>     AR, NM, and RANLIB all need to add 'gcc-' as a prefix to the
+> actual calls. For example: AR=$(BINPREF)gcc-ar
+
+That's no good.  The makefiles will need to work with both toolchains,
+and that doesn't look compatible with the old toolchain.
+
+I'd be happy to put in changes, subject to the following:
+
+ - Existing builds should work with no change.
+ - Users of the new toolchain should be able to try it out with a one
+line addition to Mkrules.local.
+ - It would be nice to allow some flexibility, so if you get it wrong on
+the first try, only Mkrules.local needs to be updated, not the R-devel
+sources.
+
+Send me a patch that you've tested on both toolchains, and I'll put it
+in (after testing on the old toolchain).
+
+Duncan Murdoch
+
+> 
+> 3) src/gnuwin32/Makefile: (changes needed to line 65)
+>     DLLFLAGS needs to allow multiple definitions (for the tools
+> package) so the else branch needs to be changed to 'DLLFLAGS =
+> -Wl,--allow-multiple-definition -s'
+> 
+> 4) src/gnuwin32/fixed/etc/Makeconf (changes needed to lines 14, 15,
+> 40, 64, and 132)
+>     DLLFLAGS and LINKFLAGS need '-Wl,--allow-multiple-definition'
+> added (lines 14 & 15)
+>     AR, NM, and RANLIB need the 'gcc-' prefix (lines 40, 64, and 132)
+> 
+> Would it be possible and make sense to expose the variables AR, NM,
+> RANLIB, DLLFLAGS, and LINKFLAGS in Mkrules.local to allow for LTO?
+> 
+> B: External BLAS
+> I have been compiling R (Windows7 64bit) linking to an external
+> OpenBLAS for years now. The method requires changing
+> src/gnuwin32/Mkrules.local to 'USE_ATLAS = YES' and setting the proper
+> ATLAS_PATH (lines 30 & 31). Then changing src/extra/blas/Makefile.win
+> line 15 to point to the proper file. Specifically, from
+> '-L../../../$(IMPDIR) -lR  -L"$(ATLAS_PATH)" -lf77blas -latlas' to '
+> -L../../../$(IMPDIR) -lR  -L"$(ATLAS_PATH)" -lopenblas' or the
+> equivalent. Could the name of the BLAS library itself be made a
+> variable for Mkrules.local? Perhaps something like 'USE_EXTBLAS',
+> 'EXTBLAS_PATH', and 'EXTBLASLIBS' could be used in Mkrules.local, with
+> EXTBLASLIBS even defaulting to '-lf77blas -latlas'. Then
+> src/extra/blas/Makefile.win line 15 could look something like
+> '-L../../../$(IMPDIR) -lR  -L"$(ATLAS_PATH)" $(EXTBLASLIBS)'? I admit
+> I have not tested this configuration yet, though.
+> 
+> C: Toolchain definitions
+> If the toolchain developed by Jeroen will be be the eventual Rtools,
+> as it is a multilib, src/gnuwin32/Mkrules.local lines 52?59 will
+> probably require a rewrite, if they are necessary at all.
+> 
+> Thank you,
+> 
+> Avi
+> 
+> _______________________________________________
+> R-SIG-windows mailing list
+> R-SIG-windows at r-project.org
+> https://stat.ethz.ch/mailman/listinfo/r-sig-windows
+>
+
+
+From avraham.adler at gmail.com  Wed Sep  9 00:32:15 2015
+From: avraham.adler at gmail.com (Avraham Adler)
+Date: Tue, 8 Sep 2015 18:32:15 -0400
+Subject: [R-SIG-Win] Some suggested changes to Windows makefiles with
+ respect to experimental toolchain
+In-Reply-To: <55EF2252.9070902@gmail.com>
+References: <CAL6gwnJQfVU-5BWGioEEFaijGL39=nLuMOhRz7NKJAv7QNJPog@mail.gmail.com>
+	<55EF2252.9070902@gmail.com>
+Message-ID: <CAL6gwnJgSPz2qWyd4MQSUZHUHyWiwz_-QGjMDv8JXQCj_-PQmQ@mail.gmail.com>
+
+Hello.
+
+While trying to build WITH LTO, I am seeing core R building properly,
+seeing the variables I created (including finding the BLAS) and
+passing the '-flto' flag properly up to building lapack.dll. From
+"building package 'base'" and on (such as stats, compiler, the
+recommended packages), the calls to gcc (compilation and linking) no
+longer have -flto in them. However, EOPTS does seem to propogate,
+which is why I missed this the first time around as I passed -flto in
+EOPTS. Of course, that misses the point as the linker doesn't use the
+EOPTS flag, which is why I modified the CC, FC, F77 etc. calls. Which
+file is it that controls the calls to gcc and gfortran from building
+base and on? If it helps, below is the patch I am using (well,
+actually the diff, as Windows doesn't play nicely with "patch").
+
+Thank you very much,
+
+Avi
+
+
+-------------8<-----------------
+
+diff -ruN C:/R/ORIG/R-patched/src/extra/blas/Makefile.win
+C:/R/R-patched/src/extra/blas/Makefile.win
+--- C:/R/ORIG/R-patched/src/extra/blas/Makefile.win    2015-04-09
+16:34:55.000000000 -0400
++++ C:/R/R-patched/src/extra/blas/Makefile.win    2015-09-08
+17:03:04.925632500 -0400
+@@ -8,11 +8,11 @@
+     $(CC) -O3 -I../../include  -c $< -o $@
+
+ ## Rblas.dll imports xerbla_ from R.dll
+-ifeq "$(USE_ATLAS)" "YES"
++ifeq "$(USE_EXTBLAS)" "YES"
+ ../../../$(BINDIR)/Rblas.dll: blas00.o ../../gnuwin32/dllversion.o
+     @$(ECHO) -------- Building $@ --------
+     $(DLL) -shared $(DLLFLAGS) -o $@ $^ Rblas.def \
+-       -L../../../$(IMPDIR) -lR  -L"$(ATLAS_PATH)" -lf77blas -latlas
++       -L../../../$(IMPDIR) -lR  -L"$(EXTBLAS_PATH)" $(EXTBLASLIBS)
+ else
+ ../../../$(BINDIR)/Rblas.dll: blas.o cmplxblas.o ../../gnuwin32/dllversion.o
+     @$(ECHO) -------- Building $@ --------
+diff -ruN C:/R/ORIG/R-patched/src/gnuwin32/Makefile
+C:/R/R-patched/src/gnuwin32/Makefile
+--- C:/R/ORIG/R-patched/src/gnuwin32/Makefile    2015-04-19
+11:02:02.000000000 -0400
++++ C:/R/R-patched/src/gnuwin32/Makefile    2015-09-08 17:21:42.945036900 -0400
+@@ -65,6 +65,10 @@
+  DLLFLAGS = -s
+ endif
+
++ifdef USE_LTO
++ DLLFLAGS += -Wl,--allow-multiple-definition
++endif
++
+
+ R-DLLFLAGS = -mwindows
+ LIBEXTRAS = -L"$(EXT_LIBS)"/lib$(R_ARCH) -lpcre -lz -lbz2 -llzma
+diff -ruN C:/R/ORIG/R-patched/src/gnuwin32/MkRules.dist
+C:/R/R-patched/src/gnuwin32/MkRules.dist
+--- C:/R/ORIG/R-patched/src/gnuwin32/MkRules.dist    2015-04-19
+11:02:01.000000000 -0400
++++ C:/R/R-patched/src/gnuwin32/MkRules.dist    2015-09-08
+17:07:23.112662800 -0400
+@@ -26,9 +26,12 @@
+ # an alternative is to use -gstabs here, if the debugger supports only stabs.
+ # G_FLAG = -gdwarf-2
+
+-# Set to YES and specify the path if you want to use the ATLAS BLAS.
+-# USE_ATLAS = NO
+-# ATLAS_PATH =
++# Set to YES and specify the path if you want to use a pre-compiled
+ATLAS or OpenBLAS EXTERNAL BLAS.
++# USE_EXTBLAS = NO
++# EXTBLAS_PATH =
++# Use '-lf77blas -latlas' ast the value for EXTBLASLIBS for ATLAS.
++# Use the appropriate version of -lopenblas for OpenBLAS
++# EXTBLASLIBS =
+
+ # Support for the ACML and Goto BLASes has been withdrawn: see R-admin.html
+
+@@ -48,6 +51,8 @@
+ # Include the trailing /, and use / not \.
+ # Do this in the more detailed options below
+
++# To enable link-time optimization using the 4.9.2 toolset, set to YES
++# USE_LTO = YES
+
+ ### BEGIN more detailed options
+ # Some of the toolchains have prefixes for e.g. ar, gcc.
+diff -ruN C:/R/ORIG/R-patched/src/gnuwin32/MkRules.rules
+C:/R/R-patched/src/gnuwin32/MkRules.rules
+--- C:/R/ORIG/R-patched/src/gnuwin32/MkRules.rules    2015-04-19
+11:02:03.000000000 -0400
++++ C:/R/R-patched/src/gnuwin32/MkRules.rules    2015-09-08
+17:09:36.373309600 -0400
+@@ -5,10 +5,12 @@
+ LOCAL_SOFT ?= $(R_HOME)/extsoft
+ EXT_LIBS ?= $(LOCAL_SOFT)
+ G_FLAG ?= -gdwarf-2
+-USE_ATLAS ?= NO
+-ATLAS_PATH ?=
++USE_EXTBLAS ?= NO
++EXTBLAS_PATH ?=
++EXTBLASLIBS ?=
+ MULTI ?=
+ TOOL_PATH ?=
++USE_LTO ?=
+ BINPREF ?=
+ BINPREF64 ?= x86_64-w64-mingw32-
+ M_ARCH ?=
+@@ -67,6 +69,15 @@
+ SYMPAT = 's/^.* [BCDRT] _/ /p'
+ endif
+
++## Link-time optimization
++ifeq "$(USE_LTO)" "YES"
++LTOPREF = gcc-
++LTOCALL = -flto
++else
++LTOPREF =
++LTOCALL =
++endif
++
+ ## -std=c99 would force __STRICT_ANSI__ disabling strdup etc, and also alloca
+ C99FLAG=-std=gnu99
+
+@@ -81,10 +92,10 @@
+ IMPDIR=$(BINDIR)
+ endif
+
+-AR=$(BINPREF)ar
++AR=$(BINPREF)$(LTOPREF)ar
+ # AWK=gawk
+ CAT=cat
+-CC=$(BINPREF)gcc$(GCC4_SUFF) $(C99FLAG) $(M_ARCH)
++CC=$(BINPREF)gcc$(GCC4_SUFF) $(C99FLAG) $(M_ARCH) $(LTOCALL)
+ CP=cp
+ # as set by make
+ CPP=$(CC) -E
+@@ -94,14 +105,14 @@
+ ## even for native builds
+ DLLTOOLFLAGS=--as $(BINPREF)as $(DT_ARCH) -k
+ ECHO=echo
+-F77=$(BINPREF)gfortran$(GCC4_SUFF) $(M_ARCH)
++F77=$(BINPREF)gfortran$(GCC4_SUFF) $(M_ARCH) $(LTOCALL)
+ FLIBS=-lgfortran -lquadmath
+ LINKER=$(MAIN_LD)
+ MAIN_LD=$(CC)
+ MAKEINFO = $(TEXI2ANY)
+ MKDIR=mkdir
+-NM=$(BINPREF)nm
+-RANLIB=$(BINPREF)ranlib
++NM=$(BINPREF)$(LTOPREF)nm
++RANLIB=$(BINPREF)$(LTOPREF)ranlib
+ RESCOMP=$(BINPREF)windres $(RC_ARCH)
+
+ # as set by make
+diff -ruN C:/R/ORIG/R-patched/src/gnuwin32/fixed/Makefile
+C:/R/R-patched/src/gnuwin32/fixed/Makefile
+--- C:/R/ORIG/R-patched/src/gnuwin32/fixed/Makefile    2015-04-19
+11:02:01.000000000 -0400
++++ C:/R/R-patched/src/gnuwin32/fixed/Makefile    2015-09-08
+18:09:11.695519700 -0400
+@@ -34,6 +34,8 @@
+       -e "s|R_ARCH =|R_ARCH = $(R_ARCH)|" \
+       -e "s|DT_ARCH =|DT_ARCH = $(DT_ARCH)|" \
+       -e "s|RC_ARCH =|RC_ARCH = $(RC_ARCH)|" \
++      -e "s|LTOCALL =|LTOCALL = $(LTOCALL)|" \
++      -e "s|LTOPREF =|LTOPREF = $(LTOPREF)|" \
+       -e "s|M_ARCH =|M_ARCH = $(M_ARCH)|" \
+       -e "s|@SYMPAT@|$(SYMPAT)|" \
+       -e "s|(TCL_HOME)/bin|(TCL_HOME)/bin64|" \
+@@ -49,6 +51,8 @@
+       -e "s|R_ARCH =|R_ARCH = $(R_ARCH)|" \
+       -e "s|DT_ARCH =|DT_ARCH = $(DT_ARCH)|" \
+       -e "s|RC_ARCH =|RC_ARCH = $(RC_ARCH)|" \
++      -e "s|LTOCALL =|LTOCALL = $(LTOCALL)|" \
++      -e "s|LTOPREF =|LTOPREF = $(LTOPREF)|" \
+       -e "s|M_ARCH =|M_ARCH = $(M_ARCH)|" \
+       -e "s|@SYMPAT@|$(SYMPAT)|" \
+       -e "s|@OPENMP@|$(OPENMP)|" \
+diff -ruN C:/R/ORIG/R-patched/src/gnuwin32/fixed/etc/Makeconf
+C:/R/R-patched/src/gnuwin32/fixed/etc/Makeconf
+--- C:/R/ORIG/R-patched/src/gnuwin32/fixed/etc/Makeconf    2015-04-19
+11:02:01.000000000 -0400
++++ C:/R/R-patched/src/gnuwin32/fixed/etc/Makeconf    2015-09-08
+18:09:32.898759500 -0400
+@@ -14,6 +14,12 @@
+ DLLFLAGS+= -static-libgcc
+ LINKFLAGS+= -static-libgcc
+
++ifdef USE_LTO
++  DLLFLAGS+= -Wl,--allow-multiple-definition
++  LINKFLAGS+= -Wl,--allow-multiple-definition
++
++endif
++
+ ## Things which are substituted by fixed/Makefile (and also -O3 -> -O2)
+ WIN = 32
+ BINPREF =
+@@ -37,7 +43,7 @@
+
+ DLLTOOL = $(BINPREF)dlltool --as $(BINPREF)as $(DT_ARCH)
+ DLLTOOLFLAGS = -k
+-NM = $(BINPREF)nm
++NM = $(BINPREF)$(LTOPREF)nm
+ RESCOMP = $(BINPREF)windres $(RC_ARCH)
+ ## MAIN_LD needs to be set by the package
+ LINKER = $(MAIN_LD)
+@@ -61,20 +67,20 @@
+ # was a reference to Rzlib.dll in R < 3.2.0
+ ZLIB_LIBS = -lz
+
+-AR = $(BINPREF)ar
++AR = $(BINPREF)$(LTOPREF)ar
+ ## Used by packages 'maps' and 'mapdata'
+ AWK = gawk
+ BLAS_LIBS = -L"$(R_HOME)/$(IMPDIR)" -lRblas
+ C_VISIBILITY =
+-CC = $(BINPREF)gcc $(M_ARCH)
++CC = $(BINPREF)gcc $(M_ARCH) $(LTOCALL)
+ CFLAGS = -O3 -Wall $(DEBUGFLAG) -std=gnu99 @EOPTS@
+ CPICFLAGS =
+-CPPFLAGS =
+-CXX = $(BINPREF)g++ $(M_ARCH)
++CPPFLAGS =
++CXX = $(BINPREF)g++ $(M_ARCH) $(LTOCALL)
+ CXXCPP = $(CXX) -E
+ CXXFLAGS = -O2 -Wall $(DEBUGFLAG) @EOPTS@
+ CXXPICFLAGS =
+-CXX1X = $(BINPREF)g++ $(M_ARCH)
++CXX1X = $(BINPREF)g++ $(M_ARCH) $(LTOCALL)
+ CXX1XFLAGS = -O2 -Wall $(DEBUGFLAG) @EOPTS@
+ CXX1XPICFLAGS =
+ CXX1XSTD = -std=c++0x
+@@ -86,11 +92,11 @@
+ ECHO_C =
+ ECHO_N = -n
+ ECHO_T =
+-FC = $(BINPREF)gfortran $(M_ARCH)
++FC = $(BINPREF)gfortran $(M_ARCH) $(LTOCALL)
+ FCFLAGS = -O3 $(DEBUGFLAG) @EOPTS@
+ # additional libs needed when linking with $(FC), e.g. on Solaris
+ FCLIBS =
+-F77 = $(BINPREF)gfortran $(M_ARCH)
++F77 = $(BINPREF)gfortran $(M_ARCH) $(LTOCALL)
+ F77_VISIBILITY =
+ FFLAGS = -O3 $(DEBUGFLAG) @EOPTS@
+ FLIBS = -lgfortran
+@@ -129,7 +135,7 @@
+ OBJC_LIBS = -lobjc
+ OBJCXX =
+ R_ARCH =
+-RANLIB = $(BINPREF)ranlib
++RANLIB = $(BINPREF)$(LTOPREF)ranlib
+ SAFE_FFLAGS = -O3 -ffloat-store
+ SED = sed
+ ## it seems some makes (but not ours) get upset if SHELL is set.
+
+------------->8-----------------
+
+
+On Tue, Sep 8, 2015 at 2:00 PM, Duncan Murdoch <murdoch.duncan at gmail.com> wrote:
+> On 08/09/2015 12:56 PM, Avraham Adler wrote:
+>> Hello.
+>>
+>> As the new toolchain is going to require some changes to some of the
+>> makefiles for Windows (such as the NM_FILTER already in place, I would
+>> like to make some suggestions for review.
+>>
+>> A: Link-time Optimization
+>> I have successfully compiled R (Windows7 64bit) using link-time
+>> optimization, but it required some monkeying around with various
+>> files. Specifically:
+>>
+>> 1) src/gnuwin32/Mkrules.local: (no change needed)
+>>     needs '-flto -ffat-lto-objects' passed in EOPTS
+>>
+>> 2) src/gnuwin32/Mkrules: (changes needed to lines 243, 262, and 263)
+>>     AR, NM, and RANLIB all need to add 'gcc-' as a prefix to the
+>> actual calls. For example: AR=$(BINPREF)gcc-ar
+>
+> That's no good.  The makefiles will need to work with both toolchains,
+> and that doesn't look compatible with the old toolchain.
+>
+> I'd be happy to put in changes, subject to the following:
+>
+>  - Existing builds should work with no change.
+>  - Users of the new toolchain should be able to try it out with a one
+> line addition to Mkrules.local.
+>  - It would be nice to allow some flexibility, so if you get it wrong on
+> the first try, only Mkrules.local needs to be updated, not the R-devel
+> sources.
+>
+> Send me a patch that you've tested on both toolchains, and I'll put it
+> in (after testing on the old toolchain).
+>
+> Duncan Murdoch
+>
+>>
+>> 3) src/gnuwin32/Makefile: (changes needed to line 65)
+>>     DLLFLAGS needs to allow multiple definitions (for the tools
+>> package) so the else branch needs to be changed to 'DLLFLAGS =
+>> -Wl,--allow-multiple-definition -s'
+>>
+>> 4) src/gnuwin32/fixed/etc/Makeconf (changes needed to lines 14, 15,
+>> 40, 64, and 132)
+>>     DLLFLAGS and LINKFLAGS need '-Wl,--allow-multiple-definition'
+>> added (lines 14 & 15)
+>>     AR, NM, and RANLIB need the 'gcc-' prefix (lines 40, 64, and 132)
+>>
+>> Would it be possible and make sense to expose the variables AR, NM,
+>> RANLIB, DLLFLAGS, and LINKFLAGS in Mkrules.local to allow for LTO?
+>>
+>> B: External BLAS
+>> I have been compiling R (Windows7 64bit) linking to an external
+>> OpenBLAS for years now. The method requires changing
+>> src/gnuwin32/Mkrules.local to 'USE_ATLAS = YES' and setting the proper
+>> ATLAS_PATH (lines 30 & 31). Then changing src/extra/blas/Makefile.win
+>> line 15 to point to the proper file. Specifically, from
+>> '-L../../../$(IMPDIR) -lR  -L"$(ATLAS_PATH)" -lf77blas -latlas' to '
+>> -L../../../$(IMPDIR) -lR  -L"$(ATLAS_PATH)" -lopenblas' or the
+>> equivalent. Could the name of the BLAS library itself be made a
+>> variable for Mkrules.local? Perhaps something like 'USE_EXTBLAS',
+>> 'EXTBLAS_PATH', and 'EXTBLASLIBS' could be used in Mkrules.local, with
+>> EXTBLASLIBS even defaulting to '-lf77blas -latlas'. Then
+>> src/extra/blas/Makefile.win line 15 could look something like
+>> '-L../../../$(IMPDIR) -lR  -L"$(ATLAS_PATH)" $(EXTBLASLIBS)'? I admit
+>> I have not tested this configuration yet, though.
+>>
+>> C: Toolchain definitions
+>> If the toolchain developed by Jeroen will be be the eventual Rtools,
+>> as it is a multilib, src/gnuwin32/Mkrules.local lines 52?59 will
+>> probably require a rewrite, if they are necessary at all.
+>>
+>> Thank you,
+>>
+>> Avi
+>>
+>> _______________________________________________
+>> R-SIG-windows mailing list
+>> R-SIG-windows at r-project.org
+>> https://stat.ethz.ch/mailman/listinfo/r-sig-windows
+>>
+>
+
+
+From avraham.adler at gmail.com  Wed Sep  9 00:54:24 2015
+From: avraham.adler at gmail.com (Avraham Adler)
+Date: Tue, 8 Sep 2015 18:54:24 -0400
+Subject: [R-SIG-Win] Some suggested changes to Windows makefiles with
+ respect to experimental toolchain
+In-Reply-To: <CAL6gwnJgSPz2qWyd4MQSUZHUHyWiwz_-QGjMDv8JXQCj_-PQmQ@mail.gmail.com>
+References: <CAL6gwnJQfVU-5BWGioEEFaijGL39=nLuMOhRz7NKJAv7QNJPog@mail.gmail.com>
+	<55EF2252.9070902@gmail.com>
+	<CAL6gwnJgSPz2qWyd4MQSUZHUHyWiwz_-QGjMDv8JXQCj_-PQmQ@mail.gmail.com>
+Message-ID: <CAL6gwnKu+2VEjo2QqUh03qBbrYinaDAy8siQVuNLRP=7Z38fFQ@mail.gmail.com>
+
+On Tue, Sep 8, 2015 at 6:32 PM, Avraham Adler <avraham.adler at gmail.com> wrote:
+> Hello.
+>
+> While trying to build WITH LTO, I am seeing core R building properly,
+> seeing the variables I created (including finding the BLAS) and
+> passing the '-flto' flag properly up to building lapack.dll. From
+> "building package 'base'" and on (such as stats, compiler, the
+> recommended packages), the calls to gcc (compilation and linking) no
+> longer have -flto in them. However, EOPTS does seem to propogate,
+> which is why I missed this the first time around as I passed -flto in
+> EOPTS. Of course, that misses the point as the linker doesn't use the
+> EOPTS flag, which is why I modified the CC, FC, F77 etc. calls. Which
+> file is it that controls the calls to gcc and gfortran from building
+> base and on? If it helps, below is the patch I am using (well,
+> actually the diff, as Windows doesn't play nicely with "patch").
+>
+> Thank you very much,
+>
+> Avi
+
+For what it is worth,setting LTOCALL and LTOPREF directly in
+src/gnuwin32/fixed/etc/Makeconf as below (as opposed to previous
+e-mail), doesn't help either (from "making package 'base'" and on,
+there is no -flto in the gcc/gfortran calls).
+
+Thank you again,
+
+Avi
+
+
+ifdef USE_LTO
+  DLLFLAGS+= -Wl,--allow-multiple-definition
+  LINKFLAGS+= -Wl,--allow-multiple-definition
+  LTOPREF = gcc-
+  LTOCALL = -flto
+else
+  LTOPREF =
+  LTOCALL=
+endif
+
+
+From murdoch.duncan at gmail.com  Wed Sep  9 00:56:25 2015
+From: murdoch.duncan at gmail.com (Duncan Murdoch)
+Date: Tue, 8 Sep 2015 18:56:25 -0400
+Subject: [R-SIG-Win] Some suggested changes to Windows makefiles with
+ respect to experimental toolchain
+In-Reply-To: <CAL6gwnJgSPz2qWyd4MQSUZHUHyWiwz_-QGjMDv8JXQCj_-PQmQ@mail.gmail.com>
+References: <CAL6gwnJQfVU-5BWGioEEFaijGL39=nLuMOhRz7NKJAv7QNJPog@mail.gmail.com>
+	<55EF2252.9070902@gmail.com>
+	<CAL6gwnJgSPz2qWyd4MQSUZHUHyWiwz_-QGjMDv8JXQCj_-PQmQ@mail.gmail.com>
+Message-ID: <55EF6799.3010407@gmail.com>
+
+On 08/09/2015 6:32 PM, Avraham Adler wrote:
+> Hello.
+> 
+> While trying to build WITH LTO, I am seeing core R building properly,
+> seeing the variables I created (including finding the BLAS) and
+> passing the '-flto' flag properly up to building lapack.dll. From
+> "building package 'base'" and on (such as stats, compiler, the
+> recommended packages), the calls to gcc (compilation and linking) no
+> longer have -flto in them. However, EOPTS does seem to propogate,
+> which is why I missed this the first time around as I passed -flto in
+> EOPTS. Of course, that misses the point as the linker doesn't use the
+> EOPTS flag, which is why I modified the CC, FC, F77 etc. calls. Which
+> file is it that controls the calls to gcc and gfortran from building
+> base and on? If it helps, below is the patch I am using (well,
+> actually the diff, as Windows doesn't play nicely with "patch").
+
+I didn't write the make files, and can't answer your questions.  You're
+on your own here if nobody else pipes up.
+
+Duncan Murdoch
+
+> 
+> Thank you very much,
+> 
+> Avi
+> 
+> 
+> -------------8<-----------------
+> 
+> diff -ruN C:/R/ORIG/R-patched/src/extra/blas/Makefile.win
+> C:/R/R-patched/src/extra/blas/Makefile.win
+> --- C:/R/ORIG/R-patched/src/extra/blas/Makefile.win    2015-04-09
+> 16:34:55.000000000 -0400
+> +++ C:/R/R-patched/src/extra/blas/Makefile.win    2015-09-08
+> 17:03:04.925632500 -0400
+> @@ -8,11 +8,11 @@
+>      $(CC) -O3 -I../../include  -c $< -o $@
+> 
+>  ## Rblas.dll imports xerbla_ from R.dll
+> -ifeq "$(USE_ATLAS)" "YES"
+> +ifeq "$(USE_EXTBLAS)" "YES"
+>  ../../../$(BINDIR)/Rblas.dll: blas00.o ../../gnuwin32/dllversion.o
+>      @$(ECHO) -------- Building $@ --------
+>      $(DLL) -shared $(DLLFLAGS) -o $@ $^ Rblas.def \
+> -       -L../../../$(IMPDIR) -lR  -L"$(ATLAS_PATH)" -lf77blas -latlas
+> +       -L../../../$(IMPDIR) -lR  -L"$(EXTBLAS_PATH)" $(EXTBLASLIBS)
+>  else
+>  ../../../$(BINDIR)/Rblas.dll: blas.o cmplxblas.o ../../gnuwin32/dllversion.o
+>      @$(ECHO) -------- Building $@ --------
+> diff -ruN C:/R/ORIG/R-patched/src/gnuwin32/Makefile
+> C:/R/R-patched/src/gnuwin32/Makefile
+> --- C:/R/ORIG/R-patched/src/gnuwin32/Makefile    2015-04-19
+> 11:02:02.000000000 -0400
+> +++ C:/R/R-patched/src/gnuwin32/Makefile    2015-09-08 17:21:42.945036900 -0400
+> @@ -65,6 +65,10 @@
+>   DLLFLAGS = -s
+>  endif
+> 
+> +ifdef USE_LTO
+> + DLLFLAGS += -Wl,--allow-multiple-definition
+> +endif
+> +
+> 
+>  R-DLLFLAGS = -mwindows
+>  LIBEXTRAS = -L"$(EXT_LIBS)"/lib$(R_ARCH) -lpcre -lz -lbz2 -llzma
+> diff -ruN C:/R/ORIG/R-patched/src/gnuwin32/MkRules.dist
+> C:/R/R-patched/src/gnuwin32/MkRules.dist
+> --- C:/R/ORIG/R-patched/src/gnuwin32/MkRules.dist    2015-04-19
+> 11:02:01.000000000 -0400
+> +++ C:/R/R-patched/src/gnuwin32/MkRules.dist    2015-09-08
+> 17:07:23.112662800 -0400
+> @@ -26,9 +26,12 @@
+>  # an alternative is to use -gstabs here, if the debugger supports only stabs.
+>  # G_FLAG = -gdwarf-2
+> 
+> -# Set to YES and specify the path if you want to use the ATLAS BLAS.
+> -# USE_ATLAS = NO
+> -# ATLAS_PATH =
+> +# Set to YES and specify the path if you want to use a pre-compiled
+> ATLAS or OpenBLAS EXTERNAL BLAS.
+> +# USE_EXTBLAS = NO
+> +# EXTBLAS_PATH =
+> +# Use '-lf77blas -latlas' ast the value for EXTBLASLIBS for ATLAS.
+> +# Use the appropriate version of -lopenblas for OpenBLAS
+> +# EXTBLASLIBS =
+> 
+>  # Support for the ACML and Goto BLASes has been withdrawn: see R-admin.html
+> 
+> @@ -48,6 +51,8 @@
+>  # Include the trailing /, and use / not \.
+>  # Do this in the more detailed options below
+> 
+> +# To enable link-time optimization using the 4.9.2 toolset, set to YES
+> +# USE_LTO = YES
+> 
+>  ### BEGIN more detailed options
+>  # Some of the toolchains have prefixes for e.g. ar, gcc.
+> diff -ruN C:/R/ORIG/R-patched/src/gnuwin32/MkRules.rules
+> C:/R/R-patched/src/gnuwin32/MkRules.rules
+> --- C:/R/ORIG/R-patched/src/gnuwin32/MkRules.rules    2015-04-19
+> 11:02:03.000000000 -0400
+> +++ C:/R/R-patched/src/gnuwin32/MkRules.rules    2015-09-08
+> 17:09:36.373309600 -0400
+> @@ -5,10 +5,12 @@
+>  LOCAL_SOFT ?= $(R_HOME)/extsoft
+>  EXT_LIBS ?= $(LOCAL_SOFT)
+>  G_FLAG ?= -gdwarf-2
+> -USE_ATLAS ?= NO
+> -ATLAS_PATH ?=
+> +USE_EXTBLAS ?= NO
+> +EXTBLAS_PATH ?=
+> +EXTBLASLIBS ?=
+>  MULTI ?=
+>  TOOL_PATH ?=
+> +USE_LTO ?=
+>  BINPREF ?=
+>  BINPREF64 ?= x86_64-w64-mingw32-
+>  M_ARCH ?=
+> @@ -67,6 +69,15 @@
+>  SYMPAT = 's/^.* [BCDRT] _/ /p'
+>  endif
+> 
+> +## Link-time optimization
+> +ifeq "$(USE_LTO)" "YES"
+> +LTOPREF = gcc-
+> +LTOCALL = -flto
+> +else
+> +LTOPREF =
+> +LTOCALL =
+> +endif
+> +
+>  ## -std=c99 would force __STRICT_ANSI__ disabling strdup etc, and also alloca
+>  C99FLAG=-std=gnu99
+> 
+> @@ -81,10 +92,10 @@
+>  IMPDIR=$(BINDIR)
+>  endif
+> 
+> -AR=$(BINPREF)ar
+> +AR=$(BINPREF)$(LTOPREF)ar
+>  # AWK=gawk
+>  CAT=cat
+> -CC=$(BINPREF)gcc$(GCC4_SUFF) $(C99FLAG) $(M_ARCH)
+> +CC=$(BINPREF)gcc$(GCC4_SUFF) $(C99FLAG) $(M_ARCH) $(LTOCALL)
+>  CP=cp
+>  # as set by make
+>  CPP=$(CC) -E
+> @@ -94,14 +105,14 @@
+>  ## even for native builds
+>  DLLTOOLFLAGS=--as $(BINPREF)as $(DT_ARCH) -k
+>  ECHO=echo
+> -F77=$(BINPREF)gfortran$(GCC4_SUFF) $(M_ARCH)
+> +F77=$(BINPREF)gfortran$(GCC4_SUFF) $(M_ARCH) $(LTOCALL)
+>  FLIBS=-lgfortran -lquadmath
+>  LINKER=$(MAIN_LD)
+>  MAIN_LD=$(CC)
+>  MAKEINFO = $(TEXI2ANY)
+>  MKDIR=mkdir
+> -NM=$(BINPREF)nm
+> -RANLIB=$(BINPREF)ranlib
+> +NM=$(BINPREF)$(LTOPREF)nm
+> +RANLIB=$(BINPREF)$(LTOPREF)ranlib
+>  RESCOMP=$(BINPREF)windres $(RC_ARCH)
+> 
+>  # as set by make
+> diff -ruN C:/R/ORIG/R-patched/src/gnuwin32/fixed/Makefile
+> C:/R/R-patched/src/gnuwin32/fixed/Makefile
+> --- C:/R/ORIG/R-patched/src/gnuwin32/fixed/Makefile    2015-04-19
+> 11:02:01.000000000 -0400
+> +++ C:/R/R-patched/src/gnuwin32/fixed/Makefile    2015-09-08
+> 18:09:11.695519700 -0400
+> @@ -34,6 +34,8 @@
+>        -e "s|R_ARCH =|R_ARCH = $(R_ARCH)|" \
+>        -e "s|DT_ARCH =|DT_ARCH = $(DT_ARCH)|" \
+>        -e "s|RC_ARCH =|RC_ARCH = $(RC_ARCH)|" \
+> +      -e "s|LTOCALL =|LTOCALL = $(LTOCALL)|" \
+> +      -e "s|LTOPREF =|LTOPREF = $(LTOPREF)|" \
+>        -e "s|M_ARCH =|M_ARCH = $(M_ARCH)|" \
+>        -e "s|@SYMPAT@|$(SYMPAT)|" \
+>        -e "s|(TCL_HOME)/bin|(TCL_HOME)/bin64|" \
+> @@ -49,6 +51,8 @@
+>        -e "s|R_ARCH =|R_ARCH = $(R_ARCH)|" \
+>        -e "s|DT_ARCH =|DT_ARCH = $(DT_ARCH)|" \
+>        -e "s|RC_ARCH =|RC_ARCH = $(RC_ARCH)|" \
+> +      -e "s|LTOCALL =|LTOCALL = $(LTOCALL)|" \
+> +      -e "s|LTOPREF =|LTOPREF = $(LTOPREF)|" \
+>        -e "s|M_ARCH =|M_ARCH = $(M_ARCH)|" \
+>        -e "s|@SYMPAT@|$(SYMPAT)|" \
+>        -e "s|@OPENMP@|$(OPENMP)|" \
+> diff -ruN C:/R/ORIG/R-patched/src/gnuwin32/fixed/etc/Makeconf
+> C:/R/R-patched/src/gnuwin32/fixed/etc/Makeconf
+> --- C:/R/ORIG/R-patched/src/gnuwin32/fixed/etc/Makeconf    2015-04-19
+> 11:02:01.000000000 -0400
+> +++ C:/R/R-patched/src/gnuwin32/fixed/etc/Makeconf    2015-09-08
+> 18:09:32.898759500 -0400
+> @@ -14,6 +14,12 @@
+>  DLLFLAGS+= -static-libgcc
+>  LINKFLAGS+= -static-libgcc
+> 
+> +ifdef USE_LTO
+> +  DLLFLAGS+= -Wl,--allow-multiple-definition
+> +  LINKFLAGS+= -Wl,--allow-multiple-definition
+> +
+> +endif
+> +
+>  ## Things which are substituted by fixed/Makefile (and also -O3 -> -O2)
+>  WIN = 32
+>  BINPREF =
+> @@ -37,7 +43,7 @@
+> 
+>  DLLTOOL = $(BINPREF)dlltool --as $(BINPREF)as $(DT_ARCH)
+>  DLLTOOLFLAGS = -k
+> -NM = $(BINPREF)nm
+> +NM = $(BINPREF)$(LTOPREF)nm
+>  RESCOMP = $(BINPREF)windres $(RC_ARCH)
+>  ## MAIN_LD needs to be set by the package
+>  LINKER = $(MAIN_LD)
+> @@ -61,20 +67,20 @@
+>  # was a reference to Rzlib.dll in R < 3.2.0
+>  ZLIB_LIBS = -lz
+> 
+> -AR = $(BINPREF)ar
+> +AR = $(BINPREF)$(LTOPREF)ar
+>  ## Used by packages 'maps' and 'mapdata'
+>  AWK = gawk
+>  BLAS_LIBS = -L"$(R_HOME)/$(IMPDIR)" -lRblas
+>  C_VISIBILITY =
+> -CC = $(BINPREF)gcc $(M_ARCH)
+> +CC = $(BINPREF)gcc $(M_ARCH) $(LTOCALL)
+>  CFLAGS = -O3 -Wall $(DEBUGFLAG) -std=gnu99 @EOPTS@
+>  CPICFLAGS =
+> -CPPFLAGS =
+> -CXX = $(BINPREF)g++ $(M_ARCH)
+> +CPPFLAGS =
+> +CXX = $(BINPREF)g++ $(M_ARCH) $(LTOCALL)
+>  CXXCPP = $(CXX) -E
+>  CXXFLAGS = -O2 -Wall $(DEBUGFLAG) @EOPTS@
+>  CXXPICFLAGS =
+> -CXX1X = $(BINPREF)g++ $(M_ARCH)
+> +CXX1X = $(BINPREF)g++ $(M_ARCH) $(LTOCALL)
+>  CXX1XFLAGS = -O2 -Wall $(DEBUGFLAG) @EOPTS@
+>  CXX1XPICFLAGS =
+>  CXX1XSTD = -std=c++0x
+> @@ -86,11 +92,11 @@
+>  ECHO_C =
+>  ECHO_N = -n
+>  ECHO_T =
+> -FC = $(BINPREF)gfortran $(M_ARCH)
+> +FC = $(BINPREF)gfortran $(M_ARCH) $(LTOCALL)
+>  FCFLAGS = -O3 $(DEBUGFLAG) @EOPTS@
+>  # additional libs needed when linking with $(FC), e.g. on Solaris
+>  FCLIBS =
+> -F77 = $(BINPREF)gfortran $(M_ARCH)
+> +F77 = $(BINPREF)gfortran $(M_ARCH) $(LTOCALL)
+>  F77_VISIBILITY =
+>  FFLAGS = -O3 $(DEBUGFLAG) @EOPTS@
+>  FLIBS = -lgfortran
+> @@ -129,7 +135,7 @@
+>  OBJC_LIBS = -lobjc
+>  OBJCXX =
+>  R_ARCH =
+> -RANLIB = $(BINPREF)ranlib
+> +RANLIB = $(BINPREF)$(LTOPREF)ranlib
+>  SAFE_FFLAGS = -O3 -ffloat-store
+>  SED = sed
+>  ## it seems some makes (but not ours) get upset if SHELL is set.
+> 
+> ------------->8-----------------
+> 
+> 
+> On Tue, Sep 8, 2015 at 2:00 PM, Duncan Murdoch <murdoch.duncan at gmail.com> wrote:
+>> On 08/09/2015 12:56 PM, Avraham Adler wrote:
+>>> Hello.
+>>>
+>>> As the new toolchain is going to require some changes to some of the
+>>> makefiles for Windows (such as the NM_FILTER already in place, I would
+>>> like to make some suggestions for review.
+>>>
+>>> A: Link-time Optimization
+>>> I have successfully compiled R (Windows7 64bit) using link-time
+>>> optimization, but it required some monkeying around with various
+>>> files. Specifically:
+>>>
+>>> 1) src/gnuwin32/Mkrules.local: (no change needed)
+>>>     needs '-flto -ffat-lto-objects' passed in EOPTS
+>>>
+>>> 2) src/gnuwin32/Mkrules: (changes needed to lines 243, 262, and 263)
+>>>     AR, NM, and RANLIB all need to add 'gcc-' as a prefix to the
+>>> actual calls. For example: AR=$(BINPREF)gcc-ar
+>>
+>> That's no good.  The makefiles will need to work with both toolchains,
+>> and that doesn't look compatible with the old toolchain.
+>>
+>> I'd be happy to put in changes, subject to the following:
+>>
+>>  - Existing builds should work with no change.
+>>  - Users of the new toolchain should be able to try it out with a one
+>> line addition to Mkrules.local.
+>>  - It would be nice to allow some flexibility, so if you get it wrong on
+>> the first try, only Mkrules.local needs to be updated, not the R-devel
+>> sources.
+>>
+>> Send me a patch that you've tested on both toolchains, and I'll put it
+>> in (after testing on the old toolchain).
+>>
+>> Duncan Murdoch
+>>
+>>>
+>>> 3) src/gnuwin32/Makefile: (changes needed to line 65)
+>>>     DLLFLAGS needs to allow multiple definitions (for the tools
+>>> package) so the else branch needs to be changed to 'DLLFLAGS =
+>>> -Wl,--allow-multiple-definition -s'
+>>>
+>>> 4) src/gnuwin32/fixed/etc/Makeconf (changes needed to lines 14, 15,
+>>> 40, 64, and 132)
+>>>     DLLFLAGS and LINKFLAGS need '-Wl,--allow-multiple-definition'
+>>> added (lines 14 & 15)
+>>>     AR, NM, and RANLIB need the 'gcc-' prefix (lines 40, 64, and 132)
+>>>
+>>> Would it be possible and make sense to expose the variables AR, NM,
+>>> RANLIB, DLLFLAGS, and LINKFLAGS in Mkrules.local to allow for LTO?
+>>>
+>>> B: External BLAS
+>>> I have been compiling R (Windows7 64bit) linking to an external
+>>> OpenBLAS for years now. The method requires changing
+>>> src/gnuwin32/Mkrules.local to 'USE_ATLAS = YES' and setting the proper
+>>> ATLAS_PATH (lines 30 & 31). Then changing src/extra/blas/Makefile.win
+>>> line 15 to point to the proper file. Specifically, from
+>>> '-L../../../$(IMPDIR) -lR  -L"$(ATLAS_PATH)" -lf77blas -latlas' to '
+>>> -L../../../$(IMPDIR) -lR  -L"$(ATLAS_PATH)" -lopenblas' or the
+>>> equivalent. Could the name of the BLAS library itself be made a
+>>> variable for Mkrules.local? Perhaps something like 'USE_EXTBLAS',
+>>> 'EXTBLAS_PATH', and 'EXTBLASLIBS' could be used in Mkrules.local, with
+>>> EXTBLASLIBS even defaulting to '-lf77blas -latlas'. Then
+>>> src/extra/blas/Makefile.win line 15 could look something like
+>>> '-L../../../$(IMPDIR) -lR  -L"$(ATLAS_PATH)" $(EXTBLASLIBS)'? I admit
+>>> I have not tested this configuration yet, though.
+>>>
+>>> C: Toolchain definitions
+>>> If the toolchain developed by Jeroen will be be the eventual Rtools,
+>>> as it is a multilib, src/gnuwin32/Mkrules.local lines 52?59 will
+>>> probably require a rewrite, if they are necessary at all.
+>>>
+>>> Thank you,
+>>>
+>>> Avi
+>>>
+>>> _______________________________________________
+>>> R-SIG-windows mailing list
+>>> R-SIG-windows at r-project.org
+>>> https://stat.ethz.ch/mailman/listinfo/r-sig-windows
+>>>
+>>
+
+
+From avraham.adler at gmail.com  Wed Sep  9 01:07:54 2015
+From: avraham.adler at gmail.com (Avraham Adler)
+Date: Tue, 8 Sep 2015 19:07:54 -0400
+Subject: [R-SIG-Win] Some suggested changes to Windows makefiles with
+ respect to experimental toolchain
+In-Reply-To: <55EF6799.3010407@gmail.com>
+References: <CAL6gwnJQfVU-5BWGioEEFaijGL39=nLuMOhRz7NKJAv7QNJPog@mail.gmail.com>
+	<55EF2252.9070902@gmail.com>
+	<CAL6gwnJgSPz2qWyd4MQSUZHUHyWiwz_-QGjMDv8JXQCj_-PQmQ@mail.gmail.com>
+	<55EF6799.3010407@gmail.com>
+Message-ID: <CAL6gwnL3V21sjo12TCrSDAUo7=06ZeBZ7H6_12GyXtpmAH+LNg@mail.gmail.com>
+
+On Tue, Sep 8, 2015 at 6:56 PM, Duncan Murdoch <murdoch.duncan at gmail.com> wrote:
+> I didn't write the make files, and can't answer your questions.  You're
+> on your own here if nobody else pipes up.
+>
+> Duncan Murdoch
+>
+
+Completely understood. Would you suggest that I cross-post the
+question to R-devel to enhance the possibility of somone piping up?
+
+Also, if the patch works under he current toolchain as well, I would
+still want to submit it, if that is acceptable, as 1) the benefits of
+LTO will still be recognized in the core of R and 2) it makes external
+BLAS compilation easier.
+
+Thank you again,
+
+Avi
+
+
+From murdoch.duncan at gmail.com  Wed Sep  9 01:11:48 2015
+From: murdoch.duncan at gmail.com (Duncan Murdoch)
+Date: Tue, 8 Sep 2015 19:11:48 -0400
+Subject: [R-SIG-Win] Some suggested changes to Windows makefiles with
+ respect to experimental toolchain
+In-Reply-To: <CAL6gwnL3V21sjo12TCrSDAUo7=06ZeBZ7H6_12GyXtpmAH+LNg@mail.gmail.com>
+References: <CAL6gwnJQfVU-5BWGioEEFaijGL39=nLuMOhRz7NKJAv7QNJPog@mail.gmail.com>
+	<55EF2252.9070902@gmail.com>
+	<CAL6gwnJgSPz2qWyd4MQSUZHUHyWiwz_-QGjMDv8JXQCj_-PQmQ@mail.gmail.com>
+	<55EF6799.3010407@gmail.com>
+	<CAL6gwnL3V21sjo12TCrSDAUo7=06ZeBZ7H6_12GyXtpmAH+LNg@mail.gmail.com>
+Message-ID: <55EF6B34.5020106@gmail.com>
+
+On 08/09/2015 7:07 PM, Avraham Adler wrote:
+> On Tue, Sep 8, 2015 at 6:56 PM, Duncan Murdoch <murdoch.duncan at gmail.com> wrote:
+>> I didn't write the make files, and can't answer your questions.  You're
+>> on your own here if nobody else pipes up.
+>>
+>> Duncan Murdoch
+>>
+> 
+> Completely understood. Would you suggest that I cross-post the
+> question to R-devel to enhance the possibility of somone piping up?r are
+
+No.  You should go into svn and see who wrote the parts of the makefiles
+that you are editing (probably Brian Ripley, but not necessarily) and
+ask them.
+
+> 
+> Also, if the patch works under he current toolchain as well, I would
+> still want to submit it, if that is acceptable, as 1) the benefits of
+> LTO will still be recognized in the core of R and 2) it makes external
+> BLAS compilation easier.
+> 
+
+I would commit the patch if it made *no* changes to the current
+compilation scheme.  I would not commit it if it made changes that I
+can't judge.
+
+Duncan Murdoch
+
+
+From kevinushey at gmail.com  Wed Sep  9 22:25:26 2015
+From: kevinushey at gmail.com (Kevin Ushey)
+Date: Wed, 9 Sep 2015 13:25:26 -0700
+Subject: [R-SIG-Win] experimental toolchain: C++ exceptions + setjmp, longjmp
+Message-ID: <CAJXgQP2sQTew1Aj6gps=e_EwkrdM_4MtEKPRegiA7zr9NfaS5w@mail.gmail.com>
+
+Hi all,
+
+Using the version of R + toolchain built by Jeroen here:
+
+    http://www.stat.ucla.edu/~jeroen/mingw-w64/
+
+I'm running into segfaults when attempting to run Rcpp unit tests with
+64bit R. In particular, when an Rcpp module throws an exception, it is
+later caught, and 'forwarded to R' -- effectively, we have a construct
+of the form:
+
+    SEXP r_condition = R_NilValue;
+    try {
+        // C++ code that might throw
+    } catch (...) {
+        // populate r_condition
+    }
+
+    // forward errors back to R
+    if (r_condition != R_NilValue) {
+        SEXP call = Rf_lang2(Rf_install("stop"), r_condition);
+        Rf_eval(call, R_GlobalEnv); // will longjmp
+    }
+
+The main goal is to ensure that any longjmps performed occur at the
+top level, with no C++ objects on the stack (and so no destructors are
+skipped). This allows us to safely transfer control back to R from a
+C++ context.
+
+The problem is, with the new toolchain, I'm seeing a crash on the
+attempted longjmp performed by R in the Rf_eval call.
+
+Moreover, though, I get an error even with a _local_ setjmp / longjmp
+after the exception is thrown and caught; ie, this fails:
+
+    if (r_condition != R_NilValue) {
+        jmp_buf buffer;
+        if (!setjmp(buffer)) {
+            longjmp(buffer, 1);
+        }
+    }
+
+This silly local setjmp / longjmp causes a crash, which I think
+implies 'something' has been corrupted 'somewhere' in the previous
+logic (unfortunately, I have no idea where)
+
+There is some extra prose in the pull request here that attempted to
+work around this: https://github.com/RcppCore/Rcpp/pull/371, but I
+think ultimately this needs to be narrowed down into a reproducible
+example. So far, the pieces seem to be:
+
+    1) A C++ function throws an exception,
+    2) That exception is caught,
+    3) We attempt to perform a longjmp after the exception is caught / handled.
+
+I still don't have any idea where fault lies (most likely within the
+toolchain, but could be within Rcpp or R itself) but if anyone is
+feeling 'brave' some help in generating a reproducible example would
+be very helpful. Note that such examples execute fine on other
+platforms, and with the old Windows toolchain, so in all likelihood
+it's a bug in exception handling with the new toolchain.
+
+It's also possible that the SJLJ exceptions used by the toolchain do
+not play well with the SEH exception model used internally by Windows
+DLLs (and, in fact, this _is_ where the crashes do later happen), but
+I think we want to stick with SJLJ for compatibility with pre-existing
+DLLs. This also seems surprising though, since the previous Windows
+toolchain used SJLJ exceptions (IIUC).
+
+NOTE: The previously established workaround, using
+`-fno-asynchronous-unwind-tables`, does not seem to save us from this
+bug.
+
+Kevin
+
+---
+
+Rcpp's failing unit test code:
+https://github.com/RcppCore/Rcpp/blob/7d556daf295e279edea7990e7b7c19f58e1f9d8f/inst/unitTests/runit.Module.R#L69
+
+The C++ code actually executed:
+https://github.com/RcppCore/Rcpp/blob/7d556daf295e279edea7990e7b7c19f58e1f9d8f/inst/include/Rcpp/module/Module_Property.h#L36
+
+Where it's caught:
+https://github.com/RcppCore/Rcpp/blob/9491c727c1f53006f17cb4c932aecbaa4617757f/inst/include/Rcpp/macros/macros.h#L38-L56
+
+The callstack from WinDbg (NOTE: Some symbol names from R may be wrong)
+
+Child-SP          RetAddr           Call Site
+00000000`044021a0 00000000`76ecf4ec ntdll!RtlRaiseStatus+0x18
+00000000`04402740 000007fe`fdd6e543 ntdll!RtlIsDosDeviceName_U+0x15acc
+00000000`04402de0 00000000`6c7c1d0e msvcrt!longjmp+0x63
+00000000`04403320 00000000`6c7c0d13 R!Rf_error+0x2ee
+00000000`04403580 00000000`6c7c4314 R!R_GetSrcFilename+0x513
+00000000`04407800 00000000`6c7c4388 R!Rf_warningcall_immediate+0x1044
+00000000`04407840 00000000`6c7d3f4e R!Rf_warningcall_immediate+0x10b8
+00000000`04407870 00000000`6c7e4b31 R!do_Rprof+0x7c6e
+00000000`044083f0 00000000`6c7e64e6 R!Rf_eval+0x161
+00000000`04408660 00000000`6c7e4ca3 R!Rf_applyClosure+0x5d6
+00000000`044088c0 00000000`6c54434f R!Rf_eval+0x2d3
+00000000`04408b30 00000000`003fff90
+sourceCpp_1!ZN4Rcpp6class_I12ModuleNumberE11setPropertyEP7SEXPRECS4_S4_+0x4ef
+00000000`04408b38 00000000`6c80529d 0x3fff90
+00000000`04408b40 00000004`00000004 R!Rf_pmatch+0xa6d
+00000000`04408c40 00000000`00000000 0x00000004`00000004
+
+
+From kevinushey at gmail.com  Thu Sep 10 04:44:46 2015
+From: kevinushey at gmail.com (Kevin Ushey)
+Date: Wed, 9 Sep 2015 19:44:46 -0700
+Subject: [R-SIG-Win] experimental toolchain: C++ exceptions + setjmp,
+	longjmp
+In-Reply-To: <CAJXgQP2sQTew1Aj6gps=e_EwkrdM_4MtEKPRegiA7zr9NfaS5w@mail.gmail.com>
+References: <CAJXgQP2sQTew1Aj6gps=e_EwkrdM_4MtEKPRegiA7zr9NfaS5w@mail.gmail.com>
+Message-ID: <CAJXgQP1yX3oC+XzetCFZWpT516uxMnfUHREmvZTw+GF7oa90Mw@mail.gmail.com>
+
+One candidate here -- it looks like the way msvcrt's setjmp is called
+has changed in the new toolchain. Previously, we had (in setjmp.h):
+
+    #ifdef _WIN64
+    #define setjmp(BUF) _setjmp((BUF), mingw_getsp())
+    #else
+    #define setjmp(BUF) _setjmp3((BUF), NULL)
+    #endif
+
+whereas now we have:
+
+    #    ifdef _WIN64
+    #     if (__MINGW_GCC_VERSION < 40702)
+    #      define setjmp(BUF) _setjmp((BUF), mingw_getsp())
+    #     else
+    #      define setjmp(BUF) _setjmp((BUF), __builtin_frame_address (0))
+    #     endif
+    #    else
+    #      define setjmp(BUF) _setjmp3((BUF), NULL)
+    #    endif
+
+In other words, the previous toolchain attempted to get the stack
+pointer with `mingw_getsp()`, while now it's done through
+`__builtin_frame_address(0)`.
+
+The definition of `mingw_getsp()` is here:
+https://sourceforge.net/p/mingw-w64/mingw-w64/ci/9592360c86d5cc04d7a265fb11e4611f6df33a62/tree/mingw-w64-crt/misc/mingw_getsp.S
+
+The definition for `__builtin_frame_address()` is here (assuming I am
+reading the gcc sources properly):
+https://github.com/gcc-mirror/gcc/blob/7aea4e7cdcd40d7bd47c64e76325a62191887d1b/gcc/builtins.c#L4528-L4574
+
+And motivation for the change is here:
+https://sourceforge.net/p/mingw-w64/mailman/mingw-w64-public/thread/CAEwic4bjMb851Y2T2dUr_ObBVYaiWY0XkgWnDodVUgjibWO-Sw%40mail.gmail.com/#msg29496874
+
+FWIW, in my tests `mingw_getsp()` and `__builtin_frame_address()` do
+return different values, so I think this is worth investigating a bit,
+and hopefully someone with more expertise than I can weigh in.
+
+Kevin
+
+
+On Wed, Sep 9, 2015 at 1:25 PM, Kevin Ushey <kevinushey at gmail.com> wrote:
+> Hi all,
+>
+> Using the version of R + toolchain built by Jeroen here:
+>
+>     http://www.stat.ucla.edu/~jeroen/mingw-w64/
+>
+> I'm running into segfaults when attempting to run Rcpp unit tests with
+> 64bit R. In particular, when an Rcpp module throws an exception, it is
+> later caught, and 'forwarded to R' -- effectively, we have a construct
+> of the form:
+>
+>     SEXP r_condition = R_NilValue;
+>     try {
+>         // C++ code that might throw
+>     } catch (...) {
+>         // populate r_condition
+>     }
+>
+>     // forward errors back to R
+>     if (r_condition != R_NilValue) {
+>         SEXP call = Rf_lang2(Rf_install("stop"), r_condition);
+>         Rf_eval(call, R_GlobalEnv); // will longjmp
+>     }
+>
+> The main goal is to ensure that any longjmps performed occur at the
+> top level, with no C++ objects on the stack (and so no destructors are
+> skipped). This allows us to safely transfer control back to R from a
+> C++ context.
+>
+> The problem is, with the new toolchain, I'm seeing a crash on the
+> attempted longjmp performed by R in the Rf_eval call.
+>
+> Moreover, though, I get an error even with a _local_ setjmp / longjmp
+> after the exception is thrown and caught; ie, this fails:
+>
+>     if (r_condition != R_NilValue) {
+>         jmp_buf buffer;
+>         if (!setjmp(buffer)) {
+>             longjmp(buffer, 1);
+>         }
+>     }
+>
+> This silly local setjmp / longjmp causes a crash, which I think
+> implies 'something' has been corrupted 'somewhere' in the previous
+> logic (unfortunately, I have no idea where)
+>
+> There is some extra prose in the pull request here that attempted to
+> work around this: https://github.com/RcppCore/Rcpp/pull/371, but I
+> think ultimately this needs to be narrowed down into a reproducible
+> example. So far, the pieces seem to be:
+>
+>     1) A C++ function throws an exception,
+>     2) That exception is caught,
+>     3) We attempt to perform a longjmp after the exception is caught / handled.
+>
+> I still don't have any idea where fault lies (most likely within the
+> toolchain, but could be within Rcpp or R itself) but if anyone is
+> feeling 'brave' some help in generating a reproducible example would
+> be very helpful. Note that such examples execute fine on other
+> platforms, and with the old Windows toolchain, so in all likelihood
+> it's a bug in exception handling with the new toolchain.
+>
+> It's also possible that the SJLJ exceptions used by the toolchain do
+> not play well with the SEH exception model used internally by Windows
+> DLLs (and, in fact, this _is_ where the crashes do later happen), but
+> I think we want to stick with SJLJ for compatibility with pre-existing
+> DLLs. This also seems surprising though, since the previous Windows
+> toolchain used SJLJ exceptions (IIUC).
+>
+> NOTE: The previously established workaround, using
+> `-fno-asynchronous-unwind-tables`, does not seem to save us from this
+> bug.
+>
+> Kevin
+>
+> ---
+>
+> Rcpp's failing unit test code:
+> https://github.com/RcppCore/Rcpp/blob/7d556daf295e279edea7990e7b7c19f58e1f9d8f/inst/unitTests/runit.Module.R#L69
+>
+> The C++ code actually executed:
+> https://github.com/RcppCore/Rcpp/blob/7d556daf295e279edea7990e7b7c19f58e1f9d8f/inst/include/Rcpp/module/Module_Property.h#L36
+>
+> Where it's caught:
+> https://github.com/RcppCore/Rcpp/blob/9491c727c1f53006f17cb4c932aecbaa4617757f/inst/include/Rcpp/macros/macros.h#L38-L56
+>
+> The callstack from WinDbg (NOTE: Some symbol names from R may be wrong)
+>
+> Child-SP          RetAddr           Call Site
+> 00000000`044021a0 00000000`76ecf4ec ntdll!RtlRaiseStatus+0x18
+> 00000000`04402740 000007fe`fdd6e543 ntdll!RtlIsDosDeviceName_U+0x15acc
+> 00000000`04402de0 00000000`6c7c1d0e msvcrt!longjmp+0x63
+> 00000000`04403320 00000000`6c7c0d13 R!Rf_error+0x2ee
+> 00000000`04403580 00000000`6c7c4314 R!R_GetSrcFilename+0x513
+> 00000000`04407800 00000000`6c7c4388 R!Rf_warningcall_immediate+0x1044
+> 00000000`04407840 00000000`6c7d3f4e R!Rf_warningcall_immediate+0x10b8
+> 00000000`04407870 00000000`6c7e4b31 R!do_Rprof+0x7c6e
+> 00000000`044083f0 00000000`6c7e64e6 R!Rf_eval+0x161
+> 00000000`04408660 00000000`6c7e4ca3 R!Rf_applyClosure+0x5d6
+> 00000000`044088c0 00000000`6c54434f R!Rf_eval+0x2d3
+> 00000000`04408b30 00000000`003fff90
+> sourceCpp_1!ZN4Rcpp6class_I12ModuleNumberE11setPropertyEP7SEXPRECS4_S4_+0x4ef
+> 00000000`04408b38 00000000`6c80529d 0x3fff90
+> 00000000`04408b40 00000004`00000004 R!Rf_pmatch+0xa6d
+> 00000000`04408c40 00000000`00000000 0x00000004`00000004
+
+
+From avraham.adler at gmail.com  Thu Sep 10 16:48:28 2015
+From: avraham.adler at gmail.com (Avraham Adler)
+Date: Thu, 10 Sep 2015 10:48:28 -0400
+Subject: [R-SIG-Win] Some suggested changes to Windows makefiles with
+ respect to experimental toolchain
+In-Reply-To: <55EF6B34.5020106@gmail.com>
+References: <CAL6gwnJQfVU-5BWGioEEFaijGL39=nLuMOhRz7NKJAv7QNJPog@mail.gmail.com>
+	<55EF2252.9070902@gmail.com>
+	<CAL6gwnJgSPz2qWyd4MQSUZHUHyWiwz_-QGjMDv8JXQCj_-PQmQ@mail.gmail.com>
+	<55EF6799.3010407@gmail.com>
+	<CAL6gwnL3V21sjo12TCrSDAUo7=06ZeBZ7H6_12GyXtpmAH+LNg@mail.gmail.com>
+	<55EF6B34.5020106@gmail.com>
+Message-ID: <CAL6gwnLQPa66RKqniewhtGQDtZgK9geGZjbWePZJ9KfLd5kLwQ@mail.gmail.com>
+
+On Tue, Sep 8, 2015 at 7:11 PM, Duncan Murdoch <murdoch.duncan at gmail.com> wrote:
+> I would commit the patch if it made *no* changes to the current
+> compilation scheme.  I would not commit it if it made changes that I
+> can't judge.
+
+
+I think I've worked out the necessary changes. I've tested the
+changes/patch on Windows 64bit using:
+
+* 4.6.3 toolset (no LTO of course, standard BLAS)
+* 4.9.2 toolset (no LTO, standard BLAS)
+* 4.9.2 toolset (with Fat LTO objects, OpenBLAS)
+* 4.9.2 toolset (with slim LTO objects, OpenBLAS)
+
+and it compiled and passed make check each time. Unfortunately,
+though, I do not have access to a 32-bit Windows platform on which to
+test compilation. While there are changes to six files, the user will
+only see a difference in Mkrules.dist, where there are a couple of new
+options. I also tried to explain a bit, and changed the default mtune
+from "core2" to "generic" which will work on any version of GCC, and
+is recommended when it isn't known what platform will be used for
+compilation.
+
+What should the next step be? Should I just post the text of the
+result of diff here? Should I e-mail someone a patchfile, the six
+revised files, or both? Is this something to list at
+<https://bugs.r-project.org/bugzilla3/>?
+
+Thank you,
+
+Avi
+
+
+From jeroenooms at gmail.com  Thu Sep 10 19:57:29 2015
+From: jeroenooms at gmail.com (Jeroen Ooms)
+Date: Thu, 10 Sep 2015 19:57:29 +0200
+Subject: [R-SIG-Win] Some suggested changes to Windows makefiles with
+ respect to experimental toolchain
+In-Reply-To: <CAL6gwnLQPa66RKqniewhtGQDtZgK9geGZjbWePZJ9KfLd5kLwQ@mail.gmail.com>
+References: <CAL6gwnJQfVU-5BWGioEEFaijGL39=nLuMOhRz7NKJAv7QNJPog@mail.gmail.com>
+	<55EF2252.9070902@gmail.com>
+	<CAL6gwnJgSPz2qWyd4MQSUZHUHyWiwz_-QGjMDv8JXQCj_-PQmQ@mail.gmail.com>
+	<55EF6799.3010407@gmail.com>
+	<CAL6gwnL3V21sjo12TCrSDAUo7=06ZeBZ7H6_12GyXtpmAH+LNg@mail.gmail.com>
+	<55EF6B34.5020106@gmail.com>
+	<CAL6gwnLQPa66RKqniewhtGQDtZgK9geGZjbWePZJ9KfLd5kLwQ@mail.gmail.com>
+Message-ID: <CABFfbXu6phBv6LPCs=YWA1Z=Y4qLT0aRbpAF+WAd=gCS+nicjA@mail.gmail.com>
+
+On Thu, Sep 10, 2015 at 4:48 PM, Avraham Adler <avraham.adler at gmail.com> wrote:
+>
+> What should the next step be? Should I just post the text of the
+> result of diff here? Should I e-mail someone a patchfile, the six
+> revised files, or both? Is this something to list at
+> <https://bugs.r-project.org/bugzilla3/>?
+
+We should hold off optimization tweaks until we have a stable build.
+Kevin and me are still trying to debug the rcpp longjmp problem which
+is more complex than we thought. Adding optimization in the mix at
+this point might further complicate things.
+
+Perhaps we can make a branch in the svn (or github mirror) to store
+these features so that they don't get lost, and we can easily test and
+merge them later on?
+
+
+From avraham.adler at gmail.com  Thu Sep 10 20:13:59 2015
+From: avraham.adler at gmail.com (Avraham Adler)
+Date: Thu, 10 Sep 2015 14:13:59 -0400
+Subject: [R-SIG-Win] Some suggested changes to Windows makefiles with
+ respect to experimental toolchain
+In-Reply-To: <CABFfbXu6phBv6LPCs=YWA1Z=Y4qLT0aRbpAF+WAd=gCS+nicjA@mail.gmail.com>
+References: <CAL6gwnJQfVU-5BWGioEEFaijGL39=nLuMOhRz7NKJAv7QNJPog@mail.gmail.com>
+	<55EF2252.9070902@gmail.com>
+	<CAL6gwnJgSPz2qWyd4MQSUZHUHyWiwz_-QGjMDv8JXQCj_-PQmQ@mail.gmail.com>
+	<55EF6799.3010407@gmail.com>
+	<CAL6gwnL3V21sjo12TCrSDAUo7=06ZeBZ7H6_12GyXtpmAH+LNg@mail.gmail.com>
+	<55EF6B34.5020106@gmail.com>
+	<CAL6gwnLQPa66RKqniewhtGQDtZgK9geGZjbWePZJ9KfLd5kLwQ@mail.gmail.com>
+	<CABFfbXu6phBv6LPCs=YWA1Z=Y4qLT0aRbpAF+WAd=gCS+nicjA@mail.gmail.com>
+Message-ID: <CAL6gwn+BjVyPo+X=aRECJ6B7A5Wmn851=CENLCStaNzTOwzt6A@mail.gmail.com>
+
+On Thu, Sep 10, 2015 at 1:57 PM, Jeroen Ooms <jeroenooms at gmail.com> wrote:
+> On Thu, Sep 10, 2015 at 4:48 PM, Avraham Adler <avraham.adler at gmail.com> wrote:
+>>
+>> What should the next step be? Should I just post the text of the
+>> result of diff here? Should I e-mail someone a patchfile, the six
+>> revised files, or both? Is this something to list at
+>> <https://bugs.r-project.org/bugzilla3/>?
+>
+> We should hold off optimization tweaks until we have a stable build.
+> Kevin and me are still trying to debug the rcpp longjmp problem which
+> is more complex than we thought. Adding optimization in the mix at
+> this point might further complicate things.
+>
+> Perhaps we can make a branch in the svn (or github mirror) to store
+> these features so that they don't get lost, and we can easily test and
+> merge them later on?
+
+Whatever Duncan, you, Kevin, and the rest of the team working on this feel.
+
+For what it is worth, I think the changes are minor and they can slide
+directly into the 4.6.3 toolchain, but I defer to Duncan and the R
+team as to what they feel is best for the project. The diff file for
+what I have working now is at
+<http://www.avrahamadler.com/R-LTO-BLAS.patch> if you want to review
+it for complexity.
+
+Thank you,
+
+Avi
+
+
+From murdoch.duncan at gmail.com  Thu Sep 10 20:25:04 2015
+From: murdoch.duncan at gmail.com (Duncan Murdoch)
+Date: Thu, 10 Sep 2015 14:25:04 -0400
+Subject: [R-SIG-Win] Some suggested changes to Windows makefiles with
+ respect to experimental toolchain
+In-Reply-To: <CABFfbXu6phBv6LPCs=YWA1Z=Y4qLT0aRbpAF+WAd=gCS+nicjA@mail.gmail.com>
+References: <CAL6gwnJQfVU-5BWGioEEFaijGL39=nLuMOhRz7NKJAv7QNJPog@mail.gmail.com>
+	<55EF2252.9070902@gmail.com>
+	<CAL6gwnJgSPz2qWyd4MQSUZHUHyWiwz_-QGjMDv8JXQCj_-PQmQ@mail.gmail.com>
+	<55EF6799.3010407@gmail.com>
+	<CAL6gwnL3V21sjo12TCrSDAUo7=06ZeBZ7H6_12GyXtpmAH+LNg@mail.gmail.com>
+	<55EF6B34.5020106@gmail.com>
+	<CAL6gwnLQPa66RKqniewhtGQDtZgK9geGZjbWePZJ9KfLd5kLwQ@mail.gmail.com>
+	<CABFfbXu6phBv6LPCs=YWA1Z=Y4qLT0aRbpAF+WAd=gCS+nicjA@mail.gmail.com>
+Message-ID: <55F1CB00.3070003@gmail.com>
+
+On 10/09/2015 1:57 PM, Jeroen Ooms wrote:
+> On Thu, Sep 10, 2015 at 4:48 PM, Avraham Adler <avraham.adler at gmail.com> wrote:
+>>
+>> What should the next step be? Should I just post the text of the
+>> result of diff here? Should I e-mail someone a patchfile, the six
+>> revised files, or both? Is this something to list at
+>> <https://bugs.r-project.org/bugzilla3/>?
+> 
+> We should hold off optimization tweaks until we have a stable build.
+> Kevin and me are still trying to debug the rcpp longjmp problem which
+> is more complex than we thought. Adding optimization in the mix at
+> this point might further complicate things.
+> 
+> Perhaps we can make a branch in the svn (or github mirror) to store
+> these features so that they don't get lost, and we can easily test and
+> merge them later on?
+> 
+
+I won't make an svn branch; they take too much maintenance.
+
+Once you have a candidate for wider testing (i.e. something that works
+as far as everyone knows in 4.9.x, and makes no changes to compiles in
+4.6.3) I'll put it into R-devel.
+
+To make sure these changes don't get lost, personally I'd use svn patch
+to create a patch against current R-devel, and update that every now and
+then as R-devel is revised.  You github users may find it easier to do
+essentially the same thing on the github mirror.
+
+Duncan Murdoch
+
+
+From jeroen.ooms at stat.ucla.edu  Sun Sep 13 18:36:55 2015
+From: jeroen.ooms at stat.ucla.edu (Jeroen Ooms)
+Date: Sun, 13 Sep 2015 18:36:55 +0200
+Subject: [R-SIG-Win] Windows toolchain update: seh vs sjlj
+Message-ID: <CABFfbXuLkmSY3SMn1cNdj3yjMdDnDykiXMiL4rLztAxNsFubbg@mail.gmail.com>
+
+Hi all,
+
+Some bad news and then good news on the developments of the new tool
+chain for Windows.
+
+Bad news: Over the past week, Kevin and me have found several more
+problem cases in which the i686-493-win32-sjlj-rt_v3-s tool chain
+would cause R to freeze or segfault in the case of c++ exceptions,
+even when compiling with --no-asynchronous-unwind-tables. These
+happened mainly within Rcpp modules, but we also found a way to
+trigger a segfault without Rcpp [1]. We investigated many workarounds
+and tried patches for setjmp.h and psignal.h, but each solution
+introduced more problems then it solved.
+
+The good news: the mingw-w64 authors suggest to move away from the
+SJLJ exception model, and instead use DWARF on win32 and SEH on win64.
+These exception models are the default in mingw-w64 since gcc 4.8
+because they are more reliable and performant. So we built a copy of
+i686-493-posix-dwarf-rt_v3-s and x86_64-493-posix-seh-rt_v3-s and used
+this to compile R. The results are quite amazing: both R and Rcpp pass
+all their checks without any special compiler flags (even without
+--no-asynchronous-unwind-tables). So far I have not been able to
+reproduce a single problem case with this new build, and it is
+noticeably faster as well. This confirms the sentiment of the
+mingw-w64 authors that SJLJ does not play nice with recent features of
+gcc.
+
+A zip file containing these new tool chains (unzip to c:/rtools) as
+well as a recent version of R-devel with DWARF/SEH (dubbed
+R-experimental) are available from [2]. I used icu-55.1 from [3] to
+build R with this new tool chain because the ICU version from Brian
+Ripley was built for SJLJ. Because ICU is the only c++ library
+required to build R, all of the other libraries (multi320.zip, Tcl,
+Cairo, libcurl) can still be taken from cran/rtools.
+
+So now we are torn on whether we should move away from SJLJ for the
+new tool chain. The advantages of DWARF/SEH are obvious:
+
+ - More reliable
+ - Better performance
+ - Better tested because it is the default
+ - Compatibly with GCC 5.x (for future updates)
+ - We can use msys2 to build libraries
+
+The disadvantages:
+
+ - No multilib support: requires separate toolchains for win32 and win64.
+ - Requires a rebuild of existing C++ static libraries.
+ - Windows build servers will need two separate sets of static c++
+libs: one set built with SJLJ for the old tool chain (R 3.2) and one
+set built with DWARF/SEH for the new tool chain (R 3.3). Mixing them
+up will lead to linking errors.
+
+The situation is obviously suboptimal. I am especially concerned about
+the last point, because it important that we get CRAN on board, and
+this will definitely cause some temporary disruption. However it looks
+like this is the only way forward. Obviously if we are going to
+migrate I can help out with the rebuilding process.
+
+The good thing is that once we bite the bullet and make the switch, R
+on windows will be more prepared for the future. A major advantage of
+using the default mingw-w64 exception model is that we can use the
+excellent msys2 (the next iteration of cygwin/msys) to build c/c++
+libraries for windows. In fact, we might be able to grab DWARF/SEH
+builds of most open source libraries straight from their repositories
+[3] as I did for ICU. We could even write an msys2 package [4] for R
+itself to work towards a more formal, automated build process on
+Windows similar to Linux.
+
+Jeroen
+
+
+
+[1] https://github.com/kevinushey/RToolsTest/commit/0471218b1e79d2cfd9477299dc1ba5f8213e9f21
+[2] http://www.stat.ucla.edu/~jeroen/mingw-w64/
+[3] http://repo.msys2.org/mingw/
+[4] https://github.com/Alexpux/MINGW-packages
+
+
+From jeroen.ooms at stat.ucla.edu  Tue Sep 15 14:34:40 2015
+From: jeroen.ooms at stat.ucla.edu (Jeroen Ooms)
+Date: Tue, 15 Sep 2015 14:34:40 +0200
+Subject: [R-SIG-Win] Rcpp revdep check with gcc 4.9.3
+Message-ID: <CABFfbXvt3eGsTsSNCmB1CWaDro1ggWFcb8pKUChvC8VGqmTYng@mail.gmail.com>
+
+Hi all,
+
+Some more updates on the new windows tool chain. We did a reverse
+dependencies check on Rcpp using the new tool chains. The summary and
+log files are here:
+http://www.stat.ucla.edu/~jeroen/mingw-w64/rcpp_check/
+
+The results seem quite promising. Out of the 460 checked pages, 24
+failed to install. However the majority of problems were unrelated to
+the toolchain, e.g. missing software on the server (Java, JAGS, latex
+packages, C libraries), or issues with the revdep check process
+itself. Perhaps more important: no unexpected segfaults or freezes
+were encountered in the process.
+
+A quick analysis of the results yields at least 4 packages that
+require a rebuild of an external C++ library:
+
+ - V8: libv8
+ - RProtoBuf: libprotobuf
+ - RQuantLib (libquantlib)
+ - h5: libhdf5
+
+Another 2 packages need some sort of fixing:
+
+ - rexpokit: fortran bug, already fixed in dev version on
+github:wrathematics/rexpokit
+ - rpg: conflicting winpthread, need to switch to native pthreads
+
+Another few packages failed an example or a unit test, but that might
+again be due to external circumstances. So far I did not find anything
+that hints at new problems with the tool chain.
+
+Jeroen
+
+
+From avraham.adler at gmail.com  Wed Sep 16 03:28:54 2015
+From: avraham.adler at gmail.com (Avraham Adler)
+Date: Tue, 15 Sep 2015 21:28:54 -0400
+Subject: [R-SIG-Win] Windows toolchain update: seh vs sjlj
+In-Reply-To: <CABFfbXuLkmSY3SMn1cNdj3yjMdDnDykiXMiL4rLztAxNsFubbg@mail.gmail.com>
+References: <CABFfbXuLkmSY3SMn1cNdj3yjMdDnDykiXMiL4rLztAxNsFubbg@mail.gmail.com>
+Message-ID: <CAL6gwnLJZva9Buza6NYhz9OXLq2Btx9arbZOA-UqwrdQ5Gu6dQ@mail.gmail.com>
+
+On Sun, Sep 13, 2015 at 12:36 PM, Jeroen Ooms <jeroen.ooms at stat.ucla.edu> wrote:
+> The good news: the mingw-w64 authors suggest to move away from the
+> SJLJ exception model, and instead use DWARF on win32 and SEH on win64.
+> These exception models are the default in mingw-w64 since gcc 4.8
+> because they are more reliable and performant.
+
+Forgive the possibly ignorant question, but is there a reason not to
+use SEH for both 32- and 64-bit Windows?
+
+Avi
+
+
+From nilsson.henric at gmail.com  Wed Sep 16 08:54:21 2015
+From: nilsson.henric at gmail.com (Henric Winell)
+Date: Wed, 16 Sep 2015 08:54:21 +0200
+Subject: [R-SIG-Win] Windows toolchain update: seh vs sjlj
+In-Reply-To: <CAL6gwnLJZva9Buza6NYhz9OXLq2Btx9arbZOA-UqwrdQ5Gu6dQ@mail.gmail.com>
+References: <CABFfbXuLkmSY3SMn1cNdj3yjMdDnDykiXMiL4rLztAxNsFubbg@mail.gmail.com>
+	<CAL6gwnLJZva9Buza6NYhz9OXLq2Btx9arbZOA-UqwrdQ5Gu6dQ@mail.gmail.com>
+Message-ID: <55F9121D.5060900@gmail.com>
+
+Den 2015-09-16 kl. 03:28, skrev Avraham Adler:
+
+> On Sun, Sep 13, 2015 at 12:36 PM, Jeroen Ooms <jeroen.ooms at stat.ucla.edu> wrote:
+>> The good news: the mingw-w64 authors suggest to move away from the
+>> SJLJ exception model, and instead use DWARF on win32 and SEH on win64.
+>> These exception models are the default in mingw-w64 since gcc 4.8
+>> because they are more reliable and performant.
+>
+> Forgive the possibly ignorant question, but is there a reason not to
+> use SEH for both 32- and 64-bit Windows?
+
+Unfortunately, it has not been implemented for 32-bit yet:
+
+http://mingw-w64.org/doku.php/contribute
+
+
+Henric
+
+
+
+>
+> Avi
+>
+> _______________________________________________
+> R-SIG-windows mailing list
+> R-SIG-windows at r-project.org
+> https://stat.ethz.ch/mailman/listinfo/r-sig-windows
+>
+
+
+From jeroenooms at gmail.com  Wed Sep 16 11:54:12 2015
+From: jeroenooms at gmail.com (Jeroen Ooms)
+Date: Wed, 16 Sep 2015 11:54:12 +0200
+Subject: [R-SIG-Win] Rtools and gfortran
+Message-ID: <CABFfbXtn4sn8oL7EGgyUEb0XxCRSFiohWMKpLtYVxsYqiwYuKg@mail.gmail.com>
+
+For those helping with testing with the new tool chain:
+
+Some packages containing Fortran code (such as 'vegan') which worked
+with the old tool chain, gave linking errors under the new one. It
+turns out that the gcc 4.9.3 requires you to explicitly link libm and
+libquadmath. So in Makeconf we need:
+
+FLIBS = -lgfortran -lm -lquadmath
+
+The same flags are used on Linux as well. I am not a Fortran expert,
+but from what I can see these libraries always get statically linked
+so the compiled R binary packages should still work on machines
+without a tool chain.
+
+
+From avraham.adler at gmail.com  Wed Sep 16 17:29:46 2015
+From: avraham.adler at gmail.com (Avraham Adler)
+Date: Wed, 16 Sep 2015 11:29:46 -0400
+Subject: [R-SIG-Win] Rtools and gfortran
+In-Reply-To: <CABFfbXtn4sn8oL7EGgyUEb0XxCRSFiohWMKpLtYVxsYqiwYuKg@mail.gmail.com>
+References: <CABFfbXtn4sn8oL7EGgyUEb0XxCRSFiohWMKpLtYVxsYqiwYuKg@mail.gmail.com>
+Message-ID: <CAL6gwnKsxa=rQG394fF7DWzfsbmS=0kp7_UaUx=4diEnVEvU5Q@mail.gmail.com>
+
+In /src/gnuwin32/Mkrules.rules already has lquadmath, but not lm.
+/src/gnuwin32/fixed/etc/Makeconf has neither.
+
+Avi
+
+On Wed, Sep 16, 2015 at 5:54 AM, Jeroen Ooms <jeroenooms at gmail.com> wrote:
+> For those helping with testing with the new tool chain:
+>
+> Some packages containing Fortran code (such as 'vegan') which worked
+> with the old tool chain, gave linking errors under the new one. It
+> turns out that the gcc 4.9.3 requires you to explicitly link libm and
+> libquadmath. So in Makeconf we need:
+>
+> FLIBS = -lgfortran -lm -lquadmath
+>
+> The same flags are used on Linux as well. I am not a Fortran expert,
+> but from what I can see these libraries always get statically linked
+> so the compiled R binary packages should still work on machines
+> without a tool chain.
+>
+> _______________________________________________
+> R-SIG-windows mailing list
+> R-SIG-windows at r-project.org
+> https://stat.ethz.ch/mailman/listinfo/r-sig-windows
+
+
+From avraham.adler at gmail.com  Fri Sep 18 19:56:17 2015
+From: avraham.adler at gmail.com (Avraham Adler)
+Date: Fri, 18 Sep 2015 13:56:17 -0400
+Subject: [R-SIG-Win] Windows toolchain update: seh vs sjlj
+In-Reply-To: <CABFfbXuLkmSY3SMn1cNdj3yjMdDnDykiXMiL4rLztAxNsFubbg@mail.gmail.com>
+References: <CABFfbXuLkmSY3SMn1cNdj3yjMdDnDykiXMiL4rLztAxNsFubbg@mail.gmail.com>
+Message-ID: <CAL6gwnKsWR19mkdPVpYk+t1aQYd2xMQaHEfMFaW_DmW9jKwLbw@mail.gmail.com>
+
+On Sun, Sep 13, 2015 at 12:36 PM, Jeroen Ooms <jeroen.ooms at stat.ucla.edu> wrote:
+> Hi all,
+>
+> The good news: the mingw-w64 authors suggest to move away from the
+> SJLJ exception model, and instead use DWARF on win32 and SEH on win64.
+> These exception models are the default in mingw-w64 since gcc 4.8
+> because they are more reliable and performant. So we built a copy of
+> i686-493-posix-dwarf-rt_v3-s and x86_64-493-posix-seh-rt_v3-s and used
+> this to compile R. The results are quite amazing: both R and Rcpp pass
+> all their checks without any special compiler flags (even without
+> --no-asynchronous-unwind-tables). So far I have not been able to
+> reproduce a single problem case with this new build, and it is
+> noticeably faster as well. This confirms the sentiment of the
+> mingw-w64 authors that SJLJ does not play nice with recent features of
+> gcc.
+
+
+Just an update on some testing. I've built R-devel_2015-09-10 on an
+i7-3740QM @ 2.7Ghz with 8MB RAM running Windows7 64bit under the new
+toolchain (4.9.3-SEH-POSIX) with the following permutations:
+
+* vanilla (outside of -mtune=generic)
+* With OpenBLAS
+* With OpenBLAS and -mtune=native
+* With OpenBLAS and -march=native
+* With OpenBLAS and link-time-optimization and -mtune=native
+* With OpenBLAS and link-time-optimization and -march=native
+
+Each time it passes make check-devel + make check-recommended (with
+the last, I haven't finished make check-devel as at work, I'm behind a
+firewall and the Internet2 test dies, preventing everything from
+segfault and on)
+
+I also build the 80-some packages I usually from source, and the only
+issues I've found so far is that 1) 'dplyr' doesn't compile well when
+specifying C++11 (either as c++111 or gnu++11) but compiles fine
+without it, 2) when using link-time-optimization, even though
+'stringi' compiles from source, it causes a crash when 'knitr' is
+being installed. Installing 'stringi' as a binary (which is much
+faster than building it) obviates that problem, and 3) I'm having
+trouble with running 'rstan' (although it compiles as long as no C++11
+option is passed) which I will bring to the attention of the rstan
+developers.
+
+I have not run the Rcpp segfault test as I always have problems with
+devtools, but you've said you're satisfied with that. Maybe over the
+weekend I can run some timing tests for comparison.
+
+Are there any tests in specific which would be useful?
+
+Avi
+
+
+From murdoch.duncan at gmail.com  Tue Sep 22 19:20:46 2015
+From: murdoch.duncan at gmail.com (Duncan Murdoch)
+Date: Tue, 22 Sep 2015 13:20:46 -0400
+Subject: [R-SIG-Win] New Rtools sent to CRAN
+Message-ID: <56018DEE.5080302@gmail.com>
+
+I have just uploaded a new build of the Rtools33.exe installer to CRAN.  
+It should appear on the mirrors within a day or two.
+
+This installer includes the current build of gcc 4.9.3 from 
+http://www.stat.ucla.edu/~jeroen/mingw-w64. It also includes
+Jeroen's build of libicu55, which is necessary to build R.
+
+The current R-devel build on CRAN should have the necessary changes to 
+build R using this toolchain, but the default is still the previous gcc 
+4.6.3 toolchain; users should follow the instructions on 
+https://github.com/rwinlib/r-base#readme to set up their systems to use it.
+
+Please post any problems here or to me or Jeroen, as appropriate. We're 
+hoping to be able to use this toolchain in R 3.3.x.
+
+Duncan Murdoch
+
+
+From dtenenba at fredhutch.org  Thu Sep 24 22:48:28 2015
+From: dtenenba at fredhutch.org (Dan Tenenbaum)
+Date: Thu, 24 Sep 2015 13:48:28 -0700 (PDT)
+Subject: [R-SIG-Win] New Rtools sent to CRAN
+In-Reply-To: <172890790.46421.1443127148764.JavaMail.root@fredhutch.org>
+Message-ID: <1657323952.46470.1443127708324.JavaMail.root@fredhutch.org>
+
+On Tue, Sep 22 2015, Duncan Murdoch wrote:
+
+> I have just uploaded a new build of the Rtools33.exe installer to CRAN.  
+> It should appear on the mirrors within a day or two.
+> 
+> This installer includes the current build of gcc 4.9.3 from 
+> http://www.stat.ucla.edu/~jeroen/mingw-w64. It also includes
+> Jeroen's build of libicu55, which is necessary to build R.
+> 
+> The current R-devel build on CRAN should have the necessary changes to 
+> build R using this toolchain, 
+
+Can you point to the specific changes (svn revision numbers) that were made to R-devel to facilitate this?
+
+> but the default is still the previous gcc 
+> 4.6.3 toolchain; users should follow the instructions on 
+> https://github.com/rwinlib/r-base#readme to set up their systems to use it.
+> 
+> Please post any problems here or to me or Jeroen, as appropriate. We're 
+> hoping to be able to use this toolchain in R 3.3.x.
+
+I installed this toolchain and the installer suggested adding the following to the beginning of my PATH:
+
+c:\Rtools\bin;
+c:\Rtools\gcc-4.6.3\bin;
+
+Is that correct? Should it (also?) have suggested 
+
+C:\Rtools\mingw_32\bin and C:\Rtools\mingw_64\bin?
+Or does the new R know where to look for those? If so, how does it know?
+
+Are the R-devel binaries available from CRAN being built with this toolchain?
+
+I myself am not interested in building R from source with this toolchain but rather using it to build packages that have C/C++/Fortran code. 
+
+Is there a way to tell which compiler is being used when I compile such a package?
+
+R CMD config CC
+just tells me "gcc -m64" it does not give the path to, or version of, the gcc that's being used.
+
+I ran the Bioconductor builds overnight using this toolchain and recent R-devel and did not notice anything odd with packages containing native code, which means either the new toolchain is working perfectly (which is wonderful) or gcc-4.6.3 is still being used and maybe I need to do something to faciliate the use of gcc-4.9.3. Can you advise?
+
+Thanks,
+Dan
+
+
+From jeroenooms at gmail.com  Fri Sep 25 00:13:03 2015
+From: jeroenooms at gmail.com (Jeroen Ooms)
+Date: Fri, 25 Sep 2015 00:13:03 +0200
+Subject: [R-SIG-Win] New Rtools sent to CRAN
+In-Reply-To: <1657323952.46470.1443127708324.JavaMail.root@fredhutch.org>
+References: <172890790.46421.1443127148764.JavaMail.root@fredhutch.org>
+	<1657323952.46470.1443127708324.JavaMail.root@fredhutch.org>
+Message-ID: <CABFfbXvjF2_ZgNSY7TTCL8y1ERiwntCzfkkjYuX3fUKFV3p7Og@mail.gmail.com>
+
+Hi Dan,
+
+Currently the r-devel builds from CRAN still use the old tool chain. A
+copy of r-devel which has been configured with the new tool chain is
+available from http://www.stat.ucla.edu/~jeroen/mingw-w64/R-experimental-r69418.exe
+
+This build has BINPREF (the path to the compiler) hardcoded to the
+default location of the new tool chains. To change it you would need
+to edit this variable in C:\Program
+Files\R\R-experimental\etc\x64\Makeconf and C:\Program
+Files\R\R-experimental\etc\i386\Makeconf.
+
+We are currently discussing how to design it such that you can set the
+path to the compiler using an environment variable.
+
+
+> I ran the Bioconductor builds overnight using this toolchain and recent R-devel and did not notice anything odd with packages containing native code, which means either the new toolchain is working perfectly (which is wonderful) or gcc-4.6.3 is still being used and maybe I need to do something to faciliate the use of gcc-4.9.3. Can you advise?
+
+
+We're talking to CRAN on how to coordinate the migration to the new
+tool chain. If you have bioc packages that link to external c++
+libraries, those need a rebuild. The most current information is
+available from: https://github.com/rwinlib/r-base#readme
+
+
+From kirill.mueller at ivt.baug.ethz.ch  Fri Sep 25 11:30:27 2015
+From: kirill.mueller at ivt.baug.ethz.ch (=?UTF-8?Q?Kirill_M=c3=bcller?=)
+Date: Fri, 25 Sep 2015 11:30:27 +0200
+Subject: [R-SIG-Win] Size of Rtools33
+Message-ID: <56051433.1070602@ivt.baug.ethz.ch>
+
+I have noticed a considerable increase in size for the installation of 
+Rtools 3.3. Are there any parts of the installation that I can safely 
+remove if I'm only interested in building R packages (but not R itself)? 
+This is for r-portable, a portable version of R for Windows [1]. Thanks.
+
+
+Best regards
+
+Kirill
+
+
+[1] https://github.com/krlmlr/r-portable
+
+
+From jeroenooms at gmail.com  Fri Sep 25 12:10:16 2015
+From: jeroenooms at gmail.com (Jeroen Ooms)
+Date: Fri, 25 Sep 2015 12:10:16 +0200
+Subject: [R-SIG-Win] Size of Rtools33
+In-Reply-To: <56051433.1070602@ivt.baug.ethz.ch>
+References: <56051433.1070602@ivt.baug.ethz.ch>
+Message-ID: <CABFfbXtTBHhmQqSp4AeJwLa-3uw2fef=9Wd_OU_7R0FP0-Pg=A@mail.gmail.com>
+
+Hi Kirill,
+
+This is noted in https://github.com/rwinlib/r-base#readme: It is
+mostly because we are shipping two separate tool chains instead of one
+multilib. Another reason is that recent versions of gdb depend on
+python, which again depends on a lot of other libraries. If you are
+not interested in gdb, you might be able to remove python related
+things.
+
+Btw this might not be the final Rtools, so maybe wait a bit.
+
+
+
+On Fri, Sep 25, 2015 at 11:30 AM, Kirill M?ller
+<kirill.mueller at ivt.baug.ethz.ch> wrote:
+> I have noticed a considerable increase in size for the installation of
+> Rtools 3.3. Are there any parts of the installation that I can safely remove
+> if I'm only interested in building R packages (but not R itself)? This is
+> for r-portable, a portable version of R for Windows [1]. Thanks.
+>
+>
+> Best regards
+>
+> Kirill
+>
+>
+> [1] https://github.com/krlmlr/r-portable
+>
+> _______________________________________________
+> R-SIG-windows mailing list
+> R-SIG-windows at r-project.org
+> https://stat.ethz.ch/mailman/listinfo/r-sig-windows
+
+
+From kirill.mueller at ivt.baug.ethz.ch  Fri Sep 25 12:20:25 2015
+From: kirill.mueller at ivt.baug.ethz.ch (=?UTF-8?Q?Kirill_M=c3=bcller?=)
+Date: Fri, 25 Sep 2015 12:20:25 +0200
+Subject: [R-SIG-Win] Size of Rtools33
+In-Reply-To: <CABFfbXtTBHhmQqSp4AeJwLa-3uw2fef=9Wd_OU_7R0FP0-Pg=A@mail.gmail.com>
+References: <56051433.1070602@ivt.baug.ethz.ch>
+	<CABFfbXtTBHhmQqSp4AeJwLa-3uw2fef=9Wd_OU_7R0FP0-Pg=A@mail.gmail.com>
+Message-ID: <56051FE9.7030802@ivt.baug.ethz.ch>
+
+Thanks, Jeroen, for your fast reply. Do you think you could separate gdb 
++ its dependencies from Rtools?
+
+The current approach of r-portable is rather crude -- it takes the 
+InnoSetup installers for R and Rtools and unpacks them. Perhaps there's 
+a better way to do this, I'm open for discussion.
+
+
+-Kirill
+
+On 25.09.2015 12:10, Jeroen Ooms wrote:
+> Hi Kirill,
+>
+> This is noted in https://github.com/rwinlib/r-base#readme: It is
+> mostly because we are shipping two separate tool chains instead of one
+> multilib. Another reason is that recent versions of gdb depend on
+> python, which again depends on a lot of other libraries. If you are
+> not interested in gdb, you might be able to remove python related
+> things.
+>
+> Btw this might not be the final Rtools, so maybe wait a bit.
+>
+>
+>
+> On Fri, Sep 25, 2015 at 11:30 AM, Kirill M?ller
+> <kirill.mueller at ivt.baug.ethz.ch> wrote:
+>> I have noticed a considerable increase in size for the installation of
+>> Rtools 3.3. Are there any parts of the installation that I can safely remove
+>> if I'm only interested in building R packages (but not R itself)? This is
+>> for r-portable, a portable version of R for Windows [1]. Thanks.
+>>
+>>
+>> Best regards
+>>
+>> Kirill
+>>
+>>
+>> [1] https://github.com/krlmlr/r-portable
+>>
+>> _______________________________________________
+>> R-SIG-windows mailing list
+>> R-SIG-windows at r-project.org
+>> https://stat.ethz.ch/mailman/listinfo/r-sig-windows
+
+
+From jeroenooms at gmail.com  Fri Sep 25 12:42:23 2015
+From: jeroenooms at gmail.com (Jeroen Ooms)
+Date: Fri, 25 Sep 2015 12:42:23 +0200
+Subject: [R-SIG-Win] Size of Rtools33
+In-Reply-To: <56051FE9.7030802@ivt.baug.ethz.ch>
+References: <56051433.1070602@ivt.baug.ethz.ch>
+	<CABFfbXtTBHhmQqSp4AeJwLa-3uw2fef=9Wd_OU_7R0FP0-Pg=A@mail.gmail.com>
+	<56051FE9.7030802@ivt.baug.ethz.ch>
+Message-ID: <CABFfbXvYCmCn_iVyyo4ciwZpiCXq-SpxL73+ZEh1vsKzpT9e0g@mail.gmail.com>
+
+On Fri, Sep 25, 2015 at 12:20 PM, Kirill M?ller
+<kirill.mueller at ivt.baug.ethz.ch> wrote:
+> The current approach of r-portable is rather crude -- it takes the InnoSetup
+> installers for R and Rtools and unpacks them. Perhaps there's a better way
+> to do this, I'm open for discussion.
+
+You could reduce the size by building a non-multiarch version of R
+(e.g. only 32 bit). That will approx half the size of R and then you
+only need a single tool chain.
+
+Using mingw-builds [1] you could create a minimal version of the tool
+chain, e.g. by not building gdb, gfortran, or other stuff you don't
+want to support. I would not recommend hacking the installer of the
+current rtools.
+
+[1] https://github.com/niXman/mingw-builds
+
+
+From avraham.adler at gmail.com  Fri Sep 25 15:40:47 2015
+From: avraham.adler at gmail.com (Avraham Adler)
+Date: Fri, 25 Sep 2015 09:40:47 -0400
+Subject: [R-SIG-Win] Size of Rtools33
+In-Reply-To: <56051FE9.7030802@ivt.baug.ethz.ch>
+References: <56051433.1070602@ivt.baug.ethz.ch>
+	<CABFfbXtTBHhmQqSp4AeJwLa-3uw2fef=9Wd_OU_7R0FP0-Pg=A@mail.gmail.com>
+	<56051FE9.7030802@ivt.baug.ethz.ch>
+Message-ID: <CAL6gwnKL=h7a5oZQAD=HkO4xTRbWeWjk=0gZDSR2tEyNSV1jwQ@mail.gmail.com>
+
+If it is built with ICU, that adds considerably to the size of r.dll.
+
+Avi
+
+On Friday, September 25, 2015, Kirill M?ller <
+kirill.mueller at ivt.baug.ethz.ch> wrote:
+
+> Thanks, Jeroen, for your fast reply. Do you think you could separate gdb +
+> its dependencies from Rtools?
+>
+> The current approach of r-portable is rather crude -- it takes the
+> InnoSetup installers for R and Rtools and unpacks them. Perhaps there's a
+> better way to do this, I'm open for discussion.
+>
+>
+> -Kirill
+>
+> On 25.09.2015 12:10, Jeroen Ooms wrote:
+>
+>> Hi Kirill,
+>>
+>> This is noted in https://github.com/rwinlib/r-base#readme: It is
+>> mostly because we are shipping two separate tool chains instead of one
+>> multilib. Another reason is that recent versions of gdb depend on
+>> python, which again depends on a lot of other libraries. If you are
+>> not interested in gdb, you might be able to remove python related
+>> things.
+>>
+>> Btw this might not be the final Rtools, so maybe wait a bit.
+>>
+>>
+>>
+>> On Fri, Sep 25, 2015 at 11:30 AM, Kirill M?ller
+>> <kirill.mueller at ivt.baug.ethz.ch> wrote:
+>>
+>>> I have noticed a considerable increase in size for the installation of
+>>> Rtools 3.3. Are there any parts of the installation that I can safely
+>>> remove
+>>> if I'm only interested in building R packages (but not R itself)? This is
+>>> for r-portable, a portable version of R for Windows [1]. Thanks.
+>>>
+>>>
+>>> Best regards
+>>>
+>>> Kirill
+>>>
+>>>
+>>> [1] https://github.com/krlmlr/r-portable
+>>>
+>>> _______________________________________________
+>>> R-SIG-windows mailing list
+>>> R-SIG-windows at r-project.org
+>>> https://stat.ethz.ch/mailman/listinfo/r-sig-windows
+>>>
+>>
+> _______________________________________________
+> R-SIG-windows mailing list
+> R-SIG-windows at r-project.org
+> https://stat.ethz.ch/mailman/listinfo/r-sig-windows
+>
+
+
+-- 
+Sent from Gmail Mobile
+
+	[[alternative HTML version deleted]]
+
+
+From avraham.adler at gmail.com  Fri Sep 25 20:11:53 2015
+From: avraham.adler at gmail.com (Avraham Adler)
+Date: Fri, 25 Sep 2015 14:11:53 -0400
+Subject: [R-SIG-Win] Some time tests with new toolchain
+Message-ID: <CAL6gwnL2sPA891_-pNCaNzP9X-kN5_TcVRQ9WQaAz9=hwcesZg@mail.gmail.com>
+
+As promised, below are some timing results using Jeroen's recent
+4.9.3-based 64bit toolchain. I will hopefully eventually blog on this in
+more detail, but there are two suites of tests, one which focuses on
+BLAS-related functionality and one that focuses on non-BLAS related math
+functionality. I've hosted the reproducible test code and full results
+(quartiles, mean, SD, and CV) at [1] in case anyone want to do any
+hypothesis testing. My immediate takeaways, there is no substitute for a
+fast BLAS if you are doing any matrix operations. I'll probably post a
+suggested patch to more easily allow building R on Windows with a
+pre-compiled OpenBLAS. This also tempts me very much to tinker under the
+hood and see what would be necessary to allow building R on Windows using
+an optimized LAPACK as well (Both ATLAS and OpenBLAS allow for building an
+optimized LAPACK).
+
+I found some weird results when testing link-time-optimization (LTO) in the
+non-BLAS section: using tune=native, it was the fastest; using arch=native,
+it was the slowest, though there really isn't much difference between tune
+native with and without LTO. For BLAS-related calls it was slower with than
+without (although a sample size of 25 may be too small). As compiling with
+LTO means that some packages may misbehave when compiled from source and
+thus require binary installs (stringi and dplyr are two that I have found)
+I'm unsure whether or not changes should be made to the makefiles to make
+it a simple call from Mkrules.local, or if it is better to post
+instructions on-line somewhere (or to this list) for the enterprising
+adventurer to try on his or her own. Your collective thoughts?
+
+There are seven builds tested against each other. The test platform was an
+i7-3740QM @ 2.7Ghz with 8MB RAM; Win7 64. The version of R tested (and all
+fully passed make check-devel and make check-recommended) was
+R-devel_2015-09-10, and the units are in milliseconds. The descriptor
+strings should be self-explanatory, Ref means reference BLAS, OPB is
+OpenBLAS version 0.2.14, TG is mtune=generic, TN is mtune=native, and AN is
+march=native. The results are in the following order. I apologize if the
+formatting gets messed up.
+
+* 463-SJLJ-Ref-TG
+* 493-SEH-POSIX-Ref-TG
+* 493-SEH-POSIX-OPB-TG
+* 493-SEH-POSIX-OPB-TN
+* 493-SEH-POSIX-OPB-AN
+* 493-SEH-POSIX-OPB-TN-LTO
+* 493-SEH-POSIX-OPB-AN-LTO
+
+[1] <http://www.avrahamadler.com/SpeedTests2015%20v4.txt>
+
+Thank you,
+
+Avi
+
+BLAS-related:
+
+sort(c(as.vector(A), as.vector(B)))         410.553       478.423
+407.874      405.382      406.139      406.254      407.029
+det(A)                                      222.413       230.527
+27.056       28.022       26.704       28.900       28.956
+A %*% B                                     680.316       661.466
+40.803       42.848       38.918       40.602       37.693
+t(A) %*% B                                  692.379       668.152
+52.604       52.422       53.991       52.072       49.743
+crossprod(A, B)                           1,191.143     1,198.826
+39.234       35.717       39.510       35.319       36.704
+solve(A)                                  1,080.882     1,139.137
+82.553       83.621       81.876       89.614       89.788
+solve(A, t(B))                            1,501.146     1,566.338
+90.099       92.029       90.027      101.827      110.558
+solve(B)                                  1,074.366     1,091.797
+99.424       98.131       99.472      106.990      108.083
+chol(A)                                     203.694       277.394
+15.455       16.834       16.306       19.880       18.918
+chol(B, pivot = TRUE)                         4.436         9.121
+4.856        5.015        4.887        5.990        5.915
+qr(A, LAPACK = TRUE)                        694.455       697.853
+132.854      133.123      131.401      133.232      133.786
+svd(A)                                    3,577.719     3,527.317
+623.759      630.878      617.791      626.818      632.760
+eigen(A, symmetric = TRUE)                1,557.346     1,593.283
+290.351      296.038      290.124      293.611      293.482
+eigen(A, symmetric = FALSE)               5,938.559     5,710.295
+1,361.771    1,409.270    1,440.704    1,425.261    1,488.135
+eigen(B, symmetric = FALSE)               6,703.844     6,460.657
+4,820.368    4,726.327    4,799.318    4,686.093    4,924.717
+lu(A)                                       240.613       293.879
+45.978       47.799       45.017       47.169       47.200
+fft(A)                                      161.925       167.645
+161.838      162.145      157.566      161.197      158.356
+Hilbert(3000)                               258.187       462.391
+254.183      255.146      254.994      252.812      257.502
+toeplitz(A[1:500, 1])                         6.423        12.544
+6.595        6.569        6.701        6.618        7.179
+princomp(A)                               2,961.546     2,977.561
+471.074      479.347      469.696      467.749      474.495
+
+
+
+Non-BLAS related:
+
+A + 2                      3.340      3.318      3.325      3.355
+ 3.398      3.316      3.586
+A - 2                      3.440      3.410      3.412      3.379
+ 3.501      3.375      3.658
+A * 2                      3.373      3.404      3.409      3.411
+ 3.474      3.325      3.654
+A/2                        5.232      3.763      3.735      3.747
+ 3.893      3.796      4.033
+A * 0.5                    3.403      3.371      3.391      3.394
+ 3.476      3.360      3.632
+A^2                        3.341      3.396      3.381      3.374
+ 3.459      3.327      3.673
+sqrt(A[1:10000])           0.192      0.189      0.188      0.178
+ 0.890      0.174      0.884
+sin(A[1:10000])            0.641      0.638      0.635      0.611
+ 1.251      0.612      1.249
+A + B                      1.807      1.834      1.839      1.843
+ 1.833      1.807      1.843
+A - B                      1.787      1.842      1.835      1.850
+ 1.829      1.801      1.848
+A * B                      1.797      1.824      1.854      1.858
+ 1.828      1.828      1.842
+A/B                        5.452      2.817      2.811      2.820
+ 2.816      2.835      2.906
+A[1:100000]%%B[1:100000]   3.999      4.439      4.446      4.445
+ 4.452      4.517      4.445
+A[1:100000]%/%B[1:100000]  3.660      4.056      4.079      4.056
+ 4.075      4.056      4.056
+
+	[[alternative HTML version deleted]]
+
+
+From dtenenba at fredhutch.org  Sun Sep 27 20:57:13 2015
+From: dtenenba at fredhutch.org (Dan Tenenbaum)
+Date: Sun, 27 Sep 2015 11:57:13 -0700 (PDT)
+Subject: [R-SIG-Win] New Rtools sent to CRAN
+In-Reply-To: <CABFfbXvjF2_ZgNSY7TTCL8y1ERiwntCzfkkjYuX3fUKFV3p7Og@mail.gmail.com>
+Message-ID: <1255445594.12970.1443380233800.JavaMail.root@fredhutch.org>
+
+
+
+----- Original Message -----
+> From: "Jeroen Ooms" <jeroenooms at gmail.com>
+> To: "Dan Tenenbaum" <dtenenba at fredhutch.org>
+> Cc: r-sig-windows at r-project.org
+> Sent: Thursday, September 24, 2015 3:13:03 PM
+> Subject: Re: [R-SIG-Win] New Rtools sent to CRAN
+> 
+> Hi Dan,
+> 
+> Currently the r-devel builds from CRAN still use the old tool chain.
+> A
+> copy of r-devel which has been configured with the new tool chain is
+> available from
+> http://www.stat.ucla.edu/~jeroen/mingw-w64/R-experimental-r69418.exe
+> 
+> This build has BINPREF (the path to the compiler) hardcoded to the
+> default location of the new tool chains. To change it you would need
+> to edit this variable in C:\Program
+> Files\R\R-experimental\etc\x64\Makeconf and C:\Program
+> Files\R\R-experimental\etc\i386\Makeconf.
+> 
+> We are currently discussing how to design it such that you can set
+> the
+> path to the compiler using an environment variable.
+> 
+> 
+> > I ran the Bioconductor builds overnight using this toolchain and
+> > recent R-devel and did not notice anything odd with packages
+> > containing native code, which means either the new toolchain is
+> > working perfectly (which is wonderful) or gcc-4.6.3 is still being
+> > used and maybe I need to do something to faciliate the use of
+> > gcc-4.9.3. Can you advise?
+> 
+> 
+> We're talking to CRAN on how to coordinate the migration to the new
+> tool chain. If you have bioc packages that link to external c++
+> libraries, those need a rebuild. The most current information is
+> available from: https://github.com/rwinlib/r-base#readme
+> 
+
+OK, I ran the Bioconductor builds with the new toolchain and the experimental version of R-devel.
+A number of packages fail to install/compile which worked before with regular R-devel. Some of these are fairly important packages which have a lot of reverse dependencies.
+
+The build report is here:
+
+http://bioconductor.org/checkResults/3.3/bioc-LATEST/windows2.bioconductor.org-index.html#show=timeout,error
+
+The list of packages with compilation errors not appearing in the normal build are:
+
+affxparser
+AffyTiling
+arrayQualityMetrics
+bamsignals
+ChemmineOB
+deepSNV
+flowMatch
+flowWorkspace
+GeneNetworkBuilder
+HilbertVisGUI
+mzR
+Rdisop
+xps
+
+You can view the build report for one of these packages by replacing PACKAGENAME with one of the packages above in this link:
+
+http://bioconductor.org/checkResults/3.3/bioc-LATEST/PACKAGENAME/windows2.bioconductor.org-install.html
+
+For example, for affxparser:
+
+http://bioconductor.org/checkResults/3.3/bioc-LATEST/affxparser/windows2.bioconductor.org-install.html
+
+FYI
+Thanks,
+Dan
+
+
+From dtenenba at fredhutch.org  Sun Sep 27 20:59:24 2015
+From: dtenenba at fredhutch.org (Dan Tenenbaum)
+Date: Sun, 27 Sep 2015 11:59:24 -0700 (PDT)
+Subject: [R-SIG-Win] New Rtools sent to CRAN
+In-Reply-To: <10735_1443380251_56083C1A_10735_9998_2_1255445594.12970.1443380233800.JavaMail.root@fredhutch.org>
+Message-ID: <1785390412.12974.1443380364198.JavaMail.root@fredhutch.org>
+
+
+
+----- Original Message -----
+> From: "Dan Tenenbaum" <dtenenba at fredhutch.org>
+> To: "Jeroen Ooms" <jeroenooms at gmail.com>
+> Cc: r-sig-windows at r-project.org
+> Sent: Sunday, September 27, 2015 11:57:13 AM
+> Subject: Re: [R-SIG-Win] New Rtools sent to CRAN
+> 
+> 
+> 
+> ----- Original Message -----
+> > From: "Jeroen Ooms" <jeroenooms at gmail.com>
+> > To: "Dan Tenenbaum" <dtenenba at fredhutch.org>
+> > Cc: r-sig-windows at r-project.org
+> > Sent: Thursday, September 24, 2015 3:13:03 PM
+> > Subject: Re: [R-SIG-Win] New Rtools sent to CRAN
+> > 
+> > Hi Dan,
+> > 
+> > Currently the r-devel builds from CRAN still use the old tool
+> > chain.
+> > A
+> > copy of r-devel which has been configured with the new tool chain
+> > is
+> > available from
+> > http://www.stat.ucla.edu/~jeroen/mingw-w64/R-experimental-r69418.exe
+> > 
+> > This build has BINPREF (the path to the compiler) hardcoded to the
+> > default location of the new tool chains. To change it you would
+> > need
+> > to edit this variable in C:\Program
+> > Files\R\R-experimental\etc\x64\Makeconf and C:\Program
+> > Files\R\R-experimental\etc\i386\Makeconf.
+> > 
+> > We are currently discussing how to design it such that you can set
+> > the
+> > path to the compiler using an environment variable.
+> > 
+> > 
+> > > I ran the Bioconductor builds overnight using this toolchain and
+> > > recent R-devel and did not notice anything odd with packages
+> > > containing native code, which means either the new toolchain is
+> > > working perfectly (which is wonderful) or gcc-4.6.3 is still
+> > > being
+> > > used and maybe I need to do something to faciliate the use of
+> > > gcc-4.9.3. Can you advise?
+> > 
+> > 
+> > We're talking to CRAN on how to coordinate the migration to the new
+> > tool chain. If you have bioc packages that link to external c++
+> > libraries, those need a rebuild. The most current information is
+> > available from: https://github.com/rwinlib/r-base#readme
+> > 
+> 
+> OK, I ran the Bioconductor builds with the new toolchain and the
+> experimental version of R-devel.
+> A number of packages fail to install/compile which worked before with
+> regular R-devel. Some of these are fairly important packages which
+> have a lot of reverse dependencies.
+> 
+> The build report is here:
+> 
+> http://bioconductor.org/checkResults/3.3/bioc-LATEST/windows2.bioconductor.org-index.html#show=timeout,error
+> 
+> The list of packages with compilation errors not appearing in the
+> normal build are:
+> 
+> affxparser
+> AffyTiling
+> arrayQualityMetrics
+> bamsignals
+> ChemmineOB
+> deepSNV
+> flowMatch
+> flowWorkspace
+> GeneNetworkBuilder
+> HilbertVisGUI
+> mzR
+> Rdisop
+> xps
+> 
+> You can view the build report for one of these packages by replacing
+> PACKAGENAME with one of the packages above in this link:
+> 
+> http://bioconductor.org/checkResults/3.3/bioc-LATEST/PACKAGENAME/windows2.bioconductor.org-install.html
+> 
+> For example, for affxparser:
+> 
+> http://bioconductor.org/checkResults/3.3/bioc-LATEST/affxparser/windows2.bioconductor.org-install.html
+> 
+
+Actually, the error will not always be in the INSTALL phase so instead use a url like this:
+
+http://bioconductor.org/checkResults/3.3/bioc-LATEST/PACKAGENAME/
+
+And click on the red ERROR icon(s).
+
+Dan
+
+
+> FYI
+> Thanks,
+> Dan
+> 
+> _______________________________________________
+> R-SIG-windows mailing list
+> R-SIG-windows at r-project.org
+> https://stat.ethz.ch/mailman/listinfo/r-sig-windows
+>
+
+
+From jeroenooms at gmail.com  Sun Sep 27 21:34:08 2015
+From: jeroenooms at gmail.com (Jeroen Ooms)
+Date: Sun, 27 Sep 2015 21:34:08 +0200
+Subject: [R-SIG-Win] New Rtools sent to CRAN
+In-Reply-To: <1785390412.12974.1443380364198.JavaMail.root@fredhutch.org>
+References: <10735_1443380251_56083C1A_10735_9998_2_1255445594.12970.1443380233800.JavaMail.root@fredhutch.org>
+	<1785390412.12974.1443380364198.JavaMail.root@fredhutch.org>
+Message-ID: <CABFfbXtxkGmu8WH_7jcAQLhgweOA6GzG9V_ZY37awCv6YqpW9A@mail.gmail.com>
+
+Thanks Dan, this is helpful. Just to confirm: these are packages that
+did not have issues with the regular r-devel (3.3) on windows? For
+example the 'xps' only has some warnings which seem unrelated to the
+toolchain.
+
+
+
+
+
+
+On Sun, Sep 27, 2015 at 8:59 PM, Dan Tenenbaum <dtenenba at fredhutch.org> wrote:
+>
+>
+> ----- Original Message -----
+>> From: "Dan Tenenbaum" <dtenenba at fredhutch.org>
+>> To: "Jeroen Ooms" <jeroenooms at gmail.com>
+>> Cc: r-sig-windows at r-project.org
+>> Sent: Sunday, September 27, 2015 11:57:13 AM
+>> Subject: Re: [R-SIG-Win] New Rtools sent to CRAN
+>>
+>>
+>>
+>> ----- Original Message -----
+>> > From: "Jeroen Ooms" <jeroenooms at gmail.com>
+>> > To: "Dan Tenenbaum" <dtenenba at fredhutch.org>
+>> > Cc: r-sig-windows at r-project.org
+>> > Sent: Thursday, September 24, 2015 3:13:03 PM
+>> > Subject: Re: [R-SIG-Win] New Rtools sent to CRAN
+>> >
+>> > Hi Dan,
+>> >
+>> > Currently the r-devel builds from CRAN still use the old tool
+>> > chain.
+>> > A
+>> > copy of r-devel which has been configured with the new tool chain
+>> > is
+>> > available from
+>> > http://www.stat.ucla.edu/~jeroen/mingw-w64/R-experimental-r69418.exe
+>> >
+>> > This build has BINPREF (the path to the compiler) hardcoded to the
+>> > default location of the new tool chains. To change it you would
+>> > need
+>> > to edit this variable in C:\Program
+>> > Files\R\R-experimental\etc\x64\Makeconf and C:\Program
+>> > Files\R\R-experimental\etc\i386\Makeconf.
+>> >
+>> > We are currently discussing how to design it such that you can set
+>> > the
+>> > path to the compiler using an environment variable.
+>> >
+>> >
+>> > > I ran the Bioconductor builds overnight using this toolchain and
+>> > > recent R-devel and did not notice anything odd with packages
+>> > > containing native code, which means either the new toolchain is
+>> > > working perfectly (which is wonderful) or gcc-4.6.3 is still
+>> > > being
+>> > > used and maybe I need to do something to faciliate the use of
+>> > > gcc-4.9.3. Can you advise?
+>> >
+>> >
+>> > We're talking to CRAN on how to coordinate the migration to the new
+>> > tool chain. If you have bioc packages that link to external c++
+>> > libraries, those need a rebuild. The most current information is
+>> > available from: https://github.com/rwinlib/r-base#readme
+>> >
+>>
+>> OK, I ran the Bioconductor builds with the new toolchain and the
+>> experimental version of R-devel.
+>> A number of packages fail to install/compile which worked before with
+>> regular R-devel. Some of these are fairly important packages which
+>> have a lot of reverse dependencies.
+>>
+>> The build report is here:
+>>
+>> http://bioconductor.org/checkResults/3.3/bioc-LATEST/windows2.bioconductor.org-index.html#show=timeout,error
+>>
+>> The list of packages with compilation errors not appearing in the
+>> normal build are:
+>>
+>> affxparser
+>> AffyTiling
+>> arrayQualityMetrics
+>> bamsignals
+>> ChemmineOB
+>> deepSNV
+>> flowMatch
+>> flowWorkspace
+>> GeneNetworkBuilder
+>> HilbertVisGUI
+>> mzR
+>> Rdisop
+>> xps
+>>
+>> You can view the build report for one of these packages by replacing
+>> PACKAGENAME with one of the packages above in this link:
+>>
+>> http://bioconductor.org/checkResults/3.3/bioc-LATEST/PACKAGENAME/windows2.bioconductor.org-install.html
+>>
+>> For example, for affxparser:
+>>
+>> http://bioconductor.org/checkResults/3.3/bioc-LATEST/affxparser/windows2.bioconductor.org-install.html
+>>
+>
+> Actually, the error will not always be in the INSTALL phase so instead use a url like this:
+>
+> http://bioconductor.org/checkResults/3.3/bioc-LATEST/PACKAGENAME/
+>
+> And click on the red ERROR icon(s).
+>
+> Dan
+>
+>
+>> FYI
+>> Thanks,
+>> Dan
+>>
+>> _______________________________________________
+>> R-SIG-windows mailing list
+>> R-SIG-windows at r-project.org
+>> https://stat.ethz.ch/mailman/listinfo/r-sig-windows
+>>
+
+
+From dtenenba at fredhutch.org  Sun Sep 27 22:17:55 2015
+From: dtenenba at fredhutch.org (Dan Tenenbaum)
+Date: Sun, 27 Sep 2015 13:17:55 -0700 (PDT)
+Subject: [R-SIG-Win] New Rtools sent to CRAN
+In-Reply-To: <CABFfbXtxkGmu8WH_7jcAQLhgweOA6GzG9V_ZY37awCv6YqpW9A@mail.gmail.com>
+Message-ID: <2127926017.13108.1443385075685.JavaMail.root@fredhutch.org>
+
+
+
+----- Original Message -----
+> From: "Jeroen Ooms" <jeroenooms at gmail.com>
+> To: "Dan Tenenbaum" <dtenenba at fredhutch.org>
+> Cc: r-sig-windows at r-project.org
+> Sent: Sunday, September 27, 2015 12:34:08 PM
+> Subject: Re: [R-SIG-Win] New Rtools sent to CRAN
+> 
+> Thanks Dan, this is helpful. Just to confirm: these are packages that
+> did not have issues with the regular r-devel (3.3) on windows? For
+> example the 'xps' only has some warnings which seem unrelated to the
+> toolchain.
+
+
+Sorry, please drop xps from the list.
+
+Other than that yes, these should be packages that do not have issues with regular r-devel.
+Dan
+
+
+> 
+> 
+> 
+> 
+> 
+> 
+> On Sun, Sep 27, 2015 at 8:59 PM, Dan Tenenbaum
+> <dtenenba at fredhutch.org> wrote:
+> >
+> >
+> > ----- Original Message -----
+> >> From: "Dan Tenenbaum" <dtenenba at fredhutch.org>
+> >> To: "Jeroen Ooms" <jeroenooms at gmail.com>
+> >> Cc: r-sig-windows at r-project.org
+> >> Sent: Sunday, September 27, 2015 11:57:13 AM
+> >> Subject: Re: [R-SIG-Win] New Rtools sent to CRAN
+> >>
+> >>
+> >>
+> >> ----- Original Message -----
+> >> > From: "Jeroen Ooms" <jeroenooms at gmail.com>
+> >> > To: "Dan Tenenbaum" <dtenenba at fredhutch.org>
+> >> > Cc: r-sig-windows at r-project.org
+> >> > Sent: Thursday, September 24, 2015 3:13:03 PM
+> >> > Subject: Re: [R-SIG-Win] New Rtools sent to CRAN
+> >> >
+> >> > Hi Dan,
+> >> >
+> >> > Currently the r-devel builds from CRAN still use the old tool
+> >> > chain.
+> >> > A
+> >> > copy of r-devel which has been configured with the new tool
+> >> > chain
+> >> > is
+> >> > available from
+> >> > http://www.stat.ucla.edu/~jeroen/mingw-w64/R-experimental-r69418.exe
+> >> >
+> >> > This build has BINPREF (the path to the compiler) hardcoded to
+> >> > the
+> >> > default location of the new tool chains. To change it you would
+> >> > need
+> >> > to edit this variable in C:\Program
+> >> > Files\R\R-experimental\etc\x64\Makeconf and C:\Program
+> >> > Files\R\R-experimental\etc\i386\Makeconf.
+> >> >
+> >> > We are currently discussing how to design it such that you can
+> >> > set
+> >> > the
+> >> > path to the compiler using an environment variable.
+> >> >
+> >> >
+> >> > > I ran the Bioconductor builds overnight using this toolchain
+> >> > > and
+> >> > > recent R-devel and did not notice anything odd with packages
+> >> > > containing native code, which means either the new toolchain
+> >> > > is
+> >> > > working perfectly (which is wonderful) or gcc-4.6.3 is still
+> >> > > being
+> >> > > used and maybe I need to do something to faciliate the use of
+> >> > > gcc-4.9.3. Can you advise?
+> >> >
+> >> >
+> >> > We're talking to CRAN on how to coordinate the migration to the
+> >> > new
+> >> > tool chain. If you have bioc packages that link to external c++
+> >> > libraries, those need a rebuild. The most current information is
+> >> > available from: https://github.com/rwinlib/r-base#readme
+> >> >
+> >>
+> >> OK, I ran the Bioconductor builds with the new toolchain and the
+> >> experimental version of R-devel.
+> >> A number of packages fail to install/compile which worked before
+> >> with
+> >> regular R-devel. Some of these are fairly important packages which
+> >> have a lot of reverse dependencies.
+> >>
+> >> The build report is here:
+> >>
+> >> http://bioconductor.org/checkResults/3.3/bioc-LATEST/windows2.bioconductor.org-index.html#show=timeout,error
+> >>
+> >> The list of packages with compilation errors not appearing in the
+> >> normal build are:
+> >>
+> >> affxparser
+> >> AffyTiling
+> >> arrayQualityMetrics
+> >> bamsignals
+> >> ChemmineOB
+> >> deepSNV
+> >> flowMatch
+> >> flowWorkspace
+> >> GeneNetworkBuilder
+> >> HilbertVisGUI
+> >> mzR
+> >> Rdisop
+> >> xps
+> >>
+> >> You can view the build report for one of these packages by
+> >> replacing
+> >> PACKAGENAME with one of the packages above in this link:
+> >>
+> >> http://bioconductor.org/checkResults/3.3/bioc-LATEST/PACKAGENAME/windows2.bioconductor.org-install.html
+> >>
+> >> For example, for affxparser:
+> >>
+> >> http://bioconductor.org/checkResults/3.3/bioc-LATEST/affxparser/windows2.bioconductor.org-install.html
+> >>
+> >
+> > Actually, the error will not always be in the INSTALL phase so
+> > instead use a url like this:
+> >
+> > http://bioconductor.org/checkResults/3.3/bioc-LATEST/PACKAGENAME/
+> >
+> > And click on the red ERROR icon(s).
+> >
+> > Dan
+> >
+> >
+> >> FYI
+> >> Thanks,
+> >> Dan
+> >>
+> >> _______________________________________________
+> >> R-SIG-windows mailing list
+> >> R-SIG-windows at r-project.org
+> >> https://stat.ethz.ch/mailman/listinfo/r-sig-windows
+> >>
+>
+
+

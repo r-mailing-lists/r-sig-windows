@@ -1,0 +1,55 @@
+{
+  "list": "r-sig-windows",
+  "description": "",
+  "month": "2025-01",
+  "messages": [
+    {
+      "id": "msg-c05a7a1b7451",
+      "message_id": "<CAL6gwnLmku9C4yd25N5RpMdwci5wBSmxq8deZjK9n5ncr7L6PA@mail.gmail.com>",
+      "from_name": "Avraham Adler",
+      "from_email_hash": "63266ae79d1743f1496b756da3e3df9582595f717d74d4d823b698d61ef74096",
+      "date": "2025-01-16T17:36:23-05:00",
+      "subject": "[R-SIG-Win] NLOPT library",
+      "subject_clean": "NLOPT library",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hello, Tomas.\n\nIn future versions of Rtools44, for the time being, please do not\nupdate the NLOPT libraries beyond 2.8.0. There are breaking changes in\n2.9.0 and possibly 2.9.1 which cause nloptr to fail. Please see\nhttps://github.com/astamm/nloptr/issues/173 for more details.\n\nThank you very much,\n\nAvi",
+      "body_snippet": "Hello, Tomas.\n\nIn future versions of Rtools44, for the time being, please do not\nupdate the NLOPT libraries beyond 2.8.0. There are breaking changes in\n2.9.0 and possibly 2.9.1 which cause nloptr to f",
+      "thread_id": "thread-c05a7a1b7451",
+      "thread_depth": 0,
+      "month": "2025-01"
+    },
+    {
+      "id": "msg-e853f8bcf897",
+      "message_id": "<c319bf84-4492-47c0-a958-630edb5dc882@gmail.com>",
+      "from_name": "Tomas Kalibera",
+      "from_email_hash": "7af110c9340339e5307bd348f1ec524e2fd1c8f104d583e9993022c5550711f4",
+      "date": "2025-01-17T11:33:47+01:00",
+      "subject": "[R-SIG-Win] NLOPT library",
+      "subject_clean": "NLOPT library",
+      "in_reply_to": "<CAL6gwnLmku9C4yd25N5RpMdwci5wBSmxq8deZjK9n5ncr7L6PA@mail.gmail.com>",
+      "references": [
+        "<CAL6gwnLmku9C4yd25N5RpMdwci5wBSmxq8deZjK9n5ncr7L6PA@mail.gmail.com>"
+      ],
+      "body_plain": "Hi Avi,\n\nsure, fine with me for Rtools44 (there will probably be one more update).\nThanks for letting me know,\n\nTomas\n\nOn 1/16/25 23:36, Avraham Adler wrote:\n> Hello, Tomas.\n>\n> In future versions of Rtools44, for the time being, please do not\n> update the NLOPT libraries beyond 2.8.0. There are breaking changes in\n> 2.9.0 and possibly 2.9.1 which cause nloptr to fail. Please see\n> https://github.com/astamm/nloptr/issues/173 for more details.\n>\n> Thank you very much,\n>\n> Avi\n>\n> _______________________________________________\n> R-SIG-windows mailing list\n> R-SIG-windows at r-project.org\n> https://stat.ethz.ch/mailman/listinfo/r-sig-windows",
+      "body_snippet": "Hi Avi,\n\nsure, fine with me for Rtools44 (there will probably be one more update).\nThanks for letting me know,\n\nTomas\n\nOn 1/16/25 23:36, Avraham Adler wrote:\n> Hello, Tomas.\n>\n> In future versions of ",
+      "thread_id": "thread-c05a7a1b7451",
+      "thread_depth": 1,
+      "month": "2025-01"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-c05a7a1b7451",
+      "subject": "NLOPT library",
+      "message_count": 2,
+      "participants": [
+        "Avraham Adler",
+        "Tomas Kalibera"
+      ],
+      "started": "2025-01-16T17:36:23-05:00",
+      "last_reply": "2025-01-17T11:33:47+01:00",
+      "root_message_id": "msg-c05a7a1b7451"
+    }
+  ]
+}

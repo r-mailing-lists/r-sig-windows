@@ -1,0 +1,58 @@
+{
+  "list": "r-sig-windows",
+  "description": "",
+  "month": "2022-06",
+  "messages": [
+    {
+      "id": "msg-ea8bb7beccc8",
+      "message_id": "<2ccdbb28-5d1c-d3db-5bf7-870964ac11be@gmail.com>",
+      "from_name": "Tomas Kalibera",
+      "from_email_hash": "7af110c9340339e5307bd348f1ec524e2fd1c8f104d583e9993022c5550711f4",
+      "date": "2022-06-20T12:48:55+02:00",
+      "subject": "[R-SIG-Win] Changelog for Rtools42",
+      "subject_clean": "Changelog for Rtools42",
+      "in_reply_to": "<d00b0539-f885-befb-8161-5ea8c95d9601@gmail.com>",
+      "references": [
+        "<CAL6gwnJMb1A_N74zhOkLD4U+=NcvG8tMhSd=p7KWhJGTK7Pt=g@mail.gmail.com>",
+        "<d00b0539-f885-befb-8161-5ea8c95d9601@gmail.com>"
+      ],
+      "body_plain": "Hi Avi,\n\nthere is now also a news file for Rtools42, at \nhttps://cran.r-project.org/bin/windows/Rtools/rtools42/news.html\n\nAs of the current release, 5253, there is also the list of installed MXE \npackages in file named \"installed.list\" in the Rtools distribution.\n\nBest\nTomas\n\nOn 4/28/22 16:29, Tomas Kalibera wrote:\n> On 4/14/22 05:08, Avraham Adler wrote:\n>> Hi, Tomas.\n>>\n>> Is there a changelog for Rtools42 anywhere; something that would\n>> explain the difference between 5111 and 5168, for example? Copying\n>> r-sig-windows for reference.\n>\n> Hi Avi,\n>\n> for now one can only find out directly from the subversion, as shown \n> here. In short, there is no fundamental change affecting package authors.\n>\n> (1)\n>\n> svn diff -r 5111:5168 \n> https://svn.r-project.org/R-dev-web/trunk/WindowsBuilds/winutf8/ucrt3/toolchain_libs\n>\n> gives you the diff for the toolchain and libraries.\n>\n> C++ library is built with more precise timers. This is not by default \n> in MXE, but I added that to match Msys2 and the previous behavior, on \n> which package benchr depends, so this fixed the package.\n>\n> Then, the distribution of the cross toolchain has been improved. There \n> are new sections in the documentation about using the cross-compilers \n> and setting up the build tree from the distributed files so that you \n> don't have to build Rtools from scratch. This is useful for people \n> wanting to contribute to Rtools (and hence MXE).\n>\n> (2)\n>\n> svn diff -r 5111:5168 \n> https://svn.r-project.org/R-dev-web/trunk/WindowsBuilds/winutf8/ucrt3/rtools\n>\n> shows nothing, so no changes in rtools build scripts\n>\n> In addition, Rtools42 also have the Msys2 part, which is current when \n> Rtools is built. But I am not aware of a fundamental change that would \n> impact R package authors.\n>\n> Best\n> Tomas\n>\n>\n>\n>\n>>\n>> Thank you,\n>>\n>> Avi\n>",
+      "body_snippet": "Hi Avi,\n\nthere is now also a news file for Rtools42, at \nhttps://cran.r-project.org/bin/windows/Rtools/rtools42/news.html\n\nAs of the current release, 5253, there is also the list of installed MXE \npac",
+      "thread_id": "thread-ea8bb7beccc8",
+      "thread_depth": 0,
+      "month": "2022-06"
+    },
+    {
+      "id": "msg-482f37e880f7",
+      "message_id": "<CB8AB45C-FF6D-4407-8837-195998EBA90A@gmail.com>",
+      "from_name": "Avraham Adler",
+      "from_email_hash": "63266ae79d1743f1496b756da3e3df9582595f717d74d4d823b698d61ef74096",
+      "date": "2022-06-20T14:32:51+03:00",
+      "subject": "[R-SIG-Win] Changelog for Rtools42",
+      "subject_clean": "Changelog for Rtools42",
+      "in_reply_to": "<2ccdbb28-5d1c-d3db-5bf7-870964ac11be@gmail.com>",
+      "references": [
+        "<2ccdbb28-5d1c-d3db-5bf7-870964ac11be@gmail.com>"
+      ],
+      "body_plain": "Thank you, Tomas, that is fantastic!\n\nAvi\n\nSent from my iPhone\n\n> On Jun 20, 2022, at 1:48 PM, Tomas Kalibera <tomas.kalibera at gmail.com> wrote:\n> \n> ?Hi Avi,\n> \n> there is now also a news file for Rtools42, at https://cran.r-project.org/bin/windows/Rtools/rtools42/news.html\n> \n> As of the current release, 5253, there is also the list of installed MXE packages in file named \"installed.list\" in the Rtools distribution.\n> \n> Best\n> Tomas\n> \n>> On 4/28/22 16:29, Tomas Kalibera wrote:\n>>> On 4/14/22 05:08, Avraham Adler wrote:\n>>> Hi, Tomas.\n>>> \n>>> Is there a changelog for Rtools42 anywhere; something that would\n>>> explain the difference between 5111 and 5168, for example? Copying\n>>> r-sig-windows for reference.\n>> \n>> Hi Avi,\n>> \n>> for now one can only find out directly from the subversion, as shown here. In short, there is no fundamental change affecting package authors.\n>> \n>> (1)\n>> \n>> svn diff -r 5111:5168 https://svn.r-project.org/R-dev-web/trunk/WindowsBuilds/winutf8/ucrt3/toolchain_libs\n>> \n>> gives you the diff for the toolchain and libraries.\n>> \n>> C++ library is built with more precise timers. This is not by default in MXE, but I added that to match Msys2 and the previous behavior, on which package benchr depends, so this fixed the package.\n>> \n>> Then, the distribution of the cross toolchain has been improved. There are new sections in the documentation about using the cross-compilers and setting up the build tree from the distributed files so that you don't have to build Rtools from scratch. This is useful for people wanting to contribute to Rtools (and hence MXE).\n>> \n>> (2)\n>> \n>> svn diff -r 5111:5168 https://svn.r-project.org/R-dev-web/trunk/WindowsBuilds/winutf8/ucrt3/rtools\n>> \n>> shows nothing, so no changes in rtools build scripts\n>> \n>> In addition, Rtools42 also have the Msys2 part, which is current when Rtools is built. But I am not aware of a fundamental change that would impact R package authors.\n>> \n>> Best\n>> Tomas\n>> \n>> \n>> \n>> \n>>> \n>>> Thank you,\n>>> \n>>> Avi\n>>",
+      "body_snippet": "Thank you, Tomas, that is fantastic!\n\nAvi\n\nSent from my iPhone\n\n> On Jun 20, 2022, at 1:48 PM, Tomas Kalibera <tomas.kalibera at gmail.com> wrote:\n> \n> ?Hi Avi,\n> \n> there is now also a news file for ",
+      "thread_id": "thread-ea8bb7beccc8",
+      "thread_depth": 1,
+      "month": "2022-06"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-ea8bb7beccc8",
+      "subject": "Changelog for Rtools42",
+      "message_count": 2,
+      "participants": [
+        "Avraham Adler",
+        "Tomas Kalibera"
+      ],
+      "started": "2022-06-20T12:48:55+02:00",
+      "last_reply": "2022-06-20T14:32:51+03:00",
+      "root_message_id": "msg-ea8bb7beccc8"
+    }
+  ]
+}

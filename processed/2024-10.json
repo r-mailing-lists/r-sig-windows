@@ -1,0 +1,36 @@
+{
+  "list": "r-sig-windows",
+  "description": "",
+  "month": "2024-10",
+  "messages": [
+    {
+      "id": "msg-f44949f14740",
+      "message_id": "<0e7ae230-1053-41ba-8749-edbd90f629fa@gmail.com>",
+      "from_name": "Tomas Kalibera",
+      "from_email_hash": "7af110c9340339e5307bd348f1ec524e2fd1c8f104d583e9993022c5550711f4",
+      "date": "2024-10-30T10:36:03+01:00",
+      "subject": "[R-SIG-Win] Rtools44 update",
+      "subject_clean": "Rtools44 update",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear R Windows developers,\n\nan update of Rtools44, the toolchain for R for Windows used by R-devel \nand R 4.4, is available as revision 6335 from\n\nhttps://cran.r-project.org/bin/windows/Rtools/rtools44/rtools.html\n\nGCC is updated to 13.3.0 with several patches. HDF5 is now built with \nFortran support. A number of libraries have been updated to newer versions.\n\nSee\n\nhttps://cran.r-project.org/bin/windows/Rtools/rtools44/news.html\n\nfor more details.\n\nBest\nTomas",
+      "body_snippet": "Dear R Windows developers,\n\nan update of Rtools44, the toolchain for R for Windows used by R-devel \nand R 4.4, is available as revision 6335 from\n\nhttps://cran.r-project.org/bin/windows/Rtools/rtools4",
+      "thread_id": "thread-f44949f14740",
+      "thread_depth": 0,
+      "month": "2024-10"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-f44949f14740",
+      "subject": "Rtools44 update",
+      "message_count": 1,
+      "participants": [
+        "Tomas Kalibera"
+      ],
+      "started": "2024-10-30T10:36:03+01:00",
+      "last_reply": "2024-10-30T10:36:03+01:00",
+      "root_message_id": "msg-f44949f14740"
+    }
+  ]
+}

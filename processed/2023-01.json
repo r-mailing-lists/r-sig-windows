@@ -1,0 +1,63 @@
+{
+  "list": "r-sig-windows",
+  "description": "",
+  "month": "2023-01",
+  "messages": [
+    {
+      "id": "msg-fdd9120ddb27",
+      "message_id": "<b3ca6a1d-780a-88f1-330f-b8b5b45427bc@gmail.com>",
+      "from_name": "Tomas Kalibera",
+      "from_email_hash": "7af110c9340339e5307bd348f1ec524e2fd1c8f104d583e9993022c5550711f4",
+      "date": "2023-01-04T13:24:36+01:00",
+      "subject": "[R-SIG-Win] Rtools43",
+      "subject_clean": "Rtools43",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear R Windows developers,\n\nthere is now a new toolchain for R for Windows, Rtools43. It is now used \nby R-devel and is intended, following likely at least one minor update, \nfor R 4.3.0.\n\nCompared to Rtools42, it uses GCC 12 and updates other core components. \nSee https://cran.r-project.org/bin/windows/Rtools/rtools43/news.html for \na detailed list of changes.\n\nAll users of R-devel who need to compile R packages with source code in \nC, C++ or Fortran should install Rtools43. From the user perspective, \nRtools43 works the same way as Rtools42. See \nhttps://cran.r-project.org/bin/windows/base/howto-R-devel.html for \ninstructions on how to build R-devel and packages for this version of R.\n\nIt is recommended to re-install packages that need compilation to avoid \npotential incompatibilities with code built using Rtools42.\n\nBest\nTomas",
+      "body_snippet": "Dear R Windows developers,\n\nthere is now a new toolchain for R for Windows, Rtools43. It is now used \nby R-devel and is intended, following likely at least one minor update, \nfor R 4.3.0.\n\nCompared to",
+      "thread_id": "thread-fdd9120ddb27",
+      "thread_depth": 0,
+      "month": "2023-01"
+    },
+    {
+      "id": "msg-2faf5ec26019",
+      "message_id": "<93f19116-ccf4-d615-0810-b7157126ff58@gmail.com>",
+      "from_name": "Tomas Kalibera",
+      "from_email_hash": "7af110c9340339e5307bd348f1ec524e2fd1c8f104d583e9993022c5550711f4",
+      "date": "2023-01-13T10:13:44+01:00",
+      "subject": "[R-SIG-Win] Rtools43 (gdal update)",
+      "subject_clean": "Rtools43 (gdal update)",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear R Windows developers,\n\na minor update of Rtools43, the toolchain for R for Windows used by \nR-devel, is now available as revision 5493 from\n\nhttps://cran.r-project.org/bin/windows/Rtools/rtools43/rtools.html\n\nThe update is important for R-devel users who are building geospatial \npackages from source, because it updates gdal from 3.6.0 to 3.6.2. \nVersion 3.6.0 of gdal has been officially retracted, it may cause data \ncorruption.\n\nSee https://cran.r-project.org/bin/windows/Rtools/rtools43/news.html for \na detailed list of changes.\n\nBest\nTomas",
+      "body_snippet": "Dear R Windows developers,\n\na minor update of Rtools43, the toolchain for R for Windows used by \nR-devel, is now available as revision 5493 from\n\nhttps://cran.r-project.org/bin/windows/Rtools/rtools43",
+      "thread_id": "thread-2faf5ec26019",
+      "thread_depth": 0,
+      "month": "2023-01"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-fdd9120ddb27",
+      "subject": "Rtools43",
+      "message_count": 1,
+      "participants": [
+        "Tomas Kalibera"
+      ],
+      "started": "2023-01-04T13:24:36+01:00",
+      "last_reply": "2023-01-04T13:24:36+01:00",
+      "root_message_id": "msg-fdd9120ddb27"
+    },
+    {
+      "id": "thread-2faf5ec26019",
+      "subject": "Rtools43 (gdal update)",
+      "message_count": 1,
+      "participants": [
+        "Tomas Kalibera"
+      ],
+      "started": "2023-01-13T10:13:44+01:00",
+      "last_reply": "2023-01-13T10:13:44+01:00",
+      "root_message_id": "msg-2faf5ec26019"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+From avraham.adler at gmail.com  Thu Aug 31 07:29:31 2017
+From: avraham.adler at gmail.com (Avraham Adler)
+Date: Thu, 31 Aug 2017 01:29:31 -0400
+Subject: [R-SIG-Win] GCC 7.1.0 & Rtools
+Message-ID: <CAL6gwn+x8KpuFFRxpzjRAuPUrZr96_=Jj0MtchbxiBFqKiS9rA@mail.gmail.com>
+
+Feeling somewhat antsy, I followed Jeroen's instructions and used
+niXman's scripts [1] off of the master branch to build gcc 7.1.0 for
+x86_64, specifically "x86_64-710-posix-seh-rt_v5-s". It took a dozen
+or so hours, but the completed suite compiled "make distribution" on
+R-patched_2017-08-27 and passed check-devel. Of course, the external
+libraries are still all built with 4.9.3, as is ICU, but I find this
+promising.
+
+Jeroen, I think you mentioned having problems with runtime version 4?
+This seems to have built runtime version 5, yet I didn't have any
+issues.
+
+Something to keep in mind perhaps for the next iteration of Rtools.
+
+Thanks,
+
+Avi
+
+[1] https://github.com/niXman/mingw-builds
+
+

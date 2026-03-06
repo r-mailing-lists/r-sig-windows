@@ -1,0 +1,154 @@
+From avraham.adler at gmail.com  Thu Mar 17 18:34:57 2016
+From: avraham.adler at gmail.com (Avraham Adler)
+Date: Thu, 17 Mar 2016 13:34:57 -0400
+Subject: [R-SIG-Win] GCC 5.3.0 - sd(NA) = NaN?
+Message-ID: <CAL6gwnKihLGBP7gD+ECWmZHmvqEgc+Trn_0tphM+f3_gaMW79A@mail.gmail.com>
+
+Hello.
+
+As an experiment, I tried compiling R with the mingw64 5.3.0 (posix-seh)
+build. R compiles smoothly, but make check fails pretty early as sd(NA)
+returns NaN instead of NA, which is a fatal error in the tests.I have no
+idea what may cause this, but thought it may be of interest to this group.
+I'd appreciate it if someone who understands why that happens would post a
+brief explanation.
+
+Thanks,
+
+Avi
+
+	[[alternative HTML version deleted]]
+
+
+From jeroenooms at gmail.com  Fri Mar 18 10:32:52 2016
+From: jeroenooms at gmail.com (Jeroen Ooms)
+Date: Fri, 18 Mar 2016 10:32:52 +0100
+Subject: [R-SIG-Win] GCC 5.3.0 - sd(NA) = NaN?
+In-Reply-To: <CAL6gwnKihLGBP7gD+ECWmZHmvqEgc+Trn_0tphM+f3_gaMW79A@mail.gmail.com>
+References: <CAL6gwnKihLGBP7gD+ECWmZHmvqEgc+Trn_0tphM+f3_gaMW79A@mail.gmail.com>
+Message-ID: <CABFfbXss6cNukvdysTgoPSr2j0MqHmhOW=qvP+gCWPPZJ8gvfA@mail.gmail.com>
+
+I found something similar a while back:
+http://r.789695.n4.nabble.com/Optimization-bug-when-byte-compiling-with-gcc-5-2-0-on-windows-td4712220.html
+
+IIRC the issue was diagnosed by Luke that there are a few workarounds
+that currently use: #if __GNUC__ <= 4. However when changing that to
+5, all kind of other problems appeared.
+
+
+
+On Thu, Mar 17, 2016 at 6:34 PM, Avraham Adler <avraham.adler at gmail.com> wrote:
+> Hello.
+>
+> As an experiment, I tried compiling R with the mingw64 5.3.0 (posix-seh)
+> build. R compiles smoothly, but make check fails pretty early as sd(NA)
+> returns NaN instead of NA, which is a fatal error in the tests.I have no
+> idea what may cause this, but thought it may be of interest to this group.
+> I'd appreciate it if someone who understands why that happens would post a
+> brief explanation.
+>
+> Thanks,
+>
+> Avi
+>
+>         [[alternative HTML version deleted]]
+>
+> _______________________________________________
+> R-SIG-windows mailing list
+> R-SIG-windows at r-project.org
+> https://stat.ethz.ch/mailman/listinfo/r-sig-windows
+
+
+From avraham.adler at gmail.com  Fri Mar 18 15:28:54 2016
+From: avraham.adler at gmail.com (Avraham Adler)
+Date: Fri, 18 Mar 2016 10:28:54 -0400
+Subject: [R-SIG-Win] GCC 5.3.0 - sd(NA) = NaN?
+In-Reply-To: <CABFfbXss6cNukvdysTgoPSr2j0MqHmhOW=qvP+gCWPPZJ8gvfA@mail.gmail.com>
+References: <CAL6gwnKihLGBP7gD+ECWmZHmvqEgc+Trn_0tphM+f3_gaMW79A@mail.gmail.com>
+	<CABFfbXss6cNukvdysTgoPSr2j0MqHmhOW=qvP+gCWPPZJ8gvfA@mail.gmail.com>
+Message-ID: <CAL6gwnLXUMd41kcfq5TfO4C78Z7vnMSsP=c8jpxN1ghk3svZ0A@mail.gmail.com>
+
+Hi, Jeroen.
+
+Thanks for the link. Has anyone posted the possible incorrect
+implementation at mingw64 for their review?
+
+Thanks,
+
+Avi
+
+On Fri, Mar 18, 2016 at 5:32 AM, Jeroen Ooms <jeroenooms at gmail.com> wrote:
+> I found something similar a while back:
+> http://r.789695.n4.nabble.com/Optimization-bug-when-byte-compiling-with-gcc-5-2-0-on-windows-td4712220.html
+>
+> IIRC the issue was diagnosed by Luke that there are a few workarounds
+> that currently use: #if __GNUC__ <= 4. However when changing that to
+> 5, all kind of other problems appeared.
+>
+>
+>
+> On Thu, Mar 17, 2016 at 6:34 PM, Avraham Adler <avraham.adler at gmail.com> wrote:
+>> Hello.
+>>
+>> As an experiment, I tried compiling R with the mingw64 5.3.0 (posix-seh)
+>> build. R compiles smoothly, but make check fails pretty early as sd(NA)
+>> returns NaN instead of NA, which is a fatal error in the tests.I have no
+>> idea what may cause this, but thought it may be of interest to this group.
+>> I'd appreciate it if someone who understands why that happens would post a
+>> brief explanation.
+>>
+>> Thanks,
+>>
+>> Avi
+>>
+>>         [[alternative HTML version deleted]]
+>>
+>> _______________________________________________
+>> R-SIG-windows mailing list
+>> R-SIG-windows at r-project.org
+>> https://stat.ethz.ch/mailman/listinfo/r-sig-windows
+
+
+From avraham.adler at gmail.com  Thu Mar 31 00:10:50 2016
+From: avraham.adler at gmail.com (Avraham Adler)
+Date: Wed, 30 Mar 2016 18:10:50 -0400
+Subject: [R-SIG-Win] Suggested change to
+	RHOME/src/gnuwin32/fixed/etc/Makeconf for R-3.3.0
+Message-ID: <CAL6gwnLx7+FZ=c4KK-eqcBZykbDyKZXWeOayoGc-1i_HsZZDvQ@mail.gmail.com>
+
+As R-3.3.0 will use gcc 4.9.3 with full support for C11, perhaps
+CXX1XSTD = -std=c++0x should be replaced by CXX1XSTD = -std=c++11
+there?
+
+Most of the time, packages build from .R/Makevars, but sometimes, and
+I don't know why, they default to the fixed/etc.
+
+Thank you,
+
+Avi
+
+
+From murdoch.duncan at gmail.com  Thu Mar 31 00:31:13 2016
+From: murdoch.duncan at gmail.com (Duncan Murdoch)
+Date: Wed, 30 Mar 2016 18:31:13 -0400
+Subject: [R-SIG-Win] Suggested change to
+ RHOME/src/gnuwin32/fixed/etc/Makeconf for R-3.3.0
+In-Reply-To: <CAL6gwnLx7+FZ=c4KK-eqcBZykbDyKZXWeOayoGc-1i_HsZZDvQ@mail.gmail.com>
+References: <CAL6gwnLx7+FZ=c4KK-eqcBZykbDyKZXWeOayoGc-1i_HsZZDvQ@mail.gmail.com>
+Message-ID: <56FC53B1.2040703@gmail.com>
+
+On 30/03/2016 6:10 PM, Avraham Adler wrote:
+> As R-3.3.0 will use gcc 4.9.3 with full support for C11, perhaps
+> CXX1XSTD = -std=c++0x should be replaced by CXX1XSTD = -std=c++11
+> there?
+>
+> Most of the time, packages build from .R/Makevars, but sometimes, and
+> I don't know why, they default to the fixed/etc.
+
+I think it's too late for a change like that.  I don't know if there are 
+any c++0x features which are illegal in c++11, but if so, the package 
+authors would be left in the lurch.
+
+Duncan Murdoch
+
+

@@ -1,0 +1,36 @@
+{
+  "list": "r-sig-windows",
+  "description": "",
+  "month": "2023-10",
+  "messages": [
+    {
+      "id": "msg-91bbc03bd8f2",
+      "message_id": "<1e02ac01-2ef0-4465-a94b-c3a56b006d4e@gmail.com>",
+      "from_name": "Tomas Kalibera",
+      "from_email_hash": "7af110c9340339e5307bd348f1ec524e2fd1c8f104d583e9993022c5550711f4",
+      "date": "2023-10-23T11:36:17+02:00",
+      "subject": "[R-SIG-Win] Rtools43 update",
+      "subject_clean": "Rtools43 update",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear R Windows developers,\n\nan update of Rtools43, the toolchain for R for Windows used by R-devel \nand R 4.3, is available as revision 5863 from\n\nhttps://cran.r-project.org/bin/windows/Rtools/rtools43/rtools.html\n\nR packages able to read files using libwebp should be rebuilt and \nreinstalled due to a security vulnerability (CVE-2023-2863). This may be \nalso indirect through other packages or libraries.\n\nNo changes in the list of libraries for linking are required.\n\nPkg-config is now available for querying libraries for linking and \ncompilation flags. See \nhttps://cran.r-project.org/bin/windows/base/howto-R-devel.html for more \ndetails (setting this up with github actions requires some tweaks).\n\nThe compilers and a number of libraries have been updated.\n\nThere is an experimental build for aarch64 based on LLVM.\n\nSee https://cran.r-project.org/bin/windows/Rtools/rtools43/news.html for \nmore details.\n\nBest\nTomas",
+      "body_snippet": "Dear R Windows developers,\n\nan update of Rtools43, the toolchain for R for Windows used by R-devel \nand R 4.3, is available as revision 5863 from\n\nhttps://cran.r-project.org/bin/windows/Rtools/rtools4",
+      "thread_id": "thread-91bbc03bd8f2",
+      "thread_depth": 0,
+      "month": "2023-10"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-91bbc03bd8f2",
+      "subject": "Rtools43 update",
+      "message_count": 1,
+      "participants": [
+        "Tomas Kalibera"
+      ],
+      "started": "2023-10-23T11:36:17+02:00",
+      "last_reply": "2023-10-23T11:36:17+02:00",
+      "root_message_id": "msg-91bbc03bd8f2"
+    }
+  ]
+}

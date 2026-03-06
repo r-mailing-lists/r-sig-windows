@@ -1,0 +1,36 @@
+{
+  "list": "r-sig-windows",
+  "description": "",
+  "month": "2024-01",
+  "messages": [
+    {
+      "id": "msg-f2f3d5ba9ea1",
+      "message_id": "<c2d55384-932d-4202-9a05-6419eb5c36cd@gmail.com>",
+      "from_name": "Tomas Kalibera",
+      "from_email_hash": "7af110c9340339e5307bd348f1ec524e2fd1c8f104d583e9993022c5550711f4",
+      "date": "2024-01-31T11:19:10+01:00",
+      "subject": "[R-SIG-Win] Rtools43 update",
+      "subject_clean": "Rtools43 update",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear R Windows developers,\n\nan update of Rtools43, the toolchain for R for Windows used by R-devel \nand R 4.3, is available as revision 5948 from\n\nhttps://cran.r-project.org/bin/windows/Rtools/rtools43/rtools.html\n\nThis update adds grpc, re2, abseil, c-ares. It includes a major update \nof protobuf and ships with protoc. There are some improvements in \npkg-config wrappers.\n\nSome software using xml2 may have to be updated to the new API.\n\nSoftware linking protobuf and httpuv now has to link additional \ndependencies.\n\nSee https://cran.r-project.org/bin/windows/Rtools/rtools43/news.html for \nmore details.\n\nBest\nTomas",
+      "body_snippet": "Dear R Windows developers,\n\nan update of Rtools43, the toolchain for R for Windows used by R-devel \nand R 4.3, is available as revision 5948 from\n\nhttps://cran.r-project.org/bin/windows/Rtools/rtools4",
+      "thread_id": "thread-f2f3d5ba9ea1",
+      "thread_depth": 0,
+      "month": "2024-01"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-f2f3d5ba9ea1",
+      "subject": "Rtools43 update",
+      "message_count": 1,
+      "participants": [
+        "Tomas Kalibera"
+      ],
+      "started": "2024-01-31T11:19:10+01:00",
+      "last_reply": "2024-01-31T11:19:10+01:00",
+      "root_message_id": "msg-f2f3d5ba9ea1"
+    }
+  ]
+}

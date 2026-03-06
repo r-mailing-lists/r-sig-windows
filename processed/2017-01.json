@@ -1,0 +1,101 @@
+{
+  "list": "r-sig-windows",
+  "description": "",
+  "month": "2017-01",
+  "messages": [
+    {
+      "id": "msg-074538909bbe",
+      "message_id": "<CAL6gwn+G0=Yn+QuzVqA7dA-p05VPeo=Qqd=a34ToMdbAm4-HHA@mail.gmail.com>",
+      "from_name": "Avraham Adler",
+      "from_email_hash": "af3a8abf7b61e7882d265f3ee607ab6f21a248be198b31d73d45602a933f5ba0",
+      "date": "2017-01-30T18:08:21-05:00",
+      "subject": "[R-SIG-Win] Is an update of Rtools in the mid-to-distant future?",
+      "subject_clean": "Is an update of Rtools in the mid-to-distant future?",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hello.\n\nHas there been any thought or consideration given to updating Rtools from\n4.9.3 to a 5.x or 6.x flavor, or was the push from 4.6 to 4.9.3 difficult\nenough that this should be tabled for a year or three? I know, I'm one to\ntalk when Jeroen, Kevin, and Dr. Murdoch do all the work, but with GCC up\nto 6.3, there have been a lot of changes between 4.9.3 and 4.9.4 [1], 5.x\n[2] and 6.x [3].\n\nThank you,\n\nAvi\n\n[1] <\nhttps://gcc.gnu.org/bugzilla/buglist.cgi?bug_status=RESOLVED&resolution=FIXED&target_milestone=4.9.4\n>\n\n[2] <https://gcc.gnu.org/gcc-5/changes.html>\n\n[3] <https://gcc.gnu.org/gcc-6/changes.html>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Hello.\n\nHas there been any thought or consideration given to updating Rtools from\n4.9.3 to a 5.x or 6.x flavor, or was the push from 4.6 to 4.9.3 difficult\nenough that this should be tabled for a year",
+      "thread_id": "thread-074538909bbe",
+      "thread_depth": 0,
+      "month": "2017-01"
+    },
+    {
+      "id": "msg-aa6e1f220954",
+      "message_id": "<CABFfbXvwkUWNO75Z6fTG9a7DC76KB+u2_gcG3h0iPptB9ara=A@mail.gmail.com>",
+      "from_name": "Jeroen Ooms",
+      "from_email_hash": "8cec1f7bf29300b425ea1be687fbb6d3fccf3de57737bb017534932e9e18a5f3",
+      "date": "2017-01-30T15:22:14-08:00",
+      "subject": "[R-SIG-Win] Is an update of Rtools in the mid-to-distant future?",
+      "subject_clean": "Is an update of Rtools in the mid-to-distant future?",
+      "in_reply_to": "<CAL6gwn+G0=Yn+QuzVqA7dA-p05VPeo=Qqd=a34ToMdbAm4-HHA@mail.gmail.com>",
+      "references": [
+        "<CAL6gwn+G0=Yn+QuzVqA7dA-p05VPeo=Qqd=a34ToMdbAm4-HHA@mail.gmail.com>"
+      ],
+      "body_plain": "On Mon, Jan 30, 2017 at 3:08 PM, Avraham Adler <avraham.adler at gmail.com> wrote:\n\n> Has there been any thought or consideration given to updating Rtools from\n> 4.9.3 to a 5.x or 6.x flavor, or was the push from 4.6 to 4.9.3 difficult\n> enough that this should be tabled for a year or three?\n\nDefinitely no upgrade planned for R 3.4, and I expect it won't get\nupgraded until it is really needed again.\n\nThe 4.9.3 upgrade was motivated by C++11 support, which was largely\nmissing in 4.6.3 and becoming mainstream. I don't think there are any\nnew features in 5.x or 6.x at this point that are critical enough to\noutweigh the disruption.\n\nThat said, any future upgrades should be much easier than the last one\nbecause we switched to a pretty standard gcc/mingw configuration. In\nfact you can easily configure R to use a more recent compiler (e.g.\nfrom msys2), which would allow you to use new compiler features\nlocally.",
+      "body_snippet": "On Mon, Jan 30, 2017 at 3:08 PM, Avraham Adler <avraham.adler at gmail.com> wrote:\n\n> Has there been any thought or consideration given to updating Rtools from\n> 4.9.3 to a 5.x or 6.x flavor, or was t",
+      "thread_id": "thread-074538909bbe",
+      "thread_depth": 1,
+      "month": "2017-01"
+    },
+    {
+      "id": "msg-c73ecce565d9",
+      "message_id": "<CAL6gwn+vDE4Fb43hECq9YbEGBrMDJ3rQS_8XE8wpFc8fhB2+3w@mail.gmail.com>",
+      "from_name": "Avraham Adler",
+      "from_email_hash": "af3a8abf7b61e7882d265f3ee607ab6f21a248be198b31d73d45602a933f5ba0",
+      "date": "2017-01-31T23:31:08-05:00",
+      "subject": "[R-SIG-Win] Default mtune for R windows",
+      "subject_clean": "Default mtune for R windows",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "I put in a bug request for this over a year ago and it went nowhere.\nNobody is using a core2 on Windows anymore. GCC itself has been\nsuggesting for a very long time to use '-mtune=generic'. Their\nlanguage on 4.9.3. is:\n\n?generic? Produce code optimized for the most common IA32/AMD64/EM64T\nprocessors. If youknow the CPU on which your code will run, then you\nshould use the corresponding -mtune or -march option instead of\n-mtune=generic. But, if you do not know exactly what CPU users of your\napplication will have, then you should use this option.\n\nAs new processors are deployed in the marketplace, the behavior of\nthis option will change. Therefore, if you upgrade to a newer version\nof GCC, code generation controlled by this option will change to\nreflect the processors that are most common at the time that version\nof GCC is released.\n\n\nHow difficult is it to change that line in Mkrules.dist/Mkrules.rules?\n\nAvi",
+      "body_snippet": "I put in a bug request for this over a year ago and it went nowhere.\nNobody is using a core2 on Windows anymore. GCC itself has been\nsuggesting for a very long time to use '-mtune=generic'. Their\nlang",
+      "thread_id": "thread-c73ecce565d9",
+      "thread_depth": 0,
+      "month": "2017-01"
+    },
+    {
+      "id": "msg-07d8b6e78e05",
+      "message_id": "<CABFfbXuB-Ui28o6xHqa4U00NrBsna=QBQWZrBChzJ0OzOR-mOA@mail.gmail.com>",
+      "from_name": "Jeroen Ooms",
+      "from_email_hash": "8cec1f7bf29300b425ea1be687fbb6d3fccf3de57737bb017534932e9e18a5f3",
+      "date": "2017-01-31T22:08:19-08:00",
+      "subject": "[R-SIG-Win] Default mtune for R windows",
+      "subject_clean": "Default mtune for R windows",
+      "in_reply_to": "<CAL6gwn+vDE4Fb43hECq9YbEGBrMDJ3rQS_8XE8wpFc8fhB2+3w@mail.gmail.com>",
+      "references": [
+        "<CAL6gwn+vDE4Fb43hECq9YbEGBrMDJ3rQS_8XE8wpFc8fhB2+3w@mail.gmail.com>"
+      ],
+      "body_plain": "On Tue, Jan 31, 2017 at 8:31 PM, Avraham Adler <avraham.adler at gmail.com> wrote:\n> I put in a bug request for this over a year ago and it went nowhere.\n\nWhere did you post this exactly? If we open a topic with a working\npatch on bugs.r-project.org and reference the canonical gcc source\nthat you are citing below, perhaps it will get merged.",
+      "body_snippet": "On Tue, Jan 31, 2017 at 8:31 PM, Avraham Adler <avraham.adler at gmail.com> wrote:\n> I put in a bug request for this over a year ago and it went nowhere.\n\nWhere did you post this exactly? If we open a",
+      "thread_id": "thread-c73ecce565d9",
+      "thread_depth": 1,
+      "month": "2017-01"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-074538909bbe",
+      "subject": "Is an update of Rtools in the mid-to-distant future?",
+      "message_count": 2,
+      "participants": [
+        "Avraham Adler",
+        "Jeroen Ooms"
+      ],
+      "started": "2017-01-30T18:08:21-05:00",
+      "last_reply": "2017-01-30T15:22:14-08:00",
+      "root_message_id": "msg-074538909bbe"
+    },
+    {
+      "id": "thread-c73ecce565d9",
+      "subject": "Default mtune for R windows",
+      "message_count": 2,
+      "participants": [
+        "Avraham Adler",
+        "Jeroen Ooms"
+      ],
+      "started": "2017-01-31T23:31:08-05:00",
+      "last_reply": "2017-01-31T22:08:19-08:00",
+      "root_message_id": "msg-c73ecce565d9"
+    }
+  ]
+}

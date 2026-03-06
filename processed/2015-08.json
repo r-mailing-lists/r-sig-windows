@@ -1,0 +1,158 @@
+{
+  "list": "r-sig-windows",
+  "description": "",
+  "month": "2015-08",
+  "messages": [
+    {
+      "id": "msg-80e8f74f3739",
+      "message_id": "<CABFfbXsJKcry=s=fbU_H7MxQnZocxF+-TH2n6DpfX4npBQV4ew@mail.gmail.com>",
+      "from_name": "Jeroen Ooms",
+      "from_email_hash": "8cec1f7bf29300b425ea1be687fbb6d3fccf3de57737bb017534932e9e18a5f3",
+      "date": "2015-08-28T23:52:36+02:00",
+      "subject": "[R-SIG-Win] mingw-w64 toolchain status update",
+      "subject_clean": "mingw-w64 toolchain status update",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Welcome to the new r-sig-windows mailing list! The initial purpose is\nto announce updates of the mingw-w64 tool chain (aka Rtools) and\ndiscuss problems related to building R and R packages on windows. Feel\nfree to invite other people that might be interested in these\ndevelopments.\n\n## Building mingw-w64\n\nSeveral people have been working on and off on this over the past\nyear. Below a summary of the current status to best of my knowledge.\nPlease correct me where I am wrong.\n\nThere are various collections of build-scripts available that produce\na mingw-w64 tool-chain. Some cross compile from Linux, others are\ncompile natively on Windows. In my experience, best results have been\nachieved using the \"mingw-builds\" [1] scripts, which build from the\nmsys2 environment on windows. The \"mingw-builds\" scripts are pretty\ncomplete and well maintained. The mingw-w64 project itself uses these\nsame scripts for publishing builds on their sourceforge website [2].\n\nBecause we strive for maximum compatibility and minimal disruption, we\ntarget the same settings as the current rtools:\n\n - i686 host (win32)\n - sjlj exceptions\n - win32 threads (not posix)\n - static gcc (i.e. no separate libstdc++-6.dll and libgcc_s_sjlj-1.dll files)\n - mingw-w64 runtime v3 (needed for c++11, current rtools has v2)\n\nWhen using sjlj exceptions, the mingw-builds defaults to a multilib\ntoolchain. This means that the same compiler can target both win32 and\nwin64 (using the -m32 and -m64 C flags). The current rtools uses a\nmultilib tool chain as well, so R already passes the correct flags to\nthe compiler, which makes the migration a little easier.\n\nI used the following command in msys2 to produce a gcc-4.9.2 build:\n\n  ./build --mode=gcc-4.9.2 --rt-version=v3 --arch=i686\n--exceptions=sjlj --static-gcc --threads=win32\n--enable-languages=c,c++,fortran\n\nBuilding took about 3 hours. A zip file with the binaries is available\nhere [3]. The zip file is pretty large because the scripts also build\na lot of extra utilities that we probably don't need in the final\nrtools distribution.\n\n## Numeric precision bug\n\nOne outstanding bug [4] in the mingw-w64 runtime can cause tiny\nnumeric differences on 64bit windows. KK has found a simple workaround\nis to change R_pow (in src/main/arithmetic.c) to use powl() instead of\npow().\n\n  sed -i \"s/pow(x, y)/powl(x, y)/g\" %R_HOME%/src/main/arithmetic.c\n\nI have confirmed that with this fix, R passes make check on win64.\nHopefully base R can adopt this fix so that we don't need special\npatching for windows.\n\n## Rf_error problem\n\nThe mingw-w64 runtime version 3.3.0 had a bug [5] for sjlj exceptions\nthat caused Rf_error() to crash. This problem has since then been\nfixed both the v3 and v4 versions of mingw-w64. Because the\n\"mingw-builds\" scripts always uses the latest v3.x version of\nmingw-w64, we do not need special patching anymore.\n\nIn case we want to build a tool chain using the v3.3.0 version of the\nmingw runtime, KK has extracted the required patch:\nhttp://pastebin.com/k4dLndkw.\n\n## Crashing V8\n\nThere was a problem with the V8 package which would crash with the new\ntool chain. It looks like this was related to some ABI change in the\nmingw-w64 runtime. Rebuilding the libv8 library for i386 has solved\nthe problem.\n\n## Static Libraries\n\nI was able to build R-devel with the new tool chain using the same\nstatic libraries as for R 3.2.2 (libicu, libcairo, libcurl, Tcl, and\nthe \"extsoft\" stuff in local320.zip, see [6]). However perhaps it\ncouldn't hurt to rebuild some of these with more recent versions.\n\n## To do\n\nThere is still a lot of work to do. We need to do more more testing of\nR itself, in particular GUI features that are not covered by make\ncheck. Kevin already found a problem with tab completion in RGui that\nwe need to investigate.\n\nThen we need to test if all CRAN packages work with the new tool\nchain. In particular packages that link to external C/C++ libraries,\nor those that use exotic c++ features might require attention.\n\nI will try to provide builds of the windows installer via [3] until\nthe new tool chain is ready for CRAN. This installer contains both x32\nand x64 builds of R-devel, as well as a copy of the new tool chain\nitself.\n\nThanks everyone for you help and patience!\n\n\n[1] https://github.com/niXman/mingw-builds/tree/develop\n[2] http://sourceforge.net/projects/mingw-w64/files/Toolchains%20targetting%20Win32/Personal%20Builds/mingw-builds/\n[3] http://www.stat.ucla.edu/~jeroen/mingw-w64/\n[4] http://sourceforge.net/p/mingw-w64/bugs/466/\n[5] http://sourceforge.net/p/mingw-w64/bugs/465/\n[6] http://www.stats.ox.ac.uk/pub/Rtools",
+      "body_snippet": "Welcome to the new r-sig-windows mailing list! The initial purpose is\nto announce updates of the mingw-w64 tool chain (aka Rtools) and\ndiscuss problems related to building R and R packages on windows.",
+      "thread_id": "thread-80e8f74f3739",
+      "thread_depth": 0,
+      "month": "2015-08"
+    },
+    {
+      "id": "msg-592a6007d06d",
+      "message_id": "<CAJ_LAMDfVwTw1dYV0wGs+bgzd=26hzCs+cpkAWaK=tZWcNDDFA@mail.gmail.com>",
+      "from_name": "Qiang Kou",
+      "from_email_hash": "0d4fdf3da64c31856471223111f08d09403b37154155aca4b413b87e0d1611b8",
+      "date": "2015-08-29T14:27:00-04:00",
+      "subject": "[R-SIG-Win] mingw-w64 toolchain status update",
+      "subject_clean": "mingw-w64 toolchain status update",
+      "in_reply_to": "<CABFfbXsJKcry=s=fbU_H7MxQnZocxF+-TH2n6DpfX4npBQV4ew@mail.gmail.com>",
+      "references": [
+        "<CABFfbXsJKcry=s=fbU_H7MxQnZocxF+-TH2n6DpfX4npBQV4ew@mail.gmail.com>"
+      ],
+      "body_plain": "More update from my side:\n\n(1) MinGW-w64:\n\nI think we should take \"mingw-builds\", although it uses a different way to\nbuild GCC.\n\nThe Rtools with GCC 4.6.3 used the cross-compiling method: it builds a\ncross-compiler and then generates the Windows binaries. But I can't get\nmultilib support by using this method.\n\nSo \"mingw-builds\" seems a better solution, since it has multilib support.\n\n(2) numerical precision\n\nFor reference, the bug is from\nhttps://github.com/wch/r-source/blob/trunk/src/main/arithmetic.c#L217\n\nBest wishes,\n\nKK\n\nOn Fri, Aug 28, 2015 at 5:52 PM, Jeroen Ooms <jeroen.ooms at stat.ucla.edu>\nwrote:\n\n> Welcome to the new r-sig-windows mailing list! The initial purpose is\n> to announce updates of the mingw-w64 tool chain (aka Rtools) and\n> discuss problems related to building R and R packages on windows. Feel\n> free to invite other people that might be interested in these\n> developments.\n>\n> ## Building mingw-w64\n>\n> Several people have been working on and off on this over the past\n> year. Below a summary of the current status to best of my knowledge.\n> Please correct me where I am wrong.\n>\n> There are various collections of build-scripts available that produce\n> a mingw-w64 tool-chain. Some cross compile from Linux, others are\n> compile natively on Windows. In my experience, best results have been\n> achieved using the \"mingw-builds\" [1] scripts, which build from the\n> msys2 environment on windows. The \"mingw-builds\" scripts are pretty\n> complete and well maintained. The mingw-w64 project itself uses these\n> same scripts for publishing builds on their sourceforge website [2].\n>\n> Because we strive for maximum compatibility and minimal disruption, we\n> target the same settings as the current rtools:\n>\n>  - i686 host (win32)\n>  - sjlj exceptions\n>  - win32 threads (not posix)\n>  - static gcc (i.e. no separate libstdc++-6.dll and libgcc_s_sjlj-1.dll\n> files)\n>  - mingw-w64 runtime v3 (needed for c++11, current rtools has v2)\n>\n> When using sjlj exceptions, the mingw-builds defaults to a multilib\n> toolchain. This means that the same compiler can target both win32 and\n> win64 (using the -m32 and -m64 C flags). The current rtools uses a\n> multilib tool chain as well, so R already passes the correct flags to\n> the compiler, which makes the migration a little easier.\n>\n> I used the following command in msys2 to produce a gcc-4.9.2 build:\n>\n>   ./build --mode=gcc-4.9.2 --rt-version=v3 --arch=i686\n> --exceptions=sjlj --static-gcc --threads=win32\n> --enable-languages=c,c++,fortran\n>\n> Building took about 3 hours. A zip file with the binaries is available\n> here [3]. The zip file is pretty large because the scripts also build\n> a lot of extra utilities that we probably don't need in the final\n> rtools distribution.\n>\n> ## Numeric precision bug\n>\n> One outstanding bug [4] in the mingw-w64 runtime can cause tiny\n> numeric differences on 64bit windows. KK has found a simple workaround\n> is to change R_pow (in src/main/arithmetic.c) to use powl() instead of\n> pow().\n>\n>   sed -i \"s/pow(x, y)/powl(x, y)/g\" %R_HOME%/src/main/arithmetic.c\n>\n> I have confirmed that with this fix, R passes make check on win64.\n> Hopefully base R can adopt this fix so that we don't need special\n> patching for windows.\n>\n> ## Rf_error problem\n>\n> The mingw-w64 runtime version 3.3.0 had a bug [5] for sjlj exceptions\n> that caused Rf_error() to crash. This problem has since then been\n> fixed both the v3 and v4 versions of mingw-w64. Because the\n> \"mingw-builds\" scripts always uses the latest v3.x version of\n> mingw-w64, we do not need special patching anymore.\n>\n> In case we want to build a tool chain using the v3.3.0 version of the\n> mingw runtime, KK has extracted the required patch:\n> http://pastebin.com/k4dLndkw.\n>\n> ## Crashing V8\n>\n> There was a problem with the V8 package which would crash with the new\n> tool chain. It looks like this was related to some ABI change in the\n> mingw-w64 runtime. Rebuilding the libv8 library for i386 has solved\n> the problem.\n>\n> ## Static Libraries\n>\n> I was able to build R-devel with the new tool chain using the same\n> static libraries as for R 3.2.2 (libicu, libcairo, libcurl, Tcl, and\n> the \"extsoft\" stuff in local320.zip, see [6]). However perhaps it\n> couldn't hurt to rebuild some of these with more recent versions.\n>\n> ## To do\n>\n> There is still a lot of work to do. We need to do more more testing of\n> R itself, in particular GUI features that are not covered by make\n> check. Kevin already found a problem with tab completion in RGui that\n> we need to investigate.\n>\n> Then we need to test if all CRAN packages work with the new tool\n> chain. In particular packages that link to external C/C++ libraries,\n> or those that use exotic c++ features might require attention.\n>\n> I will try to provide builds of the windows installer via [3] until\n> the new tool chain is ready for CRAN. This installer contains both x32\n> and x64 builds of R-devel, as well as a copy of the new tool chain\n> itself.\n>\n> Thanks everyone for you help and patience!\n>\n>\n> [1] https://github.com/niXman/mingw-builds/tree/develop\n> [2]\n> http://sourceforge.net/projects/mingw-w64/files/Toolchains%20targetting%20Win32/Personal%20Builds/mingw-builds/\n> [3] http://www.stat.ucla.edu/~jeroen/mingw-w64/\n> [4] http://sourceforge.net/p/mingw-w64/bugs/466/\n> [5] http://sourceforge.net/p/mingw-w64/bugs/465/\n> [6] http://www.stats.ox.ac.uk/pub/Rtools\n>\n> _______________________________________________\n> R-SIG-windows mailing list\n> R-SIG-windows at r-project.org\n> https://stat.ethz.ch/mailman/listinfo/r-sig-windows\n>\n\n\n\n-- \nQiang Kou\nqkou at umail.iu.edu\nSchool of Informatics and Computing, Indiana University\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "More update from my side:\n\n(1) MinGW-w64:\n\nI think we should take \"mingw-builds\", although it uses a different way to\nbuild GCC.\n\nThe Rtools with GCC 4.6.3 used the cross-compiling method: it builds a",
+      "thread_id": "thread-80e8f74f3739",
+      "thread_depth": 1,
+      "month": "2015-08"
+    },
+    {
+      "id": "msg-77bcf33f519b",
+      "message_id": "<CABFfbXsifUjqovxHqXg0PbBP4D_38NZZx=Xv0YkY9MuUnPRJdQ@mail.gmail.com>",
+      "from_name": "Jeroen Ooms",
+      "from_email_hash": "a265ef4bb03c14ee9d6f00489213486310c7d7bc8d3d2467e6937626fef998e1",
+      "date": "2015-08-31T15:14:28+02:00",
+      "subject": "[R-SIG-Win] An update on the windows toolchain developments",
+      "subject_clean": "An update on the windows toolchain developments",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "A new version of the toolchain based on gcc 4.9.3 and corresponding\nbuild of R-devel are available from [1]. See the readme.txt [2] for\ndetails. The installer should work out of the box and make it easy for\nWindows users to compile and test R packages with the new toolchain.\n\nThe bad news: unfortunately it appears that the sjlj problem on win64\n(triggered by Rf_error) is still not completely solved in the latest\nmingw-w64. Therefore I restored -fno-asynchronous-unwind-tables in\nCXXFLAGS in the latest build of R. This workaround allows us to move\nforward while we investigate this problem.\n\nEven with -fno-asynchronous-unwind-tables there are still two Rcpp\nunit tests that crash on win64: test.Module.member and\ntest.Module.property. These tests segfault when an exception is raised\nwithin a module. The problem still exists in the latest Rcpp version\nfrom Github. It is unclear if this is related to the sjlj bug above,\nor a separate problem in Rcpp / R-devel. The issue can be worked\naround by changing Rcpp's Makevars.win to:\n\n   PKG_CXXFLAGS=-mno-sse\n\nWith this fix, Rcpp is able to execute all unit tests on both win32\nand win64. All tests pass, except for an issue with dates (also only\non win64) that is reported at [3].\n\n[1] http://www.stat.ucla.edu/~jeroen/mingw-w64/\n[2] http://www.stat.ucla.edu/~jeroen/mingw-w64/readme.txt\n[3] https://github.com/RcppCore/Rcpp/issues/359",
+      "body_snippet": "A new version of the toolchain based on gcc 4.9.3 and corresponding\nbuild of R-devel are available from [1]. See the readme.txt [2] for\ndetails. The installer should work out of the box and make it ea",
+      "thread_id": "thread-77bcf33f519b",
+      "thread_depth": 0,
+      "month": "2015-08"
+    },
+    {
+      "id": "msg-a14a413e8503",
+      "message_id": "<CAL6gwnJS0PwdvjEg+P3sNCpOhjuV3p6gDotaJYs5g_m9VHaawg@mail.gmail.com>",
+      "from_name": "Avraham Adler",
+      "from_email_hash": "af3a8abf7b61e7882d265f3ee607ab6f21a248be198b31d73d45602a933f5ba0",
+      "date": "2015-08-31T09:22:33-04:00",
+      "subject": "[R-SIG-Win] An update on the windows toolchain developments",
+      "subject_clean": "An update on the windows toolchain developments",
+      "in_reply_to": "<CABFfbXsifUjqovxHqXg0PbBP4D_38NZZx=Xv0YkY9MuUnPRJdQ@mail.gmail.com>",
+      "references": [
+        "<CABFfbXsifUjqovxHqXg0PbBP4D_38NZZx=Xv0YkY9MuUnPRJdQ@mail.gmail.com>"
+      ],
+      "body_plain": "Hello, Jeroen.\n\nRegarding the Rf_error, does the issue still exist in v4 of GCC 4.9.2\nand is a regression in 4.9.3, or has it never been solved in 4.9.2\neither?\n\nRegarding the Rcpp error, wouldn't throwing no-sse also prevents the\nuse of almost all vecotrizations (sse2-4.1 and avx/avx2), slowing\nresults down noticeably?\n\n\nAvi\n\nOn Mon, Aug 31, 2015 at 9:14 AM, Jeroen Ooms <jeroenooms at gmail.com> wrote:\n> A new version of the toolchain based on gcc 4.9.3 and corresponding\n> build of R-devel are available from [1]. See the readme.txt [2] for\n> details. The installer should work out of the box and make it easy for\n> Windows users to compile and test R packages with the new toolchain.\n>\n> The bad news: unfortunately it appears that the sjlj problem on win64\n> (triggered by Rf_error) is still not completely solved in the latest\n> mingw-w64. Therefore I restored -fno-asynchronous-unwind-tables in\n> CXXFLAGS in the latest build of R. This workaround allows us to move\n> forward while we investigate this problem.\n>\n> Even with -fno-asynchronous-unwind-tables there are still two Rcpp\n> unit tests that crash on win64: test.Module.member and\n> test.Module.property. These tests segfault when an exception is raised\n> within a module. The problem still exists in the latest Rcpp version\n> from Github. It is unclear if this is related to the sjlj bug above,\n> or a separate problem in Rcpp / R-devel. The issue can be worked\n> around by changing Rcpp's Makevars.win to:\n>\n>    PKG_CXXFLAGS=-mno-sse\n>\n> With this fix, Rcpp is able to execute all unit tests on both win32\n> and win64. All tests pass, except for an issue with dates (also only\n> on win64) that is reported at [3].\n>\n> [1] http://www.stat.ucla.edu/~jeroen/mingw-w64/\n> [2] http://www.stat.ucla.edu/~jeroen/mingw-w64/readme.txt\n> [3] https://github.com/RcppCore/Rcpp/issues/359\n>\n> _______________________________________________\n> R-SIG-windows mailing list\n> R-SIG-windows at r-project.org\n> https://stat.ethz.ch/mailman/listinfo/r-sig-windows",
+      "body_snippet": "Hello, Jeroen.\n\nRegarding the Rf_error, does the issue still exist in v4 of GCC 4.9.2\nand is a regression in 4.9.3, or has it never been solved in 4.9.2\neither?\n\nRegarding the Rcpp error, wouldn't thr",
+      "thread_id": "thread-77bcf33f519b",
+      "thread_depth": 1,
+      "month": "2015-08"
+    },
+    {
+      "id": "msg-0b7d86140cc4",
+      "message_id": "<CAL6gwnLOPBT3N7kBWc_ZoDSCCPYhdZ0hYybq5n0jS1Hrw2fTJg@mail.gmail.com>",
+      "from_name": "Avraham Adler",
+      "from_email_hash": "af3a8abf7b61e7882d265f3ee607ab6f21a248be198b31d73d45602a933f5ba0",
+      "date": "2015-08-31T09:48:51-04:00",
+      "subject": "[R-SIG-Win] An update on the windows toolchain developments",
+      "subject_clean": "An update on the windows toolchain developments",
+      "in_reply_to": "<CAL6gwnJS0PwdvjEg+P3sNCpOhjuV3p6gDotaJYs5g_m9VHaawg@mail.gmail.com>",
+      "references": [
+        "<CABFfbXsifUjqovxHqXg0PbBP4D_38NZZx=Xv0YkY9MuUnPRJdQ@mail.gmail.com>",
+        "<CAL6gwnJS0PwdvjEg+P3sNCpOhjuV3p6gDotaJYs5g_m9VHaawg@mail.gmail.com>"
+      ],
+      "body_plain": "On Mon, Aug 31, 2015 at 9:22 AM, Avraham Adler <avraham.adler at gmail.com> wrote:\n> Hello, Jeroen.\n>\n> Regarding the Rf_error, does the issue still exist in v4 of GCC 4.9.2\n> and is a regression in 4.9.3, or has it never been solved in 4.9.2\n> either?\n>\n> Regarding the Rcpp error, wouldn't throwing no-sse also prevents the\n> use of almost all vecotrizations (sse2-4.1 and avx/avx2), slowing\n> results down noticeably?\n>\n>\n> Avi\n>\n> On Mon, Aug 31, 2015 at 9:14 AM, Jeroen Ooms <jeroenooms at gmail.com> wrote:\n>> A new version of the toolchain based on gcc 4.9.3 and corresponding\n>> build of R-devel are available from [1]. See the readme.txt [2] for\n>> details. The installer should work out of the box and make it easy for\n>> Windows users to compile and test R packages with the new toolchain.\n>>\n>> The bad news: unfortunately it appears that the sjlj problem on win64\n>> (triggered by Rf_error) is still not completely solved in the latest\n>> mingw-w64. Therefore I restored -fno-asynchronous-unwind-tables in\n>> CXXFLAGS in the latest build of R. This workaround allows us to move\n>> forward while we investigate this problem.\n>>\n>> Even with -fno-asynchronous-unwind-tables there are still two Rcpp\n>> unit tests that crash on win64: test.Module.member and\n>> test.Module.property. These tests segfault when an exception is raised\n>> within a module. The problem still exists in the latest Rcpp version\n>> from Github. It is unclear if this is related to the sjlj bug above,\n>> or a separate problem in Rcpp / R-devel. The issue can be worked\n>> around by changing Rcpp's Makevars.win to:\n>>\n>>    PKG_CXXFLAGS=-mno-sse\n>>\n>> With this fix, Rcpp is able to execute all unit tests on both win32\n>> and win64. All tests pass, except for an issue with dates (also only\n>> on win64) that is reported at [3].\n>>\n>> [1] http://www.stat.ucla.edu/~jeroen/mingw-w64/\n>> [2] http://www.stat.ucla.edu/~jeroen/mingw-w64/readme.txt\n>> [3] https://github.com/RcppCore/Rcpp/issues/359\n>>\n>> _______________________________________________\n>> R-SIG-windows mailing list\n>> R-SIG-windows at r-project.org\n>> https://stat.ethz.ch/mailman/listinfo/r-sig-windows\n\n\nIs this error [1] dependent on using RToolsTest (for which I get\npackage ?RToolTest? is not available (for R version 3.2.2 Patched) )?\n\nIn my test compilation of R and Rcpp using the 4.9.2 toolchain, given:\n\n#include <Rcpp.h>\nusing namespace Rcpp;\n\n// [[Rcpp::export]]\nSEXP ctor_mdy() {\n  Date dt = Date(12,31,2005);\n  return wrap(dt);\n}\n\n// [[Rcpp::export]]\nSEXP ctor_ymd() {\n  Date dt = Date(2005,12,31);\n  return wrap(dt);\n}\n\nI get\n\n> ctor_mdy()\n[1] \"2005-12-31\"\n> ctor_ymd()\n[1] \"2005-12-31\"\n\nIf it matters, EOPTS in MkRules.local were -march=ivybridge\n-mtune=ivybridge --param l1-cache-line-size=64 --param\nl1-cache-size=32 --param l2-cache-size=256 -pipe\n\n.R/Makevars CXXFLAGS= -std=gnu++11 -O2 -march=ivybridge\n-mtune=ivybridge --param l1-cache-line-size=64 --param\nl1-cache-size=32 --param l2-cache-size=256 -pipe\n\n\nThank you,\n\nAvi\n\n\n[1] https://github.com/RcppCore/Rcpp/issues/359",
+      "body_snippet": "On Mon, Aug 31, 2015 at 9:22 AM, Avraham Adler <avraham.adler at gmail.com> wrote:\n> Hello, Jeroen.\n>\n> Regarding the Rf_error, does the issue still exist in v4 of GCC 4.9.2\n> and is a regression in 4",
+      "thread_id": "thread-77bcf33f519b",
+      "thread_depth": 2,
+      "month": "2015-08"
+    },
+    {
+      "id": "msg-029babe5578a",
+      "message_id": "<CABFfbXv+pRJ7Cgba0uY8nsK8CKDPikLq+9wHJDik1maspR7E9Q@mail.gmail.com>",
+      "from_name": "Jeroen Ooms",
+      "from_email_hash": "a265ef4bb03c14ee9d6f00489213486310c7d7bc8d3d2467e6937626fef998e1",
+      "date": "2015-08-31T16:03:08+02:00",
+      "subject": "[R-SIG-Win] An update on the windows toolchain developments",
+      "subject_clean": "An update on the windows toolchain developments",
+      "in_reply_to": "<CAL6gwnLOPBT3N7kBWc_ZoDSCCPYhdZ0hYybq5n0jS1Hrw2fTJg@mail.gmail.com>",
+      "references": [
+        "<CABFfbXsifUjqovxHqXg0PbBP4D_38NZZx=Xv0YkY9MuUnPRJdQ@mail.gmail.com>",
+        "<CAL6gwnJS0PwdvjEg+P3sNCpOhjuV3p6gDotaJYs5g_m9VHaawg@mail.gmail.com>",
+        "<CAL6gwnLOPBT3N7kBWc_ZoDSCCPYhdZ0hYybq5n0jS1Hrw2fTJg@mail.gmail.com>"
+      ],
+      "body_plain": "On Mon, Aug 31, 2015 at 3:22 PM, Avraham Adler <avraham.adler at gmail.com> wrote:\n> Regarding the Rf_error, does the issue still exist in v4 of GCC 4.9.2\n> and is a regression in 4.9.3, or has it never been solved in 4.9.2\n> either?\n\nIt is an issue in the mingw runtime, it appears in either version of gcc.\n\n> Regarding the Rcpp error, wouldn't throwing no-sse also prevents the\n> use of almost all vecotrizations (sse2-4.1 and avx/avx2), slowing\n> results down noticeably?\n\nI don't know. Hopefully it is just a temporary workaround that we can\nremove once we figure out why the Rcpp module exception is crashing.\n\n> Is this error [1] dependent on using RToolsTest (for which I get\n> package ?RToolTest? is not available (for R version 3.2.2 Patched) )?\n\nRToolTest is a package we use to collect a bunch of tests for the tool\nchain. Did you test with win64 The bug does not appear on win32.\nPlease further discuss this within the github issue.",
+      "body_snippet": "On Mon, Aug 31, 2015 at 3:22 PM, Avraham Adler <avraham.adler at gmail.com> wrote:\n> Regarding the Rf_error, does the issue still exist in v4 of GCC 4.9.2\n> and is a regression in 4.9.3, or has it nev",
+      "thread_id": "thread-77bcf33f519b",
+      "thread_depth": 3,
+      "month": "2015-08"
+    },
+    {
+      "id": "msg-f729e1d0fbda",
+      "message_id": "<CAL6gwn+dKXQ9eQVDqOqK2QWcqFVNk=jLa96vRgR1CyY7bt8_bQ@mail.gmail.com>",
+      "from_name": "Avraham Adler",
+      "from_email_hash": "af3a8abf7b61e7882d265f3ee607ab6f21a248be198b31d73d45602a933f5ba0",
+      "date": "2015-08-31T15:22:38-04:00",
+      "subject": "[R-SIG-Win] An update on the windows toolchain developments",
+      "subject_clean": "An update on the windows toolchain developments",
+      "in_reply_to": "<CABFfbXsifUjqovxHqXg0PbBP4D_38NZZx=Xv0YkY9MuUnPRJdQ@mail.gmail.com>",
+      "references": [
+        "<CABFfbXsifUjqovxHqXg0PbBP4D_38NZZx=Xv0YkY9MuUnPRJdQ@mail.gmail.com>"
+      ],
+      "body_plain": "Hi, Jeroen. Per <https://github.com/jeroenooms/Rbuild/issues/1>, I\nthink there may be an issue with the 4.9.3 toolchain. I have no idea\nif it is in the build, or inherent in 4.9.3, though.\n\nAvi\n\nOn Mon, Aug 31, 2015 at 9:14 AM, Jeroen Ooms <jeroenooms at gmail.com> wrote:\n> A new version of the toolchain based on gcc 4.9.3 and corresponding\n> build of R-devel are available from [1]. See the readme.txt [2] for\n> details. The installer should work out of the box and make it easy for\n> Windows users to compile and test R packages with the new toolchain.\n>\n> The bad news: unfortunately it appears that the sjlj problem on win64\n> (triggered by Rf_error) is still not completely solved in the latest\n> mingw-w64. Therefore I restored -fno-asynchronous-unwind-tables in\n> CXXFLAGS in the latest build of R. This workaround allows us to move\n> forward while we investigate this problem.\n>\n> Even with -fno-asynchronous-unwind-tables there are still two Rcpp\n> unit tests that crash on win64: test.Module.member and\n> test.Module.property. These tests segfault when an exception is raised\n> within a module. The problem still exists in the latest Rcpp version\n> from Github. It is unclear if this is related to the sjlj bug above,\n> or a separate problem in Rcpp / R-devel. The issue can be worked\n> around by changing Rcpp's Makevars.win to:\n>\n>    PKG_CXXFLAGS=-mno-sse\n>\n> With this fix, Rcpp is able to execute all unit tests on both win32\n> and win64. All tests pass, except for an issue with dates (also only\n> on win64) that is reported at [3].\n>\n> [1] http://www.stat.ucla.edu/~jeroen/mingw-w64/\n> [2] http://www.stat.ucla.edu/~jeroen/mingw-w64/readme.txt\n> [3] https://github.com/RcppCore/Rcpp/issues/359\n>\n> _______________________________________________\n> R-SIG-windows mailing list\n> R-SIG-windows at r-project.org\n> https://stat.ethz.ch/mailman/listinfo/r-sig-windows",
+      "body_snippet": "Hi, Jeroen. Per <https://github.com/jeroenooms/Rbuild/issues/1>, I\nthink there may be an issue with the 4.9.3 toolchain. I have no idea\nif it is in the build, or inherent in 4.9.3, though.\n\nAvi\n\nOn Mo",
+      "thread_id": "thread-77bcf33f519b",
+      "thread_depth": 1,
+      "month": "2015-08"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-80e8f74f3739",
+      "subject": "mingw-w64 toolchain status update",
+      "message_count": 2,
+      "participants": [
+        "Jeroen Ooms",
+        "Qiang Kou"
+      ],
+      "started": "2015-08-28T23:52:36+02:00",
+      "last_reply": "2015-08-29T14:27:00-04:00",
+      "root_message_id": "msg-80e8f74f3739"
+    },
+    {
+      "id": "thread-77bcf33f519b",
+      "subject": "An update on the windows toolchain developments",
+      "message_count": 5,
+      "participants": [
+        "Avraham Adler",
+        "Jeroen Ooms"
+      ],
+      "started": "2015-08-31T15:14:28+02:00",
+      "last_reply": "2015-08-31T15:22:38-04:00",
+      "root_message_id": "msg-77bcf33f519b"
+    }
+  ]
+}
