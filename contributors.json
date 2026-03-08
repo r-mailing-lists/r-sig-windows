@@ -57,6 +57,17 @@
     }
   },
   {
+    "name": "Gábor Csárdi",
+    "slug": "g-bor-cs-rdi",
+    "messageCount": 6,
+    "firstDate": "2016-10-02T01:06:29+01:00",
+    "lastDate": "2018-04-25T18:53:36+01:00",
+    "yearlyActivity": {
+      "2016": 3,
+      "2018": 3
+    }
+  },
+  {
     "name": "Uwe Ligges",
     "slug": "uwe-ligges",
     "messageCount": 6,
@@ -66,17 +77,6 @@
       "2017": 2,
       "2018": 3,
       "2020": 1
-    }
-  },
-  {
-    "name": "Gábor Csárdi",
-    "slug": "g-bor-cs-rdi",
-    "messageCount": 6,
-    "firstDate": "2016-10-02T01:06:29+01:00",
-    "lastDate": "2018-04-25T18:53:36+01:00",
-    "yearlyActivity": {
-      "2016": 3,
-      "2018": 3
     }
   },
   {
@@ -98,26 +98,6 @@
     "yearlyActivity": {
       "2015": 2,
       "2020": 1
-    }
-  },
-  {
-    "name": "Tim Keitt",
-    "slug": "tim-keitt",
-    "messageCount": 2,
-    "firstDate": "2016-04-29T15:33:11-05:00",
-    "lastDate": "2016-04-29T19:08:28-05:00",
-    "yearlyActivity": {
-      "2016": 2
-    }
-  },
-  {
-    "name": "Kirill Müller",
-    "slug": "kirill-m-ller",
-    "messageCount": 2,
-    "firstDate": "2015-09-25T11:30:27+02:00",
-    "lastDate": "2015-09-25T12:20:25+02:00",
-    "yearlyActivity": {
-      "2015": 2
     }
   },
   {
@@ -151,6 +131,46 @@
     }
   },
   {
+    "name": "Kirill Müller",
+    "slug": "kirill-m-ller",
+    "messageCount": 2,
+    "firstDate": "2015-09-25T11:30:27+02:00",
+    "lastDate": "2015-09-25T12:20:25+02:00",
+    "yearlyActivity": {
+      "2015": 2
+    }
+  },
+  {
+    "name": "Tim Keitt",
+    "slug": "tim-keitt",
+    "messageCount": 2,
+    "firstDate": "2016-04-29T15:33:11-05:00",
+    "lastDate": "2016-04-29T19:08:28-05:00",
+    "yearlyActivity": {
+      "2016": 2
+    }
+  },
+  {
+    "name": "Qiang Kou",
+    "slug": "qiang-kou",
+    "messageCount": 1,
+    "firstDate": "2015-08-29T14:27:00-04:00",
+    "lastDate": "2015-08-29T14:27:00-04:00",
+    "yearlyActivity": {
+      "2015": 1
+    }
+  },
+  {
+    "name": "Constantin Ahlmann-Eltze",
+    "slug": "constantin-ahlmann-eltze",
+    "messageCount": 1,
+    "firstDate": "2020-04-08T12:01:29+02:00",
+    "lastDate": "2020-04-08T12:01:29+02:00",
+    "yearlyActivity": {
+      "2020": 1
+    }
+  },
+  {
     "name": "Henric Winell",
     "slug": "henric-winell",
     "messageCount": 1,
@@ -178,26 +198,6 @@
     "lastDate": "2016-04-29T17:55:43-05:00",
     "yearlyActivity": {
       "2016": 1
-    }
-  },
-  {
-    "name": "Qiang Kou",
-    "slug": "qiang-kou",
-    "messageCount": 1,
-    "firstDate": "2015-08-29T14:27:00-04:00",
-    "lastDate": "2015-08-29T14:27:00-04:00",
-    "yearlyActivity": {
-      "2015": 1
-    }
-  },
-  {
-    "name": "Constantin Ahlmann-Eltze",
-    "slug": "constantin-ahlmann-eltze",
-    "messageCount": 1,
-    "firstDate": "2020-04-08T12:01:29+02:00",
-    "lastDate": "2020-04-08T12:01:29+02:00",
-    "yearlyActivity": {
-      "2020": 1
     }
   }
 ]
