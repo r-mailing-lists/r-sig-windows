@@ -94,6 +94,18 @@
     }
   },
   {
+    "name": "Jeroen Ooms",
+    "slug": "jeroen-ooms",
+    "emailHash": "8cec1f7bf29300b425ea1be687fbb6d3fccf3de57737bb017534932e9e18a5f3",
+    "messageCount": 5,
+    "firstDate": "2015-08-28T23:52:36+02:00",
+    "lastDate": "2017-01-31T22:08:19-08:00",
+    "yearlyActivity": {
+      "2015": 3,
+      "2017": 2
+    }
+  },
+  {
     "name": "Dan Tenenbaum",
     "slug": "dan-tenenbaum",
     "emailHash": "7d5174f82990680cd0728614e2ab43517f6d6bb41db6e6eeef5c435d1cf19241",
@@ -105,15 +117,14 @@
     }
   },
   {
-    "name": "Jeroen Ooms",
-    "slug": "jeroen-ooms",
-    "emailHash": "8cec1f7bf29300b425ea1be687fbb6d3fccf3de57737bb017534932e9e18a5f3",
-    "messageCount": 5,
-    "firstDate": "2015-08-28T23:52:36+02:00",
-    "lastDate": "2017-01-31T22:08:19-08:00",
+    "name": "Marcel Baumgartner",
+    "slug": "marcel-baumgartner",
+    "emailHash": "505f40eb596347947082eb9657b0812aaa188cc3519f17d57420ad747a988c9e",
+    "messageCount": 2,
+    "firstDate": "2020-10-27T08:15:03+01:00",
+    "lastDate": "2020-10-27T11:08:17+01:00",
     "yearlyActivity": {
-      "2015": 3,
-      "2017": 2
+      "2020": 2
     }
   },
   {
@@ -150,28 +161,6 @@
     }
   },
   {
-    "name": "Kevin Ushey",
-    "slug": "kevin-ushey",
-    "emailHash": "fd1e8dc06c8e4652d61a44d70d6e99b3b7fb556bac7ad471ff6447d5a6e491ec",
-    "messageCount": 2,
-    "firstDate": "2015-09-09T13:25:26-07:00",
-    "lastDate": "2015-09-09T19:44:46-07:00",
-    "yearlyActivity": {
-      "2015": 2
-    }
-  },
-  {
-    "name": "Marcel Baumgartner",
-    "slug": "marcel-baumgartner",
-    "emailHash": "505f40eb596347947082eb9657b0812aaa188cc3519f17d57420ad747a988c9e",
-    "messageCount": 2,
-    "firstDate": "2020-10-27T08:15:03+01:00",
-    "lastDate": "2020-10-27T11:08:17+01:00",
-    "yearlyActivity": {
-      "2020": 2
-    }
-  },
-  {
     "name": "Tim Keitt",
     "slug": "tim-keitt",
     "emailHash": "0042cb9f110773b83d9c979cead2263cb2e28429e358bd4a999e51500a62ef01",
@@ -185,34 +174,12 @@
   {
     "name": "Kevin Ushey",
     "slug": "kevin-ushey",
-    "emailHash": "c0bffc799bd95bf26caa6b1c9abdc3f8fdc556eac7399824869756688d2f0689",
-    "messageCount": 1,
-    "firstDate": "2020-03-26T08:13:19-07:00",
-    "lastDate": "2020-03-26T08:13:19-07:00",
+    "emailHash": "fd1e8dc06c8e4652d61a44d70d6e99b3b7fb556bac7ad471ff6447d5a6e491ec",
+    "messageCount": 2,
+    "firstDate": "2015-09-09T13:25:26-07:00",
+    "lastDate": "2015-09-09T19:44:46-07:00",
     "yearlyActivity": {
-      "2020": 1
-    }
-  },
-  {
-    "name": "Constantin Ahlmann-Eltze",
-    "slug": "constantin-ahlmann-eltze",
-    "emailHash": "7a4a36b661de595f0ff16fb1dc9cc8dcb3e7b60575c8ae454acad885928418f0",
-    "messageCount": 1,
-    "firstDate": "2020-04-08T12:01:29+02:00",
-    "lastDate": "2020-04-08T12:01:29+02:00",
-    "yearlyActivity": {
-      "2020": 1
-    }
-  },
-  {
-    "name": "Henric Winell",
-    "slug": "henric-winell",
-    "emailHash": "5d45c7f70a3e8c62298b50baacd1a3b9bb0f7bc73d07cc011cfe21129fac53b5",
-    "messageCount": 1,
-    "firstDate": "2015-09-16T08:54:21+02:00",
-    "lastDate": "2015-09-16T08:54:21+02:00",
-    "yearlyActivity": {
-      "2015": 1
+      "2015": 2
     }
   },
   {
@@ -227,14 +194,14 @@
     }
   },
   {
-    "name": "Avraham Adler",
-    "slug": "avraham-adler",
-    "emailHash": "bc31d95136a42dda70906a1be7a3202337f5c9b8728bd4b530319c59fc1de16e",
+    "name": "Constantin Ahlmann-Eltze",
+    "slug": "constantin-ahlmann-eltze",
+    "emailHash": "7a4a36b661de595f0ff16fb1dc9cc8dcb3e7b60575c8ae454acad885928418f0",
     "messageCount": 1,
-    "firstDate": "2018-06-17T14:38:07-04:00",
-    "lastDate": "2018-06-17T14:38:07-04:00",
+    "firstDate": "2020-04-08T12:01:29+02:00",
+    "lastDate": "2020-04-08T12:01:29+02:00",
     "yearlyActivity": {
-      "2018": 1
+      "2020": 1
     }
   },
   {
@@ -246,6 +213,28 @@
     "lastDate": "2023-04-15T22:30:50+05:30",
     "yearlyActivity": {
       "2023": 1
+    }
+  },
+  {
+    "name": "Henric Winell",
+    "slug": "henric-winell",
+    "emailHash": "5d45c7f70a3e8c62298b50baacd1a3b9bb0f7bc73d07cc011cfe21129fac53b5",
+    "messageCount": 1,
+    "firstDate": "2015-09-16T08:54:21+02:00",
+    "lastDate": "2015-09-16T08:54:21+02:00",
+    "yearlyActivity": {
+      "2015": 1
+    }
+  },
+  {
+    "name": "Avraham Adler",
+    "slug": "avraham-adler",
+    "emailHash": "bc31d95136a42dda70906a1be7a3202337f5c9b8728bd4b530319c59fc1de16e",
+    "messageCount": 1,
+    "firstDate": "2018-06-17T14:38:07-04:00",
+    "lastDate": "2018-06-17T14:38:07-04:00",
+    "yearlyActivity": {
+      "2018": 1
     }
   },
   {
@@ -268,6 +257,17 @@
     "lastDate": "2019-11-20T12:35:30+01:00",
     "yearlyActivity": {
       "2019": 1
+    }
+  },
+  {
+    "name": "Kevin Ushey",
+    "slug": "kevin-ushey",
+    "emailHash": "c0bffc799bd95bf26caa6b1c9abdc3f8fdc556eac7399824869756688d2f0689",
+    "messageCount": 1,
+    "firstDate": "2020-03-26T08:13:19-07:00",
+    "lastDate": "2020-03-26T08:13:19-07:00",
+    "yearlyActivity": {
+      "2020": 1
     }
   }
 ]
