@@ -69,6 +69,18 @@
     }
   },
   {
+    "name": "Gábor Csárdi",
+    "slug": "g-bor-cs-rdi",
+    "emailHash": "be1b1aa2bf940edb4d90301c038c97e98b84ed5c8724f0d46a3b2ee263683539",
+    "messageCount": 6,
+    "firstDate": "2016-10-02T01:06:29+01:00",
+    "lastDate": "2018-04-25T18:53:36+01:00",
+    "yearlyActivity": {
+      "2016": 3,
+      "2018": 3
+    }
+  },
+  {
     "name": "Uwe Ligges",
     "slug": "uwe-ligges",
     "emailHash": "097a7c5a732f1b0233afb1d8bf1f457d12b0dee292721263319fe466e849eaf7",
@@ -82,15 +94,14 @@
     }
   },
   {
-    "name": "Gábor Csárdi",
-    "slug": "g-bor-cs-rdi",
-    "emailHash": "be1b1aa2bf940edb4d90301c038c97e98b84ed5c8724f0d46a3b2ee263683539",
-    "messageCount": 6,
-    "firstDate": "2016-10-02T01:06:29+01:00",
-    "lastDate": "2018-04-25T18:53:36+01:00",
+    "name": "Dan Tenenbaum",
+    "slug": "dan-tenenbaum",
+    "emailHash": "7d5174f82990680cd0728614e2ab43517f6d6bb41db6e6eeef5c435d1cf19241",
+    "messageCount": 5,
+    "firstDate": "2015-09-24T13:48:28-07:00",
+    "lastDate": "2015-10-05T15:05:35-07:00",
     "yearlyActivity": {
-      "2016": 3,
-      "2018": 3
+      "2015": 5
     }
   },
   {
@@ -106,25 +117,14 @@
     }
   },
   {
-    "name": "Dan Tenenbaum",
-    "slug": "dan-tenenbaum",
-    "emailHash": "7d5174f82990680cd0728614e2ab43517f6d6bb41db6e6eeef5c435d1cf19241",
-    "messageCount": 5,
-    "firstDate": "2015-09-24T13:48:28-07:00",
-    "lastDate": "2015-10-05T15:05:35-07:00",
-    "yearlyActivity": {
-      "2015": 5
-    }
-  },
-  {
-    "name": "Fredrik Skoog",
-    "slug": "fredrik-skoog",
-    "emailHash": "f6e4f2515ef78b0c73d582e90dc7a6130cd4ceb5bd365d3686af2f89317aa6ce",
+    "name": "Kirill Müller",
+    "slug": "kirill-m-ller",
+    "emailHash": "a2fb2924cfd3945ac45a694ffb7a206a60e7d2f7b515a3483e463868f8fa9710",
     "messageCount": 2,
-    "firstDate": "2023-04-18T14:16:58+02:00",
-    "lastDate": "2023-06-06T11:42:33+02:00",
+    "firstDate": "2015-09-25T11:30:27+02:00",
+    "lastDate": "2015-09-25T12:20:25+02:00",
     "yearlyActivity": {
-      "2023": 2
+      "2015": 2
     }
   },
   {
@@ -139,6 +139,28 @@
     }
   },
   {
+    "name": "Fredrik Skoog",
+    "slug": "fredrik-skoog",
+    "emailHash": "f6e4f2515ef78b0c73d582e90dc7a6130cd4ceb5bd365d3686af2f89317aa6ce",
+    "messageCount": 2,
+    "firstDate": "2023-04-18T14:16:58+02:00",
+    "lastDate": "2023-06-06T11:42:33+02:00",
+    "yearlyActivity": {
+      "2023": 2
+    }
+  },
+  {
+    "name": "Kevin Ushey",
+    "slug": "kevin-ushey",
+    "emailHash": "fd1e8dc06c8e4652d61a44d70d6e99b3b7fb556bac7ad471ff6447d5a6e491ec",
+    "messageCount": 2,
+    "firstDate": "2015-09-09T13:25:26-07:00",
+    "lastDate": "2015-09-09T19:44:46-07:00",
+    "yearlyActivity": {
+      "2015": 2
+    }
+  },
+  {
     "name": "Marcel Baumgartner",
     "slug": "marcel-baumgartner",
     "emailHash": "505f40eb596347947082eb9657b0812aaa188cc3519f17d57420ad747a988c9e",
@@ -147,17 +169,6 @@
     "lastDate": "2020-10-27T11:08:17+01:00",
     "yearlyActivity": {
       "2020": 2
-    }
-  },
-  {
-    "name": "Kirill Müller",
-    "slug": "kirill-m-ller",
-    "emailHash": "a2fb2924cfd3945ac45a694ffb7a206a60e7d2f7b515a3483e463868f8fa9710",
-    "messageCount": 2,
-    "firstDate": "2015-09-25T11:30:27+02:00",
-    "lastDate": "2015-09-25T12:20:25+02:00",
-    "yearlyActivity": {
-      "2015": 2
     }
   },
   {
@@ -174,12 +185,12 @@
   {
     "name": "Kevin Ushey",
     "slug": "kevin-ushey",
-    "emailHash": "fd1e8dc06c8e4652d61a44d70d6e99b3b7fb556bac7ad471ff6447d5a6e491ec",
-    "messageCount": 2,
-    "firstDate": "2015-09-09T13:25:26-07:00",
-    "lastDate": "2015-09-09T19:44:46-07:00",
+    "emailHash": "c0bffc799bd95bf26caa6b1c9abdc3f8fdc556eac7399824869756688d2f0689",
+    "messageCount": 1,
+    "firstDate": "2020-03-26T08:13:19-07:00",
+    "lastDate": "2020-03-26T08:13:19-07:00",
     "yearlyActivity": {
-      "2015": 2
+      "2020": 1
     }
   },
   {
@@ -194,14 +205,25 @@
     }
   },
   {
-    "name": "Jeroen Ooms",
-    "slug": "jeroen-ooms",
-    "emailHash": "6d6b57f7dfdacdb11068763c49af518a12f1ee23bc379f749098f057c1d6df69",
+    "name": "Henric Winell",
+    "slug": "henric-winell",
+    "emailHash": "5d45c7f70a3e8c62298b50baacd1a3b9bb0f7bc73d07cc011cfe21129fac53b5",
     "messageCount": 1,
-    "firstDate": "2019-11-20T12:35:30+01:00",
-    "lastDate": "2019-11-20T12:35:30+01:00",
+    "firstDate": "2015-09-16T08:54:21+02:00",
+    "lastDate": "2015-09-16T08:54:21+02:00",
     "yearlyActivity": {
-      "2019": 1
+      "2015": 1
+    }
+  },
+  {
+    "name": "Qiang Kou",
+    "slug": "qiang-kou",
+    "emailHash": "0d4fdf3da64c31856471223111f08d09403b37154155aca4b413b87e0d1611b8",
+    "messageCount": 1,
+    "firstDate": "2015-08-29T14:27:00-04:00",
+    "lastDate": "2015-08-29T14:27:00-04:00",
+    "yearlyActivity": {
+      "2015": 1
     }
   },
   {
@@ -227,17 +249,6 @@
     }
   },
   {
-    "name": "Henric Winell",
-    "slug": "henric-winell",
-    "emailHash": "5d45c7f70a3e8c62298b50baacd1a3b9bb0f7bc73d07cc011cfe21129fac53b5",
-    "messageCount": 1,
-    "firstDate": "2015-09-16T08:54:21+02:00",
-    "lastDate": "2015-09-16T08:54:21+02:00",
-    "yearlyActivity": {
-      "2015": 1
-    }
-  },
-  {
     "name": "Dirk Eddelbuettel",
     "slug": "dirk-eddelbuettel",
     "emailHash": "447d8de83a7b9c5d61116890bacb6dc0c76aee31b3011a41fb7d3c62dac9042f",
@@ -249,25 +260,14 @@
     }
   },
   {
-    "name": "Qiang Kou",
-    "slug": "qiang-kou",
-    "emailHash": "0d4fdf3da64c31856471223111f08d09403b37154155aca4b413b87e0d1611b8",
+    "name": "Jeroen Ooms",
+    "slug": "jeroen-ooms",
+    "emailHash": "6d6b57f7dfdacdb11068763c49af518a12f1ee23bc379f749098f057c1d6df69",
     "messageCount": 1,
-    "firstDate": "2015-08-29T14:27:00-04:00",
-    "lastDate": "2015-08-29T14:27:00-04:00",
+    "firstDate": "2019-11-20T12:35:30+01:00",
+    "lastDate": "2019-11-20T12:35:30+01:00",
     "yearlyActivity": {
-      "2015": 1
-    }
-  },
-  {
-    "name": "Kevin Ushey",
-    "slug": "kevin-ushey",
-    "emailHash": "c0bffc799bd95bf26caa6b1c9abdc3f8fdc556eac7399824869756688d2f0689",
-    "messageCount": 1,
-    "firstDate": "2020-03-26T08:13:19-07:00",
-    "lastDate": "2020-03-26T08:13:19-07:00",
-    "yearlyActivity": {
-      "2020": 1
+      "2019": 1
     }
   }
 ]
