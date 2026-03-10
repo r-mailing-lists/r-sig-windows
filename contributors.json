@@ -69,6 +69,19 @@
     }
   },
   {
+    "name": "Uwe Ligges",
+    "slug": "uwe-ligges",
+    "emailHash": "097a7c5a732f1b0233afb1d8bf1f457d12b0dee292721263319fe466e849eaf7",
+    "messageCount": 6,
+    "firstDate": "2017-02-01T16:49:24+01:00",
+    "lastDate": "2020-10-27T08:46:16+01:00",
+    "yearlyActivity": {
+      "2017": 2,
+      "2018": 3,
+      "2020": 1
+    }
+  },
+  {
     "name": "Gábor Csárdi",
     "slug": "g-bor-cs-rdi",
     "emailHash": "be1b1aa2bf940edb4d90301c038c97e98b84ed5c8724f0d46a3b2ee263683539",
@@ -81,16 +94,14 @@
     }
   },
   {
-    "name": "Uwe Ligges",
-    "slug": "uwe-ligges",
-    "emailHash": "097a7c5a732f1b0233afb1d8bf1f457d12b0dee292721263319fe466e849eaf7",
-    "messageCount": 6,
-    "firstDate": "2017-02-01T16:49:24+01:00",
-    "lastDate": "2020-10-27T08:46:16+01:00",
+    "name": "Dan Tenenbaum",
+    "slug": "dan-tenenbaum",
+    "emailHash": "7d5174f82990680cd0728614e2ab43517f6d6bb41db6e6eeef5c435d1cf19241",
+    "messageCount": 5,
+    "firstDate": "2015-09-24T13:48:28-07:00",
+    "lastDate": "2015-10-05T15:05:35-07:00",
     "yearlyActivity": {
-      "2017": 2,
-      "2018": 3,
-      "2020": 1
+      "2015": 5
     }
   },
   {
@@ -106,36 +117,14 @@
     }
   },
   {
-    "name": "Dan Tenenbaum",
-    "slug": "dan-tenenbaum",
-    "emailHash": "7d5174f82990680cd0728614e2ab43517f6d6bb41db6e6eeef5c435d1cf19241",
-    "messageCount": 5,
-    "firstDate": "2015-09-24T13:48:28-07:00",
-    "lastDate": "2015-10-05T15:05:35-07:00",
-    "yearlyActivity": {
-      "2015": 5
-    }
-  },
-  {
-    "name": "Marcel Baumgartner",
-    "slug": "marcel-baumgartner",
-    "emailHash": "505f40eb596347947082eb9657b0812aaa188cc3519f17d57420ad747a988c9e",
+    "name": "Tim Keitt",
+    "slug": "tim-keitt",
+    "emailHash": "0042cb9f110773b83d9c979cead2263cb2e28429e358bd4a999e51500a62ef01",
     "messageCount": 2,
-    "firstDate": "2020-10-27T08:15:03+01:00",
-    "lastDate": "2020-10-27T11:08:17+01:00",
+    "firstDate": "2016-04-29T15:33:11-05:00",
+    "lastDate": "2016-04-29T19:08:28-05:00",
     "yearlyActivity": {
-      "2020": 2
-    }
-  },
-  {
-    "name": "Kirill Müller",
-    "slug": "kirill-m-ller",
-    "emailHash": "a2fb2924cfd3945ac45a694ffb7a206a60e7d2f7b515a3483e463868f8fa9710",
-    "messageCount": 2,
-    "firstDate": "2015-09-25T11:30:27+02:00",
-    "lastDate": "2015-09-25T12:20:25+02:00",
-    "yearlyActivity": {
-      "2015": 2
+      "2016": 2
     }
   },
   {
@@ -161,14 +150,14 @@
     }
   },
   {
-    "name": "Tim Keitt",
-    "slug": "tim-keitt",
-    "emailHash": "0042cb9f110773b83d9c979cead2263cb2e28429e358bd4a999e51500a62ef01",
+    "name": "Kirill Müller",
+    "slug": "kirill-m-ller",
+    "emailHash": "a2fb2924cfd3945ac45a694ffb7a206a60e7d2f7b515a3483e463868f8fa9710",
     "messageCount": 2,
-    "firstDate": "2016-04-29T15:33:11-05:00",
-    "lastDate": "2016-04-29T19:08:28-05:00",
+    "firstDate": "2015-09-25T11:30:27+02:00",
+    "lastDate": "2015-09-25T12:20:25+02:00",
     "yearlyActivity": {
-      "2016": 2
+      "2015": 2
     }
   },
   {
@@ -183,6 +172,17 @@
     }
   },
   {
+    "name": "Marcel Baumgartner",
+    "slug": "marcel-baumgartner",
+    "emailHash": "505f40eb596347947082eb9657b0812aaa188cc3519f17d57420ad747a988c9e",
+    "messageCount": 2,
+    "firstDate": "2020-10-27T08:15:03+01:00",
+    "lastDate": "2020-10-27T11:08:17+01:00",
+    "yearlyActivity": {
+      "2020": 2
+    }
+  },
+  {
     "name": "Qiang Kou",
     "slug": "qiang-kou",
     "emailHash": "0d4fdf3da64c31856471223111f08d09403b37154155aca4b413b87e0d1611b8",
@@ -191,17 +191,6 @@
     "lastDate": "2015-08-29T14:27:00-04:00",
     "yearlyActivity": {
       "2015": 1
-    }
-  },
-  {
-    "name": "Constantin Ahlmann-Eltze",
-    "slug": "constantin-ahlmann-eltze",
-    "emailHash": "7a4a36b661de595f0ff16fb1dc9cc8dcb3e7b60575c8ae454acad885928418f0",
-    "messageCount": 1,
-    "firstDate": "2020-04-08T12:01:29+02:00",
-    "lastDate": "2020-04-08T12:01:29+02:00",
-    "yearlyActivity": {
-      "2020": 1
     }
   },
   {
@@ -227,17 +216,6 @@
     }
   },
   {
-    "name": "Avraham Adler",
-    "slug": "avraham-adler",
-    "emailHash": "bc31d95136a42dda70906a1be7a3202337f5c9b8728bd4b530319c59fc1de16e",
-    "messageCount": 1,
-    "firstDate": "2018-06-17T14:38:07-04:00",
-    "lastDate": "2018-06-17T14:38:07-04:00",
-    "yearlyActivity": {
-      "2018": 1
-    }
-  },
-  {
     "name": "Dirk Eddelbuettel",
     "slug": "dirk-eddelbuettel",
     "emailHash": "447d8de83a7b9c5d61116890bacb6dc0c76aee31b3011a41fb7d3c62dac9042f",
@@ -246,6 +224,28 @@
     "lastDate": "2016-04-29T17:55:43-05:00",
     "yearlyActivity": {
       "2016": 1
+    }
+  },
+  {
+    "name": "Kevin Ushey",
+    "slug": "kevin-ushey",
+    "emailHash": "c0bffc799bd95bf26caa6b1c9abdc3f8fdc556eac7399824869756688d2f0689",
+    "messageCount": 1,
+    "firstDate": "2020-03-26T08:13:19-07:00",
+    "lastDate": "2020-03-26T08:13:19-07:00",
+    "yearlyActivity": {
+      "2020": 1
+    }
+  },
+  {
+    "name": "Constantin Ahlmann-Eltze",
+    "slug": "constantin-ahlmann-eltze",
+    "emailHash": "7a4a36b661de595f0ff16fb1dc9cc8dcb3e7b60575c8ae454acad885928418f0",
+    "messageCount": 1,
+    "firstDate": "2020-04-08T12:01:29+02:00",
+    "lastDate": "2020-04-08T12:01:29+02:00",
+    "yearlyActivity": {
+      "2020": 1
     }
   },
   {
@@ -260,14 +260,14 @@
     }
   },
   {
-    "name": "Kevin Ushey",
-    "slug": "kevin-ushey",
-    "emailHash": "c0bffc799bd95bf26caa6b1c9abdc3f8fdc556eac7399824869756688d2f0689",
+    "name": "Avraham Adler",
+    "slug": "avraham-adler",
+    "emailHash": "bc31d95136a42dda70906a1be7a3202337f5c9b8728bd4b530319c59fc1de16e",
     "messageCount": 1,
-    "firstDate": "2020-03-26T08:13:19-07:00",
-    "lastDate": "2020-03-26T08:13:19-07:00",
+    "firstDate": "2018-06-17T14:38:07-04:00",
+    "lastDate": "2018-06-17T14:38:07-04:00",
     "yearlyActivity": {
-      "2020": 1
+      "2018": 1
     }
   }
 ]
