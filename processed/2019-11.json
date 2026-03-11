@@ -8,7 +8,7 @@
       "message_id": "<CAL6gwnKznQ9WRPm2cw8X4Qa=gUxhBhKn9YmqAGAGHOid3Hg-1Q@mail.gmail.com>",
       "from_name": "Avraham Adler",
       "from_email_hash": "63266ae79d1743f1496b756da3e3df9582595f717d74d4d823b698d61ef74096",
-      "date": "2019-11-19T22:54:10-05:00",
+      "date": "2019-11-20T03:54:10Z",
       "subject": "[R-SIG-Win] Rtools 4.0",
       "subject_clean": "Rtools 4.0",
       "in_reply_to": null,
@@ -24,7 +24,7 @@
       "message_id": "<CABFfbXvVSi4Ha0-ujv_76r7eYTESBsF2OF1Vyk=YUbkx1XjPFw@mail.gmail.com>",
       "from_name": "Jeroen Ooms",
       "from_email_hash": "6d6b57f7dfdacdb11068763c49af518a12f1ee23bc379f749098f057c1d6df69",
-      "date": "2019-11-20T12:35:30+01:00",
+      "date": "2019-11-20T11:35:30Z",
       "subject": "[R-SIG-Win] Rtools 4.0",
       "subject_clean": "Rtools 4.0",
       "in_reply_to": "<CAL6gwnKznQ9WRPm2cw8X4Qa=gUxhBhKn9YmqAGAGHOid3Hg-1Q@mail.gmail.com>",
@@ -47,8 +47,8 @@
         "Avraham Adler",
         "Jeroen Ooms"
       ],
-      "started": "2019-11-19T22:54:10-05:00",
-      "last_reply": "2019-11-20T12:35:30+01:00",
+      "started": "2019-11-20T03:54:10Z",
+      "last_reply": "2019-11-20T11:35:30Z",
       "root_message_id": "msg-5b8b70b86319"
     }
   ]

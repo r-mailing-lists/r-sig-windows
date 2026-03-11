@@ -8,7 +8,7 @@
       "message_id": "<91FDD4F7-33CC-4F8C-ABFA-16510B00CBE4@coeurdartichaut.ch>",
       "from_name": "Marcel Baumgartner",
       "from_email_hash": "505f40eb596347947082eb9657b0812aaa188cc3519f17d57420ad747a988c9e",
-      "date": "2020-10-27T08:15:03+01:00",
+      "date": "2020-10-27T07:15:03Z",
       "subject": "[R-SIG-Win] Call to R.exe in a Script fails since the upgrade from R 3.6.1 to R 4.0.2",
       "subject_clean": "Call to R.exe in a Script fails since the upgrade from R 3.6.1 to R 4.0.2",
       "in_reply_to": null,
@@ -24,7 +24,7 @@
       "message_id": "<817d3b5b-cbae-1040-c0eb-4002bd624117@statistik.tu-dortmund.de>",
       "from_name": "Uwe Ligges",
       "from_email_hash": "6e505c9898fda7dea05531ccd94b4c8e165b3639228a9f6dcc0368da5f09b882",
-      "date": "2020-10-27T08:46:16+01:00",
+      "date": "2020-10-27T07:46:16Z",
       "subject": "[R-SIG-Win]  Call to R.exe in a Script fails since the upgrade from R 3.6.1 to R 4.0.2",
       "subject_clean": "Call to R.exe in a Script fails since the upgrade from R 3.6.1 to R 4.0.2",
       "in_reply_to": "<91FDD4F7-33CC-4F8C-ABFA-16510B00CBE4@coeurdartichaut.ch>",
@@ -42,7 +42,7 @@
       "message_id": "<00E3408F-E8C1-4246-AB5E-1751AEDD3672@coeurdartichaut.ch>",
       "from_name": "Marcel Baumgartner",
       "from_email_hash": "505f40eb596347947082eb9657b0812aaa188cc3519f17d57420ad747a988c9e",
-      "date": "2020-10-27T11:08:17+01:00",
+      "date": "2020-10-27T10:08:17Z",
       "subject": "[R-SIG-Win]  Call to R.exe in a Script fails since the upgrade from R 3.6.1 to R 4.0.2",
       "subject_clean": "Call to R.exe in a Script fails since the upgrade from R 3.6.1 to R 4.0.2",
       "in_reply_to": "<817d3b5b-cbae-1040-c0eb-4002bd624117@statistik.tu-dortmund.de>",
@@ -66,8 +66,8 @@
         "Marcel Baumgartner",
         "Uwe Ligges"
       ],
-      "started": "2020-10-27T08:15:03+01:00",
-      "last_reply": "2020-10-27T11:08:17+01:00",
+      "started": "2020-10-27T07:15:03Z",
+      "last_reply": "2020-10-27T10:08:17Z",
       "root_message_id": "msg-79a53d939d0f"
     }
   ]

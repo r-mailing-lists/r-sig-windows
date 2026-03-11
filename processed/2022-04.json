@@ -24,7 +24,7 @@
       "message_id": "<d00b0539-f885-befb-8161-5ea8c95d9601@gmail.com>",
       "from_name": "Tomas Kalibera",
       "from_email_hash": "7af110c9340339e5307bd348f1ec524e2fd1c8f104d583e9993022c5550711f4",
-      "date": "2022-04-28T16:29:16+02:00",
+      "date": "2022-04-28T14:29:16Z",
       "subject": "[R-SIG-Win] Changelog for Rtools42",
       "subject_clean": "Changelog for Rtools42",
       "in_reply_to": "<CAL6gwnJMb1A_N74zhOkLD4U+=NcvG8tMhSd=p7KWhJGTK7Pt=g@mail.gmail.com>",
@@ -47,8 +47,8 @@
         "Avraham Adler",
         "Tomas Kalibera"
       ],
-      "started": "2022-04-14T03:08:22+00:00",
-      "last_reply": "2022-04-28T16:29:16+02:00",
+      "started": "2022-04-14T03:08:22Z",
+      "last_reply": "2022-04-28T14:29:16Z",
       "root_message_id": "msg-2e855c250128"
     }
   ]

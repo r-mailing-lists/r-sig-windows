@@ -8,7 +8,7 @@
       "message_id": "<7f7dceec-2e8b-4044-98b2-d70976344527@gmail.com>",
       "from_name": "Tomas Kalibera",
       "from_email_hash": "7af110c9340339e5307bd348f1ec524e2fd1c8f104d583e9993022c5550711f4",
-      "date": "2025-02-05T14:12:17+01:00",
+      "date": "2025-02-05T13:12:17Z",
       "subject": "[R-SIG-Win] Rtools44 update",
       "subject_clean": "Rtools44 update",
       "in_reply_to": null,
@@ -24,7 +24,7 @@
       "message_id": "<ad43df1b-7286-4d95-a25c-13ef0c943167@gmail.com>",
       "from_name": "Tomas Kalibera",
       "from_email_hash": "7af110c9340339e5307bd348f1ec524e2fd1c8f104d583e9993022c5550711f4",
-      "date": "2025-02-25T10:04:42+01:00",
+      "date": "2025-02-25T09:04:42Z",
       "subject": "[R-SIG-Win] Rtools44 and Rtools43 update",
       "subject_clean": "Rtools44 and Rtools43 update",
       "in_reply_to": null,
@@ -44,8 +44,8 @@
       "participants": [
         "Tomas Kalibera"
       ],
-      "started": "2025-02-05T14:12:17+01:00",
-      "last_reply": "2025-02-05T14:12:17+01:00",
+      "started": "2025-02-05T13:12:17Z",
+      "last_reply": "2025-02-05T13:12:17Z",
       "root_message_id": "msg-094c09227bc9"
     },
     {
@@ -55,8 +55,8 @@
       "participants": [
         "Tomas Kalibera"
       ],
-      "started": "2025-02-25T10:04:42+01:00",
-      "last_reply": "2025-02-25T10:04:42+01:00",
+      "started": "2025-02-25T09:04:42Z",
+      "last_reply": "2025-02-25T09:04:42Z",
       "root_message_id": "msg-5b0397bad228"
     }
   ]

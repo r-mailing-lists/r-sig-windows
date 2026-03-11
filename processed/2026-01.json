@@ -8,7 +8,7 @@
       "message_id": "<CAL6gwnL5XCw5PY5DsuxwvKJLcwuYTm-jZ6OERHm7XTPgrfuWrA@mail.gmail.com>",
       "from_name": "Avraham Adler",
       "from_email_hash": "63266ae79d1743f1496b756da3e3df9582595f717d74d4d823b698d61ef74096",
-      "date": "2026-01-15T16:58:55-05:00",
+      "date": "2026-01-15T21:58:55Z",
       "subject": "[R-SIG-Win] Funny compilation error for R-devel (89301+)",
       "subject_clean": "Funny compilation error for R-devel (89301+)",
       "in_reply_to": null,
@@ -28,8 +28,8 @@
       "participants": [
         "Avraham Adler"
       ],
-      "started": "2026-01-15T16:58:55-05:00",
-      "last_reply": "2026-01-15T16:58:55-05:00",
+      "started": "2026-01-15T21:58:55Z",
+      "last_reply": "2026-01-15T21:58:55Z",
       "root_message_id": "msg-222fd46e3109"
     }
   ]

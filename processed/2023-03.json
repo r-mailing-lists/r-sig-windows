@@ -8,7 +8,7 @@
       "message_id": "<469a1f05-2233-c125-cf31-a90b0d24254d@gmail.com>",
       "from_name": "Tomas Kalibera",
       "from_email_hash": "7af110c9340339e5307bd348f1ec524e2fd1c8f104d583e9993022c5550711f4",
-      "date": "2023-03-24T09:52:55+01:00",
+      "date": "2023-03-24T08:52:55Z",
       "subject": "[R-SIG-Win] Rtools43 update",
       "subject_clean": "Rtools43 update",
       "in_reply_to": null,
@@ -28,8 +28,8 @@
       "participants": [
         "Tomas Kalibera"
       ],
-      "started": "2023-03-24T09:52:55+01:00",
-      "last_reply": "2023-03-24T09:52:55+01:00",
+      "started": "2023-03-24T08:52:55Z",
+      "last_reply": "2023-03-24T08:52:55Z",
       "root_message_id": "msg-877cef68de94"
     }
   ]

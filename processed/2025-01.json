@@ -8,7 +8,7 @@
       "message_id": "<CAL6gwnLmku9C4yd25N5RpMdwci5wBSmxq8deZjK9n5ncr7L6PA@mail.gmail.com>",
       "from_name": "Avraham Adler",
       "from_email_hash": "63266ae79d1743f1496b756da3e3df9582595f717d74d4d823b698d61ef74096",
-      "date": "2025-01-16T17:36:23-05:00",
+      "date": "2025-01-16T22:36:23Z",
       "subject": "[R-SIG-Win] NLOPT library",
       "subject_clean": "NLOPT library",
       "in_reply_to": null,
@@ -24,7 +24,7 @@
       "message_id": "<c319bf84-4492-47c0-a958-630edb5dc882@gmail.com>",
       "from_name": "Tomas Kalibera",
       "from_email_hash": "7af110c9340339e5307bd348f1ec524e2fd1c8f104d583e9993022c5550711f4",
-      "date": "2025-01-17T11:33:47+01:00",
+      "date": "2025-01-17T10:33:47Z",
       "subject": "[R-SIG-Win] NLOPT library",
       "subject_clean": "NLOPT library",
       "in_reply_to": "<CAL6gwnLmku9C4yd25N5RpMdwci5wBSmxq8deZjK9n5ncr7L6PA@mail.gmail.com>",
@@ -47,8 +47,8 @@
         "Avraham Adler",
         "Tomas Kalibera"
       ],
-      "started": "2025-01-16T17:36:23-05:00",
-      "last_reply": "2025-01-17T11:33:47+01:00",
+      "started": "2025-01-16T22:36:23Z",
+      "last_reply": "2025-01-17T10:33:47Z",
       "root_message_id": "msg-c05a7a1b7451"
     }
   ]

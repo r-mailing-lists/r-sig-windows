@@ -8,7 +8,7 @@
       "message_id": "<CAL6gwn+x8KpuFFRxpzjRAuPUrZr96_=Jj0MtchbxiBFqKiS9rA@mail.gmail.com>",
       "from_name": "Avraham Adler",
       "from_email_hash": "af3a8abf7b61e7882d265f3ee607ab6f21a248be198b31d73d45602a933f5ba0",
-      "date": "2017-08-31T01:29:31-04:00",
+      "date": "2017-08-31T05:29:31Z",
       "subject": "[R-SIG-Win] GCC 7.1.0 & Rtools",
       "subject_clean": "GCC 7.1.0 & Rtools",
       "in_reply_to": null,
@@ -28,8 +28,8 @@
       "participants": [
         "Avraham Adler"
       ],
-      "started": "2017-08-31T01:29:31-04:00",
-      "last_reply": "2017-08-31T01:29:31-04:00",
+      "started": "2017-08-31T05:29:31Z",
+      "last_reply": "2017-08-31T05:29:31Z",
       "root_message_id": "msg-be9cb93bba64"
     }
   ]

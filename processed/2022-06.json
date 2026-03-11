@@ -8,7 +8,7 @@
       "message_id": "<2ccdbb28-5d1c-d3db-5bf7-870964ac11be@gmail.com>",
       "from_name": "Tomas Kalibera",
       "from_email_hash": "7af110c9340339e5307bd348f1ec524e2fd1c8f104d583e9993022c5550711f4",
-      "date": "2022-06-20T12:48:55+02:00",
+      "date": "2022-06-20T10:48:55Z",
       "subject": "[R-SIG-Win] Changelog for Rtools42",
       "subject_clean": "Changelog for Rtools42",
       "in_reply_to": "<d00b0539-f885-befb-8161-5ea8c95d9601@gmail.com>",
@@ -27,7 +27,7 @@
       "message_id": "<CB8AB45C-FF6D-4407-8837-195998EBA90A@gmail.com>",
       "from_name": "Avraham Adler",
       "from_email_hash": "63266ae79d1743f1496b756da3e3df9582595f717d74d4d823b698d61ef74096",
-      "date": "2022-06-20T14:32:51+03:00",
+      "date": "2022-06-20T11:32:51Z",
       "subject": "[R-SIG-Win] Changelog for Rtools42",
       "subject_clean": "Changelog for Rtools42",
       "in_reply_to": "<2ccdbb28-5d1c-d3db-5bf7-870964ac11be@gmail.com>",
@@ -50,8 +50,8 @@
         "Avraham Adler",
         "Tomas Kalibera"
       ],
-      "started": "2022-06-20T12:48:55+02:00",
-      "last_reply": "2022-06-20T14:32:51+03:00",
+      "started": "2022-06-20T10:48:55Z",
+      "last_reply": "2022-06-20T11:32:51Z",
       "root_message_id": "msg-ea8bb7beccc8"
     }
   ]

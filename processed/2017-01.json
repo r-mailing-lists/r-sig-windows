@@ -8,7 +8,7 @@
       "message_id": "<CAL6gwn+G0=Yn+QuzVqA7dA-p05VPeo=Qqd=a34ToMdbAm4-HHA@mail.gmail.com>",
       "from_name": "Avraham Adler",
       "from_email_hash": "af3a8abf7b61e7882d265f3ee607ab6f21a248be198b31d73d45602a933f5ba0",
-      "date": "2017-01-30T18:08:21-05:00",
+      "date": "2017-01-30T23:08:21Z",
       "subject": "[R-SIG-Win] Is an update of Rtools in the mid-to-distant future?",
       "subject_clean": "Is an update of Rtools in the mid-to-distant future?",
       "in_reply_to": null,
@@ -24,7 +24,7 @@
       "message_id": "<CABFfbXvwkUWNO75Z6fTG9a7DC76KB+u2_gcG3h0iPptB9ara=A@mail.gmail.com>",
       "from_name": "Jeroen Ooms",
       "from_email_hash": "8cec1f7bf29300b425ea1be687fbb6d3fccf3de57737bb017534932e9e18a5f3",
-      "date": "2017-01-30T15:22:14-08:00",
+      "date": "2017-01-30T23:22:14Z",
       "subject": "[R-SIG-Win] Is an update of Rtools in the mid-to-distant future?",
       "subject_clean": "Is an update of Rtools in the mid-to-distant future?",
       "in_reply_to": "<CAL6gwn+G0=Yn+QuzVqA7dA-p05VPeo=Qqd=a34ToMdbAm4-HHA@mail.gmail.com>",
@@ -42,7 +42,7 @@
       "message_id": "<CAL6gwn+vDE4Fb43hECq9YbEGBrMDJ3rQS_8XE8wpFc8fhB2+3w@mail.gmail.com>",
       "from_name": "Avraham Adler",
       "from_email_hash": "af3a8abf7b61e7882d265f3ee607ab6f21a248be198b31d73d45602a933f5ba0",
-      "date": "2017-01-31T23:31:08-05:00",
+      "date": "2017-02-01T04:31:08Z",
       "subject": "[R-SIG-Win] Default mtune for R windows",
       "subject_clean": "Default mtune for R windows",
       "in_reply_to": null,
@@ -58,7 +58,7 @@
       "message_id": "<CABFfbXuB-Ui28o6xHqa4U00NrBsna=QBQWZrBChzJ0OzOR-mOA@mail.gmail.com>",
       "from_name": "Jeroen Ooms",
       "from_email_hash": "8cec1f7bf29300b425ea1be687fbb6d3fccf3de57737bb017534932e9e18a5f3",
-      "date": "2017-01-31T22:08:19-08:00",
+      "date": "2017-02-01T06:08:19Z",
       "subject": "[R-SIG-Win] Default mtune for R windows",
       "subject_clean": "Default mtune for R windows",
       "in_reply_to": "<CAL6gwn+vDE4Fb43hECq9YbEGBrMDJ3rQS_8XE8wpFc8fhB2+3w@mail.gmail.com>",
@@ -81,8 +81,8 @@
         "Avraham Adler",
         "Jeroen Ooms"
       ],
-      "started": "2017-01-30T18:08:21-05:00",
-      "last_reply": "2017-01-30T15:22:14-08:00",
+      "started": "2017-01-30T23:08:21Z",
+      "last_reply": "2017-01-30T23:22:14Z",
       "root_message_id": "msg-074538909bbe"
     },
     {
@@ -93,8 +93,8 @@
         "Avraham Adler",
         "Jeroen Ooms"
       ],
-      "started": "2017-01-31T23:31:08-05:00",
-      "last_reply": "2017-01-31T22:08:19-08:00",
+      "started": "2017-02-01T04:31:08Z",
+      "last_reply": "2017-02-01T06:08:19Z",
       "root_message_id": "msg-c73ecce565d9"
     }
   ]

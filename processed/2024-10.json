@@ -8,7 +8,7 @@
       "message_id": "<0e7ae230-1053-41ba-8749-edbd90f629fa@gmail.com>",
       "from_name": "Tomas Kalibera",
       "from_email_hash": "7af110c9340339e5307bd348f1ec524e2fd1c8f104d583e9993022c5550711f4",
-      "date": "2024-10-30T10:36:03+01:00",
+      "date": "2024-10-30T09:36:03Z",
       "subject": "[R-SIG-Win] Rtools44 update",
       "subject_clean": "Rtools44 update",
       "in_reply_to": null,
@@ -28,8 +28,8 @@
       "participants": [
         "Tomas Kalibera"
       ],
-      "started": "2024-10-30T10:36:03+01:00",
-      "last_reply": "2024-10-30T10:36:03+01:00",
+      "started": "2024-10-30T09:36:03Z",
+      "last_reply": "2024-10-30T09:36:03Z",
       "root_message_id": "msg-f44949f14740"
     }
   ]

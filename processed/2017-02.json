@@ -8,7 +8,7 @@
       "message_id": "<CAL6gwnJG_yEXf6HK+_rbgWSf1QD=iz28dt4oHiRuHVkRymwg8w@mail.gmail.com>",
       "from_name": "Avraham Adler",
       "from_email_hash": "af3a8abf7b61e7882d265f3ee607ab6f21a248be198b31d73d45602a933f5ba0",
-      "date": "2017-02-01T02:32:15-05:00",
+      "date": "2017-02-01T07:32:15Z",
       "subject": "[R-SIG-Win] Default mtune for R windows",
       "subject_clean": "Default mtune for R windows",
       "in_reply_to": "<CABFfbXuB-Ui28o6xHqa4U00NrBsna=QBQWZrBChzJ0OzOR-mOA@mail.gmail.com>",
@@ -27,7 +27,7 @@
       "message_id": "<eb24e9e2-a300-6b94-7093-eb9f0ce5aa63@statistik.tu-dortmund.de>",
       "from_name": "Uwe Ligges",
       "from_email_hash": "41041d76fae21a8bc18fe19d38def92b3b630abfb7abf4acf41a0734d8851d24",
-      "date": "2017-02-01T16:49:24+01:00",
+      "date": "2017-02-01T15:49:24Z",
       "subject": "[R-SIG-Win] Default mtune for R windows",
       "subject_clean": "Default mtune for R windows",
       "in_reply_to": "<CAL6gwn+vDE4Fb43hECq9YbEGBrMDJ3rQS_8XE8wpFc8fhB2+3w@mail.gmail.com>",
@@ -45,7 +45,7 @@
       "message_id": "<11ca3f00-1b57-6cf6-0427-8a21322b5e18@statistik.tu-dortmund.de>",
       "from_name": "Uwe Ligges",
       "from_email_hash": "41041d76fae21a8bc18fe19d38def92b3b630abfb7abf4acf41a0734d8851d24",
-      "date": "2017-02-01T16:55:53+01:00",
+      "date": "2017-02-01T15:55:53Z",
       "subject": "[R-SIG-Win] Default mtune for R windows",
       "subject_clean": "Default mtune for R windows",
       "in_reply_to": "<CAL6gwnJG_yEXf6HK+_rbgWSf1QD=iz28dt4oHiRuHVkRymwg8w@mail.gmail.com>",
@@ -70,8 +70,8 @@
         "Avraham Adler",
         "Uwe Ligges"
       ],
-      "started": "2017-02-01T02:32:15-05:00",
-      "last_reply": "2017-02-01T16:55:53+01:00",
+      "started": "2017-02-01T07:32:15Z",
+      "last_reply": "2017-02-01T15:55:53Z",
       "root_message_id": "msg-d2157d3ff779"
     },
     {
@@ -81,8 +81,8 @@
       "participants": [
         "Uwe Ligges"
       ],
-      "started": "2017-02-01T16:49:24+01:00",
-      "last_reply": "2017-02-01T16:49:24+01:00",
+      "started": "2017-02-01T15:49:24Z",
+      "last_reply": "2017-02-01T15:49:24Z",
       "root_message_id": "msg-67d62103c216"
     }
   ]

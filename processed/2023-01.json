@@ -8,7 +8,7 @@
       "message_id": "<b3ca6a1d-780a-88f1-330f-b8b5b45427bc@gmail.com>",
       "from_name": "Tomas Kalibera",
       "from_email_hash": "7af110c9340339e5307bd348f1ec524e2fd1c8f104d583e9993022c5550711f4",
-      "date": "2023-01-04T13:24:36+01:00",
+      "date": "2023-01-04T12:24:36Z",
       "subject": "[R-SIG-Win] Rtools43",
       "subject_clean": "Rtools43",
       "in_reply_to": null,
@@ -24,7 +24,7 @@
       "message_id": "<93f19116-ccf4-d615-0810-b7157126ff58@gmail.com>",
       "from_name": "Tomas Kalibera",
       "from_email_hash": "7af110c9340339e5307bd348f1ec524e2fd1c8f104d583e9993022c5550711f4",
-      "date": "2023-01-13T10:13:44+01:00",
+      "date": "2023-01-13T09:13:44Z",
       "subject": "[R-SIG-Win] Rtools43 (gdal update)",
       "subject_clean": "Rtools43 (gdal update)",
       "in_reply_to": null,
@@ -44,8 +44,8 @@
       "participants": [
         "Tomas Kalibera"
       ],
-      "started": "2023-01-04T13:24:36+01:00",
-      "last_reply": "2023-01-04T13:24:36+01:00",
+      "started": "2023-01-04T12:24:36Z",
+      "last_reply": "2023-01-04T12:24:36Z",
       "root_message_id": "msg-fdd9120ddb27"
     },
     {
@@ -55,8 +55,8 @@
       "participants": [
         "Tomas Kalibera"
       ],
-      "started": "2023-01-13T10:13:44+01:00",
-      "last_reply": "2023-01-13T10:13:44+01:00",
+      "started": "2023-01-13T09:13:44Z",
+      "last_reply": "2023-01-13T09:13:44Z",
       "root_message_id": "msg-2faf5ec26019"
     }
   ]

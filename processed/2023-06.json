@@ -8,7 +8,7 @@
       "message_id": "<CAGO=1Nt3wyXLOyqfpwOamaJUMwSuoc2SX_7NiTmhO_oEm0EzdQ@mail.gmail.com>",
       "from_name": "Fredrik Skoog",
       "from_email_hash": "f6e4f2515ef78b0c73d582e90dc7a6130cd4ceb5bd365d3686af2f89317aa6ce",
-      "date": "2023-06-06T11:42:33+02:00",
+      "date": "2023-06-06T09:42:33Z",
       "subject": "[R-SIG-Win] R4.2.3 slower than R4.1.3 on Windows only",
       "subject_clean": "R4.2.3 slower than R4.1.3 on Windows only",
       "in_reply_to": "<5f80fbf8-245d-b017-ef83-c5dcf423fb2e@gmail.com>",
@@ -28,7 +28,7 @@
       "message_id": "<b318c2f3-0a2a-9f27-46ac-18b2946e9f09@gmail.com>",
       "from_name": "Tomas Kalibera",
       "from_email_hash": "7af110c9340339e5307bd348f1ec524e2fd1c8f104d583e9993022c5550711f4",
-      "date": "2023-06-07T10:32:40+02:00",
+      "date": "2023-06-07T08:32:40Z",
       "subject": "[R-SIG-Win] R4.2.3 slower than R4.1.3 on Windows only",
       "subject_clean": "R4.2.3 slower than R4.1.3 on Windows only",
       "in_reply_to": "<CAGO=1Nt3wyXLOyqfpwOamaJUMwSuoc2SX_7NiTmhO_oEm0EzdQ@mail.gmail.com>",
@@ -54,8 +54,8 @@
         "Fredrik Skoog",
         "Tomas Kalibera"
       ],
-      "started": "2023-06-06T11:42:33+02:00",
-      "last_reply": "2023-06-07T10:32:40+02:00",
+      "started": "2023-06-06T09:42:33Z",
+      "last_reply": "2023-06-07T08:32:40Z",
       "root_message_id": "msg-f31b80d1bf0f"
     }
   ]

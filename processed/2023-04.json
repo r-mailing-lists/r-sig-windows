@@ -8,7 +8,7 @@
       "message_id": "<CAK7Q9bcu4jjTnj0aTP87byRQfn0kkcN9JaS2WA=6kEs4PJtuFg@mail.gmail.com>",
       "from_name": "Debartha Paul",
       "from_email_hash": "7d5c28e64346d0f280377ae3000a076390074e0384a3554b334308574e9210e9",
-      "date": "2023-04-15T22:30:50+05:30",
+      "date": "2023-04-15T17:00:50Z",
       "subject": "[R-SIG-Win] pcre2.h not found error while building R in windows",
       "subject_clean": "pcre2.h not found error while building R in windows",
       "in_reply_to": null,
@@ -24,7 +24,7 @@
       "message_id": "<15986752-2c46-b8c0-5e17-6f28b27d70c7@gmail.com>",
       "from_name": "Tomas Kalibera",
       "from_email_hash": "7af110c9340339e5307bd348f1ec524e2fd1c8f104d583e9993022c5550711f4",
-      "date": "2023-04-17T09:51:52+02:00",
+      "date": "2023-04-17T07:51:52Z",
       "subject": "[R-SIG-Win] pcre2.h not found error while building R in windows",
       "subject_clean": "pcre2.h not found error while building R in windows",
       "in_reply_to": "<CAK7Q9bcu4jjTnj0aTP87byRQfn0kkcN9JaS2WA=6kEs4PJtuFg@mail.gmail.com>",
@@ -42,7 +42,7 @@
       "message_id": "<CAGO=1NuPKrPP8j=-zocTJ82Dm-JYKAkR1w6WW3EcsEAb20HaJQ@mail.gmail.com>",
       "from_name": "Fredrik Skoog",
       "from_email_hash": "f6e4f2515ef78b0c73d582e90dc7a6130cd4ceb5bd365d3686af2f89317aa6ce",
-      "date": "2023-04-18T14:16:58+02:00",
+      "date": "2023-04-18T12:16:58Z",
       "subject": "[R-SIG-Win] R4.2.3 slower than R4.1.3 on Windows only",
       "subject_clean": "R4.2.3 slower than R4.1.3 on Windows only",
       "in_reply_to": null,
@@ -63,8 +63,8 @@
         "Debartha Paul",
         "Tomas Kalibera"
       ],
-      "started": "2023-04-15T22:30:50+05:30",
-      "last_reply": "2023-04-17T09:51:52+02:00",
+      "started": "2023-04-15T17:00:50Z",
+      "last_reply": "2023-04-17T07:51:52Z",
       "root_message_id": "msg-09d79ebd6f88"
     },
     {
@@ -74,8 +74,8 @@
       "participants": [
         "Fredrik Skoog"
       ],
-      "started": "2023-04-18T14:16:58+02:00",
-      "last_reply": "2023-04-18T14:16:58+02:00",
+      "started": "2023-04-18T12:16:58Z",
+      "last_reply": "2023-04-18T12:16:58Z",
       "root_message_id": "msg-c6d707ed8a0a"
     }
   ]

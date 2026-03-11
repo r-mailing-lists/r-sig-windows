@@ -8,7 +8,7 @@
       "message_id": "<828605955.154389.1444082734982.JavaMail.root@fredhutch.org>",
       "from_name": "Dan Tenenbaum",
       "from_email_hash": "7d5174f82990680cd0728614e2ab43517f6d6bb41db6e6eeef5c435d1cf19241",
-      "date": "2015-10-05T15:05:35-07:00",
+      "date": "2015-10-05T22:05:35Z",
       "subject": "[R-SIG-Win] New Rtools sent to CRAN",
       "subject_clean": "New Rtools sent to CRAN",
       "in_reply_to": "<1255445594.12970.1443380233800.JavaMail.root@fredhutch.org>",
@@ -24,7 +24,7 @@
       "message_id": "<CAL6gwnKj1-KCigTUib=+wpZ2TsgRBFXCD3ExJmcrQeqfY_jd4Q@mail.gmail.com>",
       "from_name": "Avraham Adler",
       "from_email_hash": "af3a8abf7b61e7882d265f3ee607ab6f21a248be198b31d73d45602a933f5ba0",
-      "date": "2015-10-08T21:59:44-04:00",
+      "date": "2015-10-09T01:59:44Z",
       "subject": "[R-SIG-Win] Will there be another release of the 4.6.3 based toolchain for Windows this year?",
       "subject_clean": "Will there be another release of the 4.6.3 based toolchain for Windows this year?",
       "in_reply_to": null,
@@ -40,7 +40,7 @@
       "message_id": "<56172BAF.2020807@gmail.com>",
       "from_name": "Duncan Murdoch",
       "from_email_hash": "17e1fcd7901e6a11dc6bc3ede542d46252611499631dfb4199936939fda2e399",
-      "date": "2015-10-08T22:51:27-04:00",
+      "date": "2015-10-09T02:51:27Z",
       "subject": "[R-SIG-Win] Will there be another release of the 4.6.3 based toolchain for Windows this year?",
       "subject_clean": "Will there be another release of the 4.6.3 based toolchain for Windows this year?",
       "in_reply_to": "<CAL6gwnKj1-KCigTUib=+wpZ2TsgRBFXCD3ExJmcrQeqfY_jd4Q@mail.gmail.com>",
@@ -62,8 +62,8 @@
       "participants": [
         "Dan Tenenbaum"
       ],
-      "started": "2015-10-05T15:05:35-07:00",
-      "last_reply": "2015-10-05T15:05:35-07:00",
+      "started": "2015-10-05T22:05:35Z",
+      "last_reply": "2015-10-05T22:05:35Z",
       "root_message_id": "msg-d5845861763a"
     },
     {
@@ -74,8 +74,8 @@
         "Avraham Adler",
         "Duncan Murdoch"
       ],
-      "started": "2015-10-08T21:59:44-04:00",
-      "last_reply": "2015-10-08T22:51:27-04:00",
+      "started": "2015-10-09T01:59:44Z",
+      "last_reply": "2015-10-09T02:51:27Z",
       "root_message_id": "msg-ef4b44bbd78b"
     }
   ]

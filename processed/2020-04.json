@@ -8,7 +8,7 @@
       "message_id": "<feb70c65-24a8-d403-ceb5-782da3ef1280-7470@googlemail.com>",
       "from_name": "Constantin Ahlmann-Eltze",
       "from_email_hash": "7a4a36b661de595f0ff16fb1dc9cc8dcb3e7b60575c8ae454acad885928418f0",
-      "date": "2020-04-08T12:01:29+02:00",
+      "date": "2020-04-08T10:01:29Z",
       "subject": "[R-SIG-Win] Rtools and R 4.0.0?",
       "subject_clean": "Rtools and R 4.0.0?",
       "in_reply_to": null,
@@ -28,8 +28,8 @@
       "participants": [
         "Constantin Ahlmann-Eltze"
       ],
-      "started": "2020-04-08T12:01:29+02:00",
-      "last_reply": "2020-04-08T12:01:29+02:00",
+      "started": "2020-04-08T10:01:29Z",
+      "last_reply": "2020-04-08T10:01:29Z",
       "root_message_id": "msg-0d59509c3b44"
     }
   ]

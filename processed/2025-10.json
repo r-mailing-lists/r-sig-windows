@@ -8,7 +8,7 @@
       "message_id": "<40c9f740-2e72-4931-9c0d-6f5717091c27@gmail.com>",
       "from_name": "Tomas Kalibera",
       "from_email_hash": "7af110c9340339e5307bd348f1ec524e2fd1c8f104d583e9993022c5550711f4",
-      "date": "2025-10-29T15:06:56+01:00",
+      "date": "2025-10-29T14:06:56Z",
       "subject": "[R-SIG-Win] Rtools45 update",
       "subject_clean": "Rtools45 update",
       "in_reply_to": null,
@@ -28,8 +28,8 @@
       "participants": [
         "Tomas Kalibera"
       ],
-      "started": "2025-10-29T15:06:56+01:00",
-      "last_reply": "2025-10-29T15:06:56+01:00",
+      "started": "2025-10-29T14:06:56Z",
+      "last_reply": "2025-10-29T14:06:56Z",
       "root_message_id": "msg-1e7996bd1b8c"
     }
   ]
