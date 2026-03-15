@@ -120,14 +120,14 @@
     }
   },
   {
-    "name": "Fredrik Skoog",
-    "slug": "fredrik-skoog",
-    "emailHash": "f6e4f2515ef78b0c73d582e90dc7a6130cd4ceb5bd365d3686af2f89317aa6ce",
+    "name": "JJ Allaire",
+    "slug": "jj-allaire",
+    "emailHash": "6dec1421994cd139c8f61fa081c24a1a379fa063affd8c4b445b95fd55a28bb6",
     "messageCount": 2,
-    "firstDate": "2023-04-18T12:16:58Z",
-    "lastDate": "2023-06-06T09:42:33Z",
+    "firstDate": "2016-10-02T00:29:32Z",
+    "lastDate": "2016-10-02T10:54:20Z",
     "yearlyActivity": {
-      "2023": 2
+      "2016": 2
     }
   },
   {
@@ -142,6 +142,17 @@
     }
   },
   {
+    "name": "Fredrik Skoog",
+    "slug": "fredrik-skoog",
+    "emailHash": "f6e4f2515ef78b0c73d582e90dc7a6130cd4ceb5bd365d3686af2f89317aa6ce",
+    "messageCount": 2,
+    "firstDate": "2023-04-18T12:16:58Z",
+    "lastDate": "2023-06-06T09:42:33Z",
+    "yearlyActivity": {
+      "2023": 2
+    }
+  },
+  {
     "name": "Tim Keitt",
     "slug": "tim-keitt",
     "emailHash": "0042cb9f110773b83d9c979cead2263cb2e28429e358bd4a999e51500a62ef01",
@@ -150,28 +161,6 @@
     "lastDate": "2016-04-30T00:08:28Z",
     "yearlyActivity": {
       "2016": 2
-    }
-  },
-  {
-    "name": "JJ Allaire",
-    "slug": "jj-allaire",
-    "emailHash": "6dec1421994cd139c8f61fa081c24a1a379fa063affd8c4b445b95fd55a28bb6",
-    "messageCount": 2,
-    "firstDate": "2016-10-02T00:29:32Z",
-    "lastDate": "2016-10-02T10:54:20Z",
-    "yearlyActivity": {
-      "2016": 2
-    }
-  },
-  {
-    "name": "Constantin Ahlmann-Eltze",
-    "slug": "constantin-ahlmann-eltze",
-    "emailHash": "6e7c36460b9fa571d94299466a17dfc1dc4f8d6d013e694e03246a0375580c42",
-    "messageCount": 1,
-    "firstDate": "2020-04-08T10:01:29Z",
-    "lastDate": "2020-04-08T10:01:29Z",
-    "yearlyActivity": {
-      "2020": 1
     }
   },
   {
@@ -197,6 +186,17 @@
     }
   },
   {
+    "name": "Debartha Paul",
+    "slug": "debartha-paul",
+    "emailHash": "7d5c28e64346d0f280377ae3000a076390074e0384a3554b334308574e9210e9",
+    "messageCount": 1,
+    "firstDate": "2023-04-15T17:00:50Z",
+    "lastDate": "2023-04-15T17:00:50Z",
+    "yearlyActivity": {
+      "2023": 1
+    }
+  },
+  {
     "name": "Henric Nilsson (Public)",
     "slug": "henric-nilsson-public",
     "emailHash": "1dccf4528b79d2845b90efc093cc15e7a98c007185f168d28e0ea726bdb09d0e",
@@ -208,14 +208,14 @@
     }
   },
   {
-    "name": "Debartha Paul",
-    "slug": "debartha-paul",
-    "emailHash": "7d5c28e64346d0f280377ae3000a076390074e0384a3554b334308574e9210e9",
+    "name": "Constantin Ahlmann-Eltze",
+    "slug": "constantin-ahlmann-eltze",
+    "emailHash": "6e7c36460b9fa571d94299466a17dfc1dc4f8d6d013e694e03246a0375580c42",
     "messageCount": 1,
-    "firstDate": "2023-04-15T17:00:50Z",
-    "lastDate": "2023-04-15T17:00:50Z",
+    "firstDate": "2020-04-08T10:01:29Z",
+    "lastDate": "2020-04-08T10:01:29Z",
     "yearlyActivity": {
-      "2023": 1
+      "2020": 1
     }
   }
 ]
