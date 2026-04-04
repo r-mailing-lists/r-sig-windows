@@ -109,6 +109,17 @@
     }
   },
   {
+    "name": "Marcel Baumgartner",
+    "slug": "marcel-baumgartner",
+    "emailHash": "505f40eb596347947082eb9657b0812aaa188cc3519f17d57420ad747a988c9e",
+    "messageCount": 2,
+    "firstDate": "2020-10-27T07:15:03Z",
+    "lastDate": "2020-10-27T10:08:17Z",
+    "yearlyActivity": {
+      "2020": 2
+    }
+  },
+  {
     "name": "Fredrik Skoog",
     "slug": "fredrik-skoog",
     "emailHash": "f6e4f2515ef78b0c73d582e90dc7a6130cd4ceb5bd365d3686af2f89317aa6ce",
@@ -117,17 +128,6 @@
     "lastDate": "2023-06-06T09:42:33Z",
     "yearlyActivity": {
       "2023": 2
-    }
-  },
-  {
-    "name": "Kirill Müller",
-    "slug": "kirill-m-ller",
-    "emailHash": "27428f4e68e783f0953f00cf0a4d40466bcc4bbb32ab5f2324bee380e4c44f0b",
-    "messageCount": 2,
-    "firstDate": "2015-09-25T09:30:27Z",
-    "lastDate": "2015-09-25T10:20:25Z",
-    "yearlyActivity": {
-      "2015": 2
     }
   },
   {
@@ -142,17 +142,6 @@
     }
   },
   {
-    "name": "Marcel Baumgartner",
-    "slug": "marcel-baumgartner",
-    "emailHash": "505f40eb596347947082eb9657b0812aaa188cc3519f17d57420ad747a988c9e",
-    "messageCount": 2,
-    "firstDate": "2020-10-27T07:15:03Z",
-    "lastDate": "2020-10-27T10:08:17Z",
-    "yearlyActivity": {
-      "2020": 2
-    }
-  },
-  {
     "name": "Tim Keitt",
     "slug": "tim-keitt",
     "emailHash": "0042cb9f110773b83d9c979cead2263cb2e28429e358bd4a999e51500a62ef01",
@@ -164,6 +153,17 @@
     }
   },
   {
+    "name": "Kirill Müller",
+    "slug": "kirill-m-ller",
+    "emailHash": "27428f4e68e783f0953f00cf0a4d40466bcc4bbb32ab5f2324bee380e4c44f0b",
+    "messageCount": 2,
+    "firstDate": "2015-09-25T09:30:27Z",
+    "lastDate": "2015-09-25T10:20:25Z",
+    "yearlyActivity": {
+      "2015": 2
+    }
+  },
+  {
     "name": "Qiang Kou",
     "slug": "qiang-kou",
     "emailHash": "0d4fdf3da64c31856471223111f08d09403b37154155aca4b413b87e0d1611b8",
@@ -172,17 +172,6 @@
     "lastDate": "2015-08-29T18:27:00Z",
     "yearlyActivity": {
       "2015": 1
-    }
-  },
-  {
-    "name": "Debartha Paul",
-    "slug": "debartha-paul",
-    "emailHash": "7d5c28e64346d0f280377ae3000a076390074e0384a3554b334308574e9210e9",
-    "messageCount": 1,
-    "firstDate": "2023-04-15T17:00:50Z",
-    "lastDate": "2023-04-15T17:00:50Z",
-    "yearlyActivity": {
-      "2023": 1
     }
   },
   {
@@ -216,6 +205,17 @@
     "lastDate": "2020-04-08T10:01:29Z",
     "yearlyActivity": {
       "2020": 1
+    }
+  },
+  {
+    "name": "Debartha Paul",
+    "slug": "debartha-paul",
+    "emailHash": "7d5c28e64346d0f280377ae3000a076390074e0384a3554b334308574e9210e9",
+    "messageCount": 1,
+    "firstDate": "2023-04-15T17:00:50Z",
+    "lastDate": "2023-04-15T17:00:50Z",
+    "yearlyActivity": {
+      "2023": 1
     }
   }
 ]
