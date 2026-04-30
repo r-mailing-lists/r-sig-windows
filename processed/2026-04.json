@@ -1,0 +1,36 @@
+{
+  "list": "r-sig-windows",
+  "description": "",
+  "month": "2026-04",
+  "messages": [
+    {
+      "id": "msg-a525713ee492",
+      "message_id": "<CAL6gwn+a5SuL9Rr=U-7-G68V8xMbsS6QoR0YFmAkACkZnsWuhA@mail.gmail.com>",
+      "from_name": "Avraham Adler",
+      "from_email_hash": "63266ae79d1743f1496b756da3e3df9582595f717d74d4d823b698d61ef74096",
+      "date": "2026-04-29T18:43:03Z",
+      "subject": "[R-SIG-Win] Who will be assuming the lead for Rtools and other Windows-related development?",
+      "subject_clean": "Who will be assuming the lead for Rtools and other Windows-related development?",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hello.\n\nTomas Kalibera's passing is tragic on many levels. He was\nyoung?younger than most of us long-time members of this list, I\nfear?leaving a family and children bereft. He leaves many friends;\nsome personal, some virtual. And practically, he leaves a hole in\nR-core, especially when it comes to Windows-related development,\nmaintenance, and debugging.\n\nI apologize if this is too soon, but with his tragic passing, has\nR-core decided on who will be the point-person/lead maintainer for\nRtools and other Windows-related issues?\n\nThank you,\n\nAvi",
+      "body_snippet": "Hello.\n\nTomas Kalibera's passing is tragic on many levels. He was\nyoung?younger than most of us long-time members of this list, I\nfear?leaving a family and children bereft. He leaves many friends;\nsom",
+      "thread_id": "thread-a525713ee492",
+      "thread_depth": 0,
+      "month": "2026-04"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-a525713ee492",
+      "subject": "Who will be assuming the lead for Rtools and other Windows-related development?",
+      "message_count": 1,
+      "participants": [
+        "Avraham Adler"
+      ],
+      "started": "2026-04-29T18:43:03Z",
+      "last_reply": "2026-04-29T18:43:03Z",
+      "root_message_id": "msg-a525713ee492"
+    }
+  ]
+}
