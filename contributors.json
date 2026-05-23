@@ -109,6 +109,17 @@
     }
   },
   {
+    "name": "JJ Allaire",
+    "slug": "jj-allaire",
+    "emailHash": "6dec1421994cd139c8f61fa081c24a1a379fa063affd8c4b445b95fd55a28bb6",
+    "messageCount": 2,
+    "firstDate": "2016-10-02T00:29:32Z",
+    "lastDate": "2016-10-02T10:54:20Z",
+    "yearlyActivity": {
+      "2016": 2
+    }
+  },
+  {
     "name": "Tim Keitt",
     "slug": "tim-keitt",
     "emailHash": "0042cb9f110773b83d9c979cead2263cb2e28429e358bd4a999e51500a62ef01",
@@ -117,17 +128,6 @@
     "lastDate": "2016-04-30T00:08:28Z",
     "yearlyActivity": {
       "2016": 2
-    }
-  },
-  {
-    "name": "Marcel Baumgartner",
-    "slug": "marcel-baumgartner",
-    "emailHash": "505f40eb596347947082eb9657b0812aaa188cc3519f17d57420ad747a988c9e",
-    "messageCount": 2,
-    "firstDate": "2020-10-27T07:15:03Z",
-    "lastDate": "2020-10-27T10:08:17Z",
-    "yearlyActivity": {
-      "2020": 2
     }
   },
   {
@@ -153,14 +153,14 @@
     }
   },
   {
-    "name": "JJ Allaire",
-    "slug": "jj-allaire",
-    "emailHash": "6dec1421994cd139c8f61fa081c24a1a379fa063affd8c4b445b95fd55a28bb6",
+    "name": "Marcel Baumgartner",
+    "slug": "marcel-baumgartner",
+    "emailHash": "505f40eb596347947082eb9657b0812aaa188cc3519f17d57420ad747a988c9e",
     "messageCount": 2,
-    "firstDate": "2016-10-02T00:29:32Z",
-    "lastDate": "2016-10-02T10:54:20Z",
+    "firstDate": "2020-10-27T07:15:03Z",
+    "lastDate": "2020-10-27T10:08:17Z",
     "yearlyActivity": {
-      "2016": 2
+      "2020": 2
     }
   },
   {
@@ -175,14 +175,14 @@
     }
   },
   {
-    "name": "Henric Nilsson (Public)",
-    "slug": "henric-nilsson-public",
-    "emailHash": "1dccf4528b79d2845b90efc093cc15e7a98c007185f168d28e0ea726bdb09d0e",
+    "name": "Constantin Ahlmann-Eltze",
+    "slug": "constantin-ahlmann-eltze",
+    "emailHash": "6e7c36460b9fa571d94299466a17dfc1dc4f8d6d013e694e03246a0375580c42",
     "messageCount": 1,
-    "firstDate": "2015-09-16T06:54:21Z",
-    "lastDate": "2015-09-16T06:54:21Z",
+    "firstDate": "2020-04-08T10:01:29Z",
+    "lastDate": "2020-04-08T10:01:29Z",
     "yearlyActivity": {
-      "2015": 1
+      "2020": 1
     }
   },
   {
@@ -208,14 +208,14 @@
     }
   },
   {
-    "name": "Constantin Ahlmann-Eltze",
-    "slug": "constantin-ahlmann-eltze",
-    "emailHash": "6e7c36460b9fa571d94299466a17dfc1dc4f8d6d013e694e03246a0375580c42",
+    "name": "Henric Nilsson (Public)",
+    "slug": "henric-nilsson-public",
+    "emailHash": "1dccf4528b79d2845b90efc093cc15e7a98c007185f168d28e0ea726bdb09d0e",
     "messageCount": 1,
-    "firstDate": "2020-04-08T10:01:29Z",
-    "lastDate": "2020-04-08T10:01:29Z",
+    "firstDate": "2015-09-16T06:54:21Z",
+    "lastDate": "2015-09-16T06:54:21Z",
     "yearlyActivity": {
-      "2020": 1
+      "2015": 1
     }
   }
 ]
