@@ -109,14 +109,25 @@
     }
   },
   {
-    "name": "Marcel Baumgartner",
-    "slug": "marcel-baumgartner",
-    "emailHash": "505f40eb596347947082eb9657b0812aaa188cc3519f17d57420ad747a988c9e",
+    "name": "Kirill Müller",
+    "slug": "kirill-m-ller",
+    "emailHash": "27428f4e68e783f0953f00cf0a4d40466bcc4bbb32ab5f2324bee380e4c44f0b",
     "messageCount": 2,
-    "firstDate": "2020-10-27T07:15:03Z",
-    "lastDate": "2020-10-27T10:08:17Z",
+    "firstDate": "2015-09-25T09:30:27Z",
+    "lastDate": "2015-09-25T10:20:25Z",
     "yearlyActivity": {
-      "2020": 2
+      "2015": 2
+    }
+  },
+  {
+    "name": "Tim Keitt",
+    "slug": "tim-keitt",
+    "emailHash": "0042cb9f110773b83d9c979cead2263cb2e28429e358bd4a999e51500a62ef01",
+    "messageCount": 2,
+    "firstDate": "2016-04-29T20:33:11Z",
+    "lastDate": "2016-04-30T00:08:28Z",
+    "yearlyActivity": {
+      "2016": 2
     }
   },
   {
@@ -142,58 +153,14 @@
     }
   },
   {
-    "name": "Tim Keitt",
-    "slug": "tim-keitt",
-    "emailHash": "0042cb9f110773b83d9c979cead2263cb2e28429e358bd4a999e51500a62ef01",
+    "name": "Marcel Baumgartner",
+    "slug": "marcel-baumgartner",
+    "emailHash": "505f40eb596347947082eb9657b0812aaa188cc3519f17d57420ad747a988c9e",
     "messageCount": 2,
-    "firstDate": "2016-04-29T20:33:11Z",
-    "lastDate": "2016-04-30T00:08:28Z",
+    "firstDate": "2020-10-27T07:15:03Z",
+    "lastDate": "2020-10-27T10:08:17Z",
     "yearlyActivity": {
-      "2016": 2
-    }
-  },
-  {
-    "name": "Kirill Müller",
-    "slug": "kirill-m-ller",
-    "emailHash": "27428f4e68e783f0953f00cf0a4d40466bcc4bbb32ab5f2324bee380e4c44f0b",
-    "messageCount": 2,
-    "firstDate": "2015-09-25T09:30:27Z",
-    "lastDate": "2015-09-25T10:20:25Z",
-    "yearlyActivity": {
-      "2015": 2
-    }
-  },
-  {
-    "name": "Constantin Ahlmann-Eltze",
-    "slug": "constantin-ahlmann-eltze",
-    "emailHash": "6e7c36460b9fa571d94299466a17dfc1dc4f8d6d013e694e03246a0375580c42",
-    "messageCount": 1,
-    "firstDate": "2020-04-08T10:01:29Z",
-    "lastDate": "2020-04-08T10:01:29Z",
-    "yearlyActivity": {
-      "2020": 1
-    }
-  },
-  {
-    "name": "Dirk Eddelbuettel",
-    "slug": "dirk-eddelbuettel",
-    "emailHash": "0fbdef44c1dd04f038656de5f1f4b6a17c248d863c092d17d1efdb9f10b5c034",
-    "messageCount": 1,
-    "firstDate": "2016-04-29T22:55:43Z",
-    "lastDate": "2016-04-29T22:55:43Z",
-    "yearlyActivity": {
-      "2016": 1
-    }
-  },
-  {
-    "name": "Henric Nilsson (Public)",
-    "slug": "henric-nilsson-public",
-    "emailHash": "1dccf4528b79d2845b90efc093cc15e7a98c007185f168d28e0ea726bdb09d0e",
-    "messageCount": 1,
-    "firstDate": "2015-09-16T06:54:21Z",
-    "lastDate": "2015-09-16T06:54:21Z",
-    "yearlyActivity": {
-      "2015": 1
+      "2020": 2
     }
   },
   {
@@ -208,12 +175,45 @@
     }
   },
   {
+    "name": "Dirk Eddelbuettel",
+    "slug": "dirk-eddelbuettel",
+    "emailHash": "0fbdef44c1dd04f038656de5f1f4b6a17c248d863c092d17d1efdb9f10b5c034",
+    "messageCount": 1,
+    "firstDate": "2016-04-29T22:55:43Z",
+    "lastDate": "2016-04-29T22:55:43Z",
+    "yearlyActivity": {
+      "2016": 1
+    }
+  },
+  {
     "name": "Qiang Kou",
     "slug": "qiang-kou",
     "emailHash": "0d4fdf3da64c31856471223111f08d09403b37154155aca4b413b87e0d1611b8",
     "messageCount": 1,
     "firstDate": "2015-08-29T18:27:00Z",
     "lastDate": "2015-08-29T18:27:00Z",
+    "yearlyActivity": {
+      "2015": 1
+    }
+  },
+  {
+    "name": "Constantin Ahlmann-Eltze",
+    "slug": "constantin-ahlmann-eltze",
+    "emailHash": "6e7c36460b9fa571d94299466a17dfc1dc4f8d6d013e694e03246a0375580c42",
+    "messageCount": 1,
+    "firstDate": "2020-04-08T10:01:29Z",
+    "lastDate": "2020-04-08T10:01:29Z",
+    "yearlyActivity": {
+      "2020": 1
+    }
+  },
+  {
+    "name": "Henric Nilsson (Public)",
+    "slug": "henric-nilsson-public",
+    "emailHash": "1dccf4528b79d2845b90efc093cc15e7a98c007185f168d28e0ea726bdb09d0e",
+    "messageCount": 1,
+    "firstDate": "2015-09-16T06:54:21Z",
+    "lastDate": "2015-09-16T06:54:21Z",
     "yearlyActivity": {
       "2015": 1
     }
