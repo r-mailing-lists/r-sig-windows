@@ -1,0 +1,36 @@
+{
+  "list": "r-sig-windows",
+  "description": "",
+  "month": "2026-07",
+  "messages": [
+    {
+      "id": "msg-451b4db08363",
+      "message_id": "<CAL6gwnLDamY7aS7aKsP86jqdApQbS_+Bh-j8nf7N24ueTEurgQ@mail.gmail.com>",
+      "from_name": "Avraham Adler",
+      "from_email_hash": "63266ae79d1743f1496b756da3e3df9582595f717d74d4d823b698d61ef74096",
+      "date": "2026-07-20T08:04:11Z",
+      "subject": "[R-SIG-Win] Innosetup 7: 64-bit & Windows",
+      "subject_clean": "Innosetup 7: 64-bit & Windows",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Hello.\n\nInnosetup recently took version 7 out of beta and released it properly\n[1]. Using IS 7.0.2-x64 [2]On Windows 11, r-devel 90279 compiled,\npassed make check-all, and installed properly on my system, so long as\nthe proper subdirectory was passed to ISDIR, in my case \"ISDIR =\nC:/Program Files/Inno Setup 7\". I would guess that eventually R-devel\nmay want to make IS7:64 the default, but I wanted to share that it\nworks now.\n\nThank you,\n\nAvi\n\n[1] https://jrsoftware.org/files/is7-whatsnew.htm\n[2] https://jrsoftware.org/isdl.php#v7",
+      "body_snippet": "Hello.\n\nInnosetup recently took version 7 out of beta and released it properly\n[1]. Using IS 7.0.2-x64 [2]On Windows 11, r-devel 90279 compiled,\npassed make check-all, and installed properly on my sys",
+      "thread_id": "thread-451b4db08363",
+      "thread_depth": 0,
+      "month": "2026-07"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-451b4db08363",
+      "subject": "Innosetup 7: 64-bit & Windows",
+      "message_count": 1,
+      "participants": [
+        "Avraham Adler"
+      ],
+      "started": "2026-07-20T08:04:11Z",
+      "last_reply": "2026-07-20T08:04:11Z",
+      "root_message_id": "msg-451b4db08363"
+    }
+  ]
+}

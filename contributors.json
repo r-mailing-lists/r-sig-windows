@@ -3,9 +3,9 @@
     "name": "Avraham Adler",
     "slug": "avraham-adler",
     "emailHash": "63266ae79d1743f1496b756da3e3df9582595f717d74d4d823b698d61ef74096",
-    "messageCount": 48,
+    "messageCount": 49,
     "firstDate": "2015-08-31T13:22:33Z",
-    "lastDate": "2026-04-29T18:43:03Z",
+    "lastDate": "2026-07-20T08:04:11Z",
     "yearlyActivity": {
       "2015": 15,
       "2016": 3,
@@ -15,7 +15,7 @@
       "2022": 2,
       "2024": 8,
       "2025": 9,
-      "2026": 2
+      "2026": 3
     }
   },
   {
@@ -120,28 +120,6 @@
     }
   },
   {
-    "name": "Tim Keitt",
-    "slug": "tim-keitt",
-    "emailHash": "0042cb9f110773b83d9c979cead2263cb2e28429e358bd4a999e51500a62ef01",
-    "messageCount": 2,
-    "firstDate": "2016-04-29T20:33:11Z",
-    "lastDate": "2016-04-30T00:08:28Z",
-    "yearlyActivity": {
-      "2016": 2
-    }
-  },
-  {
-    "name": "JJ Allaire",
-    "slug": "jj-allaire",
-    "emailHash": "6dec1421994cd139c8f61fa081c24a1a379fa063affd8c4b445b95fd55a28bb6",
-    "messageCount": 2,
-    "firstDate": "2016-10-02T00:29:32Z",
-    "lastDate": "2016-10-02T10:54:20Z",
-    "yearlyActivity": {
-      "2016": 2
-    }
-  },
-  {
     "name": "Kirill Müller",
     "slug": "kirill-m-ller",
     "emailHash": "27428f4e68e783f0953f00cf0a4d40466bcc4bbb32ab5f2324bee380e4c44f0b",
@@ -164,14 +142,25 @@
     }
   },
   {
-    "name": "Constantin Ahlmann-Eltze",
-    "slug": "constantin-ahlmann-eltze",
-    "emailHash": "6e7c36460b9fa571d94299466a17dfc1dc4f8d6d013e694e03246a0375580c42",
-    "messageCount": 1,
-    "firstDate": "2020-04-08T10:01:29Z",
-    "lastDate": "2020-04-08T10:01:29Z",
+    "name": "JJ Allaire",
+    "slug": "jj-allaire",
+    "emailHash": "6dec1421994cd139c8f61fa081c24a1a379fa063affd8c4b445b95fd55a28bb6",
+    "messageCount": 2,
+    "firstDate": "2016-10-02T00:29:32Z",
+    "lastDate": "2016-10-02T10:54:20Z",
     "yearlyActivity": {
-      "2020": 1
+      "2016": 2
+    }
+  },
+  {
+    "name": "Tim Keitt",
+    "slug": "tim-keitt",
+    "emailHash": "0042cb9f110773b83d9c979cead2263cb2e28429e358bd4a999e51500a62ef01",
+    "messageCount": 2,
+    "firstDate": "2016-04-29T20:33:11Z",
+    "lastDate": "2016-04-30T00:08:28Z",
+    "yearlyActivity": {
+      "2016": 2
     }
   },
   {
@@ -183,17 +172,6 @@
     "lastDate": "2015-09-16T06:54:21Z",
     "yearlyActivity": {
       "2015": 1
-    }
-  },
-  {
-    "name": "Dirk Eddelbuettel",
-    "slug": "dirk-eddelbuettel",
-    "emailHash": "0fbdef44c1dd04f038656de5f1f4b6a17c248d863c092d17d1efdb9f10b5c034",
-    "messageCount": 1,
-    "firstDate": "2016-04-29T22:55:43Z",
-    "lastDate": "2016-04-29T22:55:43Z",
-    "yearlyActivity": {
-      "2016": 1
     }
   },
   {
@@ -216,6 +194,28 @@
     "lastDate": "2015-08-29T18:27:00Z",
     "yearlyActivity": {
       "2015": 1
+    }
+  },
+  {
+    "name": "Dirk Eddelbuettel",
+    "slug": "dirk-eddelbuettel",
+    "emailHash": "0fbdef44c1dd04f038656de5f1f4b6a17c248d863c092d17d1efdb9f10b5c034",
+    "messageCount": 1,
+    "firstDate": "2016-04-29T22:55:43Z",
+    "lastDate": "2016-04-29T22:55:43Z",
+    "yearlyActivity": {
+      "2016": 1
+    }
+  },
+  {
+    "name": "Constantin Ahlmann-Eltze",
+    "slug": "constantin-ahlmann-eltze",
+    "emailHash": "6e7c36460b9fa571d94299466a17dfc1dc4f8d6d013e694e03246a0375580c42",
+    "messageCount": 1,
+    "firstDate": "2020-04-08T10:01:29Z",
+    "lastDate": "2020-04-08T10:01:29Z",
+    "yearlyActivity": {
+      "2020": 1
     }
   }
 ]
