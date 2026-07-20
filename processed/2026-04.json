@@ -18,6 +18,26 @@
       "thread_id": "thread-a525713ee492",
       "thread_depth": 0,
       "month": "2026-04"
+    },
+    {
+      "id": "msg-f92469b049ef",
+      "message_id": "<49f40dda0366b5d6acb49c3552851813@purelymail.com>",
+      "from_name": "Andrew Robbins",
+      "from_email_hash": "e889f78aaa7ec3002ef1578aafe75f5cff986c51e056360c275a285fa3c3e4a5",
+      "date": "2026-04-30T01:08:09Z",
+      "subject": "[R-SIG-Win]  [Rd] Who will be assuming the lead for Rtools and other Windows-related development?",
+      "subject_clean": "Who will be assuming the lead for Rtools and other Windows-related development?",
+      "in_reply_to": "<DS2PR17MB78497B6543F6D0B6E40CCE48FA342@DS2PR17MB7849.namprd17.prod.outlook.com>",
+      "references": [
+        "<CAL6gwn+a5SuL9Rr=U-7-G68V8xMbsS6QoR0YFmAkACkZnsWuhA@mail.gmail.com>",
+        "<2cae8bb5e44d4d079e5a7dab9645ac3b@alumni.ku.dk>",
+        "<DS2PR17MB78497B6543F6D0B6E40CCE48FA342@DS2PR17MB7849.namprd17.prod.outlook.com>"
+      ],
+      "body_plain": "Just to clarify because it appears that Microsoft Outlook mangled my \noutbound email address (yes, I know, I know), I can be reached at andrew \nat robbinsa dot me\n\nApologies for the double post,\n-Andrew\n\nOn 2026-04-29 20:40, andrew--- via R-devel wrote:\n> Hi all,\n> \n> I'm somewhat familiar with the MXE/rtools codebase myself (and \n> submitted a few patches a year or two back) and am happy to help out \n> with maintenance if desired. I've also been messing around with the \n> extremely-early-beta gcc WoA patches that are (allegedly) supposed to \n> hit with gcc 17 and am looking forward to being able to get aarch64-win \n> out of the perpetual-beta stage!\n> \n> Feel free to reach out at any time.\n> \n> -Andrew\n> \n> \n> \n> \n> ________________________________________\n> From:?R-devel <r-devel-bounces at r-project.org> on behalf of Mossa Merhi \n> Reimert via R-devel <r-devel at r-project.org>\n> Sent:?Wednesday, April 29, 2026 4:22 PM\n> To:?Avraham Adler <avraham.adler at gmail.com>; R-devel \n> <r-devel at r-project.org>\n> Cc:?r-sig-windows at r-project.org <r-sig-windows at r-project.org>\n> Subject:?Re: [Rd] Who will be assuming the lead for Rtools and other \n> Windows-related development?\n> \n> \n> The passing of Tomas Kalibera is indeed a shock and a loss to all of \n> us, and the entirety of the R community, even further.? I used to read \n> his blogposts on (now) https://blog.r-project.org/?and they were a \n> gift.\n> \n> \n> \n> On the concern you bring up, I do remember Jeroen Ooms being the \n> maintainer of Rtools.\n> \n> And from one day to another, this changed. I never saw an explanation \n> of this decision,\n> \n> or anything. Maybe R-Core could ask Jeroen Ooms to do this again?\n> \n> \n> \n> Sent from Outlook for Mac\n> \n> From: R-devel <r-devel-bounces at r-project.org> on behalf of Avraham \n> Adler <avraham.adler at gmail.com>\n> \n> Date: Wednesday, 29 April 2026 at 20.45\n> \n> To: R-devel <r-devel at r-project.org>\n> \n> Cc: r-sig-windows at r-project.org <r-sig-windows at r-project.org>\n> \n> Subject: [Rd] Who will be assuming the lead for Rtools and other \n> Windows-related development?\n> \n> \n> \n> Hello.\n> \n> \n> \n> Tomas Kalibera's passing is tragic on many levels. He was\n> \n> young?younger than most of us long-time members of this list, I\n> \n> fear?leaving a family and children bereft. He leaves many friends;\n> \n> some personal, some virtual. And practically, he leaves a hole in\n> \n> R-core, especially when it comes to Windows-related development,\n> \n> maintenance, and debugging.\n> \n> \n> \n> I apologize if this is too soon, but with his tragic passing, has\n> \n> R-core decided on who will be the point-person/lead maintainer for\n> \n> Rtools and other Windows-related issues?\n> \n> \n> \n> Thank you,\n> \n> \n> \n> Avi\n> \n> \n> \n> ______________________________________________\n> \n> R-devel at r-project.org mailing list\n> \n> https://stat.ethz.ch/mailman/listinfo/r-devel\n> \n> \n> \n> ??????? [[alternative HTML version deleted]]\n> \n> \n> \n> ______________________________________________\n> R-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-devel",
+      "body_snippet": "Just to clarify because it appears that Microsoft Outlook mangled my \noutbound email address (yes, I know, I know), I can be reached at andrew \nat robbinsa dot me\n\nApologies for the double post,\n-Andr",
+      "thread_id": "thread-f92469b049ef",
+      "thread_depth": 0,
+      "month": "2026-04"
     }
   ],
   "threads": [
@@ -31,6 +51,17 @@
       "started": "2026-04-29T18:43:03Z",
       "last_reply": "2026-04-29T18:43:03Z",
       "root_message_id": "msg-a525713ee492"
+    },
+    {
+      "id": "thread-f92469b049ef",
+      "subject": "Who will be assuming the lead for Rtools and other Windows-related development?",
+      "message_count": 1,
+      "participants": [
+        "Andrew Robbins"
+      ],
+      "started": "2026-04-30T01:08:09Z",
+      "last_reply": "2026-04-30T01:08:09Z",
+      "root_message_id": "msg-f92469b049ef"
     }
   ]
 }

@@ -1,0 +1,36 @@
+{
+  "list": "r-sig-windows",
+  "description": "",
+  "month": "2026-03",
+  "messages": [
+    {
+      "id": "msg-063b76caaf55",
+      "message_id": "<8b753e8f-63b7-4861-ac22-3c4f343c39c1@nutrinf.uni-kiel.de>",
+      "from_name": "Silvio Waschina",
+      "from_email_hash": "8a6804b0a692aa9a3cf69f6fa0a7726c349753048956bd7d65def86d225a01b0",
+      "date": "2026-03-27T09:24:05Z",
+      "subject": "[R-SIG-Win] Rtools' additional package libsbml may mask MXE libsbml and lacks required extensions",
+      "subject_clean": "Rtools' additional package libsbml may mask MXE libsbml and lacks required extensions",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear Rtools maintainers,\n\nI would like to report a potential issue with the libsbml library as \ncurrently distributed in Rtools (tested with Rtools45), and ask for \nguidance on how best to proceed.\n\nI contributed the system library 'libsbml' to MXE. The MXE build of \nlibsbml includes a number of extensions that are required by most common \ndownstream use cases. The extensions are enables via optional parameters \nwhen building the library: \nhttps://github.com/mxe/mxe/blob/master/src/libsbml.mk\n\nHowever, Rtools also distributes an additional libsbml package (outside \nof MXE), and this version appears to be built without several important \nextensions. My concern is that this Rtools-providedlibsbml may take \nprecedence over the MXE-provided one (e.g., via PATH or pkg-config), \neffectively masking the new MXE version in upcoming Rtools revisions.\n\nThis creates a problem for potential R packages that depend on features \nprovided by those extensions. I currently have an R package in \npreparation for CRAN submission that requires these capabilities, and I \nam concerned it may fail to build or function correctly on Windows due \nto this mismatch.\n\nCurrently, there seems to be no R packages on CRAN, that depends on \nlibsbml. Even if there were, building such package should also succeed \nwith the new MXE-provided libsbml.\n\nA potential solution could be to avoid shipping libsbml in Rtools \nso?that the MXE-provided version is used consistently.\n\nBest regards\nSilvio",
+      "body_snippet": "Dear Rtools maintainers,\n\nI would like to report a potential issue with the libsbml library as \ncurrently distributed in Rtools (tested with Rtools45), and ask for \nguidance on how best to proceed.\n\nI",
+      "thread_id": "thread-063b76caaf55",
+      "thread_depth": 0,
+      "month": "2026-03"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-063b76caaf55",
+      "subject": "Rtools' additional package libsbml may mask MXE libsbml and lacks required extensions",
+      "message_count": 1,
+      "participants": [
+        "Silvio Waschina"
+      ],
+      "started": "2026-03-27T09:24:05Z",
+      "last_reply": "2026-03-27T09:24:05Z",
+      "root_message_id": "msg-063b76caaf55"
+    }
+  ]
+}

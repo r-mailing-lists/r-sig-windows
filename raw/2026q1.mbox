@@ -105,3 +105,45 @@ Best
 Tomas
 
 
+From @@w@@ch|n@ @end|ng |rom nutr|n|@un|-k|e|@de  Fri Mar 27 10:24:05 2026
+From: @@w@@ch|n@ @end|ng |rom nutr|n|@un|-k|e|@de (Silvio Waschina)
+Date: Fri, 27 Mar 2026 10:24:05 +0100
+Subject: [R-SIG-Win] Rtools' additional package libsbml may mask MXE libsbml
+ and lacks required extensions
+Message-ID: <8b753e8f-63b7-4861-ac22-3c4f343c39c1@nutrinf.uni-kiel.de>
+
+Dear Rtools maintainers,
+
+I would like to report a potential issue with the libsbml library as 
+currently distributed in Rtools (tested with Rtools45), and ask for 
+guidance on how best to proceed.
+
+I contributed the system library 'libsbml' to MXE. The MXE build of 
+libsbml includes a number of extensions that are required by most common 
+downstream use cases. The extensions are enables via optional parameters 
+when building the library: 
+https://github.com/mxe/mxe/blob/master/src/libsbml.mk
+
+However, Rtools also distributes an additional libsbml package (outside 
+of MXE), and this version appears to be built without several important 
+extensions. My concern is that this Rtools-providedlibsbml may take 
+precedence over the MXE-provided one (e.g., via PATH or pkg-config), 
+effectively masking the new MXE version in upcoming Rtools revisions.
+
+This creates a problem for potential R packages that depend on features 
+provided by those extensions. I currently have an R package in 
+preparation for CRAN submission that requires these capabilities, and I 
+am concerned it may fail to build or function correctly on Windows due 
+to this mismatch.
+
+Currently, there seems to be no R packages on CRAN, that depends on 
+libsbml. Even if there were, building such package should also succeed 
+with the new MXE-provided libsbml.
+
+A potential solution could be to avoid shipping libsbml in Rtools 
+so?that the MXE-provided version is used consistently.
+
+Best regards
+Silvio
+
+

@@ -1,0 +1,42 @@
+{
+  "list": "r-sig-windows",
+  "description": "",
+  "month": "2026-05",
+  "messages": [
+    {
+      "id": "msg-f1aaec043a84",
+      "message_id": "<CAL6gwnLejb-MGQDS1qdH4O1gQdwY-rgDskO0aUr0e3Y8orNAUQ@mail.gmail.com>",
+      "from_name": "Avraham Adler",
+      "from_email_hash": "63266ae79d1743f1496b756da3e3df9582595f717d74d4d823b698d61ef74096",
+      "date": "2026-05-28T22:39:16Z",
+      "subject": "[R-SIG-Win] [Rd] Compilation on Windows freezes at recommended packages",
+      "subject_clean": "Compilation on Windows freezes at recommended packages",
+      "in_reply_to": "<4bde9524-dddd-42de-8716-e24cc712681e@robbinsa.me>",
+      "references": [
+        "<CAL6gwnKpR=KyRzxmsZXFQk-zzUtYnuU0jU37AhycP70-M4kohg@mail.gmail.com>",
+        "<20260506192154.374921c1@arachnoid>",
+        "<20260506235257.21cd8ee4@Tarkus>",
+        "<CAL6gwnJpU0s_83opGmj69s1663Q9f0at0+3-qwaaNtufypJomg@mail.gmail.com>",
+        "<4bde9524-dddd-42de-8716-e24cc712681e@robbinsa.me>"
+      ],
+      "body_plain": "Thank you, Andrew.\n\nI just saw make updated today, so I should try rebuilding on the\nfailing platform sometime in the future.\n\nAs for r-sig-Windows, I would think we should revive it, especially in\nlight of this long thread [1] and the recent updates (comment 47 and\non) at [2], but it will require a Tomas-level guru to monitor it as\nwell. Especially since if the stack misalignment feature is actually\nfixed, it may only be fixed for the upcoming GCC 17 [3], and Rtools45\nuses GCC 14 [4].\n\nThank you,\n\nAvi\n\n[1] https://stat.ethz.ch/pipermail/r-sig-windows/2024q1/000105.html\n[2] https://gcc.gnu.org/bugzilla/show_bug.cgi?id=54412\n[3] https://gcc.gnu.org/bugzilla/show_bug.cgi?id=54412#c49\n[4] https://cran.r-project.org/bin/windows/Rtools/rtools45/rtools.html\n\nOn Thu, May 28, 2026 at 12:43?PM Andrew Robbins via R-devel\n<r-devel at r-project.org> wrote:\n>\n> It should pull down with pacman -Syuu as make is not shipped in the MXE\n> tarball. This will need to be done on every install until a new release\n> is cut, granted.\n>\n>\n> As an aside, do we want to revive R-sig-win? Its kind of a dead mailing\n> list, but its still there.\n>\n> On 5/26/2026 11:17 AM, Avraham Adler wrote:\n> > On Wed, May 6, 2026 at 4:53?PM Ivan Krylov <ikrylov at disroot.org> wrote:\n> >> ? Wed, 6 May 2026 19:21:54 +0300\n> >> Ivan Krylov via R-devel <r-devel at r-project.org> ?????:\n> >>\n> >>> it looked like GNU Make was stuck\n> >> Indeed, this happened to me a few times just now, and it was Make in\n> >> all cases. I think we stumbled upon a bug in the MSYS2 runtime:\n> >> https://github.com/msys2/msys2-runtime/issues/338\n> > Yes, it clearly seems so. Now that Takashi Yano's patch was accepted\n> > and merged [1] does Rtools45 need to be rebuilt or will it propagate\n> > the next time MSYS2 is updated via \"pacman -Syuu\" or the like?\n> >\n> > Thank you,\n> >\n> > Avi\n> >\n> > [1] https://github.com/msys2/msys2-runtime/pull/339\n> >\n> > ______________________________________________\n> > R-devel at r-project.org mailing list\n> > https://stat.ethz.ch/mailman/listinfo/r-devel\n>\n> --\n> Andrew Robbins\n> Research Software Specialist\n> University of Michigan\n> ITS Advanced Research Computing\n>\n> ______________________________________________\n> R-devel at r-project.org mailing list\n> https://stat.ethz.ch/mailman/listinfo/r-devel",
+      "body_snippet": "Thank you, Andrew.\n\nI just saw make updated today, so I should try rebuilding on the\nfailing platform sometime in the future.\n\nAs for r-sig-Windows, I would think we should revive it, especially in\nli",
+      "thread_id": "thread-f1aaec043a84",
+      "thread_depth": 0,
+      "month": "2026-05"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-f1aaec043a84",
+      "subject": "Compilation on Windows freezes at recommended packages",
+      "message_count": 1,
+      "participants": [
+        "Avraham Adler"
+      ],
+      "started": "2026-05-28T22:39:16Z",
+      "last_reply": "2026-05-28T22:39:16Z",
+      "root_message_id": "msg-f1aaec043a84"
+    }
+  ]
+}

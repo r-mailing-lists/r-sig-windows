@@ -23,3 +23,212 @@ Thank you,
 Avi
 
 
+From @ndrew @end|ng |rom robb|n@@@me  Thu Apr 30 03:08:09 2026
+From: @ndrew @end|ng |rom robb|n@@@me (Andrew Robbins)
+Date: Wed, 29 Apr 2026 21:08:09 -0400
+Subject: [R-SIG-Win] 
+ [Rd] Who will be assuming the lead for Rtools and other
+ Windows-related development?
+In-Reply-To: <DS2PR17MB78497B6543F6D0B6E40CCE48FA342@DS2PR17MB7849.namprd17.prod.outlook.com>
+References: <CAL6gwn+a5SuL9Rr=U-7-G68V8xMbsS6QoR0YFmAkACkZnsWuhA@mail.gmail.com>
+ <2cae8bb5e44d4d079e5a7dab9645ac3b@alumni.ku.dk>
+ <DS2PR17MB78497B6543F6D0B6E40CCE48FA342@DS2PR17MB7849.namprd17.prod.outlook.com>
+Message-ID: <49f40dda0366b5d6acb49c3552851813@purelymail.com>
+
+Just to clarify because it appears that Microsoft Outlook mangled my 
+outbound email address (yes, I know, I know), I can be reached at andrew 
+at robbinsa dot me
+
+Apologies for the double post,
+-Andrew
+
+On 2026-04-29 20:40, andrew--- via R-devel wrote:
+> Hi all,
+> 
+> I'm somewhat familiar with the MXE/rtools codebase myself (and 
+> submitted a few patches a year or two back) and am happy to help out 
+> with maintenance if desired. I've also been messing around with the 
+> extremely-early-beta gcc WoA patches that are (allegedly) supposed to 
+> hit with gcc 17 and am looking forward to being able to get aarch64-win 
+> out of the perpetual-beta stage!
+> 
+> Feel free to reach out at any time.
+> 
+> -Andrew
+> 
+> 
+> 
+> 
+> ________________________________________
+> From:?R-devel <r-devel-bounces at r-project.org> on behalf of Mossa Merhi 
+> Reimert via R-devel <r-devel at r-project.org>
+> Sent:?Wednesday, April 29, 2026 4:22 PM
+> To:?Avraham Adler <avraham.adler at gmail.com>; R-devel 
+> <r-devel at r-project.org>
+> Cc:?r-sig-windows at r-project.org <r-sig-windows at r-project.org>
+> Subject:?Re: [Rd] Who will be assuming the lead for Rtools and other 
+> Windows-related development?
+> 
+> 
+> The passing of Tomas Kalibera is indeed a shock and a loss to all of 
+> us, and the entirety of the R community, even further.? I used to read 
+> his blogposts on (now) https://blog.r-project.org/?and they were a 
+> gift.
+> 
+> 
+> 
+> On the concern you bring up, I do remember Jeroen Ooms being the 
+> maintainer of Rtools.
+> 
+> And from one day to another, this changed. I never saw an explanation 
+> of this decision,
+> 
+> or anything. Maybe R-Core could ask Jeroen Ooms to do this again?
+> 
+> 
+> 
+> Sent from Outlook for Mac
+> 
+> From: R-devel <r-devel-bounces at r-project.org> on behalf of Avraham 
+> Adler <avraham.adler at gmail.com>
+> 
+> Date: Wednesday, 29 April 2026 at 20.45
+> 
+> To: R-devel <r-devel at r-project.org>
+> 
+> Cc: r-sig-windows at r-project.org <r-sig-windows at r-project.org>
+> 
+> Subject: [Rd] Who will be assuming the lead for Rtools and other 
+> Windows-related development?
+> 
+> 
+> 
+> Hello.
+> 
+> 
+> 
+> Tomas Kalibera's passing is tragic on many levels. He was
+> 
+> young?younger than most of us long-time members of this list, I
+> 
+> fear?leaving a family and children bereft. He leaves many friends;
+> 
+> some personal, some virtual. And practically, he leaves a hole in
+> 
+> R-core, especially when it comes to Windows-related development,
+> 
+> maintenance, and debugging.
+> 
+> 
+> 
+> I apologize if this is too soon, but with his tragic passing, has
+> 
+> R-core decided on who will be the point-person/lead maintainer for
+> 
+> Rtools and other Windows-related issues?
+> 
+> 
+> 
+> Thank you,
+> 
+> 
+> 
+> Avi
+> 
+> 
+> 
+> ______________________________________________
+> 
+> R-devel at r-project.org mailing list
+> 
+> https://stat.ethz.ch/mailman/listinfo/r-devel
+> 
+> 
+> 
+> ??????? [[alternative HTML version deleted]]
+> 
+> 
+> 
+> ______________________________________________
+> R-devel at r-project.org mailing list
+> https://stat.ethz.ch/mailman/listinfo/r-devel
+
+
+From @vr@h@m@@d|er @end|ng |rom gm@||@com  Fri May 29 00:39:16 2026
+From: @vr@h@m@@d|er @end|ng |rom gm@||@com (Avraham Adler)
+Date: Thu, 28 May 2026 18:39:16 -0400
+Subject: [R-SIG-Win] [Rd] Compilation on Windows freezes at recommended
+ packages
+In-Reply-To: <4bde9524-dddd-42de-8716-e24cc712681e@robbinsa.me>
+References: <CAL6gwnKpR=KyRzxmsZXFQk-zzUtYnuU0jU37AhycP70-M4kohg@mail.gmail.com>
+ <20260506192154.374921c1@arachnoid> <20260506235257.21cd8ee4@Tarkus>
+ <CAL6gwnJpU0s_83opGmj69s1663Q9f0at0+3-qwaaNtufypJomg@mail.gmail.com>
+ <4bde9524-dddd-42de-8716-e24cc712681e@robbinsa.me>
+Message-ID: <CAL6gwnLejb-MGQDS1qdH4O1gQdwY-rgDskO0aUr0e3Y8orNAUQ@mail.gmail.com>
+
+Thank you, Andrew.
+
+I just saw make updated today, so I should try rebuilding on the
+failing platform sometime in the future.
+
+As for r-sig-Windows, I would think we should revive it, especially in
+light of this long thread [1] and the recent updates (comment 47 and
+on) at [2], but it will require a Tomas-level guru to monitor it as
+well. Especially since if the stack misalignment feature is actually
+fixed, it may only be fixed for the upcoming GCC 17 [3], and Rtools45
+uses GCC 14 [4].
+
+Thank you,
+
+Avi
+
+[1] https://stat.ethz.ch/pipermail/r-sig-windows/2024q1/000105.html
+[2] https://gcc.gnu.org/bugzilla/show_bug.cgi?id=54412
+[3] https://gcc.gnu.org/bugzilla/show_bug.cgi?id=54412#c49
+[4] https://cran.r-project.org/bin/windows/Rtools/rtools45/rtools.html
+
+On Thu, May 28, 2026 at 12:43?PM Andrew Robbins via R-devel
+<r-devel at r-project.org> wrote:
+>
+> It should pull down with pacman -Syuu as make is not shipped in the MXE
+> tarball. This will need to be done on every install until a new release
+> is cut, granted.
+>
+>
+> As an aside, do we want to revive R-sig-win? Its kind of a dead mailing
+> list, but its still there.
+>
+> On 5/26/2026 11:17 AM, Avraham Adler wrote:
+> > On Wed, May 6, 2026 at 4:53?PM Ivan Krylov <ikrylov at disroot.org> wrote:
+> >> ? Wed, 6 May 2026 19:21:54 +0300
+> >> Ivan Krylov via R-devel <r-devel at r-project.org> ?????:
+> >>
+> >>> it looked like GNU Make was stuck
+> >> Indeed, this happened to me a few times just now, and it was Make in
+> >> all cases. I think we stumbled upon a bug in the MSYS2 runtime:
+> >> https://github.com/msys2/msys2-runtime/issues/338
+> > Yes, it clearly seems so. Now that Takashi Yano's patch was accepted
+> > and merged [1] does Rtools45 need to be rebuilt or will it propagate
+> > the next time MSYS2 is updated via "pacman -Syuu" or the like?
+> >
+> > Thank you,
+> >
+> > Avi
+> >
+> > [1] https://github.com/msys2/msys2-runtime/pull/339
+> >
+> > ______________________________________________
+> > R-devel at r-project.org mailing list
+> > https://stat.ethz.ch/mailman/listinfo/r-devel
+>
+> --
+> Andrew Robbins
+> Research Software Specialist
+> University of Michigan
+> ITS Advanced Research Computing
+>
+> ______________________________________________
+> R-devel at r-project.org mailing list
+> https://stat.ethz.ch/mailman/listinfo/r-devel
+
+
