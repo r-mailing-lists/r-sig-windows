@@ -109,14 +109,14 @@
     }
   },
   {
-    "name": "Tim Keitt",
-    "slug": "tim-keitt",
-    "emailHash": "0042cb9f110773b83d9c979cead2263cb2e28429e358bd4a999e51500a62ef01",
+    "name": "Fredrik Skoog",
+    "slug": "fredrik-skoog",
+    "emailHash": "f6e4f2515ef78b0c73d582e90dc7a6130cd4ceb5bd365d3686af2f89317aa6ce",
     "messageCount": 2,
-    "firstDate": "2016-04-29T20:33:11Z",
-    "lastDate": "2016-04-30T00:08:28Z",
+    "firstDate": "2023-04-18T12:16:58Z",
+    "lastDate": "2023-06-06T09:42:33Z",
     "yearlyActivity": {
-      "2016": 2
+      "2023": 2
     }
   },
   {
@@ -131,17 +131,6 @@
     }
   },
   {
-    "name": "Fredrik Skoog",
-    "slug": "fredrik-skoog",
-    "emailHash": "f6e4f2515ef78b0c73d582e90dc7a6130cd4ceb5bd365d3686af2f89317aa6ce",
-    "messageCount": 2,
-    "firstDate": "2023-04-18T12:16:58Z",
-    "lastDate": "2023-06-06T09:42:33Z",
-    "yearlyActivity": {
-      "2023": 2
-    }
-  },
-  {
     "name": "Kirill Müller",
     "slug": "kirill-m-ller",
     "emailHash": "27428f4e68e783f0953f00cf0a4d40466bcc4bbb32ab5f2324bee380e4c44f0b",
@@ -150,6 +139,17 @@
     "lastDate": "2015-09-25T10:20:25Z",
     "yearlyActivity": {
       "2015": 2
+    }
+  },
+  {
+    "name": "Tim Keitt",
+    "slug": "tim-keitt",
+    "emailHash": "0042cb9f110773b83d9c979cead2263cb2e28429e358bd4a999e51500a62ef01",
+    "messageCount": 2,
+    "firstDate": "2016-04-29T20:33:11Z",
+    "lastDate": "2016-04-30T00:08:28Z",
+    "yearlyActivity": {
+      "2016": 2
     }
   },
   {
@@ -164,14 +164,14 @@
     }
   },
   {
-    "name": "Andrew Robbins",
-    "slug": "andrew-robbins",
-    "emailHash": "e889f78aaa7ec3002ef1578aafe75f5cff986c51e056360c275a285fa3c3e4a5",
+    "name": "Debartha Paul",
+    "slug": "debartha-paul",
+    "emailHash": "7d5c28e64346d0f280377ae3000a076390074e0384a3554b334308574e9210e9",
     "messageCount": 1,
-    "firstDate": "2026-04-30T01:08:09Z",
-    "lastDate": "2026-04-30T01:08:09Z",
+    "firstDate": "2023-04-15T17:00:50Z",
+    "lastDate": "2023-04-15T17:00:50Z",
     "yearlyActivity": {
-      "2026": 1
+      "2023": 1
     }
   },
   {
@@ -208,28 +208,6 @@
     }
   },
   {
-    "name": "Henric Nilsson (Public)",
-    "slug": "henric-nilsson-public",
-    "emailHash": "1dccf4528b79d2845b90efc093cc15e7a98c007185f168d28e0ea726bdb09d0e",
-    "messageCount": 1,
-    "firstDate": "2015-09-16T06:54:21Z",
-    "lastDate": "2015-09-16T06:54:21Z",
-    "yearlyActivity": {
-      "2015": 1
-    }
-  },
-  {
-    "name": "Debartha Paul",
-    "slug": "debartha-paul",
-    "emailHash": "7d5c28e64346d0f280377ae3000a076390074e0384a3554b334308574e9210e9",
-    "messageCount": 1,
-    "firstDate": "2023-04-15T17:00:50Z",
-    "lastDate": "2023-04-15T17:00:50Z",
-    "yearlyActivity": {
-      "2023": 1
-    }
-  },
-  {
     "name": "Silvio Waschina",
     "slug": "silvio-waschina",
     "emailHash": "8a6804b0a692aa9a3cf69f6fa0a7726c349753048956bd7d65def86d225a01b0",
@@ -238,6 +216,28 @@
     "lastDate": "2026-03-27T09:24:05Z",
     "yearlyActivity": {
       "2026": 1
+    }
+  },
+  {
+    "name": "Andrew Robbins",
+    "slug": "andrew-robbins",
+    "emailHash": "e889f78aaa7ec3002ef1578aafe75f5cff986c51e056360c275a285fa3c3e4a5",
+    "messageCount": 1,
+    "firstDate": "2026-04-30T01:08:09Z",
+    "lastDate": "2026-04-30T01:08:09Z",
+    "yearlyActivity": {
+      "2026": 1
+    }
+  },
+  {
+    "name": "Henric Nilsson (Public)",
+    "slug": "henric-nilsson-public",
+    "emailHash": "1dccf4528b79d2845b90efc093cc15e7a98c007185f168d28e0ea726bdb09d0e",
+    "messageCount": 1,
+    "firstDate": "2015-09-16T06:54:21Z",
+    "lastDate": "2015-09-16T06:54:21Z",
+    "yearlyActivity": {
+      "2015": 1
     }
   }
 ]
