@@ -2,10 +2,10 @@
   "list": "r-sig-windows",
   "description": "",
   "source_url": "",
-  "total_messages": 144,
+  "total_messages": 145,
   "first_message": "2015-08-28T21:52:36Z",
-  "last_message": "2026-07-20T08:04:11Z",
-  "total_threads": 58,
+  "last_message": "2026-08-25T16:43:33Z",
+  "total_threads": 59,
   "months_available": [
     "2015-08",
     "2015-09",
@@ -43,6 +43,7 @@
     "2026-03",
     "2026-04",
     "2026-05",
-    "2026-07"
+    "2026-07",
+    "2026-08"
   ]
 }

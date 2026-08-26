@@ -1,0 +1,36 @@
+{
+  "list": "r-sig-windows",
+  "description": "",
+  "month": "2026-08",
+  "messages": [
+    {
+      "id": "msg-3593fe446504",
+      "message_id": "<AM0PR05MB59859DCC8BD54AEFC5622C1FC0AF2@AM0PR05MB5985.eurprd05.prod.outlook.com>",
+      "from_name": "Krzysztof Dmytrów",
+      "from_email_hash": "30c69b84960012f211f53f73df5610ef1189a5411dad123c9ab6e12ec4cd5093",
+      "date": "2026-08-25T16:43:33Z",
+      "subject": "[R-SIG-Win] When can we expect further versions of R for Windows on ARM?",
+      "subject_clean": "When can we expect further versions of R for Windows on ARM?",
+      "in_reply_to": null,
+      "references": [],
+      "body_plain": "Dear All,\n\nAs far as I am aware, Tomas Kalibera led the development of R for Windows on ARM machines. His much too early passing stopped the development of this version of R. Because I own a Snapdragon Elite X based system, I am very interested on continuation of work for this architecture. The last version available is R-4.5.3. When can we expect further versions of R for Windows on ARM systems?\n\nI hope my question will not be considered as spam or anything like this. I looked at FAQ pages and hadn't seen any information on this. I know that my issue is very specific and quite niche.\n\nThank you,\n\nKrzysztof\n\n\n--\n\npozdrawiam serdecznie/best regards\n\ndr Krzysztof Dmytr?w\nUniwersytet Szczeci?ski\nInstytut Ekonomii i Finans?w\n\nKrzysztof Dmytr?w, Ph.D.\nUniversity of Szczecin\nInstitute of Economics and Finance\n\n\nul. Mickiewicza 64\n71-101 Szczecin, Poland\ntel. +48 91 444 1824\ne-mail: krzysztof.dmytrow at usz.edu.pl<mailto:krzysztof.dmytrow at usz.edu.pl>\n\n\n\nInformacje o przetwarzaniu danych osobowych - usz.edu.pl/rodo<http://usz.edu.pl/rodo/>\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "Dear All,\n\nAs far as I am aware, Tomas Kalibera led the development of R for Windows on ARM machines. His much too early passing stopped the development of this version of R. Because I own a Snapdrago",
+      "thread_id": "thread-3593fe446504",
+      "thread_depth": 0,
+      "month": "2026-08"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-3593fe446504",
+      "subject": "When can we expect further versions of R for Windows on ARM?",
+      "message_count": 1,
+      "participants": [
+        "Krzysztof Dmytrów"
+      ],
+      "started": "2026-08-25T16:43:33Z",
+      "last_reply": "2026-08-25T16:43:33Z",
+      "root_message_id": "msg-3593fe446504"
+    }
+  ]
+}
