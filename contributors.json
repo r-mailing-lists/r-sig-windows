@@ -120,6 +120,39 @@
     }
   },
   {
+    "name": "Tim Keitt",
+    "slug": "tim-keitt",
+    "emailHash": "0042cb9f110773b83d9c979cead2263cb2e28429e358bd4a999e51500a62ef01",
+    "messageCount": 2,
+    "firstDate": "2016-04-29T20:33:11Z",
+    "lastDate": "2016-04-30T00:08:28Z",
+    "yearlyActivity": {
+      "2016": 2
+    }
+  },
+  {
+    "name": "Marcel Baumgartner",
+    "slug": "marcel-baumgartner",
+    "emailHash": "505f40eb596347947082eb9657b0812aaa188cc3519f17d57420ad747a988c9e",
+    "messageCount": 2,
+    "firstDate": "2020-10-27T07:15:03Z",
+    "lastDate": "2020-10-27T10:08:17Z",
+    "yearlyActivity": {
+      "2020": 2
+    }
+  },
+  {
+    "name": "Andrew Robbins",
+    "slug": "andrew-robbins",
+    "emailHash": "e889f78aaa7ec3002ef1578aafe75f5cff986c51e056360c275a285fa3c3e4a5",
+    "messageCount": 2,
+    "firstDate": "2026-04-30T01:08:09Z",
+    "lastDate": "2026-09-01T06:38:47Z",
+    "yearlyActivity": {
+      "2026": 2
+    }
+  },
+  {
     "name": "Fredrik Skoog",
     "slug": "fredrik-skoog",
     "emailHash": "f6e4f2515ef78b0c73d582e90dc7a6130cd4ceb5bd365d3686af2f89317aa6ce",
@@ -142,47 +175,14 @@
     }
   },
   {
-    "name": "Marcel Baumgartner",
-    "slug": "marcel-baumgartner",
-    "emailHash": "505f40eb596347947082eb9657b0812aaa188cc3519f17d57420ad747a988c9e",
-    "messageCount": 2,
-    "firstDate": "2020-10-27T07:15:03Z",
-    "lastDate": "2020-10-27T10:08:17Z",
-    "yearlyActivity": {
-      "2020": 2
-    }
-  },
-  {
-    "name": "Tim Keitt",
-    "slug": "tim-keitt",
-    "emailHash": "0042cb9f110773b83d9c979cead2263cb2e28429e358bd4a999e51500a62ef01",
-    "messageCount": 2,
-    "firstDate": "2016-04-29T20:33:11Z",
-    "lastDate": "2016-04-30T00:08:28Z",
-    "yearlyActivity": {
-      "2016": 2
-    }
-  },
-  {
-    "name": "Krzysztof Dmytrów",
-    "slug": "krzysztof-dmytr-w",
-    "emailHash": "30c69b84960012f211f53f73df5610ef1189a5411dad123c9ab6e12ec4cd5093",
+    "name": "Dirk Eddelbuettel",
+    "slug": "dirk-eddelbuettel",
+    "emailHash": "0fbdef44c1dd04f038656de5f1f4b6a17c248d863c092d17d1efdb9f10b5c034",
     "messageCount": 1,
-    "firstDate": "2026-08-25T16:43:33Z",
-    "lastDate": "2026-08-25T16:43:33Z",
+    "firstDate": "2016-04-29T22:55:43Z",
+    "lastDate": "2016-04-29T22:55:43Z",
     "yearlyActivity": {
-      "2026": 1
-    }
-  },
-  {
-    "name": "Andrew Robbins",
-    "slug": "andrew-robbins",
-    "emailHash": "e889f78aaa7ec3002ef1578aafe75f5cff986c51e056360c275a285fa3c3e4a5",
-    "messageCount": 1,
-    "firstDate": "2026-04-30T01:08:09Z",
-    "lastDate": "2026-04-30T01:08:09Z",
-    "yearlyActivity": {
-      "2026": 1
+      "2016": 1
     }
   },
   {
@@ -208,14 +208,14 @@
     }
   },
   {
-    "name": "Henric Nilsson (Public)",
-    "slug": "henric-nilsson-public",
-    "emailHash": "1dccf4528b79d2845b90efc093cc15e7a98c007185f168d28e0ea726bdb09d0e",
+    "name": "Debartha Paul",
+    "slug": "debartha-paul",
+    "emailHash": "7d5c28e64346d0f280377ae3000a076390074e0384a3554b334308574e9210e9",
     "messageCount": 1,
-    "firstDate": "2015-09-16T06:54:21Z",
-    "lastDate": "2015-09-16T06:54:21Z",
+    "firstDate": "2023-04-15T17:00:50Z",
+    "lastDate": "2023-04-15T17:00:50Z",
     "yearlyActivity": {
-      "2015": 1
+      "2023": 1
     }
   },
   {
@@ -230,25 +230,25 @@
     }
   },
   {
-    "name": "Debartha Paul",
-    "slug": "debartha-paul",
-    "emailHash": "7d5c28e64346d0f280377ae3000a076390074e0384a3554b334308574e9210e9",
+    "name": "Henric Nilsson (Public)",
+    "slug": "henric-nilsson-public",
+    "emailHash": "1dccf4528b79d2845b90efc093cc15e7a98c007185f168d28e0ea726bdb09d0e",
     "messageCount": 1,
-    "firstDate": "2023-04-15T17:00:50Z",
-    "lastDate": "2023-04-15T17:00:50Z",
+    "firstDate": "2015-09-16T06:54:21Z",
+    "lastDate": "2015-09-16T06:54:21Z",
     "yearlyActivity": {
-      "2023": 1
+      "2015": 1
     }
   },
   {
-    "name": "Dirk Eddelbuettel",
-    "slug": "dirk-eddelbuettel",
-    "emailHash": "0fbdef44c1dd04f038656de5f1f4b6a17c248d863c092d17d1efdb9f10b5c034",
+    "name": "Krzysztof Dmytrów",
+    "slug": "krzysztof-dmytr-w",
+    "emailHash": "30c69b84960012f211f53f73df5610ef1189a5411dad123c9ab6e12ec4cd5093",
     "messageCount": 1,
-    "firstDate": "2016-04-29T22:55:43Z",
-    "lastDate": "2016-04-29T22:55:43Z",
+    "firstDate": "2026-08-25T16:43:33Z",
+    "lastDate": "2026-08-25T16:43:33Z",
     "yearlyActivity": {
-      "2016": 1
+      "2026": 1
     }
   }
 ]

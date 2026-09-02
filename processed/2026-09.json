@@ -1,0 +1,38 @@
+{
+  "list": "r-sig-windows",
+  "description": "",
+  "month": "2026-09",
+  "messages": [
+    {
+      "id": "msg-96f951722cea",
+      "message_id": "<e050fc59ef5be8b9d283dfb14457ba7d@purelymail.com>",
+      "from_name": "Andrew Robbins",
+      "from_email_hash": "e889f78aaa7ec3002ef1578aafe75f5cff986c51e056360c275a285fa3c3e4a5",
+      "date": "2026-09-01T06:38:47Z",
+      "subject": "[R-SIG-Win]  When can we expect further versions of R for Windows on ARM?",
+      "subject_clean": "When can we expect further versions of R for Windows on ARM?",
+      "in_reply_to": "<AM0PR05MB59859DCC8BD54AEFC5622C1FC0AF2@AM0PR05MB5985.eurprd05.prod.outlook.com>",
+      "references": [
+        "<AM0PR05MB59859DCC8BD54AEFC5622C1FC0AF2@AM0PR05MB5985.eurprd05.prod.outlook.com>"
+      ],
+      "body_plain": "They're not signed, but you can find release builds at the r-hub github \nrepo. For instance: https://github.com/r-hub/R/releases/tag/v4.6.1\n\n-Andrew\n\nOn 2026-08-25 12:43, Krzysztof Dmytr?w via R-SIG-windows wrote:\n> Dear All,\n> \n> As far as I am aware, Tomas Kalibera led the development of R for \n> Windows on ARM machines. His much too early passing stopped the \n> development of this version of R. Because I own a Snapdragon Elite X \n> based system, I am very interested on continuation of work for this \n> architecture. The last version available is R-4.5.3. When can we expect \n> further versions of R for Windows on ARM systems?\n> \n> I hope my question will not be considered as spam or anything like \n> this. I looked at FAQ pages and hadn't seen any information on this. I \n> know that my issue is very specific and quite niche.\n> \n> Thank you,\n> \n> Krzysztof\n> \n> \n> --\n> \n> pozdrawiam serdecznie/best regards\n> \n> dr Krzysztof Dmytr?w\n> Uniwersytet Szczeci?ski\n> Instytut Ekonomii i Finans?w\n> \n> Krzysztof Dmytr?w, Ph.D.\n> University of Szczecin\n> Institute of Economics and Finance\n> \n> \n> ul. Mickiewicza 64\n> 71-101 Szczecin, Poland\n> tel. +48 91 444 1824\n> e-mail: \n> krzysztof.dmytrow at usz.edu.pl<mailto:krzysztof.dmytrow at usz.edu.pl>\n> \n> \n> \n> Informacje o przetwarzaniu danych osobowych - \n> usz.edu.pl/rodo<http://usz.edu.pl/rodo/>\n> \n> \t[[alternative HTML version deleted]]\n> \n> \n> _______________________________________________\n> R-SIG-windows mailing list\n> R-SIG-windows at r-project.org\n> https://stat.ethz.ch/mailman/listinfo/r-sig-windows",
+      "body_snippet": "They're not signed, but you can find release builds at the r-hub github \nrepo. For instance: https://github.com/r-hub/R/releases/tag/v4.6.1\n\n-Andrew\n\nOn 2026-08-25 12:43, Krzysztof Dmytr?w via R-SIG-w",
+      "thread_id": "thread-96f951722cea",
+      "thread_depth": 0,
+      "month": "2026-09"
+    }
+  ],
+  "threads": [
+    {
+      "id": "thread-96f951722cea",
+      "subject": "When can we expect further versions of R for Windows on ARM?",
+      "message_count": 1,
+      "participants": [
+        "Andrew Robbins"
+      ],
+      "started": "2026-09-01T06:38:47Z",
+      "last_reply": "2026-09-01T06:38:47Z",
+      "root_message_id": "msg-96f951722cea"
+    }
+  ]
+}

@@ -65,3 +65,69 @@ Informacje o przetwarzaniu danych osobowych - usz.edu.pl/rodo<http://usz.edu.pl/
 	[[alternative HTML version deleted]]
 
 
+From @ndrew @end|ng |rom robb|n@@@me  Tue Sep  1 08:38:47 2026
+From: @ndrew @end|ng |rom robb|n@@@me (Andrew Robbins)
+Date: Tue, 01 Sep 2026 02:38:47 -0400
+Subject: [R-SIG-Win] 
+ When can we expect further versions of R for Windows on ARM?
+In-Reply-To: <AM0PR05MB59859DCC8BD54AEFC5622C1FC0AF2@AM0PR05MB5985.eurprd05.prod.outlook.com>
+References: <AM0PR05MB59859DCC8BD54AEFC5622C1FC0AF2@AM0PR05MB5985.eurprd05.prod.outlook.com>
+Message-ID: <e050fc59ef5be8b9d283dfb14457ba7d@purelymail.com>
+
+They're not signed, but you can find release builds at the r-hub github 
+repo. For instance: https://github.com/r-hub/R/releases/tag/v4.6.1
+
+-Andrew
+
+On 2026-08-25 12:43, Krzysztof Dmytr?w via R-SIG-windows wrote:
+> Dear All,
+> 
+> As far as I am aware, Tomas Kalibera led the development of R for 
+> Windows on ARM machines. His much too early passing stopped the 
+> development of this version of R. Because I own a Snapdragon Elite X 
+> based system, I am very interested on continuation of work for this 
+> architecture. The last version available is R-4.5.3. When can we expect 
+> further versions of R for Windows on ARM systems?
+> 
+> I hope my question will not be considered as spam or anything like 
+> this. I looked at FAQ pages and hadn't seen any information on this. I 
+> know that my issue is very specific and quite niche.
+> 
+> Thank you,
+> 
+> Krzysztof
+> 
+> 
+> --
+> 
+> pozdrawiam serdecznie/best regards
+> 
+> dr Krzysztof Dmytr?w
+> Uniwersytet Szczeci?ski
+> Instytut Ekonomii i Finans?w
+> 
+> Krzysztof Dmytr?w, Ph.D.
+> University of Szczecin
+> Institute of Economics and Finance
+> 
+> 
+> ul. Mickiewicza 64
+> 71-101 Szczecin, Poland
+> tel. +48 91 444 1824
+> e-mail: 
+> krzysztof.dmytrow at usz.edu.pl<mailto:krzysztof.dmytrow at usz.edu.pl>
+> 
+> 
+> 
+> Informacje o przetwarzaniu danych osobowych - 
+> usz.edu.pl/rodo<http://usz.edu.pl/rodo/>
+> 
+> 	[[alternative HTML version deleted]]
+> 
+> 
+> _______________________________________________
+> R-SIG-windows mailing list
+> R-SIG-windows at r-project.org
+> https://stat.ethz.ch/mailman/listinfo/r-sig-windows
+
+
