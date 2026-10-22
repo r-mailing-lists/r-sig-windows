@@ -19,7 +19,8 @@
       "body_snippet": "On 4/18/23 14:16, Fredrik Skoog wrote:\n> Hi,\n>\n> If you run:\n>\n> library(microbenchmark)\n> m <- matrix(rnorm(28000000), nrow=7000, byrow=TRUE)\n> rownames(m) <- rownames(m, do.NULL = FALSE, prefix = \"t",
       "thread_id": "thread-04d064e7f831",
       "thread_depth": 0,
-      "month": "2023-05"
+      "month": "2023-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2023q2/000099.html"
     },
     {
       "id": "msg-bf96f2ffd840",
@@ -38,7 +39,8 @@
       "body_snippet": "On 5/17/23 16:07, Tomas Kalibera wrote:\n>\n> On 4/18/23 14:16, Fredrik Skoog wrote:\n>> Hi,\n>>\n>> If you run:\n>>\n>> library(microbenchmark)\n>> m <- matrix(rnorm(28000000), nrow=7000, byrow=TRUE)\n>> rown",
       "thread_id": "thread-04d064e7f831",
       "thread_depth": 1,
-      "month": "2023-05"
+      "month": "2023-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2023q2/000100.html"
     }
   ],
   "threads": [

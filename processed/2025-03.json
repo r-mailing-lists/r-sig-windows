@@ -17,7 +17,8 @@
       "body_snippet": "Dear R Windows developers,\n\nthere is now a new toolchain for R for Windows, Rtools45. It is now used \nby R-devel and R 4.5.0 (now alpha).\n\nCompared to Rtools44, it uses GCC 14 and updates other core c",
       "thread_id": "thread-3779fd0d3160",
       "thread_depth": 0,
-      "month": "2025-03"
+      "month": "2025-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2025q1/000123.html"
     },
     {
       "id": "msg-4db3780de2f3",
@@ -33,7 +34,8 @@
       "body_snippet": "Hi, Tomas.\n\nAccording to R installation and administration, version 4.5.0 will be\nthe last version with BLAS bundled with R [1]. For the past 15?20\nyears, I have been building R from source linking fi",
       "thread_id": "thread-4db3780de2f3",
       "thread_depth": 0,
-      "month": "2025-03"
+      "month": "2025-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2025q1/000124.html"
     },
     {
       "id": "msg-6899363467df",
@@ -49,7 +51,8 @@
       "body_snippet": "Hello.\n\nI am trying to build R using the new toolchain tonight and the\ncompilation stops very early with the errors below.\n\nPer [1], this is now an error. Does this need to be raised to R-devel\nor sho",
       "thread_id": "thread-6899363467df",
       "thread_depth": 0,
-      "month": "2025-03"
+      "month": "2025-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2025q1/000125.html"
     },
     {
       "id": "msg-aad72a895c79",
@@ -67,7 +70,8 @@
       "body_snippet": "Hi Avi,\n\nthe plan is that BLAS/LAPACK in R 4.5.0 on Windows will be bundled as it \nis now (and was in the previous versions of R). I plan to work on the \nunbundling after 4.5.0 is out. Whether any cha",
       "thread_id": "thread-4db3780de2f3",
       "thread_depth": 1,
-      "month": "2025-03"
+      "month": "2025-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2025q1/000126.html"
     },
     {
       "id": "msg-e625b3ef30a9",
@@ -85,7 +89,8 @@
       "body_snippet": "Hi, Tomas.\n\nI tested and this happens when I try to link to a precompiled static\nOpenBLAS (as per the prior post). When I build R with no outside BLAS\nthis does not happen. Do you have any suggestions",
       "thread_id": "thread-6899363467df",
       "thread_depth": 1,
-      "month": "2025-03"
+      "month": "2025-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2025q1/000127.html"
     },
     {
       "id": "msg-1c3ab07009a7",
@@ -104,7 +109,8 @@
       "body_snippet": "For what it is worth, \"make install\" on OPenBLAS creates two header\nfiles (posted below) f77blas.h and openblas_config.h. I copied both to\nsrc/include and then added #include \"f77blas.h\" to blas00.c a",
       "thread_id": "thread-6899363467df",
       "thread_depth": 2,
-      "month": "2025-03"
+      "month": "2025-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2025q1/000134.html"
     },
     {
       "id": "msg-c76d2770d2ae",
@@ -124,7 +130,8 @@
       "body_snippet": "Changing line 8 in src/extra/blas/Makefile.win to \" $(CC) -O3\n-I../../include  -c $< -o $@ -Wno-implicit-function-declaration\"\nallows the compilation to proceed past that point. But now I get\nerrors w",
       "thread_id": "thread-6899363467df",
       "thread_depth": 3,
-      "month": "2025-03"
+      "month": "2025-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2025q1/000128.html"
     },
     {
       "id": "msg-7931b19e8e61",
@@ -145,7 +152,8 @@
       "body_snippet": "That's weird. Restarting the compilation allowed Matrix to finish and\nit passes make check-devel/check-recommended. I am so confused.\n\nSo, for the time being, passing \"-Wno-implicit-function-declarati",
       "thread_id": "thread-6899363467df",
       "thread_depth": 4,
-      "month": "2025-03"
+      "month": "2025-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2025q1/000129.html"
     },
     {
       "id": "msg-8d233edea479",
@@ -167,7 +175,8 @@
       "body_snippet": "Thanks for the report. Fixed in R-devel (and R-patched).\n\nTomas\n\nOn 3/23/25 21:24, Avraham Adler wrote:\n> That's weird. Restarting the compilation allowed Matrix to finish and\n> it passes make check-d",
       "thread_id": "thread-6899363467df",
       "thread_depth": 5,
-      "month": "2025-03"
+      "month": "2025-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2025q1/000130.html"
     },
     {
       "id": "msg-f55a44326c3a",
@@ -190,7 +199,8 @@
       "body_snippet": "And thank you for your tireless work, Tomas! It is very much appreciated.\n\nAvi\n\nOn Mon, Mar 24, 2025 at 11:42?AM Tomas Kalibera\n<tomas.kalibera at gmail.com> wrote:\n>\n> Thanks for the report. Fixed in",
       "thread_id": "thread-6899363467df",
       "thread_depth": 6,
-      "month": "2025-03"
+      "month": "2025-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2025q1/000131.html"
     },
     {
       "id": "msg-c1a09277f6f3",
@@ -206,7 +216,8 @@
       "body_snippet": "Hello, Tomas.\n\nAt nloptr, we are struggling with the recent upgrading of non-API\npoints from NOTES to ERRORs, given that the upstream NLOPT library\nuses various calls not allowed within R; please see ",
       "thread_id": "thread-c1a09277f6f3",
       "thread_depth": 0,
-      "month": "2025-03"
+      "month": "2025-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2025q1/000132.html"
     },
     {
       "id": "msg-9919139ed8de",
@@ -224,7 +235,8 @@
       "body_snippet": "Hi Avi,\n\nOn 3/27/25 03:12, Avraham Adler wrote:\n> Hello, Tomas.\n>\n> At nloptr, we are struggling with the recent upgrading of non-API\n> points from NOTES to ERRORs, given that the upstream NLOPT libra",
       "thread_id": "thread-c1a09277f6f3",
       "thread_depth": 1,
-      "month": "2025-03"
+      "month": "2025-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2025q1/000133.html"
     }
   ],
   "threads": [

@@ -17,7 +17,8 @@
       "body_snippet": "Dear R Windows developers,\n\nan update of Rtools45, the toolchain for R for Windows used by R-devel \nand R 4.5, is available as revision 6691 from\n\nhttps://cran.r-project.org/bin/windows/Rtools/rtools4",
       "thread_id": "thread-1e7996bd1b8c",
       "thread_depth": 0,
-      "month": "2025-10"
+      "month": "2025-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2025q4/000136.html"
     }
   ],
   "threads": [

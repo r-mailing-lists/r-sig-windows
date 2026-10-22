@@ -17,7 +17,8 @@
       "body_snippet": "Hello.\n\nAs an experiment, I tried compiling R with the mingw64 5.3.0 (posix-seh)\nbuild. R compiles smoothly, but make check fails pretty early as sd(NA)\nreturns NaN instead of NA, which is a fatal err",
       "thread_id": "thread-6b94b641f0e6",
       "thread_depth": 0,
-      "month": "2016-03"
+      "month": "2016-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2016q1/000043.html"
     },
     {
       "id": "msg-cf09b09465f4",
@@ -35,7 +36,8 @@
       "body_snippet": "I found something similar a while back:\nhttp://r.789695.n4.nabble.com/Optimization-bug-when-byte-compiling-with-gcc-5-2-0-on-windows-td4712220.html\n\nIIRC the issue was diagnosed by Luke that there are",
       "thread_id": "thread-6b94b641f0e6",
       "thread_depth": 1,
-      "month": "2016-03"
+      "month": "2016-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2016q1/000044.html"
     },
     {
       "id": "msg-48fd2b629a57",
@@ -54,7 +56,8 @@
       "body_snippet": "Hi, Jeroen.\n\nThanks for the link. Has anyone posted the possible incorrect\nimplementation at mingw64 for their review?\n\nThanks,\n\nAvi\n\nOn Fri, Mar 18, 2016 at 5:32 AM, Jeroen Ooms <jeroenooms at gmail.",
       "thread_id": "thread-6b94b641f0e6",
       "thread_depth": 2,
-      "month": "2016-03"
+      "month": "2016-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2016q1/000045.html"
     },
     {
       "id": "msg-e7a5382d2a0e",
@@ -70,7 +73,8 @@
       "body_snippet": "As R-3.3.0 will use gcc 4.9.3 with full support for C11, perhaps\nCXX1XSTD = -std=c++0x should be replaced by CXX1XSTD = -std=c++11\nthere?\n\nMost of the time, packages build from .R/Makevars, but someti",
       "thread_id": "thread-e7a5382d2a0e",
       "thread_depth": 0,
-      "month": "2016-03"
+      "month": "2016-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2016q1/000046.html"
     },
     {
       "id": "msg-772707931fba",
@@ -88,7 +92,8 @@
       "body_snippet": "On 30/03/2016 6:10 PM, Avraham Adler wrote:\n> As R-3.3.0 will use gcc 4.9.3 with full support for C11, perhaps\n> CXX1XSTD = -std=c++0x should be replaced by CXX1XSTD = -std=c++11\n> there?\n>\n> Most of ",
       "thread_id": "thread-e7a5382d2a0e",
       "thread_depth": 1,
-      "month": "2016-03"
+      "month": "2016-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2016q1/000047.html"
     }
   ],
   "threads": [

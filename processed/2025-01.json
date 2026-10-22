@@ -17,7 +17,8 @@
       "body_snippet": "Hello, Tomas.\n\nIn future versions of Rtools44, for the time being, please do not\nupdate the NLOPT libraries beyond 2.8.0. There are breaking changes in\n2.9.0 and possibly 2.9.1 which cause nloptr to f",
       "thread_id": "thread-c05a7a1b7451",
       "thread_depth": 0,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2025q1/000119.html"
     },
     {
       "id": "msg-e853f8bcf897",
@@ -35,7 +36,8 @@
       "body_snippet": "Hi Avi,\n\nsure, fine with me for Rtools44 (there will probably be one more update).\nThanks for letting me know,\n\nTomas\n\nOn 1/16/25 23:36, Avraham Adler wrote:\n> Hello, Tomas.\n>\n> In future versions of ",
       "thread_id": "thread-c05a7a1b7451",
       "thread_depth": 1,
-      "month": "2025-01"
+      "month": "2025-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2025q1/000120.html"
     }
   ],
   "threads": [

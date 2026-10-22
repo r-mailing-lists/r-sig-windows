@@ -17,7 +17,8 @@
       "body_snippet": "Hello, Jereon.\n\nI am very happy and grateful for the work you have done, unsupported, in\nmodernizing the Windows toolchain. What concerns me, though, is that there\nseems to be a major overhaul to the ",
       "thread_id": "thread-5b8b70b86319",
       "thread_depth": 0,
-      "month": "2019-11"
+      "month": "2019-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2019q4/000082.html"
     },
     {
       "id": "msg-19521834f73b",
@@ -35,7 +36,8 @@
       "body_snippet": "I think you are misunderstanding the difference between R and Rtools.\nRtools is merely a bundle with gcc and some extra utilities.\nEverything else is managed by R-core in the R svn. An update Rtools\nd",
       "thread_id": "thread-5b8b70b86319",
       "thread_depth": 1,
-      "month": "2019-11"
+      "month": "2019-11",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2019q4/000083.html"
     }
   ],
   "threads": [

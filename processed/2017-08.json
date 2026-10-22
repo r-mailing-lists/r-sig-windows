@@ -17,7 +17,8 @@
       "body_snippet": "Feeling somewhat antsy, I followed Jeroen's instructions and used\nniXman's scripts [1] off of the master branch to build gcc 7.1.0 for\nx86_64, specifically \"x86_64-710-posix-seh-rt_v5-s\". It took a do",
       "thread_id": "thread-be9cb93bba64",
       "thread_depth": 0,
-      "month": "2017-08"
+      "month": "2017-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2017q3/000066.html"
     }
   ],
   "threads": [

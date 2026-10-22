@@ -17,7 +17,8 @@
       "body_snippet": "Hi, Jeroen.\n\nYou mentioned that in the summer, there would be work on creating a\nnew version of Rtools based on gcc 8+. Any news? NixMans scripts seem\nto have stopped with GCC 7.2, although the MinGW6",
       "thread_id": "thread-a589c98ac664",
       "thread_depth": 0,
-      "month": "2018-06"
+      "month": "2018-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2018q2/000081.html"
     }
   ],
   "threads": [

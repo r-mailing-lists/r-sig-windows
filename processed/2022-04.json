@@ -17,7 +17,8 @@
       "body_snippet": "Hi, Tomas.\n\nIs there a changelog for Rtools42 anywhere; something that would\nexplain the difference between 5111 and 5168, for example? Copying\nr-sig-windows for reference.\n\nThank you,\n\nAvi",
       "thread_id": "thread-2e855c250128",
       "thread_depth": 0,
-      "month": "2022-04"
+      "month": "2022-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2022q2/000089.html"
     },
     {
       "id": "msg-f667da000b9e",
@@ -35,7 +36,8 @@
       "body_snippet": "On 4/14/22 05:08, Avraham Adler wrote:\n> Hi, Tomas.\n>\n> Is there a changelog for Rtools42 anywhere; something that would\n> explain the difference between 5111 and 5168, for example? Copying\n> r-sig-wi",
       "thread_id": "thread-2e855c250128",
       "thread_depth": 1,
-      "month": "2022-04"
+      "month": "2022-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2022q2/000090.html"
     }
   ],
   "threads": [

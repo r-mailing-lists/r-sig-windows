@@ -17,7 +17,8 @@
       "body_snippet": "Hi,\n\nI'm curious to know: has a decision been made on whether R 4.0.0 will\nuse the new Rtools toolchain or not?\n\nThanks,\nKevin",
       "thread_id": "thread-9071c1030eba",
       "thread_depth": 0,
-      "month": "2020-03"
+      "month": "2020-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2020q1/000084.html"
     }
   ],
   "threads": [

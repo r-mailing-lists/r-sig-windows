@@ -17,7 +17,8 @@
       "body_snippet": "Hello.\n\nHas there been any thought or consideration given to updating Rtools from\n4.9.3 to a 5.x or 6.x flavor, or was the push from 4.6 to 4.9.3 difficult\nenough that this should be tabled for a year",
       "thread_id": "thread-074538909bbe",
       "thread_depth": 0,
-      "month": "2017-01"
+      "month": "2017-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2017q1/000059.html"
     },
     {
       "id": "msg-aa6e1f220954",
@@ -35,7 +36,8 @@
       "body_snippet": "On Mon, Jan 30, 2017 at 3:08 PM, Avraham Adler <avraham.adler at gmail.com> wrote:\n\n> Has there been any thought or consideration given to updating Rtools from\n> 4.9.3 to a 5.x or 6.x flavor, or was t",
       "thread_id": "thread-074538909bbe",
       "thread_depth": 1,
-      "month": "2017-01"
+      "month": "2017-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2017q1/000060.html"
     },
     {
       "id": "msg-c73ecce565d9",
@@ -51,7 +53,8 @@
       "body_snippet": "I put in a bug request for this over a year ago and it went nowhere.\nNobody is using a core2 on Windows anymore. GCC itself has been\nsuggesting for a very long time to use '-mtune=generic'. Their\nlang",
       "thread_id": "thread-c73ecce565d9",
       "thread_depth": 0,
-      "month": "2017-01"
+      "month": "2017-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2017q1/000061.html"
     },
     {
       "id": "msg-07d8b6e78e05",
@@ -69,7 +72,8 @@
       "body_snippet": "On Tue, Jan 31, 2017 at 8:31 PM, Avraham Adler <avraham.adler at gmail.com> wrote:\n> I put in a bug request for this over a year ago and it went nowhere.\n\nWhere did you post this exactly? If we open a",
       "thread_id": "thread-c73ecce565d9",
       "thread_depth": 1,
-      "month": "2017-01"
+      "month": "2017-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2017q1/000062.html"
     }
   ],
   "threads": [

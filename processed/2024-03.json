@@ -17,7 +17,8 @@
       "body_snippet": "Dear R Windows developers,\n\nthere is now a new toolchain for R for Windows, Rtools44. It is now used \nby R-devel and is intended for R 4.4.0.\n\nCompared to Rtools43, it uses GCC 13 and updates other co",
       "thread_id": "thread-d6f77da81144",
       "thread_depth": 0,
-      "month": "2024-03"
+      "month": "2024-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2024q1/000105.html"
     },
     {
       "id": "msg-a1713701c37a",
@@ -35,7 +36,8 @@
       "body_snippet": "Hello, Tomas.\n\nAs always, thank you for your incessant hard work. I have compiled\nR-devel 86144 using Rtools44 and it completes normally. However, it\nfails very early in make check-devel. Specifically",
       "thread_id": "thread-d6f77da81144",
       "thread_depth": 1,
-      "month": "2024-03"
+      "month": "2024-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2024q1/000106.html"
     },
     {
       "id": "msg-cc2606698316",
@@ -54,7 +56,8 @@
       "body_snippet": "Hello Avi,\n\nOn 3/17/24 17:53, Avraham Adler wrote:\n> Hello, Tomas.\n>\n> As always, thank you for your incessant hard work. I have compiled\n> R-devel 86144 using Rtools44 and it completes normally. Howe",
       "thread_id": "thread-d6f77da81144",
       "thread_depth": 2,
-      "month": "2024-03"
+      "month": "2024-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2024q1/000107.html"
     },
     {
       "id": "msg-085aed3564c8",
@@ -74,7 +77,8 @@
       "body_snippet": "Hello, Tomas.\n\nI had hoped that my problem was that I was linking to OpenBLAS built\nunder Rtools43, but sadly that is not the case, as I built OpenBLAS\nusing Rtools44 and I still get the error in 'uti",
       "thread_id": "thread-d6f77da81144",
       "thread_depth": 3,
-      "month": "2024-03"
+      "month": "2024-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2024q1/000108.html"
     },
     {
       "id": "msg-97b041aa990c",
@@ -95,7 +99,8 @@
       "body_snippet": "Hello, Tomas.\n\nI ran check again and this time it failed on base. Base failed at\n\"agrep\" and utils failed at \"adist\" if that triggers any ideas.\n\nThank you,\n\nAvi\n\nOn Mon, Mar 18, 2024 at 11:49?PM Avra",
       "thread_id": "thread-d6f77da81144",
       "thread_depth": 4,
-      "month": "2024-03"
+      "month": "2024-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2024q1/000109.html"
     },
     {
       "id": "msg-8268369fe875",
@@ -117,7 +122,8 @@
       "body_snippet": "I ran \"tools::testInstalledBasic(\"both\")\" from within Rterm, and it\nfailed on reg-tests-1a, and doesn't that last call in the FAIL look\nfamiliar? Three times isn;t coincidence. What could be causing\na",
       "thread_id": "thread-d6f77da81144",
       "thread_depth": 5,
-      "month": "2024-03"
+      "month": "2024-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2024q1/000110.html"
     },
     {
       "id": "msg-7fa1238cf26b",
@@ -140,7 +146,8 @@
       "body_snippet": "For completeness, I compiled R from source using the native BLAS, and\nmake check fails again, this time on \"aregexec\". Running \"agrep\" from\nwithin Rgui causes it to crash to desktop. Could it be somet",
       "thread_id": "thread-d6f77da81144",
       "thread_depth": 6,
-      "month": "2024-03"
+      "month": "2024-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2024q1/000111.html"
     },
     {
       "id": "msg-182f53cb2ffc",
@@ -164,7 +171,8 @@
       "body_snippet": "On 3/19/24 15:33, Avraham Adler wrote:\n> For completeness, I compiled R from source using the native BLAS, and\n> make check fails again, this time on \"aregexec\". Running \"agrep\" from\n> within Rgui cau",
       "thread_id": "thread-d6f77da81144",
       "thread_depth": 7,
-      "month": "2024-03"
+      "month": "2024-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2024q1/000112.html"
     },
     {
       "id": "msg-073dc4707e86",
@@ -189,7 +197,8 @@
       "body_snippet": "On 3/19/24 17:05, Tomas Kalibera wrote:\n> On 3/19/24 15:33, Avraham Adler wrote:\n>> For completeness, I compiled R from source using the native BLAS, and\n>> make check fails again, this time on \"arege",
       "thread_id": "thread-d6f77da81144",
       "thread_depth": 8,
-      "month": "2024-03"
+      "month": "2024-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2024q1/000113.html"
     },
     {
       "id": "msg-3d288c9b2bb3",
@@ -215,7 +224,8 @@
       "body_snippet": "Thank you very much, Tomas.\n\nI guess when the variables were recast to long long, the compiler\ntried to use AVX2 commands. This is rather disappointing from GCC's\nend; there isn't much we in R can do.",
       "thread_id": "thread-d6f77da81144",
       "thread_depth": 9,
-      "month": "2024-03"
+      "month": "2024-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2024q1/000114.html"
     },
     {
       "id": "msg-0b67dba5ee22",
@@ -242,7 +252,8 @@
       "body_snippet": "On 3/19/24 18:32, Avraham Adler wrote:\n> Thank you very much, Tomas.\n>\n> I guess when the variables were recast to long long, the compiler\n> tried to use AVX2 commands.\nThis is just an optimization fo",
       "thread_id": "thread-d6f77da81144",
       "thread_depth": 10,
-      "month": "2024-03"
+      "month": "2024-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2024q1/000115.html"
     },
     {
       "id": "msg-013bc8815499",
@@ -270,7 +281,8 @@
       "body_snippet": "Thank you very much, Tomas, for your advice and your reminder about FLOSS.\n\nFor completeness and closure, passing\n\"\"-Wa,-muse-unaligned-vector-move\" to EOPTS in Mkrules.local allows\nmake check-devel t",
       "thread_id": "thread-d6f77da81144",
       "thread_depth": 11,
-      "month": "2024-03"
+      "month": "2024-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2024q1/000116.html"
     },
     {
       "id": "msg-471230204705",
@@ -299,7 +311,8 @@
       "body_snippet": "For the benefit of posterity, on the exact same machine, the new\nversion which requires passing \"-Wa,-muse-unaligned-vector-move\" is\nbetween 5% and 20% slower on BLAS actions and over 30% slower on so",
       "thread_id": "thread-d6f77da81144",
       "thread_depth": 12,
-      "month": "2024-03"
+      "month": "2024-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2024q1/000117.html"
     }
   ],
   "threads": [

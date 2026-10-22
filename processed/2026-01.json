@@ -17,7 +17,8 @@
       "body_snippet": "Hello, Tomas.\n\nI thought I'd ask here before sending to the full R-devel. I am trying\nto build a very recent version of R (89301) on two platforms, both\nWIndows 11 using Rtools45. On my home desktop i",
       "thread_id": "thread-222fd46e3109",
       "thread_depth": 0,
-      "month": "2026-01"
+      "month": "2026-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2026q1/000137.html"
     }
   ],
   "threads": [

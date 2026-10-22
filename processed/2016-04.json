@@ -17,7 +17,8 @@
       "body_snippet": "I am trying to be clever (whether that's a good idea is for another thread\n;) and write an R script that downloads and builds the postgres libpq\nlibrary when its not installed. (The idea is to call th",
       "thread_id": "thread-733b7dc0f6d6",
       "thread_depth": 0,
-      "month": "2016-04"
+      "month": "2016-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2016q2/000048.html"
     },
     {
       "id": "msg-333a0dd920ab",
@@ -35,7 +36,8 @@
       "body_snippet": "On Fri, Apr 29, 2016 at 10:33 PM, Tim Keitt <tkeitt at utexas.edu> wrote:\n> I am trying to be clever (whether that's a good idea is for another thread\n> ;) and write an R script that downloads and bui",
       "thread_id": "thread-733b7dc0f6d6",
       "thread_depth": 1,
-      "month": "2016-04"
+      "month": "2016-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2016q2/000049.html"
     },
     {
       "id": "msg-9d1892758ffb",
@@ -54,7 +56,8 @@
       "body_snippet": "On 29 April 2016 at 22:37, Jeroen Ooms wrote:\n| On Fri, Apr 29, 2016 at 10:33 PM, Tim Keitt <tkeitt at utexas.edu> wrote:\n| > I am trying to be clever (whether that's a good idea is for another thread",
       "thread_id": "thread-733b7dc0f6d6",
       "thread_depth": 2,
-      "month": "2016-04"
+      "month": "2016-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2016q2/000050.html"
     },
     {
       "id": "msg-ba41f6f2b712",
@@ -73,7 +76,8 @@
       "body_snippet": "http://www.keittlab.org/\n\nOn Fri, Apr 29, 2016 at 3:37 PM, Jeroen Ooms <jeroenooms at gmail.com> wrote:\n\n> On Fri, Apr 29, 2016 at 10:33 PM, Tim Keitt <tkeitt at utexas.edu> wrote:\n> > I am trying to ",
       "thread_id": "thread-733b7dc0f6d6",
       "thread_depth": 2,
-      "month": "2016-04"
+      "month": "2016-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2016q2/000051.html"
     },
     {
       "id": "msg-08397525c68d",
@@ -93,7 +97,8 @@
       "body_snippet": "On Sat, Apr 30, 2016 at 2:08 AM, Tim Keitt <tkeitt at utexas.edu> wrote:\n> Nice to discover the prebuilt windows libs on github. Did not know about\n> that. I was pulling the full postgresql source and",
       "thread_id": "thread-733b7dc0f6d6",
       "thread_depth": 3,
-      "month": "2016-04"
+      "month": "2016-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2016q2/000052.html"
     }
   ],
   "threads": [

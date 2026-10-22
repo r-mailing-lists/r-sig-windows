@@ -17,7 +17,8 @@
       "body_snippet": "Dear R Windows developers,\n\nthere is now a new toolchain for R for Windows, Rtools43. It is now used \nby R-devel and is intended, following likely at least one minor update, \nfor R 4.3.0.\n\nCompared to",
       "thread_id": "thread-fdd9120ddb27",
       "thread_depth": 0,
-      "month": "2023-01"
+      "month": "2023-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2023q1/000093.html"
     },
     {
       "id": "msg-2faf5ec26019",
@@ -33,7 +34,8 @@
       "body_snippet": "Dear R Windows developers,\n\na minor update of Rtools43, the toolchain for R for Windows used by \nR-devel, is now available as revision 5493 from\n\nhttps://cran.r-project.org/bin/windows/Rtools/rtools43",
       "thread_id": "thread-2faf5ec26019",
       "thread_depth": 0,
-      "month": "2023-01"
+      "month": "2023-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2023q1/000094.html"
     }
   ],
   "threads": [

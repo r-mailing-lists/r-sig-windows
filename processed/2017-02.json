@@ -20,7 +20,8 @@
       "body_snippet": "https://bugs.r-project.org/bugzilla/show_bug.cgi?id=16536\n\nI closed it after it was open over a year.\n\nAvi\n\nOn Wed, Feb 1, 2017 at 1:08 AM, Jeroen Ooms <jeroen.ooms at stat.ucla.edu>\nwrote:\n\n> On Tue,",
       "thread_id": "thread-d2157d3ff779",
       "thread_depth": 0,
-      "month": "2017-02"
+      "month": "2017-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2017q1/000063.html"
     },
     {
       "id": "msg-67d62103c216",
@@ -38,7 +39,8 @@
       "body_snippet": "On 01.02.2017 05:31, Avraham Adler wrote:\n> I put in a bug request for this over a year ago and it went nowhere.\n> Nobody is using a core2 on Windows anymore. GCC itself has been\n> suggesting for a ve",
       "thread_id": "thread-67d62103c216",
       "thread_depth": 0,
-      "month": "2017-02"
+      "month": "2017-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2017q1/000064.html"
     },
     {
       "id": "msg-68a691f039dc",
@@ -58,7 +60,8 @@
       "body_snippet": "On 01.02.2017 08:32, Avraham Adler wrote:\n> https://bugs.r-project.org/bugzilla/show_bug.cgi?id=16536\n>\n> I closed it after it was open over a year.\n\nI just see this,\n\nI can try to make a CRAN run wit",
       "thread_id": "thread-d2157d3ff779",
       "thread_depth": 1,
-      "month": "2017-02"
+      "month": "2017-02",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2017q1/000065.html"
     }
   ],
   "threads": [

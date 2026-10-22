@@ -17,7 +17,8 @@
       "body_snippet": "Hello.\n\nAs the new toolchain is going to require some changes to some of the\nmakefiles for Windows (such as the NM_FILTER already in place, I would\nlike to make some suggestions for review.\n\nA: Link-t",
       "thread_id": "thread-2d2264fc8e94",
       "thread_depth": 0,
-      "month": "2015-09"
+      "month": "2015-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2015q3/000007.html"
     },
     {
       "id": "msg-63cf763487b4",
@@ -35,7 +36,8 @@
       "body_snippet": "On 08/09/2015 12:56 PM, Avraham Adler wrote:\n> Hello.\n> \n> As the new toolchain is going to require some changes to some of the\n> makefiles for Windows (such as the NM_FILTER already in place, I would",
       "thread_id": "thread-2d2264fc8e94",
       "thread_depth": 1,
-      "month": "2015-09"
+      "month": "2015-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2015q3/000008.html"
     },
     {
       "id": "msg-78ca31252c0a",
@@ -54,7 +56,8 @@
       "body_snippet": "Hello.\n\nWhile trying to build WITH LTO, I am seeing core R building properly,\nseeing the variables I created (including finding the BLAS) and\npassing the '-flto' flag properly up to building lapack.dl",
       "thread_id": "thread-2d2264fc8e94",
       "thread_depth": 2,
-      "month": "2015-09"
+      "month": "2015-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2015q3/000009.html"
     },
     {
       "id": "msg-0a6a1a3dc330",
@@ -74,7 +77,8 @@
       "body_snippet": "On Tue, Sep 8, 2015 at 6:32 PM, Avraham Adler <avraham.adler at gmail.com> wrote:\n> Hello.\n>\n> While trying to build WITH LTO, I am seeing core R building properly,\n> seeing the variables I created (i",
       "thread_id": "thread-2d2264fc8e94",
       "thread_depth": 3,
-      "month": "2015-09"
+      "month": "2015-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2015q3/000010.html"
     },
     {
       "id": "msg-0a00dd67d48e",
@@ -94,7 +98,8 @@
       "body_snippet": "On 08/09/2015 6:32 PM, Avraham Adler wrote:\n> Hello.\n> \n> While trying to build WITH LTO, I am seeing core R building properly,\n> seeing the variables I created (including finding the BLAS) and\n> pass",
       "thread_id": "thread-2d2264fc8e94",
       "thread_depth": 3,
-      "month": "2015-09"
+      "month": "2015-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2015q3/000011.html"
     },
     {
       "id": "msg-e5970296a7cb",
@@ -115,7 +120,8 @@
       "body_snippet": "On Tue, Sep 8, 2015 at 6:56 PM, Duncan Murdoch <murdoch.duncan at gmail.com> wrote:\n> I didn't write the make files, and can't answer your questions.  You're\n> on your own here if nobody else pipes up",
       "thread_id": "thread-2d2264fc8e94",
       "thread_depth": 4,
-      "month": "2015-09"
+      "month": "2015-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2015q3/000012.html"
     },
     {
       "id": "msg-b5481ce9abf5",
@@ -137,7 +143,8 @@
       "body_snippet": "On 08/09/2015 7:07 PM, Avraham Adler wrote:\n> On Tue, Sep 8, 2015 at 6:56 PM, Duncan Murdoch <murdoch.duncan at gmail.com> wrote:\n>> I didn't write the make files, and can't answer your questions.  Yo",
       "thread_id": "thread-2d2264fc8e94",
       "thread_depth": 5,
-      "month": "2015-09"
+      "month": "2015-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2015q3/000013.html"
     },
     {
       "id": "msg-54118aeab2fd",
@@ -153,7 +160,8 @@
       "body_snippet": "Hi all,\n\nUsing the version of R + toolchain built by Jeroen here:\n\n    http://www.stat.ucla.edu/~jeroen/mingw-w64/\n\nI'm running into segfaults when attempting to run Rcpp unit tests with\n64bit R. In p",
       "thread_id": "thread-54118aeab2fd",
       "thread_depth": 0,
-      "month": "2015-09"
+      "month": "2015-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2015q3/000014.html"
     },
     {
       "id": "msg-a675197ccbd6",
@@ -171,7 +179,8 @@
       "body_snippet": "One candidate here -- it looks like the way msvcrt's setjmp is called\nhas changed in the new toolchain. Previously, we had (in setjmp.h):\n\n    #ifdef _WIN64\n    #define setjmp(BUF) _setjmp((BUF), ming",
       "thread_id": "thread-54118aeab2fd",
       "thread_depth": 1,
-      "month": "2015-09"
+      "month": "2015-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2015q3/000015.html"
     },
     {
       "id": "msg-e5d2c71c76cb",
@@ -194,7 +203,8 @@
       "body_snippet": "On Tue, Sep 8, 2015 at 7:11 PM, Duncan Murdoch <murdoch.duncan at gmail.com> wrote:\n> I would commit the patch if it made *no* changes to the current\n> compilation scheme.  I would not commit it if it",
       "thread_id": "thread-2d2264fc8e94",
       "thread_depth": 6,
-      "month": "2015-09"
+      "month": "2015-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2015q3/000016.html"
     },
     {
       "id": "msg-9a2b35b4ba11",
@@ -218,7 +228,8 @@
       "body_snippet": "On Thu, Sep 10, 2015 at 4:48 PM, Avraham Adler <avraham.adler at gmail.com> wrote:\n>\n> What should the next step be? Should I just post the text of the\n> result of diff here? Should I e-mail someone a",
       "thread_id": "thread-2d2264fc8e94",
       "thread_depth": 7,
-      "month": "2015-09"
+      "month": "2015-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2015q3/000017.html"
     },
     {
       "id": "msg-e0d9c96edb29",
@@ -243,7 +254,8 @@
       "body_snippet": "On Thu, Sep 10, 2015 at 1:57 PM, Jeroen Ooms <jeroenooms at gmail.com> wrote:\n> On Thu, Sep 10, 2015 at 4:48 PM, Avraham Adler <avraham.adler at gmail.com> wrote:\n>>\n>> What should the next step be? S",
       "thread_id": "thread-2d2264fc8e94",
       "thread_depth": 8,
-      "month": "2015-09"
+      "month": "2015-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2015q3/000018.html"
     },
     {
       "id": "msg-92ac5a50cebb",
@@ -268,7 +280,8 @@
       "body_snippet": "On 10/09/2015 1:57 PM, Jeroen Ooms wrote:\n> On Thu, Sep 10, 2015 at 4:48 PM, Avraham Adler <avraham.adler at gmail.com> wrote:\n>>\n>> What should the next step be? Should I just post the text of the\n>>",
       "thread_id": "thread-2d2264fc8e94",
       "thread_depth": 8,
-      "month": "2015-09"
+      "month": "2015-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2015q3/000019.html"
     },
     {
       "id": "msg-51b97e86f9a3",
@@ -284,7 +297,8 @@
       "body_snippet": "Hi all,\n\nSome bad news and then good news on the developments of the new tool\nchain for Windows.\n\nBad news: Over the past week, Kevin and me have found several more\nproblem cases in which the i686-493",
       "thread_id": "thread-51b97e86f9a3",
       "thread_depth": 0,
-      "month": "2015-09"
+      "month": "2015-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2015q3/000020.html"
     },
     {
       "id": "msg-eea996f4b1e4",
@@ -300,7 +314,8 @@
       "body_snippet": "Hi all,\n\nSome more updates on the new windows tool chain. We did a reverse\ndependencies check on Rcpp using the new tool chains. The summary and\nlog files are here:\nhttp://www.stat.ucla.edu/~jeroen/mi",
       "thread_id": "thread-eea996f4b1e4",
       "thread_depth": 0,
-      "month": "2015-09"
+      "month": "2015-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2015q3/000021.html"
     },
     {
       "id": "msg-dd527c5a69e7",
@@ -318,7 +333,8 @@
       "body_snippet": "On Sun, Sep 13, 2015 at 12:36 PM, Jeroen Ooms <jeroen.ooms at stat.ucla.edu> wrote:\n> The good news: the mingw-w64 authors suggest to move away from the\n> SJLJ exception model, and instead use DWARF o",
       "thread_id": "thread-51b97e86f9a3",
       "thread_depth": 1,
-      "month": "2015-09"
+      "month": "2015-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2015q3/000022.html"
     },
     {
       "id": "msg-51d7ad6ba0c3",
@@ -337,7 +353,8 @@
       "body_snippet": "Den 2015-09-16 kl. 03:28, skrev Avraham Adler:\n\n> On Sun, Sep 13, 2015 at 12:36 PM, Jeroen Ooms <jeroen.ooms at stat.ucla.edu> wrote:\n>> The good news: the mingw-w64 authors suggest to move away from ",
       "thread_id": "thread-51b97e86f9a3",
       "thread_depth": 2,
-      "month": "2015-09"
+      "month": "2015-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2015q3/000023.html"
     },
     {
       "id": "msg-66e9ab30c80c",
@@ -353,7 +370,8 @@
       "body_snippet": "For those helping with testing with the new tool chain:\n\nSome packages containing Fortran code (such as 'vegan') which worked\nwith the old tool chain, gave linking errors under the new one. It\nturns o",
       "thread_id": "thread-66e9ab30c80c",
       "thread_depth": 0,
-      "month": "2015-09"
+      "month": "2015-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2015q3/000024.html"
     },
     {
       "id": "msg-db926dd88a59",
@@ -371,7 +389,8 @@
       "body_snippet": "In /src/gnuwin32/Mkrules.rules already has lquadmath, but not lm.\n/src/gnuwin32/fixed/etc/Makeconf has neither.\n\nAvi\n\nOn Wed, Sep 16, 2015 at 5:54 AM, Jeroen Ooms <jeroenooms at gmail.com> wrote:\n> Fo",
       "thread_id": "thread-66e9ab30c80c",
       "thread_depth": 1,
-      "month": "2015-09"
+      "month": "2015-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2015q3/000025.html"
     },
     {
       "id": "msg-702014191306",
@@ -389,7 +408,8 @@
       "body_snippet": "On Sun, Sep 13, 2015 at 12:36 PM, Jeroen Ooms <jeroen.ooms at stat.ucla.edu> wrote:\n> Hi all,\n>\n> The good news: the mingw-w64 authors suggest to move away from the\n> SJLJ exception model, and instead",
       "thread_id": "thread-51b97e86f9a3",
       "thread_depth": 1,
-      "month": "2015-09"
+      "month": "2015-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2015q3/000026.html"
     },
     {
       "id": "msg-6bb33a923a26",
@@ -405,7 +425,8 @@
       "body_snippet": "I have just uploaded a new build of the Rtools33.exe installer to CRAN.  \nIt should appear on the mirrors within a day or two.\n\nThis installer includes the current build of gcc 4.9.3 from \nhttp://www.",
       "thread_id": "thread-6bb33a923a26",
       "thread_depth": 0,
-      "month": "2015-09"
+      "month": "2015-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2015q3/000027.html"
     },
     {
       "id": "msg-2983b3c0d5a1",
@@ -421,7 +442,8 @@
       "body_snippet": "On Tue, Sep 22 2015, Duncan Murdoch wrote:\n\n> I have just uploaded a new build of the Rtools33.exe installer to CRAN.  \n> It should appear on the mirrors within a day or two.\n> \n> This installer inclu",
       "thread_id": "thread-2983b3c0d5a1",
       "thread_depth": 0,
-      "month": "2015-09"
+      "month": "2015-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2015q3/000028.html"
     },
     {
       "id": "msg-1c2cc10d15fe",
@@ -440,7 +462,8 @@
       "body_snippet": "Hi Dan,\n\nCurrently the r-devel builds from CRAN still use the old tool chain. A\ncopy of r-devel which has been configured with the new tool chain is\navailable from http://www.stat.ucla.edu/~jeroen/min",
       "thread_id": "thread-2983b3c0d5a1",
       "thread_depth": 1,
-      "month": "2015-09"
+      "month": "2015-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2015q3/000029.html"
     },
     {
       "id": "msg-e2c30d4614b1",
@@ -456,7 +479,8 @@
       "body_snippet": "I have noticed a considerable increase in size for the installation of \nRtools 3.3. Are there any parts of the installation that I can safely \nremove if I'm only interested in building R packages (but",
       "thread_id": "thread-e2c30d4614b1",
       "thread_depth": 0,
-      "month": "2015-09"
+      "month": "2015-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2015q3/000030.html"
     },
     {
       "id": "msg-ea44627eaa0c",
@@ -470,11 +494,12 @@
       "references": [
         "<56051433.1070602@ivt.baug.ethz.ch>"
       ],
-      "body_plain": "Hi Kirill,\n\nThis is noted in https://github.com/rwinlib/r-base#readme: It is\nmostly because we are shipping two separate tool chains instead of one\nmultilib. Another reason is that recent versions of gdb depend on\npython, which again depends on a lot of other libraries. If you are\nnot interested in gdb, you might be able to remove python related\nthings.\n\nBtw this might not be the final Rtools, so maybe wait a bit.\n\n\n\nOn Fri, Sep 25, 2015 at 11:30 AM, Kirill M?ller\n<kirill.mueller at ivt.baug.ethz.ch> wrote:\n> I have noticed a considerable increase in size for the installation of\n> Rtools 3.3. Are there any parts of the installation that I can safely remove\n> if I'm only interested in building R packages (but not R itself)? This is\n> for r-portable, a portable version of R for Windows [1]. Thanks.\n>\n>\n> Best regards\n>\n> Kirill\n>\n>\n> [1] https://github.com/krlmlr/r-portable\n>\n> _______________________________________________\n> R-SIG-windows mailing list\n> R-SIG-windows at r-project.org\n> https://stat.ethz.ch/mailman/listinfo/r-sig-windows",
+      "body_plain": "Hi Kirill,\n\nThis is noted in https://github.com/rwinlib/r-base#readme: It is\nmostly because we are shipping two separate tool chains instead of one\nmultilib. Another reason is that recent versions of gdb depend on\npython, which again depends on a lot of other libraries. If you are\nnot interested in gdb, you might be able to remove python related\nthings.\n\nBtw this might not be the final Rtools, so maybe wait a bit.\n\n\n\nOn Fri, Sep 25, 2015 at 11:30 AM, Kirill Müller\n<kirill.mueller at ivt.baug.ethz.ch> wrote:\n> I have noticed a considerable increase in size for the installation of\n> Rtools 3.3. Are there any parts of the installation that I can safely remove\n> if I'm only interested in building R packages (but not R itself)? This is\n> for r-portable, a portable version of R for Windows [1]. Thanks.\n>\n>\n> Best regards\n>\n> Kirill\n>\n>\n> [1] https://github.com/krlmlr/r-portable\n>\n> _______________________________________________\n> R-SIG-windows mailing list\n> R-SIG-windows at r-project.org\n> https://stat.ethz.ch/mailman/listinfo/r-sig-windows",
       "body_snippet": "Hi Kirill,\n\nThis is noted in https://github.com/rwinlib/r-base#readme: It is\nmostly because we are shipping two separate tool chains instead of one\nmultilib. Another reason is that recent versions of ",
       "thread_id": "thread-e2c30d4614b1",
       "thread_depth": 1,
-      "month": "2015-09"
+      "month": "2015-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2015q3/000031.html"
     },
     {
       "id": "msg-da5065c3da81",
@@ -489,11 +514,12 @@
         "<56051433.1070602@ivt.baug.ethz.ch>",
         "<CABFfbXtTBHhmQqSp4AeJwLa-3uw2fef=9Wd_OU_7R0FP0-Pg=A@mail.gmail.com>"
       ],
-      "body_plain": "Thanks, Jeroen, for your fast reply. Do you think you could separate gdb \n+ its dependencies from Rtools?\n\nThe current approach of r-portable is rather crude -- it takes the \nInnoSetup installers for R and Rtools and unpacks them. Perhaps there's \na better way to do this, I'm open for discussion.\n\n\n-Kirill\n\nOn 25.09.2015 12:10, Jeroen Ooms wrote:\n> Hi Kirill,\n>\n> This is noted in https://github.com/rwinlib/r-base#readme: It is\n> mostly because we are shipping two separate tool chains instead of one\n> multilib. Another reason is that recent versions of gdb depend on\n> python, which again depends on a lot of other libraries. If you are\n> not interested in gdb, you might be able to remove python related\n> things.\n>\n> Btw this might not be the final Rtools, so maybe wait a bit.\n>\n>\n>\n> On Fri, Sep 25, 2015 at 11:30 AM, Kirill M?ller\n> <kirill.mueller at ivt.baug.ethz.ch> wrote:\n>> I have noticed a considerable increase in size for the installation of\n>> Rtools 3.3. Are there any parts of the installation that I can safely remove\n>> if I'm only interested in building R packages (but not R itself)? This is\n>> for r-portable, a portable version of R for Windows [1]. Thanks.\n>>\n>>\n>> Best regards\n>>\n>> Kirill\n>>\n>>\n>> [1] https://github.com/krlmlr/r-portable\n>>\n>> _______________________________________________\n>> R-SIG-windows mailing list\n>> R-SIG-windows at r-project.org\n>> https://stat.ethz.ch/mailman/listinfo/r-sig-windows",
+      "body_plain": "Thanks, Jeroen, for your fast reply. Do you think you could separate gdb \n+ its dependencies from Rtools?\n\nThe current approach of r-portable is rather crude -- it takes the \nInnoSetup installers for R and Rtools and unpacks them. Perhaps there's \na better way to do this, I'm open for discussion.\n\n\n-Kirill\n\nOn 25.09.2015 12:10, Jeroen Ooms wrote:\n> Hi Kirill,\n>\n> This is noted in https://github.com/rwinlib/r-base#readme: It is\n> mostly because we are shipping two separate tool chains instead of one\n> multilib. Another reason is that recent versions of gdb depend on\n> python, which again depends on a lot of other libraries. If you are\n> not interested in gdb, you might be able to remove python related\n> things.\n>\n> Btw this might not be the final Rtools, so maybe wait a bit.\n>\n>\n>\n> On Fri, Sep 25, 2015 at 11:30 AM, Kirill Müller\n> <kirill.mueller at ivt.baug.ethz.ch> wrote:\n>> I have noticed a considerable increase in size for the installation of\n>> Rtools 3.3. Are there any parts of the installation that I can safely remove\n>> if I'm only interested in building R packages (but not R itself)? This is\n>> for r-portable, a portable version of R for Windows [1]. Thanks.\n>>\n>>\n>> Best regards\n>>\n>> Kirill\n>>\n>>\n>> [1] https://github.com/krlmlr/r-portable\n>>\n>> _______________________________________________\n>> R-SIG-windows mailing list\n>> R-SIG-windows at r-project.org\n>> https://stat.ethz.ch/mailman/listinfo/r-sig-windows",
       "body_snippet": "Thanks, Jeroen, for your fast reply. Do you think you could separate gdb \n+ its dependencies from Rtools?\n\nThe current approach of r-portable is rather crude -- it takes the \nInnoSetup installers for ",
       "thread_id": "thread-e2c30d4614b1",
       "thread_depth": 2,
-      "month": "2015-09"
+      "month": "2015-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2015q3/000032.html"
     },
     {
       "id": "msg-62bc7254a327",
@@ -509,11 +535,12 @@
         "<CABFfbXtTBHhmQqSp4AeJwLa-3uw2fef=9Wd_OU_7R0FP0-Pg=A@mail.gmail.com>",
         "<56051FE9.7030802@ivt.baug.ethz.ch>"
       ],
-      "body_plain": "On Fri, Sep 25, 2015 at 12:20 PM, Kirill M?ller\n<kirill.mueller at ivt.baug.ethz.ch> wrote:\n> The current approach of r-portable is rather crude -- it takes the InnoSetup\n> installers for R and Rtools and unpacks them. Perhaps there's a better way\n> to do this, I'm open for discussion.\n\nYou could reduce the size by building a non-multiarch version of R\n(e.g. only 32 bit). That will approx half the size of R and then you\nonly need a single tool chain.\n\nUsing mingw-builds [1] you could create a minimal version of the tool\nchain, e.g. by not building gdb, gfortran, or other stuff you don't\nwant to support. I would not recommend hacking the installer of the\ncurrent rtools.\n\n[1] https://github.com/niXman/mingw-builds",
-      "body_snippet": "On Fri, Sep 25, 2015 at 12:20 PM, Kirill M?ller\n<kirill.mueller at ivt.baug.ethz.ch> wrote:\n> The current approach of r-portable is rather crude -- it takes the InnoSetup\n> installers for R and Rtools",
+      "body_plain": "On Fri, Sep 25, 2015 at 12:20 PM, Kirill Müller\n<kirill.mueller at ivt.baug.ethz.ch> wrote:\n> The current approach of r-portable is rather crude -- it takes the InnoSetup\n> installers for R and Rtools and unpacks them. Perhaps there's a better way\n> to do this, I'm open for discussion.\n\nYou could reduce the size by building a non-multiarch version of R\n(e.g. only 32 bit). That will approx half the size of R and then you\nonly need a single tool chain.\n\nUsing mingw-builds [1] you could create a minimal version of the tool\nchain, e.g. by not building gdb, gfortran, or other stuff you don't\nwant to support. I would not recommend hacking the installer of the\ncurrent rtools.\n\n[1] https://github.com/niXman/mingw-builds",
+      "body_snippet": "On Fri, Sep 25, 2015 at 12:20 PM, Kirill Müller\n<kirill.mueller at ivt.baug.ethz.ch> wrote:\n> The current approach of r-portable is rather crude -- it takes the InnoSetup\n> installers for R and Rtools",
       "thread_id": "thread-e2c30d4614b1",
       "thread_depth": 3,
-      "month": "2015-09"
+      "month": "2015-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2015q3/000033.html"
     },
     {
       "id": "msg-ec22ed50ddf9",
@@ -529,11 +556,12 @@
         "<CABFfbXtTBHhmQqSp4AeJwLa-3uw2fef=9Wd_OU_7R0FP0-Pg=A@mail.gmail.com>",
         "<56051FE9.7030802@ivt.baug.ethz.ch>"
       ],
-      "body_plain": "If it is built with ICU, that adds considerably to the size of r.dll.\n\nAvi\n\nOn Friday, September 25, 2015, Kirill M?ller <\nkirill.mueller at ivt.baug.ethz.ch> wrote:\n\n> Thanks, Jeroen, for your fast reply. Do you think you could separate gdb +\n> its dependencies from Rtools?\n>\n> The current approach of r-portable is rather crude -- it takes the\n> InnoSetup installers for R and Rtools and unpacks them. Perhaps there's a\n> better way to do this, I'm open for discussion.\n>\n>\n> -Kirill\n>\n> On 25.09.2015 12:10, Jeroen Ooms wrote:\n>\n>> Hi Kirill,\n>>\n>> This is noted in https://github.com/rwinlib/r-base#readme: It is\n>> mostly because we are shipping two separate tool chains instead of one\n>> multilib. Another reason is that recent versions of gdb depend on\n>> python, which again depends on a lot of other libraries. If you are\n>> not interested in gdb, you might be able to remove python related\n>> things.\n>>\n>> Btw this might not be the final Rtools, so maybe wait a bit.\n>>\n>>\n>>\n>> On Fri, Sep 25, 2015 at 11:30 AM, Kirill M?ller\n>> <kirill.mueller at ivt.baug.ethz.ch> wrote:\n>>\n>>> I have noticed a considerable increase in size for the installation of\n>>> Rtools 3.3. Are there any parts of the installation that I can safely\n>>> remove\n>>> if I'm only interested in building R packages (but not R itself)? This is\n>>> for r-portable, a portable version of R for Windows [1]. Thanks.\n>>>\n>>>\n>>> Best regards\n>>>\n>>> Kirill\n>>>\n>>>\n>>> [1] https://github.com/krlmlr/r-portable\n>>>\n>>> _______________________________________________\n>>> R-SIG-windows mailing list\n>>> R-SIG-windows at r-project.org\n>>> https://stat.ethz.ch/mailman/listinfo/r-sig-windows\n>>>\n>>\n> _______________________________________________\n> R-SIG-windows mailing list\n> R-SIG-windows at r-project.org\n> https://stat.ethz.ch/mailman/listinfo/r-sig-windows\n>\n\n\n-- \nSent from Gmail Mobile\n\n\t[[alternative HTML version deleted]]",
-      "body_snippet": "If it is built with ICU, that adds considerably to the size of r.dll.\n\nAvi\n\nOn Friday, September 25, 2015, Kirill M?ller <\nkirill.mueller at ivt.baug.ethz.ch> wrote:\n\n> Thanks, Jeroen, for your fast r",
+      "body_plain": "If it is built with ICU, that adds considerably to the size of r.dll.\n\nAvi\n\nOn Friday, September 25, 2015, Kirill Müller <\nkirill.mueller at ivt.baug.ethz.ch> wrote:\n\n> Thanks, Jeroen, for your fast reply. Do you think you could separate gdb +\n> its dependencies from Rtools?\n>\n> The current approach of r-portable is rather crude -- it takes the\n> InnoSetup installers for R and Rtools and unpacks them. Perhaps there's a\n> better way to do this, I'm open for discussion.\n>\n>\n> -Kirill\n>\n> On 25.09.2015 12:10, Jeroen Ooms wrote:\n>\n>> Hi Kirill,\n>>\n>> This is noted in https://github.com/rwinlib/r-base#readme: It is\n>> mostly because we are shipping two separate tool chains instead of one\n>> multilib. Another reason is that recent versions of gdb depend on\n>> python, which again depends on a lot of other libraries. If you are\n>> not interested in gdb, you might be able to remove python related\n>> things.\n>>\n>> Btw this might not be the final Rtools, so maybe wait a bit.\n>>\n>>\n>>\n>> On Fri, Sep 25, 2015 at 11:30 AM, Kirill Müller\n>> <kirill.mueller at ivt.baug.ethz.ch> wrote:\n>>\n>>> I have noticed a considerable increase in size for the installation of\n>>> Rtools 3.3. Are there any parts of the installation that I can safely\n>>> remove\n>>> if I'm only interested in building R packages (but not R itself)? This is\n>>> for r-portable, a portable version of R for Windows [1]. Thanks.\n>>>\n>>>\n>>> Best regards\n>>>\n>>> Kirill\n>>>\n>>>\n>>> [1] https://github.com/krlmlr/r-portable\n>>>\n>>> _______________________________________________\n>>> R-SIG-windows mailing list\n>>> R-SIG-windows at r-project.org\n>>> https://stat.ethz.ch/mailman/listinfo/r-sig-windows\n>>>\n>>\n> _______________________________________________\n> R-SIG-windows mailing list\n> R-SIG-windows at r-project.org\n> https://stat.ethz.ch/mailman/listinfo/r-sig-windows\n>\n\n\n-- \nSent from Gmail Mobile\n\n\t[[alternative HTML version deleted]]",
+      "body_snippet": "If it is built with ICU, that adds considerably to the size of r.dll.\n\nAvi\n\nOn Friday, September 25, 2015, Kirill Müller <\nkirill.mueller at ivt.baug.ethz.ch> wrote:\n\n> Thanks, Jeroen, for your fast r",
       "thread_id": "thread-e2c30d4614b1",
       "thread_depth": 3,
-      "month": "2015-09"
+      "month": "2015-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2015q3/000034.html"
     },
     {
       "id": "msg-77aaee6c50a6",
@@ -549,7 +577,8 @@
       "body_snippet": "As promised, below are some timing results using Jeroen's recent\n4.9.3-based 64bit toolchain. I will hopefully eventually blog on this in\nmore detail, but there are two suites of tests, one which focu",
       "thread_id": "thread-77aaee6c50a6",
       "thread_depth": 0,
-      "month": "2015-09"
+      "month": "2015-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2015q3/000035.html"
     },
     {
       "id": "msg-d9a2ec3d0161",
@@ -565,7 +594,8 @@
       "body_snippet": "----- Original Message -----\n> From: \"Jeroen Ooms\" <jeroenooms at gmail.com>\n> To: \"Dan Tenenbaum\" <dtenenba at fredhutch.org>\n> Cc: r-sig-windows at r-project.org\n> Sent: Thursday, September 24, 2015",
       "thread_id": "thread-2983b3c0d5a1",
       "thread_depth": 2,
-      "month": "2015-09"
+      "month": "2015-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2015q3/000036.html"
     },
     {
       "id": "msg-290ce616ddbe",
@@ -581,7 +611,8 @@
       "body_snippet": "----- Original Message -----\n> From: \"Dan Tenenbaum\" <dtenenba at fredhutch.org>\n> To: \"Jeroen Ooms\" <jeroenooms at gmail.com>\n> Cc: r-sig-windows at r-project.org\n> Sent: Sunday, September 27, 2015 1",
       "thread_id": "thread-290ce616ddbe",
       "thread_depth": 0,
-      "month": "2015-09"
+      "month": "2015-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2015q3/000037.html"
     },
     {
       "id": "msg-23c1f6f060a4",
@@ -600,7 +631,8 @@
       "body_snippet": "Thanks Dan, this is helpful. Just to confirm: these are packages that\ndid not have issues with the regular r-devel (3.3) on windows? For\nexample the 'xps' only has some warnings which seem unrelated t",
       "thread_id": "thread-290ce616ddbe",
       "thread_depth": 1,
-      "month": "2015-09"
+      "month": "2015-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2015q3/000038.html"
     },
     {
       "id": "msg-0732ee91b892",
@@ -616,7 +648,8 @@
       "body_snippet": "----- Original Message -----\n> From: \"Jeroen Ooms\" <jeroenooms at gmail.com>\n> To: \"Dan Tenenbaum\" <dtenenba at fredhutch.org>\n> Cc: r-sig-windows at r-project.org\n> Sent: Sunday, September 27, 2015 1",
       "thread_id": "thread-290ce616ddbe",
       "thread_depth": 2,
-      "month": "2015-09"
+      "month": "2015-09",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2015q3/000039.html"
     }
   ],
   "threads": [

@@ -20,7 +20,8 @@
       "body_snippet": "Hi Avi,\n\nthere is now also a news file for Rtools42, at \nhttps://cran.r-project.org/bin/windows/Rtools/rtools42/news.html\n\nAs of the current release, 5253, there is also the list of installed MXE \npac",
       "thread_id": "thread-ea8bb7beccc8",
       "thread_depth": 0,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2022q2/000091.html"
     },
     {
       "id": "msg-482f37e880f7",
@@ -38,7 +39,8 @@
       "body_snippet": "Thank you, Tomas, that is fantastic!\n\nAvi\n\nSent from my iPhone\n\n> On Jun 20, 2022, at 1:48 PM, Tomas Kalibera <tomas.kalibera at gmail.com> wrote:\n> \n> ?Hi Avi,\n> \n> there is now also a news file for ",
       "thread_id": "thread-ea8bb7beccc8",
       "thread_depth": 1,
-      "month": "2022-06"
+      "month": "2022-06",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2022q2/000092.html"
     }
   ],
   "threads": [

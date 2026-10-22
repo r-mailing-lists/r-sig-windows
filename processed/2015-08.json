@@ -17,7 +17,8 @@
       "body_snippet": "Welcome to the new r-sig-windows mailing list! The initial purpose is\nto announce updates of the mingw-w64 tool chain (aka Rtools) and\ndiscuss problems related to building R and R packages on windows.",
       "thread_id": "thread-80e8f74f3739",
       "thread_depth": 0,
-      "month": "2015-08"
+      "month": "2015-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2015q3/000000.html"
     },
     {
       "id": "msg-592a6007d06d",
@@ -35,7 +36,8 @@
       "body_snippet": "More update from my side:\n\n(1) MinGW-w64:\n\nI think we should take \"mingw-builds\", although it uses a different way to\nbuild GCC.\n\nThe Rtools with GCC 4.6.3 used the cross-compiling method: it builds a",
       "thread_id": "thread-80e8f74f3739",
       "thread_depth": 1,
-      "month": "2015-08"
+      "month": "2015-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2015q3/000001.html"
     },
     {
       "id": "msg-77bcf33f519b",
@@ -51,7 +53,8 @@
       "body_snippet": "A new version of the toolchain based on gcc 4.9.3 and corresponding\nbuild of R-devel are available from [1]. See the readme.txt [2] for\ndetails. The installer should work out of the box and make it ea",
       "thread_id": "thread-77bcf33f519b",
       "thread_depth": 0,
-      "month": "2015-08"
+      "month": "2015-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2015q3/000002.html"
     },
     {
       "id": "msg-a14a413e8503",
@@ -69,7 +72,8 @@
       "body_snippet": "Hello, Jeroen.\n\nRegarding the Rf_error, does the issue still exist in v4 of GCC 4.9.2\nand is a regression in 4.9.3, or has it never been solved in 4.9.2\neither?\n\nRegarding the Rcpp error, wouldn't thr",
       "thread_id": "thread-77bcf33f519b",
       "thread_depth": 1,
-      "month": "2015-08"
+      "month": "2015-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2015q3/000003.html"
     },
     {
       "id": "msg-0b7d86140cc4",
@@ -88,7 +92,8 @@
       "body_snippet": "On Mon, Aug 31, 2015 at 9:22 AM, Avraham Adler <avraham.adler at gmail.com> wrote:\n> Hello, Jeroen.\n>\n> Regarding the Rf_error, does the issue still exist in v4 of GCC 4.9.2\n> and is a regression in 4",
       "thread_id": "thread-77bcf33f519b",
       "thread_depth": 2,
-      "month": "2015-08"
+      "month": "2015-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2015q3/000004.html"
     },
     {
       "id": "msg-029babe5578a",
@@ -108,7 +113,8 @@
       "body_snippet": "On Mon, Aug 31, 2015 at 3:22 PM, Avraham Adler <avraham.adler at gmail.com> wrote:\n> Regarding the Rf_error, does the issue still exist in v4 of GCC 4.9.2\n> and is a regression in 4.9.3, or has it nev",
       "thread_id": "thread-77bcf33f519b",
       "thread_depth": 3,
-      "month": "2015-08"
+      "month": "2015-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2015q3/000005.html"
     },
     {
       "id": "msg-f729e1d0fbda",
@@ -126,7 +132,8 @@
       "body_snippet": "Hi, Jeroen. Per <https://github.com/jeroenooms/Rbuild/issues/1>, I\nthink there may be an issue with the 4.9.3 toolchain. I have no idea\nif it is in the build, or inherent in 4.9.3, though.\n\nAvi\n\nOn Mo",
       "thread_id": "thread-77bcf33f519b",
       "thread_depth": 1,
-      "month": "2015-08"
+      "month": "2015-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2015q3/000006.html"
     }
   ],
   "threads": [

@@ -17,7 +17,8 @@
       "body_snippet": "Dear R Windows developers,\n\nan update of Rtools43, the toolchain for R for Windows used by R-devel \nand R 4.3, is available as revision 5948 from\n\nhttps://cran.r-project.org/bin/windows/Rtools/rtools4",
       "thread_id": "thread-f2f3d5ba9ea1",
       "thread_depth": 0,
-      "month": "2024-01"
+      "month": "2024-01",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2024q1/000104.html"
     }
   ],
   "threads": [

@@ -17,7 +17,8 @@
       "body_snippet": "----- Original Message -----\n> From: \"Dan Tenenbaum\" <dtenenba at fredhutch.org>\n> To: \"Jeroen Ooms\" <jeroenooms at gmail.com>\n> Cc: r-sig-windows at r-project.org\n> Sent: Sunday, September 27, 2015 1",
       "thread_id": "thread-d5845861763a",
       "thread_depth": 0,
-      "month": "2015-10"
+      "month": "2015-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2015q4/000040.html"
     },
     {
       "id": "msg-ef4b44bbd78b",
@@ -33,7 +34,8 @@
       "body_snippet": "While I am eagerly awaiting an upgrade to a more modern toolchain, if there\nwill be a wait, and another iteration of the current toolset is\ncontemplated, may I request that it be compiled with lto act",
       "thread_id": "thread-ef4b44bbd78b",
       "thread_depth": 0,
-      "month": "2015-10"
+      "month": "2015-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2015q4/000041.html"
     },
     {
       "id": "msg-b4b22bc2ef99",
@@ -51,7 +53,8 @@
       "body_snippet": "On 08/10/2015 9:59 PM, Avraham Adler wrote:\n> While I am eagerly awaiting an upgrade to a more modern toolchain, if there\n> will be a wait, and another iteration of the current toolset is\n> contemplat",
       "thread_id": "thread-ef4b44bbd78b",
       "thread_depth": 1,
-      "month": "2015-10"
+      "month": "2015-10",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2015q4/000042.html"
     }
   ],
   "threads": [

@@ -17,7 +17,8 @@
       "body_snippet": "Dear R Windows developers,\n\nan update of Rtools43, the toolchain for R for Windows used by R-devel, \nis now available as revision 5550 from\n\nhttps://cran.r-project.org/bin/windows/Rtools/rtools43/rtoo",
       "thread_id": "thread-877cef68de94",
       "thread_depth": 0,
-      "month": "2023-03"
+      "month": "2023-03",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2023q1/000095.html"
     }
   ],
   "threads": [

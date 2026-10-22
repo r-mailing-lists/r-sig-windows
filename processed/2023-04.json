@@ -17,7 +17,8 @@
       "body_snippet": "Hi. I am Debartha Paul, a Master's student in Statistics at Presidency\nUniversity, Kolkata, India. I was trying to build R from scratch using\nRTools as described in https://contributor.r-project.org/r",
       "thread_id": "thread-09d79ebd6f88",
       "thread_depth": 0,
-      "month": "2023-04"
+      "month": "2023-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2023q2/000096.html"
     },
     {
       "id": "msg-be7ad040d191",
@@ -35,7 +36,8 @@
       "body_snippet": "On 4/15/23 19:00, Debartha Paul wrote:\n> Hi. I am Debartha Paul, a Master's student in Statistics at Presidency\n> University, Kolkata, India. I was trying to build R from scratch using\n> RTools as des",
       "thread_id": "thread-09d79ebd6f88",
       "thread_depth": 1,
-      "month": "2023-04"
+      "month": "2023-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2023q2/000097.html"
     },
     {
       "id": "msg-c6d707ed8a0a",
@@ -51,7 +53,8 @@
       "body_snippet": "Hi,\n\nIf you run:\n\nlibrary(microbenchmark)\nm <- matrix(rnorm(28000000), nrow=7000, byrow=TRUE)\nrownames(m) <- rownames(m, do.NULL = FALSE, prefix = \"this is a row name\")\ncolnames(m) <- colnames(m, do.N",
       "thread_id": "thread-c6d707ed8a0a",
       "thread_depth": 0,
-      "month": "2023-04"
+      "month": "2023-04",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2023q2/000098.html"
     }
   ],
   "threads": [
