@@ -17,7 +17,8 @@
       "body_snippet": "Hello.\n\nInnosetup recently took version 7 out of beta and released it properly\n[1]. Using IS 7.0.2-x64 [2]On Windows 11, r-devel 90279 compiled,\npassed make check-all, and installed properly on my sys",
       "thread_id": "thread-451b4db08363",
       "thread_depth": 0,
-      "month": "2026-07"
+      "month": "2026-07",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2026q3/000143.html"
     }
   ],
   "threads": [

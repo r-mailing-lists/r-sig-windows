@@ -17,7 +17,8 @@
       "body_snippet": "Dear All,\n\nAs far as I am aware, Tomas Kalibera led the development of R for Windows on ARM machines. His much too early passing stopped the development of this version of R. Because I own a Snapdrago",
       "thread_id": "thread-3593fe446504",
       "thread_depth": 0,
-      "month": "2026-08"
+      "month": "2026-08",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2026q3/000144.html"
     }
   ],
   "threads": [

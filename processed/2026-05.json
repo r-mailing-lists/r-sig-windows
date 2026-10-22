@@ -23,7 +23,8 @@
       "body_snippet": "Thank you, Andrew.\n\nI just saw make updated today, so I should try rebuilding on the\nfailing platform sometime in the future.\n\nAs for r-sig-Windows, I would think we should revive it, especially in\nli",
       "thread_id": "thread-f1aaec043a84",
       "thread_depth": 0,
-      "month": "2026-05"
+      "month": "2026-05",
+      "source_url": "https://stat.ethz.ch/pipermail/r-sig-windows/2026q2/000142.html"
     }
   ],
   "threads": [
